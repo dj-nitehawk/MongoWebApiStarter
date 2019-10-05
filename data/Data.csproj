@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>App.Data</AssemblyName>
+    <RootNamespace>App.Data</RootNamespace>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="MongoDB.Entities" Version="8.4.2" />
+  </ItemGroup>
+
+</Project>

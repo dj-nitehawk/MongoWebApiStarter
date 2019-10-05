@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>App.Biz</AssemblyName>
+    <RootNamespace>App.Biz</RootNamespace>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0" />
+    <PackageReference Include="MailKit" Version="2.3.1.6" />
+    <PackageReference Include="MlkPwgen" Version="0.3.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\data\Data.csproj" />
+  </ItemGroup>
+
+</Project>
