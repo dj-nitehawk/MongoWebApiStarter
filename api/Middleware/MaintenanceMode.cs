@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace App.Api
+namespace App.Api.Middleware
 {
     public class MaintenanceMode
     {

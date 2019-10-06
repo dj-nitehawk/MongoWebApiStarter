@@ -1,4 +1,5 @@
 ﻿using App.Api.Auth;
+using App.Api.Middleware;
 using App.Biz.Auth;
 using App.Biz.Services;
 using App.Biz.Settings;

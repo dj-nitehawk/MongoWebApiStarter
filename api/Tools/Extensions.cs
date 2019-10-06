@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace App.Api
+namespace App.Api.Extensions
 {
     public static class Extensions
     {
