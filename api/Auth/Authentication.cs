@@ -15,13 +15,11 @@ namespace App.Api.Auth
 {
     public static class Authentication
     {
-        private static string signingKey = "ZGVmYXVsdC1zaWduaW5nLWtleQ=="; // default key for tests
-        private static int tokenValidity = 60; // default validity for tests
+        private static AppSettings _settings = new AppSettings();
 
         public static IServiceCollection AddJWTAuthentication(this IServiceCollection services, AppSettings settings)
         {
-            signingKey = settings.Auth.SigningKey;
-            tokenValidity = settings.Auth.TokenValidityMinutes;
+            _settings = settings;
 
             services.AddAuthentication(x =>
             {
@@ -36,7 +34,7 @@ namespace App.Api.Auth
                             ValidateAudience = false,
                             ValidateIssuerSigningKey = true,
                             ValidateLifetime = true,
-                            IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(signingKey))
+                            IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(_settings.Auth.SigningKey))
                         };
                     });
 
@@ -67,10 +65,10 @@ namespace App.Api.Auth
                 Audience = null,
                 IssuedAt = DateTime.UtcNow,
                 NotBefore = DateTime.UtcNow,
-                Expires = DateTime.UtcNow.AddMinutes(tokenValidity),
+                Expires = DateTime.UtcNow.AddMinutes(_settings.Auth.TokenValidityMinutes),
                 Subject = new ClaimsIdentity(claims),
                 SigningCredentials = new SigningCredentials(
-                                            new SymmetricSecurityKey(Convert.FromBase64String(signingKey)),
+                                            new SymmetricSecurityKey(Convert.FromBase64String(_settings.Auth.SigningKey)),
                                             SecurityAlgorithms.HmacSha256Signature)
             };
             var jwtTokenHandler = new JwtSecurityTokenHandler();

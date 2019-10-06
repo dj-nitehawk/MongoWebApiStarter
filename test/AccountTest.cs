@@ -17,15 +17,7 @@ namespace App.Test
     [TestClass]
     public class AccountTest
     {
-        private AppSettings settings = new AppSettings
-        {
-            Email = new Email
-            {
-                BatchSize = 10,
-                FromEmail = "default@default.domain",
-                FromName = "default email sender",
-            }
-        };
+        private AppSettings settings = new AppSettings();
 
         [TestMethod]
         public void saving_a_new_account()
@@ -45,7 +37,6 @@ namespace App.Test
 
             res.Should().BeOfType<OkObjectResult>();
         }
-
 
         [TestMethod]
         public void fail_login_with_unverified_email()
@@ -181,7 +172,7 @@ namespace App.Test
             };
             account.NeedsEmailVerification = true;
 
-            account.SendVerificationEmail("http://localhost:8888/", "sender name", "sender@email.domain");
+            account.SendVerificationEmail("http://localhost:8888/", settings.Email);
 
             var msg = DB.Find<EmailMessage>()
                         .Match(e => e.ToEmail == guid)

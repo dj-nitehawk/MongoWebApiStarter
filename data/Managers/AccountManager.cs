@@ -106,7 +106,8 @@ namespace App.Data.Managers
             return DB.Queryable<Account>()
                      .Skip(skip)
                      .Take(take)
-                     .Select(projection).ToArray();
+                     .Select(projection)
+                     .ToArray();
         }
 
         public int UnverifiedCount()
