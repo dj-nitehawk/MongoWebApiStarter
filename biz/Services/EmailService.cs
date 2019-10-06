@@ -1,11 +1,11 @@
-﻿using MailKit.Net.Smtp;
+﻿using App.Biz.Settings;
+using App.Data.Entities;
+using App.Data.Managers;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MimeKit;
 using MimeKit.Text;
-using App.Biz.Settings;
-using App.Data.Entities;
-using App.Data.Managers;
 using System;
 using System.Collections.Generic;
 using System.Threading;

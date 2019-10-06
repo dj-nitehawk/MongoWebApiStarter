@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using App.Biz;
-using App.Biz.Models;
+﻿using App.Biz.Models;
 using App.Biz.Views;
+using Microsoft.AspNetCore.Authorization;
 
-namespace App.Api.Auth
+namespace App.Biz.Auth
 {
-    public static class Authorization
+    public static class Policies
     {
-        public static void EnableAppPolicies(this AuthorizationOptions opts)
+        public static void EnablePolicies(this AuthorizationOptions opts)
         {
             // account holders can save account
             opts.AddPolicy(AccountModel.Perms.Save,

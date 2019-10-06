@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using App.Api.Auth;
+﻿using App.Api.Auth;
 using App.Biz.Settings;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.Api.Controllers
 {

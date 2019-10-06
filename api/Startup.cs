@@ -1,4 +1,8 @@
-﻿using FluentValidation.AspNetCore;
+﻿using App.Api.Auth;
+using App.Biz.Auth;
+using App.Biz.Services;
+using App.Biz.Settings;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -7,9 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Entities;
-using App.Api.Auth;
-using App.Biz.Services;
-using App.Biz.Settings;
 using System.IO;
 
 namespace App.Api
@@ -39,7 +40,7 @@ namespace App.Api
             services.AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(environment.ContentRootPath, "dp_keys")));
             services.AddJWTAuthentication(settings);
-            services.AddAuthorization(o => o.EnableAppPolicies());
+            services.AddAuthorization(o => o.EnablePolicies());
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

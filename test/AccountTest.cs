@@ -1,13 +1,13 @@
+using App.Api.Controllers;
+using App.Biz.Models;
+using App.Biz.Settings;
+using App.Data.Entities;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Bson;
 using MongoDB.Entities;
-using App.Api.Controllers;
-using App.Biz.Models;
-using App.Biz.Settings;
-using App.Data.Entities;
 using System;
 using System.Linq;
 using System.Security.Claims;

@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
+﻿using App.Data.Entities;
+using App.Data.Managers;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
-using App.Data.Entities;
-using App.Data.Managers;
 using System;
 using System.Linq;
 

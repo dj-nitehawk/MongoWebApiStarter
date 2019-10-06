@@ -1,6 +1,6 @@
-﻿using FluentValidation;
+﻿using App.Data.Managers;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
-using App.Data.Managers;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;

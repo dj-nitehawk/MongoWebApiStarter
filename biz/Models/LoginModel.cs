@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using App.Data.Managers;
+﻿using App.Data.Managers;
+using FluentValidation;
 
 namespace App.Biz.Models
 {

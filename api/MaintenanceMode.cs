@@ -12,13 +12,11 @@ namespace App.Api
         private bool maintenanceMode = false;
         private readonly string content;
         private readonly RequestDelegate next;
-        private readonly string wwwroot;
 
         public MaintenanceMode(RequestDelegate next, IWebHostEnvironment environment)
         {
             this.next = next;
-            this.wwwroot = environment.WebRootPath;
-            this.content = File.ReadAllText(Path.Combine(wwwroot, "maintenance.htm"));
+            this.content = File.ReadAllText(Path.Combine(environment.WebRootPath, "maintenance.htm"));
         }
 
         public async Task Invoke(HttpContext context)

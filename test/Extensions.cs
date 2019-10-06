@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using App.Api.Controllers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using App.Api.Controllers;
 using System.Collections.Generic;
 using System.Security.Claims;
 

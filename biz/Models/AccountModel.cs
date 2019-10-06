@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-using MlkPwgen;
-using App.Data.Entities;
+﻿using App.Data.Entities;
 using App.Data.Managers;
+using FluentValidation;
+using MlkPwgen;
 
 namespace App.Biz.Models
 {
