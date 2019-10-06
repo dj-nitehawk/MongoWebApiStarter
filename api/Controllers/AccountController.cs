@@ -23,7 +23,7 @@ namespace App.Api.Controllers
         public ActionResult Save(AccountModel model)
         {
             model.Save();
-            model.SendVerificationEmail(this.BaseURL(), Settings.Email.FromName, Settings.Email.FromEmail);
+            model.SendVerificationEmail(this.BaseURL(), Settings.Email);
             return Ok(new
             {
                 model.ID,

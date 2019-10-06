@@ -73,7 +73,7 @@ namespace App.Biz.Models
             IsEmailVerified = ac.IsEmailVerified;
         }
 
-        public void SendVerificationEmail(string baseURL, string fromName, string fromEmail)
+        public void SendVerificationEmail(string baseURL, Settings.Email settings)
         {
             if (NeedsEmailVerification)
             {
@@ -83,8 +83,8 @@ namespace App.Biz.Models
                 var salutation = $"{Title} {FirstName} {LastName}";
 
                 var email = new EmailModel(
-                    fromName,
-                    fromEmail,
+                    settings.FromName,
+                    settings.FromEmail,
                     salutation,
                     EmailAddress,
                     "Please validate your Account...",
