@@ -1,4 +1,5 @@
 ﻿using App.Api.Auth;
+using App.Biz.Auth;
 using App.Api.Extensions;
 using App.Biz.Models;
 using App.Biz.Settings;
@@ -75,7 +76,7 @@ namespace App.Api.Controllers
 
             var claims = new[] {
                     new Claim(AccountModel.Claims.ID, model.AccountID),
-                    new Claim(Biz.Claims.Role, Biz.Roles.Owner)
+                    new Claim(Claims.Role, Roles.Owner)
                 };
 
             return Ok(new
