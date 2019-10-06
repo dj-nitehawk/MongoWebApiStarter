@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace App.Biz.Auth
+﻿namespace App.Biz.Auth
 {
     public static class Claims
     {

@@ -83,5 +83,12 @@ namespace App.Api.Auth
                 Expiry = tokenDescriptor.Expires.Value
             };
         }
+
+        public static JwtToken GenerateToken(Action<ClaimBuilder> action)
+        {
+            var builder = new ClaimBuilder();
+            action(builder);
+            return GenerateToken(builder.GetClaims());
+        }
     }
 }

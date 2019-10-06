@@ -1,6 +1,6 @@
 ﻿using App.Api.Auth;
-using App.Biz.Auth;
 using App.Api.Extensions;
+using App.Biz.Auth;
 using App.Biz.Models;
 using App.Biz.Settings;
 using App.Biz.Views;
@@ -74,15 +74,13 @@ namespace App.Api.Controllers
                 return BadRequest(error);
             }
 
-            var claims = new[] {
-                    new Claim(AccountModel.Claims.ID, model.AccountID),
-                    new Claim(Claims.Role, Roles.Owner)
-                };
-
-            return Ok(new
-            {
-                Token = Authentication.GenerateToken(claims)
-            });
+            return Ok(
+                new
+                {
+                    Token = Authentication
+                            .GenerateToken(x => x.WithClaim(AccountModel.Claims.ID, model.AccountID)
+                                                 .WithClaim(Claims.Role, Roles.Owner))
+                });
         }
 
         [NeedPermission(AccountsView.Perms.View)]
