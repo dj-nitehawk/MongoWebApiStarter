@@ -7,7 +7,8 @@ namespace App.Biz.Views
     public class AccountDetailView
     {
         public string ID { get; set; }
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public bool EmailValidated { get; set; }
     }
 
@@ -22,21 +23,14 @@ namespace App.Biz.Views
         public AccountsView Load()
         {
             AccountList = manager.GetAccounts(a =>
-                                    new Account
-                                    {
-                                        ID = a.ID,
-                                        Title = a.Title,
-                                        FirstName = a.FirstName,
-                                        LastName = a.LastName,
-                                        IsEmailVerified = a.IsEmailVerified
-                                    }, 0, 100)
-                                 .Select(a =>
                                     new AccountDetailView
                                     {
                                         ID = a.ID,
-                                        FullName = $"{a.Title} {a.FirstName} {a.LastName}",
+                                        FirstName = a.FirstName,
+                                        LastName = a.LastName,
                                         EmailValidated = a.IsEmailVerified
-                                    }).ToArray();
+                                    }, 
+                                    0, 100).ToArray();
 
             TotalAccounts = manager.TotalCount();
             UnverifiedAccounts = manager.UnverifiedCount();

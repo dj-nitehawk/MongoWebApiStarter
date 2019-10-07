@@ -101,7 +101,7 @@ namespace App.Data.Managers
             return true;
         }
 
-        public Account[] GetAccounts(Expression<Func<Account, Account>> projection, int skip, int take)
+        public TResult[] GetAccounts<TResult>(Expression<Func<Account, TResult>> projection, int skip, int take)
         {
             return DB.Queryable<Account>()
                      .Skip(skip)

@@ -1,6 +1,7 @@
 using App.Api.Controllers;
 using App.Biz.Models;
 using App.Biz.Settings;
+using App.Biz.Views;
 using App.Data.Entities;
 using FluentAssertions;
 using FluentValidation.TestHelper;
@@ -194,6 +195,28 @@ namespace App.Test
             account = DB.Find<Account>().One(account.ID);
 
             account.IsEmailVerified.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void retrieve_account_list()
+        {
+            var email = $"{Guid.NewGuid().ToString()}@email.com";
+            var account = new AccountModel
+            {
+                Title = "mr.",
+                FirstName = "first",
+                LastName = "last",
+                EmailAddress = email,
+                Password = "passwordABC123",
+            };
+            var cnt = new AccountController(settings);
+            cnt.Save(account);
+
+            var acsView = cnt.ViewAccounts()
+                             .Result.As<OkObjectResult>()
+                             .Value.As<AccountsView>();
+            
+            acsView.AccountList.Should().BeOfType<AccountDetailView[]>();
         }
     }
 }
