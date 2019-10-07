@@ -46,28 +46,24 @@ namespace App.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
+            app.UseForwardedHeaders(new ForwardedHeadersOptions //needed for nginx reverse proxy
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
             if (env.IsDevelopment())
             {
                 app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseMaintenanceModeMiddleware();
-            app.UseForwardedHeaders(new ForwardedHeadersOptions //needed for nginx reverse proxy
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseRouting();
-
             app.UseJWTAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(b => b.MapControllers());
 
+            //note: the order of the above is important
         }
     }
 }
