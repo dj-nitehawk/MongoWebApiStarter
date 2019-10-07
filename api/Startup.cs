@@ -35,7 +35,7 @@ namespace App.Api
             services.AddCors();
             services.AddRouting();
             services.AddControllers()
-                    .AddNewtonsoftJson(o => o.UseMemberCasing())
+                    .AddJsonOptions(o => o.JsonSerializerOptions.PropertyNamingPolicy = null) //use member casing for properties
                     .AddFluentValidation(o => o.RegisterValidatorsFromAssemblyContaining<AppSettings>())
                     .ConfigureApiBehaviorOptions(o => o.SuppressModelStateInvalidFilter = false); //set to true to disable automatic model error response 400
             services.AddDataProtection()
