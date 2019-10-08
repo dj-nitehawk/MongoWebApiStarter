@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace App.Data.Managers
 {
-    public class AccountManager
+    public class AccountManager : ManagerBase<Account>
     {
         public string Save(Account account, bool pendingEmailValidation)
         {
@@ -38,46 +38,6 @@ namespace App.Data.Managers
             return account.ID;
         }
 
-        public Account Find(string id)
-        {
-            return DB.Find<Account>().One(id);
-        }
-
-        public Account Find(string email, string password)
-        {
-            var acc = DB.Find<Account>()
-                        .Match(a => a.Email == email)
-                        .Project(x => new Account
-                        {
-                            ID = x.ID,
-                            PasswordHash = x.PasswordHash,
-                            IsEmailVerified = x.IsEmailVerified,
-                            Title = x.Title,
-                            FirstName = x.FirstName,
-                            LastName = x.LastName,
-                        })
-                        .Execute()
-                        .SingleOrDefault();
-
-            if (acc != null)
-            {
-                if (BCrypt.Net.BCrypt.Verify(password, acc.PasswordHash))
-                {
-                    return acc;
-                }
-            }
-
-            return null;
-        }
-
-        public string GetID(string email)
-        {
-            return DB.Queryable<Account>()
-                     .Where(a => a.Email == email)
-                     .Select(a => a.ID)
-                     .SingleOrDefault();
-        }
-
         public void SetEmailValidationCode(string code, string id)
         {
             DB.Update<Account>()
@@ -88,11 +48,11 @@ namespace App.Data.Managers
 
         public bool ValidateEmail(string id, string code)
         {
-            var vpExists = DB.Queryable<Account>()
-                             .Where(a => a.ID == id && a.EmailVerificationCode == code)
-                             .Any();
+            var acc = DB.Queryable<Account>()
+                        .Where(a => a.ID == id && a.EmailVerificationCode == code)
+                        .Any();
 
-            if (!vpExists) return false;
+            if (!acc) return false;
 
             DB.Update<Account>()
               .Match(a => a.ID == id)
@@ -124,5 +84,6 @@ namespace App.Data.Managers
                 TotalCount = groups.Sum(g => g.Count)
             };
         }
+
     }
 }

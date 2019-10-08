@@ -5,13 +5,8 @@ using System.Collections.Generic;
 
 namespace App.Data.Managers
 {
-    public class EmailManager
+    public class EmailManager : ManagerBase<EmailMessage>
     {
-        public void Save(EmailMessage email)
-        {
-            email.Save();
-        }
-
         public List<EmailMessage> FetchNextBatch(int batchSize)
         {
             return DB.Find<EmailMessage>()

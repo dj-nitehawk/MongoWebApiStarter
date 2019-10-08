@@ -2,7 +2,7 @@
 using App.Biz.Settings;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.Api.Controllers
+namespace App.Api.Base
 {
     [NeedPermission]
     [ApiController]

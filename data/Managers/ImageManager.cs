@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 
 namespace App.Data.Managers
 {
-    public class ImageManager
+    public class ImageManager : ManagerBase<Image>
     {
-        public async Task<string> SaveAsync(Image image)
-        {
-            await image.SaveAsync();
-            return image.ID;
-        }
-
-        public async Task<Image> Find(string id)
+        new public async Task<Image> Find(string id)
         {
             if (!ObjectId.TryParse(id, out ObjectId tmp)) return null;
 

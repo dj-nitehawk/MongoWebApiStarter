@@ -1,14 +1,13 @@
-﻿using App.Data.Entities;
+﻿using App.Biz.Base;
+using App.Data.Entities;
 using App.Data.Managers;
 using System;
 using System.Collections.Generic;
 
 namespace App.Biz.Models
 {
-    public class EmailModel
+    public class EmailModel : ModelBase<EmailManager>
     {
-        private readonly EmailManager manager = new EmailManager();
-
         private readonly string fromName;
         private readonly string fromEmail;
         private readonly string toName;
@@ -25,7 +24,7 @@ namespace App.Biz.Models
             this.toName = toName;
             this.toEmail = toEmail;
             this.subject = subject;
-            this.template = manager.GetTemplate(template);
+            this.template = Manager.GetTemplate(template);
         }
 
         public void AddToSendingQueue()
@@ -37,7 +36,7 @@ namespace App.Biz.Models
                 template = template.Replace("{" + f.Key + "}", f.Value);
             }
 
-            manager.Save(new EmailMessage
+            Manager.Save(new EmailMessage
             {
                 FromName = fromName,
                 FromEmail = fromEmail,

@@ -1,4 +1,5 @@
-﻿using App.Data.Managers;
+﻿using App.Biz.Base;
+using App.Data.Managers;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using SixLabors.ImageSharp;
@@ -12,10 +13,8 @@ using System.Threading.Tasks;
 
 namespace App.Biz.Models
 {
-    public class ImageModel
+    public class ImageModel : ModelBase<ImageManager>
     {
-        private readonly ImageManager manager = new ImageManager();
-
         public string ID { get; set; }
         public IFormFile File { get; set; }
         public int Width { get; set; }
@@ -23,7 +22,7 @@ namespace App.Biz.Models
 
         public async Task<byte[]> FetchAsync(string id)
         {
-            var image = await manager.Find(id);
+            var image = await Manager.Find(id);
 
             if (image == null) return null;
 
@@ -56,7 +55,7 @@ namespace App.Biz.Models
                             Bytes = strOutput.ToArray()
                         };
 
-                        ID = await manager.SaveAsync(image);
+                        ID = await Manager.SaveAsync(image);
                     }
                 }
             }

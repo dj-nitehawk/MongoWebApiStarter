@@ -1,14 +1,14 @@
-﻿using App.Data.Entities;
+﻿using App.Biz.Base;
+using App.Data.Entities;
 using App.Data.Managers;
 using FluentValidation;
 using MlkPwgen;
+using System.Linq;
 
 namespace App.Biz.Models
 {
-    public class AccountModel
+    public class AccountModel : ModelBase<AccountManager>
     {
-        private readonly AccountManager acManager = new AccountManager();
-
         public bool NeedsEmailVerification = false;
 
         public string ID { get; set; }
@@ -32,10 +32,10 @@ namespace App.Biz.Models
         {
             CheckIfEmailValidationIsNeeded();
 
-            ID = acManager.Save(
+            ID = Manager.Save(
                 new Account
                 {
-                    ID = ID, //if ID is null, a new record will be created. if ID is not null, it will update existing record in db.
+                    ID = ID, //if ID is null, a new record will be created. if ID is not null, it will replace existing record in db.
                     Email = EmailAddress.Trim().ToLower(),
                     PasswordHash = Password.ToSaltedHash(),
                     Title = Title,
@@ -53,14 +53,10 @@ namespace App.Biz.Models
                 NeedsEmailVerification);
         }
 
-        public bool ValidateEmailAddress(string code)
-        {
-            return acManager.ValidateEmail(ID, code);
-        }
-
         public void Load()
         {
-            var ac = acManager.Find(ID);
+            var ac = Manager.Find(ID);
+
             EmailAddress = ac.Email;
             Title = ac.Title;
             FirstName = ac.FirstName;
@@ -73,12 +69,17 @@ namespace App.Biz.Models
             IsEmailVerified = ac.IsEmailVerified;
         }
 
+        public bool ValidateEmailAddress(string code)
+        {
+            return Manager.ValidateEmail(ID, code);
+        }
+
         public void SendVerificationEmail(string baseURL, Settings.Email settings)
         {
             if (NeedsEmailVerification)
             {
                 var code = PasswordGenerator.Generate(20);
-                acManager.SetEmailValidationCode(code, ID);
+                Manager.SetEmailValidationCode(code, ID);
 
                 var salutation = $"{Title} {FirstName} {LastName}";
 
@@ -103,7 +104,9 @@ namespace App.Biz.Models
             {
                 NeedsEmailVerification = true;
             }
-            else if (ID != acManager.GetID(EmailAddress.Trim().ToLower()))
+            else if (ID != Manager.Find(a => a.Email == EmailAddress.Trim().ToLower(),
+                                        a => a.ID)
+                                  .SingleOrDefault())
             {
                 NeedsEmailVerification = true;
                 IsEmailVerified = false;
@@ -119,7 +122,9 @@ namespace App.Biz.Models
         {
             if (EmailAddress == null) return true;
 
-            var idForEmail = acManager.GetID(EmailAddress.Trim().ToLower());
+            var idForEmail = Manager.Find(a => a.Email == EmailAddress.Trim().ToLower(),
+                                          a => a.ID)
+                                    .SingleOrDefault();
             return idForEmail != ID;
         }
 

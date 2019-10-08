@@ -1,28 +1,48 @@
-﻿using App.Data.Managers;
+﻿using App.Biz.Base;
+using App.Data.Managers;
 using FluentValidation;
+using System.Linq;
 
 namespace App.Biz.Models
 {
-    public class LoginModel
+    public class LoginModel : ModelBase<AccountManager>
     {
-        private AccountManager manager = new AccountManager();
-
         public string AccountID = null;
-
+        public string FullName { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public bool RememberMe { get; set; }
-        public int DaysToRemember { get; set; }
 
         public string SingIn()
         {
-            var acc = manager.Find(UserName.ToLower().Trim(), Password);
+            var acc = Manager.Find(a => a.Email == UserName.ToLower().Trim(),
+                                   a => new
+                                   {
+                                       a.PasswordHash,
+                                       a.IsEmailVerified,
+                                       a.ID,
+                                       a.Title,
+                                       a.FirstName,
+                                       a.LastName
+                                   })
+                              .SingleOrDefault();
 
-            if (acc == null) return "The supplied credentials are invalid. Please try again...";
+            if (acc != null)
+            {
+                if (!BCrypt.Net.BCrypt.Verify(Password, acc.PasswordHash))
+                {
+                    return "The supplied credentials are invalid. Please try again...";
+                }
+            }
+            else
+            {
+                return "Sorry, couldn't locate your account...";
+            }
 
-            if (!acc.IsEmailVerified) return "Please verify your email address before logging in...";
+            if (!acc.IsEmailVerified)
+                return "Please verify your email address before logging in...";
 
             AccountID = acc.ID;
+            FullName = $"{acc.Title}. {acc.FirstName} {acc.LastName}";
 
             return null;
         }

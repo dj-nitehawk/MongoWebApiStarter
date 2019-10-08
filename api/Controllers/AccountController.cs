@@ -1,4 +1,5 @@
 ﻿using App.Api.Auth;
+using App.Api.Base;
 using App.Api.Extensions;
 using App.Biz.Auth;
 using App.Biz.Models;
@@ -77,6 +78,7 @@ namespace App.Api.Controllers
             return Ok(
                 new
                 {
+                    model.FullName,
                     Token = Authentication
                             .GenerateToken(x => x.WithClaim(AccountModel.Claims.ID, model.AccountID)
                                                  .WithClaim(Claims.Role, Roles.Owner))
