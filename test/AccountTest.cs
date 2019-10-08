@@ -215,7 +215,7 @@ namespace App.Test
             var acsView = cnt.ViewAccounts()
                              .Result.As<OkObjectResult>()
                              .Value.As<AccountsView>();
-            
+
             acsView.AccountList.Should().BeOfType<AccountDetailView[]>();
         }
     }

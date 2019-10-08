@@ -1,4 +1,5 @@
 ﻿using App.Data.Entities;
+using App.Data.Views;
 using MongoDB.Entities;
 using System;
 using System.Linq;
@@ -110,16 +111,18 @@ namespace App.Data.Managers
                      .ToArray();
         }
 
-        public int UnverifiedCount()
+        public AccountStats GetStats()
         {
-            return DB.Queryable<Account>()
-                     .Count(a => a.IsEmailVerified == false);
-        }
+            var groups = DB.Queryable<Account>()
+                           .GroupBy(a => a.IsEmailVerified)
+                           .Select(g => new { Verified = g.Key, Count = g.Count() })
+                           .ToArray();
 
-        public int TotalCount()
-        {
-            return DB.Queryable<Account>()
-                     .Count();
+            return new AccountStats
+            {
+                UnverifiedCount = groups.Where(g => g.Verified == false).Count(),
+                TotalCount = groups.Sum(g => g.Count)
+            };
         }
     }
 }

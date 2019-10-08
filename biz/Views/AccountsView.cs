@@ -1,5 +1,4 @@
-﻿using App.Data.Entities;
-using App.Data.Managers;
+﻿using App.Data.Managers;
 using System.Linq;
 
 namespace App.Biz.Views
@@ -29,11 +28,13 @@ namespace App.Biz.Views
                                         FirstName = a.FirstName,
                                         LastName = a.LastName,
                                         EmailValidated = a.IsEmailVerified
-                                    }, 
+                                    },
                                     0, 100).ToArray();
 
-            TotalAccounts = manager.TotalCount();
-            UnverifiedAccounts = manager.UnverifiedCount();
+            var stats = manager.GetStats();
+
+            TotalAccounts = stats.TotalCount;
+            UnverifiedAccounts = stats.UnverifiedCount;
 
             return this;
         }
