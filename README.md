@@ -33,3 +33,6 @@ A full-featured starter template for a .Net Core 3.0 Web-Api project with MongoD
 - uses mstest framework
 - uses fluentassertions
 - tests business logic via controller actions
+
+#### Bonus
+instructions & config files for setting up a linux server for deployment.
