@@ -1,4 +1,5 @@
-﻿using App.Data.Entities;
+﻿using App.Data.Base;
+using App.Data.Entities;
 using App.Data.Views;
 using MongoDB.Entities;
 using System;

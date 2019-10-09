@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace App.Data.Managers
+namespace App.Data.Base
 {
     public class ManagerBase<TEntity> where TEntity : Entity
     {
