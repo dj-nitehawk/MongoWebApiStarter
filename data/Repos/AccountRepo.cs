@@ -10,35 +10,6 @@ namespace App.Data.Repos
 {
     public class AccountRepo : RepoBase<Account>
     {
-        public string Save(Account account, bool pendingEmailValidation)
-        {
-            if (account.IsNotNew()) // existing account
-            {
-                var acc = DB.Find<Account>()
-                            .Match(a => a.ID == account.ID)
-                            .Project(a => new Account
-                            {
-                                IsEmailVerified = a.IsEmailVerified,
-                                EmailVerificationCode = a.EmailVerificationCode,
-                            })
-                            .Execute()
-                            .Single();
-
-                if (pendingEmailValidation)
-                {
-                    account.IsEmailVerified = false;
-                    account.EmailVerificationCode = null;
-                }
-            }
-            else // new account
-            {
-                // do something with new accounts here
-            }
-
-            account.Save();
-            return account.ID;
-        }
-
         public string GetID(string email)
         {
             return DB.Find<Account, string>()

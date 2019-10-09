@@ -3,7 +3,6 @@ using App.Data.Entities;
 using App.Data.Repos;
 using FluentValidation;
 using MlkPwgen;
-using System.Linq;
 
 namespace App.Biz.Models
 {
@@ -30,27 +29,43 @@ namespace App.Biz.Models
 
         public void Save()
         {
+            var account = new Account
+            {
+                ID = ID, // if ID is null, a new record will be created. otherwise it will replace the existing record in db.
+                Email = EmailAddress.Trim().ToLower(),
+                PasswordHash = Password.ToSaltedHash(),
+                Title = Title,
+                FirstName = FirstName,
+                LastName = LastName,
+                Address = new Address
+                {
+                    Street = Street,
+                    City = City,
+                    State = State,
+                    ZipCode = ZipCode,
+                    CountryCode = CountryCode
+                }
+            };
+
             CheckIfEmailValidationIsNeeded();
 
-            ID = Repo.Save(
-                new Account
+            if (ID.IsNotEmpty()) // it's an existing account being updated
+            {
+                if (NeedsEmailVerification) // don't replace the two fields below
                 {
-                    ID = ID, //if ID is null, a new record will be created. if ID is not null, it will replace existing record in db.
-                    Email = EmailAddress.Trim().ToLower(),
-                    PasswordHash = Password.ToSaltedHash(),
-                    Title = Title,
-                    FirstName = FirstName,
-                    LastName = LastName,
-                    Address = new Address
-                    {
-                        Street = Street,
-                        City = City,
-                        State = State,
-                        ZipCode = ZipCode,
-                        CountryCode = CountryCode
-                    }
-                },
-                NeedsEmailVerification);
+                    var acc = Repo.Find(
+                                ID,
+                                a => new
+                                {
+                                    a.IsEmailVerified,
+                                    a.EmailVerificationCode
+                                });
+                    account.IsEmailVerified = acc.IsEmailVerified;
+                    account.EmailVerificationCode = acc.EmailVerificationCode;
+                }
+            }
+
+            ID = Repo.Save(account);
         }
 
         public void Load()
