@@ -11,7 +11,7 @@ namespace App.Biz.Models
         public string FullName { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-
+               
         public string SingIn()
         {
             var acc = Repo.Find(a => a.Email == UserName.ToLower().Trim(),
@@ -45,6 +45,16 @@ namespace App.Biz.Models
             FullName = $"{acc.Title}. {acc.FirstName} {acc.LastName}";
 
             return null;
+        }
+
+        public override void Load()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Save()
+        {
+            throw new System.NotImplementedException();
         }
 
         public class Validator : AbstractValidator<LoginModel>

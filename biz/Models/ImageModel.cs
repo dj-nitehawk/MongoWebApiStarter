@@ -72,6 +72,16 @@ namespace App.Biz.Models
             return (File?.Length >= 100 && File?.Length <= 10485760);
         }
 
+        public override void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Load()
+        {
+            throw new NotImplementedException();
+        }
+
         public class Validator : AbstractValidator<ImageModel>
         {
             public Validator()

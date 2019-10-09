@@ -27,7 +27,7 @@ namespace App.Biz.Models
             this.template = Repo.GetTemplate(template);
         }
 
-        public void AddToSendingQueue()
+        public override void Save()
         {
             if (MergeFields.Count == 0) throw new InvalidOperationException("Cannot proceed without any MergeFields!");
 
@@ -46,5 +46,17 @@ namespace App.Biz.Models
                 BodyHTML = template
             });
         }
+
+        public override void Load()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddToSendingQueue()
+        {
+            Save();
+        }
+
+
     }
 }

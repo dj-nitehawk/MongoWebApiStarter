@@ -89,7 +89,9 @@ namespace App.Api.Controllers
         [HttpGet("/api/view/accounts")]
         public ActionResult<AccountsView> ViewAccounts()
         {
-            return Ok(new AccountsView().Load());
+            var view = new AccountsView();
+            view.Load();
+            return Ok(view);
         }
     }
 }

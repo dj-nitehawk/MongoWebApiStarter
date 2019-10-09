@@ -27,7 +27,7 @@ namespace App.Biz.Models
 
         public bool IsEmailVerified { get; set; }
 
-        public void Save()
+        public override void Save()
         {
             var account = new Account
             {
@@ -68,7 +68,7 @@ namespace App.Biz.Models
             ID = Repo.Save(account);
         }
 
-        public void Load()
+        public override void Load()
         {
             var ac = Repo.Find(ID);
 

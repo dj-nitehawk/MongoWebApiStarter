@@ -1,27 +1,18 @@
-﻿using App.Data.Repos;
+﻿using App.Biz.Base;
+using App.Data.Repos;
 using System.Linq;
 
 namespace App.Biz.Views
 {
-    public class AccountDetailView
-    {
-        public string ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public bool EmailValidated { get; set; }
-    }
-
-    public class AccountsView
+    public class AccountsView : ViewBase<AccountRepo>
     {
         public int TotalAccounts { get; set; }
         public int UnverifiedAccounts { get; set; }
         public AccountDetailView[] AccountList { get; set; }
 
-        AccountRepo repo = new AccountRepo();
-
-        public AccountsView Load()
+        public override void Load()
         {
-            AccountList = repo.GetAccounts(a =>
+            AccountList = Repo.GetAccounts(a =>
                             new AccountDetailView
                             {
                                 ID = a.ID,
@@ -31,12 +22,10 @@ namespace App.Biz.Views
                             },
                             0, 100).ToArray();
 
-            var stats = repo.GetStats();
+            var stats = Repo.GetStats();
 
             TotalAccounts = stats.TotalCount;
             UnverifiedAccounts = stats.UnverifiedCount;
-
-            return this;
         }
 
         public static class Perms
@@ -46,4 +35,11 @@ namespace App.Biz.Views
         }
     }
 
+    public class AccountDetailView
+    {
+        public string ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public bool EmailValidated { get; set; }
+    }
 }
