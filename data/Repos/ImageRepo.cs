@@ -5,9 +5,9 @@ using MongoDB.Entities;
 using System;
 using System.Threading.Tasks;
 
-namespace App.Data.Managers
+namespace App.Data.Repos
 {
-    public class ImageManager : ManagerBase<Image>
+    public class ImageRepo : RepoBase<Image>
     {
         new public async Task<Image> Find(string id)
         {

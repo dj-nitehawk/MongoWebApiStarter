@@ -1,13 +1,13 @@
 ﻿using App.Biz.Base;
 using App.Data.Entities;
-using App.Data.Managers;
+using App.Data.Repos;
 using FluentValidation;
 using MlkPwgen;
 using System.Linq;
 
 namespace App.Biz.Models
 {
-    public class AccountModel : ModelBase<AccountManager>
+    public class AccountModel : ModelBase<AccountRepo>
     {
         public bool NeedsEmailVerification = false;
 
@@ -32,7 +32,7 @@ namespace App.Biz.Models
         {
             CheckIfEmailValidationIsNeeded();
 
-            ID = Manager.Save(
+            ID = Repo.Save(
                 new Account
                 {
                     ID = ID, //if ID is null, a new record will be created. if ID is not null, it will replace existing record in db.
@@ -55,7 +55,7 @@ namespace App.Biz.Models
 
         public void Load()
         {
-            var ac = Manager.Find(ID);
+            var ac = Repo.Find(ID);
 
             EmailAddress = ac.Email;
             Title = ac.Title;
@@ -71,7 +71,7 @@ namespace App.Biz.Models
 
         public bool ValidateEmailAddress(string code)
         {
-            return Manager.ValidateEmail(ID, code);
+            return Repo.ValidateEmail(ID, code);
         }
 
         public void SendVerificationEmail(string baseURL, Settings.Email settings)
@@ -79,7 +79,7 @@ namespace App.Biz.Models
             if (NeedsEmailVerification)
             {
                 var code = PasswordGenerator.Generate(20);
-                Manager.SetEmailValidationCode(code, ID);
+                Repo.SetEmailValidationCode(code, ID);
 
                 var salutation = $"{Title} {FirstName} {LastName}";
 
@@ -104,7 +104,7 @@ namespace App.Biz.Models
             {
                 NeedsEmailVerification = true;
             }
-            else if (ID != Manager.Find(a => a.Email == EmailAddress.Trim().ToLower(),
+            else if (ID != Repo.Find(a => a.Email == EmailAddress.Trim().ToLower(),
                                         a => a.ID)
                                   .SingleOrDefault())
             {
@@ -122,7 +122,7 @@ namespace App.Biz.Models
         {
             if (EmailAddress == null) return true;
 
-            var idForEmail = Manager.Find(a => a.Email == EmailAddress.Trim().ToLower(),
+            var idForEmail = Repo.Find(a => a.Email == EmailAddress.Trim().ToLower(),
                                           a => a.ID)
                                     .SingleOrDefault();
             return idForEmail != ID;

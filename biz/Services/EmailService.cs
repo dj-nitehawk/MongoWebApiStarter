@@ -1,6 +1,6 @@
 ﻿using App.Biz.Settings;
 using App.Data.Entities;
-using App.Data.Managers;
+using App.Data.Repos;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -18,7 +18,7 @@ namespace App.Biz.Services
         private readonly Email settings;
         private readonly bool isProduction;
         private bool startMsgLogged;
-        private readonly EmailManager manager = new EmailManager();
+        private readonly EmailRepo repo = new EmailRepo();
         private readonly ILogger log;
 
         public EmailService(AppSettings settings, IHostEnvironment environment, ILogger<EmailService> log)
@@ -43,7 +43,7 @@ namespace App.Biz.Services
                         log.LogWarning("EMAIL SERVICE HAS STARTED..." + "[" + settings.Username + "]" + Environment.NewLine);
                     }
 
-                    msgs = manager.FetchNextBatch(settings.BatchSize);
+                    msgs = repo.FetchNextBatch(settings.BatchSize);
 
                     if (msgs.Count > 0)
                     {
@@ -70,7 +70,7 @@ namespace App.Biz.Services
                                 {
                                     await smtp.SendAsync(ComposeEmail(m), stoppingToken);
                                     lastActiveAt = DateTime.UtcNow;
-                                    manager.MarkAsSent(m.ID);
+                                    repo.MarkAsSent(m.ID);
                                 }
                                 catch (Exception x)
                                 {

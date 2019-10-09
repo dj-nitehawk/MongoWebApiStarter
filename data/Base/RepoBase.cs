@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.Data.Base
 {
-    public class ManagerBase<TEntity> where TEntity : Entity
+    public class RepoBase<TEntity> where TEntity : Entity
     {
         //FIND
 

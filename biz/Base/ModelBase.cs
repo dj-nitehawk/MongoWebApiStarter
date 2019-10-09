@@ -1,7 +1,7 @@
 ﻿namespace App.Biz.Base
 {
-    public class ModelBase<TManager> where TManager : new()
+    public class ModelBase<TRepo> where TRepo : new()
     {
-        public TManager Manager { get; set; } = new TManager();
+        public TRepo Repo { get; set; } = new TRepo();
     }
 }

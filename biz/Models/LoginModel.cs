@@ -1,11 +1,11 @@
 ﻿using App.Biz.Base;
-using App.Data.Managers;
+using App.Data.Repos;
 using FluentValidation;
 using System.Linq;
 
 namespace App.Biz.Models
 {
-    public class LoginModel : ModelBase<AccountManager>
+    public class LoginModel : ModelBase<AccountRepo>
     {
         public string AccountID = null;
         public string FullName { get; set; }
@@ -14,7 +14,7 @@ namespace App.Biz.Models
 
         public string SingIn()
         {
-            var acc = Manager.Find(a => a.Email == UserName.ToLower().Trim(),
+            var acc = Repo.Find(a => a.Email == UserName.ToLower().Trim(),
                                    a => new
                                    {
                                        a.PasswordHash,

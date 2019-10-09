@@ -6,9 +6,9 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace App.Data.Managers
+namespace App.Data.Repos
 {
-    public class AccountManager : ManagerBase<Account>
+    public class AccountRepo : RepoBase<Account>
     {
         public string Save(Account account, bool pendingEmailValidation)
         {

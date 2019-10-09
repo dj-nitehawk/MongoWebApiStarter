@@ -4,9 +4,9 @@ using MongoDB.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace App.Data.Managers
+namespace App.Data.Repos
 {
-    public class EmailManager : ManagerBase<EmailMessage>
+    public class EmailRepo : RepoBase<EmailMessage>
     {
         public List<EmailMessage> FetchNextBatch(int batchSize)
         {

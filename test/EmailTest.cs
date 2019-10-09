@@ -1,5 +1,5 @@
 ﻿using App.Data.Entities;
-using App.Data.Managers;
+using App.Data.Repos;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
@@ -12,14 +12,14 @@ namespace App.Test
     public class EmailTest
     {
         private static readonly string email = $"{Guid.NewGuid().ToString()}@email.com";
-        private static readonly EmailManager manager = new EmailManager();
+        private static readonly EmailRepo repo = new EmailRepo();
 
         [TestMethod]
         public void saving_an_email()
         {
             for (int i = 1; i <= 10; i++)
             {
-                manager.Save(new EmailMessage
+                repo.Save(new EmailMessage
                 {
                     FromEmail = email,
                     FromName = "From Me",
@@ -34,13 +34,13 @@ namespace App.Test
         [TestMethod]
         public void fetching_next_batch_of_emails()
         {
-            manager.FetchNextBatch(10).Count.Should().Be(10);
+            repo.FetchNextBatch(10).Count.Should().Be(10);
         }
 
         [TestMethod]
         public void marking_email_as_sent()
         {
-            manager.Save(new EmailMessage
+            repo.Save(new EmailMessage
             {
                 FromEmail = email,
                 FromName = "From Me",
@@ -50,8 +50,8 @@ namespace App.Test
                 BodyHTML = "this is a test email message"
             });
 
-            var id = manager.FetchNextBatch(1).Single().ID;
-            manager.MarkAsSent(id);
+            var id = repo.FetchNextBatch(1).Single().ID;
+            repo.MarkAsSent(id);
 
             DB.Find<EmailMessage>()
               .Match(e => e.ID == id)
