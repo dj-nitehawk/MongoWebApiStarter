@@ -104,9 +104,7 @@ namespace App.Biz.Models
             {
                 NeedsEmailVerification = true;
             }
-            else if (ID != Repo.Find(a => a.Email == EmailAddress.Trim().ToLower(),
-                                        a => a.ID)
-                                  .SingleOrDefault())
+            else if (ID != Repo.GetID(EmailAddress.Trim().ToLower()))
             {
                 NeedsEmailVerification = true;
                 IsEmailVerified = false;
@@ -122,9 +120,7 @@ namespace App.Biz.Models
         {
             if (EmailAddress == null) return true;
 
-            var idForEmail = Repo.Find(a => a.Email == EmailAddress.Trim().ToLower(),
-                                          a => a.ID)
-                                    .SingleOrDefault();
+            var idForEmail = Repo.GetID(EmailAddress.Trim().ToLower());
             return idForEmail != ID;
         }
 

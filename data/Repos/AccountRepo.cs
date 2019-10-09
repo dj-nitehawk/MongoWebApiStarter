@@ -39,6 +39,15 @@ namespace App.Data.Repos
             return account.ID;
         }
 
+        public string GetID(string email)
+        {
+            return DB.Find<Account, string>()
+                     .Match(a => a.Email == email)
+                     .Project(a => a.ID)
+                     .Execute()
+                     .SingleOrDefault();
+        }
+
         public void SetEmailValidationCode(string code, string id)
         {
             DB.Update<Account>()
