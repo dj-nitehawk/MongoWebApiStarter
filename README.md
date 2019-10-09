@@ -27,7 +27,7 @@ A full-featured starter template for a .Net Core 3.0 Web-Api project with MongoD
 
 #### Data Layer
 - data is stored in mongodb
-- data is modified & retrieved via manager classes
+- data is modified & retrieved via repository classes
 
 #### Integration Tests
 - uses mstest framework
