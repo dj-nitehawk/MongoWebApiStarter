@@ -1,15 +1,15 @@
-﻿using App.Api.Auth;
-using App.Api.Base;
-using App.Api.Extensions;
-using App.Biz.Auth;
-using App.Biz.Models;
-using App.Biz.Settings;
-using App.Biz.Views;
+﻿using MongoWebApiStarter.Api.Auth;
+using MongoWebApiStarter.Api.Base;
+using MongoWebApiStarter.Api.Extensions;
+using MongoWebApiStarter.Biz.Auth;
+using MongoWebApiStarter.Biz.Models;
+using MongoWebApiStarter.Biz.Settings;
+using MongoWebApiStarter.Biz.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace App.Api.Controllers
+namespace MongoWebApiStarter.Api.Controllers
 {
     [NeedPermission(AccountModel.Perms.Save)]
     public class AccountController : BaseController

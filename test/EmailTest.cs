@@ -1,12 +1,12 @@
-﻿using App.Data.Entities;
-using App.Data.Repos;
+﻿using MongoWebApiStarter.Data.Entities;
+using MongoWebApiStarter.Data.Repos;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
 using System;
 using System.Linq;
 
-namespace App.Test
+namespace MongoWebApiStarter.Test
 {
     [TestClass]
     public class EmailTest

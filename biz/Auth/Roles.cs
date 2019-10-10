@@ -1,4 +1,4 @@
-﻿namespace App.Biz.Auth
+﻿namespace MongoWebApiStarter.Biz.Auth
 {
     public static class Roles
     {

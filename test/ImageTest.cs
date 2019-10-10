@@ -1,5 +1,5 @@
-﻿using App.Api.Controllers;
-using App.Biz.Models;
+﻿using MongoWebApiStarter.Api.Controllers;
+using MongoWebApiStarter.Biz.Models;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +9,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace App.Test
+namespace MongoWebApiStarter.Test
 {
     [TestClass]
     public class ImageTest

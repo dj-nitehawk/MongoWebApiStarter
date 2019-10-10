@@ -1,9 +1,9 @@
-﻿using App.Api.Base;
+﻿using MongoWebApiStarter.Api.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.Api.Controllers
+namespace MongoWebApiStarter.Api.Controllers
 {
     public class UtilityController : BaseController
     {

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AssemblyName>App.Biz</AssemblyName>
-    <RootNamespace>App.Biz</RootNamespace>
+    <AssemblyName>MongoWebApiStarter.Biz</AssemblyName>
+    <RootNamespace>MongoWebApiStarter.Biz</RootNamespace>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 

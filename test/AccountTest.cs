@@ -1,8 +1,8 @@
-using App.Api.Controllers;
-using App.Biz.Models;
-using App.Biz.Settings;
-using App.Biz.Views;
-using App.Data.Entities;
+using MongoWebApiStarter.Api.Controllers;
+using MongoWebApiStarter.Biz.Models;
+using MongoWebApiStarter.Biz.Settings;
+using MongoWebApiStarter.Biz.Views;
+using MongoWebApiStarter.Data.Entities;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 
-namespace App.Test
+namespace MongoWebApiStarter.Test
 {
     [TestClass]
     public class AccountTest

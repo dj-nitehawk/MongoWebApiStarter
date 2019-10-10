@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace App.Api
+namespace MongoWebApiStarter.Api
 {
     public class Program
     {

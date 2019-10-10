@@ -1,0 +1,4 @@
+Settings__Email__Username=""
+Settings__Email__Password=""
+Settings__Email__FromEmail=""
+Settings__Auth__SigningKey=""

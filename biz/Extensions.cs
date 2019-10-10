@@ -1,4 +1,4 @@
-﻿namespace App.Biz
+﻿namespace MongoWebApiStarter.Biz
 {
     public static class Extensions
     {

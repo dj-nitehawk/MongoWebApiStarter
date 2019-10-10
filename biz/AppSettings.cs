@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Biz.Settings
+namespace MongoWebApiStarter.Biz.Settings
 {
     public class AppSettings
     {

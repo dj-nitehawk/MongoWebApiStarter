@@ -1,10 +1,10 @@
-﻿using App.Data.Base;
-using App.Data.Entities;
+﻿using MongoWebApiStarter.Data.Base;
+using MongoWebApiStarter.Data.Entities;
 using MongoDB.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace App.Data.Repos
+namespace MongoWebApiStarter.Data.Repos
 {
     public class EmailRepo : RepoBase<EmailMessage>
     {

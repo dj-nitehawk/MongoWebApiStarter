@@ -1,8 +1,8 @@
-﻿using App.Api.Auth;
-using App.Biz.Settings;
+﻿using MongoWebApiStarter.Api.Auth;
+using MongoWebApiStarter.Biz.Settings;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.Api.Base
+namespace MongoWebApiStarter.Api.Base
 {
     [NeedPermission]
     [ApiController]

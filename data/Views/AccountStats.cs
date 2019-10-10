@@ -1,4 +1,4 @@
-﻿namespace App.Data.Views
+﻿namespace MongoWebApiStarter.Data.Views
 {
     public class AccountStats
     {

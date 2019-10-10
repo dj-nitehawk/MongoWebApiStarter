@@ -1,4 +1,4 @@
-﻿namespace App.Data.Entities
+﻿namespace MongoWebApiStarter.Data.Entities
 {
     public class Address
     {

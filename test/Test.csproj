@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>App.Test</AssemblyName>
-    <RootNamespace>App.Test</RootNamespace>
+    <AssemblyName>MongoWebApiStarter.Test</AssemblyName>
+    <RootNamespace>MongoWebApiStarter.Test</RootNamespace>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 

@@ -1,6 +1,6 @@
-﻿using App.Biz.Settings;
-using App.Data.Entities;
-using App.Data.Repos;
+﻿using MongoWebApiStarter.Biz.Settings;
+using MongoWebApiStarter.Data.Entities;
+using MongoWebApiStarter.Data.Repos;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace App.Biz.Services
+namespace MongoWebApiStarter.Biz.Services
 {
     public class EmailService : BackgroundService
     {

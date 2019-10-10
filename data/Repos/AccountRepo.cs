@@ -1,12 +1,12 @@
-﻿using App.Data.Base;
-using App.Data.Entities;
-using App.Data.Views;
+﻿using MongoWebApiStarter.Data.Base;
+using MongoWebApiStarter.Data.Entities;
+using MongoWebApiStarter.Data.Views;
 using MongoDB.Entities;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace App.Data.Repos
+namespace MongoWebApiStarter.Data.Repos
 {
     public class AccountRepo : RepoBase<Account>
     {

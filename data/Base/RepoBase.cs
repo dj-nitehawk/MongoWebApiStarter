@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace App.Data.Base
+namespace MongoWebApiStarter.Data.Base
 {
     public class RepoBase<TEntity> where TEntity : Entity
     {

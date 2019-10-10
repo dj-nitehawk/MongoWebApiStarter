@@ -1,10 +1,10 @@
-﻿using App.Api.Base;
+﻿using MongoWebApiStarter.Api.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace App.Test
+namespace MongoWebApiStarter.Test
 {
     public static class Extensions
     {

@@ -1,6 +1,6 @@
 ﻿using MongoDB.Entities;
 
-namespace App.Data
+namespace MongoWebApiStarter.Data
 {
     public static class Extensions
     {

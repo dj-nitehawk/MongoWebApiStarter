@@ -1,11 +1,11 @@
-﻿using App.Data.Base;
-using App.Data.Entities;
+﻿using MongoWebApiStarter.Data.Base;
+using MongoWebApiStarter.Data.Entities;
 using MongoDB.Bson;
 using MongoDB.Entities;
 using System;
 using System.Threading.Tasks;
 
-namespace App.Data.Repos
+namespace MongoWebApiStarter.Data.Repos
 {
     public class ImageRepo : RepoBase<Image>
     {

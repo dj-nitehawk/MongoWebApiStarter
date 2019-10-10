@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System;
 
-namespace App.Api.Auth
+namespace MongoWebApiStarter.Api.Auth
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
     public class AllowedRolesAttribute : AuthorizeAttribute

@@ -1,8 +1,8 @@
-﻿using App.Biz.Base;
-using App.Data.Repos;
+﻿using MongoWebApiStarter.Biz.Base;
+using MongoWebApiStarter.Data.Repos;
 using System.Linq;
 
-namespace App.Biz.Views
+namespace MongoWebApiStarter.Biz.Views
 {
     public class AccountsView : ViewBase<AccountRepo>
     {

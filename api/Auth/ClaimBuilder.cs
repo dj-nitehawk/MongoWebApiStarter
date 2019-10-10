@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 
-namespace App.Api.Auth
+namespace MongoWebApiStarter.Api.Auth
 {
     public class ClaimBuilder
     {

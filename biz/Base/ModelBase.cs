@@ -1,4 +1,4 @@
-﻿namespace App.Biz.Base
+﻿namespace MongoWebApiStarter.Biz.Base
 {
     public abstract class ModelBase<TRepo> where TRepo : new()
     {

@@ -1,9 +1,9 @@
-﻿using App.Biz.Models;
-using App.Biz.Views;
+﻿using MongoWebApiStarter.Biz.Models;
+using MongoWebApiStarter.Biz.Views;
 using Microsoft.AspNetCore.Authorization;
 using System;
 
-namespace App.Biz.Auth
+namespace MongoWebApiStarter.Biz.Auth
 {
     public static class Policies
     {

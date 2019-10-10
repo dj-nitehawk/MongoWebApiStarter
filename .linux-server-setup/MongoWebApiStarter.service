@@ -1,0 +1,19 @@
+[Unit]
+Description=MongoWebApiStarter
+
+[Service]
+WorkingDirectory=/MongoWebApiStarter
+ExecStart=/usr/bin/dotnet  /MongoWebApiStarter/MongoWebApiStarter.Api.dll
+StandardOutput=file:/MongoWebApiStarter/output.log
+StandardError=file:/MongoWebApiStarter/error.log
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=shared-care-vault
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+EnvironmentFile=/etc/environment
+
+[Install]
+WantedBy=multi-user.target

@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace App.Api.Middleware
+namespace MongoWebApiStarter.Api.Middleware
 {
     public class MaintenanceMode
     {

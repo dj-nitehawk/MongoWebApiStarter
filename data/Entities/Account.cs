@@ -1,6 +1,6 @@
 ﻿using MongoDB.Entities;
 
-namespace App.Data.Entities
+namespace MongoWebApiStarter.Data.Entities
 {
     public class Account : Entity
     {

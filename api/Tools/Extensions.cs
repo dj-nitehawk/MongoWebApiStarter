@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace App.Api.Extensions
+namespace MongoWebApiStarter.Api.Extensions
 {
     public static class Extensions
     {

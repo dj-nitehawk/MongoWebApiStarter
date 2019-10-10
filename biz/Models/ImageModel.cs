@@ -1,5 +1,5 @@
-﻿using App.Biz.Base;
-using App.Data.Repos;
+﻿using MongoWebApiStarter.Biz.Base;
+using MongoWebApiStarter.Data.Repos;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using SixLabors.ImageSharp;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace App.Biz.Models
+namespace MongoWebApiStarter.Biz.Models
 {
     public class ImageModel : ModelBase<ImageRepo>
     {

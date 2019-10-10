@@ -1,4 +1,4 @@
-﻿using App.Biz.Settings;
+﻿using MongoWebApiStarter.Biz.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace App.Api.Auth
+namespace MongoWebApiStarter.Api.Auth
 {
     public static class Authentication
     {

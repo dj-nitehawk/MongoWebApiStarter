@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Api.Auth
+namespace MongoWebApiStarter.Api.Auth
 {
     public class JwtToken
     {

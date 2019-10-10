@@ -1,12 +1,12 @@
-﻿using App.Api.Auth;
-using App.Api.Base;
-using App.Biz.Models;
+﻿using MongoWebApiStarter.Api.Auth;
+using MongoWebApiStarter.Api.Base;
+using MongoWebApiStarter.Biz.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace App.Api.Controllers
+namespace MongoWebApiStarter.Api.Controllers
 {
     [NeedPermission(ImageModel.Perms.Save)]
     public class ImageController : BaseController

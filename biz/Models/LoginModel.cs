@@ -1,9 +1,9 @@
-﻿using App.Biz.Base;
-using App.Data.Repos;
+﻿using MongoWebApiStarter.Biz.Base;
+using MongoWebApiStarter.Data.Repos;
 using FluentValidation;
 using System.Linq;
 
-namespace App.Biz.Models
+namespace MongoWebApiStarter.Biz.Models
 {
     public class LoginModel : ModelBase<AccountRepo>
     {

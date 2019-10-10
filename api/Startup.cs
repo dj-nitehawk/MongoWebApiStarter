@@ -1,8 +1,8 @@
-﻿using App.Api.Auth;
-using App.Api.Middleware;
-using App.Biz.Auth;
-using App.Biz.Services;
-using App.Biz.Settings;
+﻿using MongoWebApiStarter.Api.Auth;
+using MongoWebApiStarter.Api.Middleware;
+using MongoWebApiStarter.Biz.Auth;
+using MongoWebApiStarter.Biz.Services;
+using MongoWebApiStarter.Biz.Settings;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -14,7 +14,7 @@ using Microsoft.Extensions.Hosting;
 using MongoDB.Entities;
 using System.IO;
 
-namespace App.Api
+namespace MongoWebApiStarter.Api
 {
     public class Startup
     {

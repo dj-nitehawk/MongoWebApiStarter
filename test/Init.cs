@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
 
-namespace App.Test
+namespace MongoWebApiStarter.Test
 {
     [TestClass]
     public static class InitTest
