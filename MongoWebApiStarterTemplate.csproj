@@ -6,7 +6,7 @@
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
-    <Description>A full-featured starter template for a .Net Core 3.0 Web-Api project with MongoDB as the data store.</Description>
+    <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net Core 3.0 Web-Api project with MongoDB as the data store.</Description>
     <PackageTags>dotnet-new;templates;mongodb;webapi;netcore3</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
 
