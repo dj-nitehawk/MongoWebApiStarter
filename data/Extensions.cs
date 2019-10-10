@@ -8,5 +8,10 @@ namespace App.Data
         {
             return !string.IsNullOrEmpty(entity.ID);
         }
+
+        public static bool IsNew(this Entity entity)
+        {
+            return string.IsNullOrEmpty(entity.ID);
+        }
     }
 }

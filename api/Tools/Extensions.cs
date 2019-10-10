@@ -14,9 +14,14 @@ namespace App.Api.Extensions
             return "http://localhost:8888/";
         }
 
-        public static bool IsNotEmpty(this string value)
+        public static bool HasValue(this string value)
         {
             return !string.IsNullOrEmpty(value);
+        }
+
+        public static bool HasNoValue(this string value)
+        {
+            return string.IsNullOrEmpty(value);
         }
     }
 }

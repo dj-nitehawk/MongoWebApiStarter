@@ -49,7 +49,7 @@ namespace App.Biz.Models
 
             CheckIfEmailValidationIsNeeded();
 
-            if (ID.IsNotEmpty()) // it's an existing account being updated
+            if (ID.HasValue()) // it's an existing account being updated
             {
                 if (NeedsEmailVerification) // don't replace the two fields below
                 {

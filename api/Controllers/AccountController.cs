@@ -70,7 +70,7 @@ namespace App.Api.Controllers
         {
             var error = model.SingIn();
 
-            if (error.IsNotEmpty())
+            if (error.HasValue())
             {
                 return BadRequest(error);
             }
