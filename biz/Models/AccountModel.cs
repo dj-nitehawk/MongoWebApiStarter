@@ -170,6 +170,7 @@ namespace App.Biz.Models
         public static class Claims
         {
             public const string ID = "account.claim.id";
+            public const string Email = "account.claim.email";
         }
     }
 

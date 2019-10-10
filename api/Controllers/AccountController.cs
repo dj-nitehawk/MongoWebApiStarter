@@ -81,6 +81,7 @@ namespace App.Api.Controllers
                     model.FullName,
                     Token = Authentication
                             .GenerateToken(x => x.WithClaim(AccountModel.Claims.ID, model.AccountID)
+                                                 .WithClaim(AccountModel.Claims.Email,model.UserName)
                                                  .WithClaim(Claims.Role, Roles.Owner))
                 });
         }
