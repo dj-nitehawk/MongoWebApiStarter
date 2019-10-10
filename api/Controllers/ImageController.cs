@@ -43,12 +43,12 @@ namespace App.Api.Controllers
         [HttpGet("api/image/{id}.jpg")] //jpg extension is used so files can be cached by CDNs and browsers
         public async Task<ActionResult> Retrieve(string id)
         {
-            var model = new ImageModel();
-            var bytes = await model.FetchAsync(id);
+            var model = new ImageModel() { ID = id };
+            await model.LoadAsync();
+            
+            if (model.FileBytes == null) return NotFound();
 
-            if (bytes == null) return NotFound();
-
-            return File(bytes, "image/jpeg");
+            return File(model.FileBytes, "image/jpeg");
         }
     }
 }

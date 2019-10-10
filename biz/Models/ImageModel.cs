@@ -17,16 +17,13 @@ namespace App.Biz.Models
     {
         public string ID { get; set; }
         public IFormFile File { get; set; }
+        public byte[] FileBytes { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public async Task<byte[]> FetchAsync(string id)
+        public async Task LoadAsync()
         {
-            var image = await Repo.Find(id);
-
-            if (image == null) return null;
-
-            return image.Bytes;
+            FileBytes = (await Repo.GetAsync(ID))?.Bytes;
         }
 
         public async Task SaveAsync()

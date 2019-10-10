@@ -11,20 +11,20 @@ namespace App.Biz.Models
         public string FullName { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-               
+
         public string SingIn()
         {
-            var acc = Repo.Find(a => a.Email == UserName.ToLower().Trim(),
-                                   a => new
-                                   {
-                                       a.PasswordHash,
-                                       a.IsEmailVerified,
-                                       a.ID,
-                                       a.Title,
-                                       a.FirstName,
-                                       a.LastName
-                                   })
-                              .SingleOrDefault();
+            var acc = Repo.Find(a =>
+                        a.Email == UserName.ToLower().Trim(),
+                        a => new
+                        {
+                            a.PasswordHash,
+                            a.IsEmailVerified,
+                            a.ID,
+                            a.Title,
+                            a.FirstName,
+                            a.LastName
+                        }).SingleOrDefault();
 
             if (acc != null)
             {

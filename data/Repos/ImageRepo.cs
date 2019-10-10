@@ -9,7 +9,7 @@ namespace App.Data.Repos
 {
     public class ImageRepo : RepoBase<Image>
     {
-        new public async Task<Image> Find(string id)
+        public async Task<Image> GetAsync(string id)
         {
             if (!ObjectId.TryParse(id, out ObjectId tmp)) return null;
 
