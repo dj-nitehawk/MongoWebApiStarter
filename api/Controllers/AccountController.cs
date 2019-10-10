@@ -43,7 +43,7 @@ namespace App.Api.Controllers
         [HttpGet("api/account/{id}")]
         public ActionResult<AccountModel> Retrieve(string id)
         {
-            if (string.IsNullOrEmpty(id)) return NotFound("Invalid ID");
+            if (id.HasNoValue()) return NotFound("Invalid ID");
 
             var model = new AccountModel { ID = id };
             model.Load();

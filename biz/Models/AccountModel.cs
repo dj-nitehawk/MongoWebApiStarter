@@ -115,7 +115,7 @@ namespace App.Biz.Models
 
         public void CheckIfEmailValidationIsNeeded()
         {
-            if (string.IsNullOrEmpty(ID))
+            if (ID.HasNoValue())
             {
                 NeedsEmailVerification = true;
             }
