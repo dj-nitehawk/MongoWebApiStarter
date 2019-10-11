@@ -23,10 +23,11 @@
     {
       "exclude": [
         "**/.vs/**",
+        "**/dp_keys/**",
         "**/.git/**",
         "**/.template.config/**",
-        "**/bin/**",
-        "**/obj/**",
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
         "**/TestResults/**"
       ]
     }
