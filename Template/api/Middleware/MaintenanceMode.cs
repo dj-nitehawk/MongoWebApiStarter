@@ -23,10 +23,10 @@ namespace MongoWebApiStarter.Api.Middleware
         {
             switch (context.Request.Path)
             {
-                case "/turn-site-off": // don't forget to protect this url with nginx
+                case "/turn-site-off": //todo: blacklist this route with nginx in production [https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/]
                     maintenanceMode = true;
                     break; ;
-                case "/turn-site-on": // don't forget to protect this url with nginx
+                case "/turn-site-on": //todo: blacklist this route with nginx in production [https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/]
                     maintenanceMode = false;
                     context.Response.Clear();
                     context.Response.StatusCode = (int)HttpStatusCode.OK;

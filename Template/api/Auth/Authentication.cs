@@ -13,6 +13,9 @@ using System.Security.Claims;
 
 namespace MongoWebApiStarter.Api.Auth
 {
+    /// <summary>
+    /// The main entrypoint for authentication
+    /// </summary>
     public static class Authentication
     {
         private static AppSettings _settings = new AppSettings();
@@ -57,6 +60,11 @@ namespace MongoWebApiStarter.Api.Auth
             return filters;
         }
 
+        /// <summary>
+        /// Generates a JWT token with the given claims
+        /// </summary>
+        /// <param name="claims">The claims to embed in the token</param>
+        /// <returns></returns>
         public static JwtToken GenerateToken(IEnumerable<Claim> claims)
         {
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -82,6 +90,11 @@ namespace MongoWebApiStarter.Api.Auth
             };
         }
 
+        /// <summary>
+        /// Generates a JWT token with the given claims
+        /// </summary>
+        /// <param name="action">x => x.WithClaim("type1","value1").WithClaim("type2","value2")</param>
+        /// <returns></returns>
         public static JwtToken GenerateToken(Action<ClaimBuilder> action)
         {
             var builder = new ClaimBuilder();

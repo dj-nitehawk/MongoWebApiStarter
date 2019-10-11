@@ -15,7 +15,7 @@ namespace MongoWebApiStarter.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("show-log")] // don't forget to lock this url down with nginx
+        [HttpGet("show-log")] //todo: blacklist this route with nginx in production [https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/]
         public ActionResult ShowLog()
         {
             if (System.IO.File.Exists("output.log"))

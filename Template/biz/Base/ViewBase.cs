@@ -1,6 +1,11 @@
 ﻿namespace MongoWebApiStarter.Biz.Base
 {
-    public abstract class ViewBase<TRepo> : ModelBase<TRepo> where TRepo : new() {
+    /// <summary>
+    /// Base class for views
+    /// </summary>
+    /// <typeparam name="TRepo">The type of repo for the view</typeparam>
+    public abstract class ViewBase<TRepo> : ModelBase<TRepo> where TRepo : new()
+    {
         public override void Save()
         {
             throw new System.NotImplementedException();

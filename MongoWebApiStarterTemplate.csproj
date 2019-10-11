@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.2.1</PackageVersion>
+    <PackageVersion>1.3</PackageVersion>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
@@ -14,7 +14,7 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- exclude dp_keys</PackageReleaseNotes>
+    <PackageReleaseNotes>added xml documentation</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
@@ -24,6 +24,10 @@
   <ItemGroup>
     <Content Include="Template\**\*" Exclude="Template\**\bin\**;Template\**\obj\**" />
     <Compile Remove="**\*" />
+    <Compile Remove="Template\api\dp_keys\**" />
+    <Content Remove="Template\api\dp_keys\**" />
+    <EmbeddedResource Remove="Template\api\dp_keys\**" />
+    <None Remove="Template\api\dp_keys\**" />
   </ItemGroup>
 
   <ItemGroup>
