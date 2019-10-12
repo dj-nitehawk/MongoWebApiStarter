@@ -1,10 +1,10 @@
-﻿using MongoWebApiStarter.Api.Controllers;
-using MongoWebApiStarter.Biz.Models;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentValidation.TestHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MongoWebApiStarter.Api.Controllers;
+using MongoWebApiStarter.Biz.Models;
 using System;
 using System.IO;
 using System.Threading.Tasks;

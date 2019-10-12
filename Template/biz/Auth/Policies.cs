@@ -1,6 +1,6 @@
-﻿using MongoWebApiStarter.Biz.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using MongoWebApiStarter.Biz.Models;
 using MongoWebApiStarter.Biz.Views;
-using Microsoft.AspNetCore.Authorization;
 using System;
 
 namespace MongoWebApiStarter.Biz.Auth

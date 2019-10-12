@@ -1,7 +1,7 @@
-﻿using MongoWebApiStarter.Data.Base;
-using MongoWebApiStarter.Data.Entities;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Entities;
+using MongoWebApiStarter.Data.Base;
+using MongoWebApiStarter.Data.Entities;
 using System;
 using System.Threading.Tasks;
 

@@ -1,8 +1,8 @@
-﻿using MongoWebApiStarter.Api.Auth;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MongoWebApiStarter.Api.Auth;
 using MongoWebApiStarter.Api.Base;
 using MongoWebApiStarter.Biz.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
@@ -45,7 +45,7 @@ namespace MongoWebApiStarter.Api.Controllers
         {
             var model = new ImageModel() { ID = id };
             await model.LoadAsync();
-            
+
             if (model.FileBytes == null) return NotFound();
 
             return File(model.FileBytes, "image/jpeg");

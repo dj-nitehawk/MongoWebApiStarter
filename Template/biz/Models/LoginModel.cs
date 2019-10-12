@@ -1,6 +1,6 @@
-﻿using MongoWebApiStarter.Biz.Base;
+﻿using FluentValidation;
+using MongoWebApiStarter.Biz.Base;
 using MongoWebApiStarter.Data.Repos;
-using FluentValidation;
 using System.Linq;
 
 namespace MongoWebApiStarter.Biz.Models

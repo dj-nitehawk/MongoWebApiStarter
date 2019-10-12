@@ -1,11 +1,11 @@
-﻿using MongoWebApiStarter.Biz.Settings;
-using MongoWebApiStarter.Data.Entities;
-using MongoWebApiStarter.Data.Repos;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MimeKit;
 using MimeKit.Text;
+using MongoWebApiStarter.Biz.Settings;
+using MongoWebApiStarter.Data.Entities;
+using MongoWebApiStarter.Data.Repos;
 using System;
 using System.Collections.Generic;
 using System.Threading;

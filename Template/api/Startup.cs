@@ -1,9 +1,4 @@
-﻿using MongoWebApiStarter.Api.Auth;
-using MongoWebApiStarter.Api.Middleware;
-using MongoWebApiStarter.Biz.Auth;
-using MongoWebApiStarter.Biz.Services;
-using MongoWebApiStarter.Biz.Settings;
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Entities;
+using MongoWebApiStarter.Api.Auth;
+using MongoWebApiStarter.Api.Middleware;
+using MongoWebApiStarter.Biz.Auth;
+using MongoWebApiStarter.Biz.Services;
+using MongoWebApiStarter.Biz.Settings;
 using System.IO;
 
 namespace MongoWebApiStarter.Api

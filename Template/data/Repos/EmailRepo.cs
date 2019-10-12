@@ -1,6 +1,6 @@
-﻿using MongoWebApiStarter.Data.Base;
+﻿using MongoDB.Entities;
+using MongoWebApiStarter.Data.Base;
 using MongoWebApiStarter.Data.Entities;
-using MongoDB.Entities;
 using System;
 using System.Collections.Generic;
 

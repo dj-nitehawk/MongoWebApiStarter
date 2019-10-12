@@ -1,12 +1,12 @@
-﻿using MongoWebApiStarter.Api.Auth;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MongoWebApiStarter.Api.Auth;
 using MongoWebApiStarter.Api.Base;
 using MongoWebApiStarter.Api.Extensions;
 using MongoWebApiStarter.Biz.Auth;
 using MongoWebApiStarter.Biz.Models;
 using MongoWebApiStarter.Biz.Settings;
 using MongoWebApiStarter.Biz.Views;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace MongoWebApiStarter.Api.Controllers
@@ -81,7 +81,7 @@ namespace MongoWebApiStarter.Api.Controllers
                     model.FullName,
                     Token = Authentication
                             .GenerateToken(x => x.WithClaim(AccountModel.Claims.ID, model.AccountID)
-                                                 .WithClaim(AccountModel.Claims.Email,model.UserName)
+                                                 .WithClaim(AccountModel.Claims.Email, model.UserName)
                                                  .WithClaim(Claims.Role, Roles.Owner))
                 });
         }

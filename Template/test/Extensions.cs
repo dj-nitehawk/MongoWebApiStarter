@@ -1,6 +1,6 @@
-﻿using MongoWebApiStarter.Api.Base;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoWebApiStarter.Api.Base;
 using System.Collections.Generic;
 using System.Security.Claims;
 

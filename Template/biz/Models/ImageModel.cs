@@ -1,7 +1,7 @@
-﻿using MongoWebApiStarter.Biz.Base;
-using MongoWebApiStarter.Data.Repos;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using MongoWebApiStarter.Biz.Base;
+using MongoWebApiStarter.Data.Repos;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;

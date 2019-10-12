@@ -1,8 +1,8 @@
-﻿using MongoWebApiStarter.Data.Entities;
-using MongoWebApiStarter.Data.Repos;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
+using MongoWebApiStarter.Data.Entities;
+using MongoWebApiStarter.Data.Repos;
 using System;
 using System.Linq;
 

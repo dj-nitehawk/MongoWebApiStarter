@@ -1,7 +1,7 @@
-﻿using MongoWebApiStarter.Data.Base;
+﻿using MongoDB.Entities;
+using MongoWebApiStarter.Data.Base;
 using MongoWebApiStarter.Data.Entities;
 using MongoWebApiStarter.Data.Views;
-using MongoDB.Entities;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

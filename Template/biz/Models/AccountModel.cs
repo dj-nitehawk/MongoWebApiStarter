@@ -1,8 +1,8 @@
-﻿using MongoWebApiStarter.Biz.Base;
+﻿using FluentValidation;
+using MlkPwgen;
+using MongoWebApiStarter.Biz.Base;
 using MongoWebApiStarter.Data.Entities;
 using MongoWebApiStarter.Data.Repos;
-using FluentValidation;
-using MlkPwgen;
 
 namespace MongoWebApiStarter.Biz.Models
 {

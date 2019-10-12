@@ -1,7 +1,7 @@
-﻿using MongoWebApiStarter.Api.Base;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using MongoWebApiStarter.Api.Base;
 
 namespace MongoWebApiStarter.Api.Controllers
 {
