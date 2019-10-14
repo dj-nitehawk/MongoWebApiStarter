@@ -9,9 +9,9 @@ using MongoWebApiStarter.Biz.Models;
 using MongoWebApiStarter.Biz.Settings;
 using MongoWebApiStarter.Biz.Views;
 using MongoWebApiStarter.Data.Entities;
+using SCVault.Test;
 using System;
 using System.Linq;
-using System.Security.Claims;
 
 namespace MongoWebApiStarter.Test
 {
@@ -131,7 +131,7 @@ namespace MongoWebApiStarter.Test
             account.Save();
 
             var cnt = new AccountController(settings);
-            cnt.SetClaims(new[] { new Claim(AccountModel.Claims.ID, account.ID) });
+            cnt.SetClaims(x => x.WithClaim(AccountModel.Claims.ID, account.ID));
             account = cnt.Retrieve(account.ID).Value;
             account.Password = "updated password";
             cnt.Update(account).Should().BeOfType<OkObjectResult>();
