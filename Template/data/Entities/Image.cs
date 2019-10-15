@@ -1,4 +1,4 @@
-﻿using MongoDB.Entities.Common;
+﻿using MongoDB.Entities.Core;
 using System;
 
 namespace MongoWebApiStarter.Data.Entities
