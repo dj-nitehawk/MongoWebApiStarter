@@ -66,5 +66,13 @@ namespace MongoWebApiStarter.Data.Repos
             };
         }
 
+        static AccountRepo()
+        {
+            // define indexes for Account entities here
+
+            DB.Index<Account>()
+              .Key(a => a.Email, KeyType.Ascending)
+              .CreateAsync();
+        }
     }
 }
