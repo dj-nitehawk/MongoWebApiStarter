@@ -212,9 +212,7 @@ namespace MongoWebApiStarter.Test
             var cnt = new AccountController(settings);
             cnt.Save(account);
 
-            var acsView = cnt.ViewAccounts()
-                             .Result.As<OkObjectResult>()
-                             .Value.As<AccountsView>();
+            var acsView = cnt.ViewAccounts().Value;
 
             acsView.AccountList.Should().BeOfType<AccountDetailView[]>();
         }

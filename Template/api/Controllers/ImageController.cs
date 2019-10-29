@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Api.Controllers
 {
-    [NeedPermission(ImageModel.Perms.Save)]
+    [NeedPermission(ImageModel.Perms.Full)]
     public class ImageController : BaseController
     {
         [HttpPost("api/image")]

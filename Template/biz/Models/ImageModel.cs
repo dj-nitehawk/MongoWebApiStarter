@@ -100,7 +100,9 @@ namespace MongoWebApiStarter.Biz.Models
 
         public static class Perms
         {
-            public const string Save = "image.perm.save";
+            public const string Full = "perm.image.full";
+            public const string Save = "perm.image.save";
+            public const string Delete = "perm.image.delete";
         }
     }
 

@@ -30,8 +30,8 @@ namespace MongoWebApiStarter.Biz.Views
 
         public static class Perms
         {
-            public const string View = "accounts.perm.view";
-            public const string Delete = "accounts.perm.delete";
+            public const string View = "perm.accounts.view";
+            public const string Delete = "perm.accounts.delete";
         }
     }
 

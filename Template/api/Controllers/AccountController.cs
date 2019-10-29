@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace MongoWebApiStarter.Api.Controllers
 {
-    [NeedPermission(AccountModel.Perms.Save)]
+    [NeedPermission(AccountModel.Perms.Full)]
     public class AccountController : BaseController
     {
         public AccountController(AppSettings settings)
@@ -87,12 +87,12 @@ namespace MongoWebApiStarter.Api.Controllers
         }
 
         [NeedPermission(AccountsView.Perms.View)]
-        [HttpGet("/api/view/accounts")]
+        [HttpGet("/api/accounts")]
         public ActionResult<AccountsView> ViewAccounts()
         {
             var view = new AccountsView();
             view.Load();
-            return Ok(view);
+            return view;
         }
     }
 }
