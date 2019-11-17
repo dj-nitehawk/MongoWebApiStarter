@@ -14,17 +14,12 @@ namespace MongoWebApiStarter.Api.Controllers
     [NeedPermission(AccountModel.Perms.Full)]
     public class AccountController : BaseController
     {
-        public AccountController(AppSettings settings)
-        {
-            Settings = settings;
-        }
-
         [AllowAnonymous]
         [HttpPost("api/account")]
         public ActionResult Save(AccountModel model)
         {
             model.Save();
-            model.SendVerificationEmail(this.BaseURL(), Settings.Email);
+            model.SendVerificationEmail(BaseURL, Settings.Email);
             return Ok(new
             {
                 model.ID,

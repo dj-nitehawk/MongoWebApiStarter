@@ -18,8 +18,6 @@ namespace MongoWebApiStarter.Test
     [TestClass]
     public class AccountTest
     {
-        private AppSettings settings = new AppSettings();
-
         [TestMethod]
         public void saving_a_new_account()
         {
@@ -33,7 +31,7 @@ namespace MongoWebApiStarter.Test
             var validator = new AccountModel.Validator();
             validator.ShouldNotHaveValidationErrorFor(v => v.Password, account.Password);
 
-            var cnt = new AccountController(settings);
+            var cnt = new AccountController();
             var res = cnt.Save(account);
 
             res.Should().BeOfType<OkObjectResult>();
@@ -49,7 +47,7 @@ namespace MongoWebApiStarter.Test
                 Password = "passwordABC123",
             };
 
-            var cnt = new AccountController(settings);
+            var cnt = new AccountController();
             cnt.Save(account);
 
             var res = cnt.Login(new LoginModel
@@ -71,7 +69,7 @@ namespace MongoWebApiStarter.Test
                 Password = "passwordABC123",
             };
 
-            var cnt = new AccountController(settings);
+            var cnt = new AccountController();
             cnt.Save(account);
 
             DB.Update<Account>()
@@ -114,7 +112,7 @@ namespace MongoWebApiStarter.Test
             };
             account.Save();
 
-            var cnt = new AccountController(settings);
+            var cnt = new AccountController();
             account = cnt.Retrieve(account.ID).Value;
             account.EmailAddress.Should().Be(email);
         }
@@ -130,7 +128,7 @@ namespace MongoWebApiStarter.Test
             };
             account.Save();
 
-            var cnt = new AccountController(settings);
+            var cnt = new AccountController();
             cnt.SetClaims(x => x.WithClaim(AccountModel.Claims.ID, account.ID));
             account = cnt.Retrieve(account.ID).Value;
             account.Password = "updated password";
@@ -173,7 +171,7 @@ namespace MongoWebApiStarter.Test
             };
             account.NeedsEmailVerification = true;
 
-            account.SendVerificationEmail("http://localhost:8888/", settings.Email);
+            account.SendVerificationEmail("http://localhost:8888/", new AppSettings().Email);
 
             var msg = DB.Find<EmailMessage>()
                         .Match(e => e.ToEmail == guid)
@@ -189,7 +187,7 @@ namespace MongoWebApiStarter.Test
             var account = new Account { ID = ObjectId.GenerateNewId().ToString(), EmailVerificationCode = "123456" };
             account.Save();
 
-            var cnt = new AccountController(settings);
+            var cnt = new AccountController();
             cnt.ValidateEmail(account.ID, account.EmailVerificationCode);
 
             account = DB.Find<Account>().One(account.ID);
@@ -209,7 +207,7 @@ namespace MongoWebApiStarter.Test
                 EmailAddress = email,
                 Password = "passwordABC123",
             };
-            var cnt = new AccountController(settings);
+            var cnt = new AccountController();
             cnt.Save(account);
 
             var acsView = cnt.ViewAccounts().Value;

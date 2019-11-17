@@ -11,6 +11,30 @@ namespace MongoWebApiStarter.Api.Base
     [ApiController]
     public class BaseController : ControllerBase
     {
-        public AppSettings Settings { get; set; }
+        public AppSettings Settings
+        {
+            get
+            {
+                if (Request == null || Request.HttpContext == null || Request.HttpContext.RequestServices == null)
+                {
+                    return new AppSettings();
+                }
+
+                return Request.HttpContext.RequestServices.GetService(typeof(AppSettings)) as AppSettings;
+            }
+        }
+
+        public string BaseURL
+        {
+            get
+            {
+                if (Request != null)
+                {
+                    return $"{Request.Scheme}://{Request.Host}/";
+                }
+
+                return "http://localhost:8888/";
+            }
+        }
     }
 }
