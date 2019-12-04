@@ -16,7 +16,7 @@ namespace MongoWebApiStarter.Api.Middleware
         public MaintenanceMode(RequestDelegate next, IWebHostEnvironment environment)
         {
             this.next = next;
-            this.content = File.ReadAllText(Path.Combine(environment.WebRootPath, "maintenance.htm"));
+            content = File.ReadAllText(Path.Combine(environment.WebRootPath, "maintenance.htm"));
         }
 
         public async Task Invoke(HttpContext context)

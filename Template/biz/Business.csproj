@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>MongoWebApiStarter.Biz</AssemblyName>
     <RootNamespace>MongoWebApiStarter.Biz</RootNamespace>
     <LangVersion>8.0</LangVersion>
@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="3.2.1" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0" />
-    <PackageReference Include="MailKit" Version="2.3.1.6" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
+    <PackageReference Include="MailKit" Version="2.4.1" />
     <PackageReference Include="MlkPwgen" Version="0.3.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
   </ItemGroup>

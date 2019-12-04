@@ -6,7 +6,7 @@ namespace MongoWebApiStarter.Api.Auth
 {
     public class ClaimBuilder
     {
-        HashSet<Claim> claims = new HashSet<Claim>();
+        private readonly HashSet<Claim> claims = new HashSet<Claim>();
 
         /// <summary>
         /// Adds a new claim to the builder

@@ -7,7 +7,7 @@
     public abstract class ModelBase<TRepo> where TRepo : new()
     {
         protected TRepo Repo { get; set; } = new TRepo();
-        abstract public void Save();
-        abstract public void Load();
+        public abstract void Save();
+        public abstract void Load();
     }
 }

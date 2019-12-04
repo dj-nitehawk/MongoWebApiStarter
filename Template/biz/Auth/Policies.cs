@@ -28,7 +28,7 @@ namespace MongoWebApiStarter.Biz.Auth
         }
 
         // CUSTOM REQUIREMENTS:        
-        static Func<AuthorizationHandlerContext, bool> UserHasGmailAddress =
+        private static readonly Func<AuthorizationHandlerContext, bool> UserHasGmailAddress =
             ctx =>
             {
                 var email = ctx.User.FindFirst(AccountModel.Claims.Email)?.Value;

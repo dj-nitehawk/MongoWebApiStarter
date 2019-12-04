@@ -1,5 +1,5 @@
 # MongoWebApiStarter
-A full-featured starter template for `dotnet new` to quickly scaffold a .Net Core 3.0 Web-Api project with MongoDB as the data store.
+A full-featured starter template for `dotnet new` to quickly scaffold a .Net Core 3.1 Web-Api project with MongoDB as the data store.
 
 ## Install & Scaffold
 ```csharp
@@ -10,7 +10,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold a .Net Cor
 ## Features
 
 ### Platform
-- framework: .net core 3.0
+- framework: .net core 3.1
 - language: c#
 - database: mongodb
 

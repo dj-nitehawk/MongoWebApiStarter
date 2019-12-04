@@ -5,7 +5,6 @@ using MongoWebApiStarter.Api.Base;
 using MongoWebApiStarter.Api.Extensions;
 using MongoWebApiStarter.Biz.Auth;
 using MongoWebApiStarter.Biz.Models;
-using MongoWebApiStarter.Biz.Settings;
 using MongoWebApiStarter.Biz.Views;
 using System.Security.Claims;
 
