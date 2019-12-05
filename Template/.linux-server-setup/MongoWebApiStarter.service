@@ -9,7 +9,7 @@ StandardError=file:/MongoWebApiStarter/error.log
 Restart=always
 RestartSec=10
 KillSignal=SIGINT
-SyslogIdentifier=shared-care-vault
+SyslogIdentifier=MongoWebApiStarter
 User=www-data
 Environment=ASPNETCORE_ENVIRONMENT=Production
 Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
