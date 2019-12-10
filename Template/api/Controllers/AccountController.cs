@@ -64,8 +64,8 @@ namespace MongoWebApiStarter.Api.Controllers
         {
             model.SingIn();
 
-            if (!model.State.IsValid)
-                return BadRequest(model.State);
+            if (model.HasErrors())
+                return BadRequest(model.Errors());
 
             return Ok(
                 new

@@ -10,8 +10,9 @@ namespace MongoWebApiStarter.Biz.Base
     /// <typeparam name="TRepo">The type of repo for the model</typeparam>
     public abstract class ModelBase<TRepo> where TRepo : new()
     {
-        public ModelStateDictionary State { get; set; } = new ModelStateDictionary();
         protected TRepo Repo { get; set; } = new TRepo();
+
+        private ModelStateDictionary modelState = new ModelStateDictionary();
 
         public abstract void Save();
 
@@ -25,7 +26,7 @@ namespace MongoWebApiStarter.Biz.Base
         /// <param name="errorMessage">The error description</param>
         protected void AddError<TModel>(Expression<Func<TModel, object>> targetProperty, string errorMessage)
         {
-            State.AddModelError(targetProperty, errorMessage);
+            modelState.AddModelError(targetProperty, errorMessage);
         }
 
         /// <summary>
@@ -34,7 +35,11 @@ namespace MongoWebApiStarter.Biz.Base
         /// <param name="errorMessage">The error description</param>
         protected void AddError(string errorMessage)
         {
-            State.AddModelError("GeneralErrors", errorMessage);
+            modelState.AddModelError("GeneralErrors", errorMessage);
         }
+
+        public bool HasErrors() => !modelState.IsValid;
+
+        public ModelStateDictionary Errors() => modelState;
     }
 }
