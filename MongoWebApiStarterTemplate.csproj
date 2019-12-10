@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>2.3.1</PackageVersion>
+    <PackageVersion>2.4</PackageVersion>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
@@ -14,10 +14,10 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- upgraded project to .net core 3.1 sdk
-- upgrade dependencies to latest
-- minor code refactorings
-- modify linux server setup files for .net core 3.1</PackageReleaseNotes>
+    <PackageReleaseNotes>- refactor modelbase class
+- refactor viewbase class
+- add modelstate errors from account signin
+- return modelstate from signin controller action</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
