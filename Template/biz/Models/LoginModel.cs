@@ -12,7 +12,7 @@ namespace MongoWebApiStarter.Biz.Models
         public string UserName { get; set; }
         public string Password { get; set; }
 
-        public string SingIn()
+        public void SingIn()
         {
             var acc = Repo.Find(a =>
                         a.Email == UserName.ToLower().Trim(),
@@ -30,21 +30,24 @@ namespace MongoWebApiStarter.Biz.Models
             {
                 if (!BCrypt.Net.BCrypt.Verify(Password, acc.PasswordHash))
                 {
-                    return "The supplied credentials are invalid. Please try again...";
+                    AddError("The supplied credentials are invalid.Please try again...");
+                    return;
                 }
             }
             else
             {
-                return "Sorry, couldn't locate your account...";
+                AddError("Sorry, couldn't locate your account...");
+                return;
             }
 
             if (!acc.IsEmailVerified)
-                return "Please verify your email address before logging in...";
+            {
+                AddError("Please verify your email address before logging in...");
+                return;
+            }
 
             AccountID = acc.ID;
             FullName = $"{acc.Title}. {acc.FirstName} {acc.LastName}";
-
-            return null;
         }
 
         public override void Load()

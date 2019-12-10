@@ -62,21 +62,19 @@ namespace MongoWebApiStarter.Api.Controllers
         [HttpPost("/api/account/login")]
         public ActionResult Login(LoginModel model)
         {
-            var error = model.SingIn();
+            model.SingIn();
 
-            if (error.HasValue())
-            {
-                return BadRequest(error);
-            }
+            if (!model.State.IsValid)
+                return BadRequest(model.State);
 
             return Ok(
                 new
                 {
                     model.FullName,
-                    Token = Authentication
-                            .GenerateToken(x => x.WithClaim(AccountModel.Claims.ID, model.AccountID)
-                                                 .WithClaim(AccountModel.Claims.Email, model.UserName)
-                                                 .WithClaim(Claims.Role, Roles.Owner))
+                    Token = Authentication.GenerateToken(x => x
+                            .WithClaim(AccountModel.Claims.ID, model.AccountID)
+                            .WithClaim(AccountModel.Claims.Email, model.UserName)
+                            .WithClaim(Claims.Role, Roles.Owner))
                 });
         }
 

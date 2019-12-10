@@ -59,6 +59,4 @@
             return isValid;
         }
     }
-
-
 }
