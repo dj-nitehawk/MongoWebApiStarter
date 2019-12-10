@@ -4,11 +4,9 @@
     /// Base class for views
     /// </summary>
     /// <typeparam name="TRepo">The type of repo for the view</typeparam>
-    public abstract class ViewBase<TRepo> : ModelBase<TRepo> where TRepo : new()
+    public abstract class ViewBase<TRepo> where TRepo : new()
     {
-        public override void Save()
-        {
-            throw new System.NotImplementedException();
-        }
+        protected TRepo Repo { get; set; } = new TRepo();
+        public abstract void Load();
     }
 }
