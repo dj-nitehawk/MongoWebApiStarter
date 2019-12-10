@@ -34,7 +34,7 @@ namespace MongoWebApiStarter.Biz.Base
         /// <param name="errorMessage">The error description</param>
         protected void AddError(string errorMessage)
         {
-            State.AddModelError("Error", errorMessage);
+            State.AddModelError("GeneralErrors", errorMessage);
         }
     }
 }
