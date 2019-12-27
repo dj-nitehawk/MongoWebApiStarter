@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>2.4.1</PackageVersion>
+    <PackageVersion>2.5</PackageVersion>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
@@ -14,10 +14,9 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- refactor modelbase class
-- refactor viewbase class
-- add modelstate errors from account signin
-- return modelstate from signin controller action</PackageReleaseNotes>
+    <PackageReleaseNotes>- move claim adding logic to biz layer
+- upgraded dependancies to latest
+- minor code changes</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
