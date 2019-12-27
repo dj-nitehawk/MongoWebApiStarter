@@ -12,7 +12,7 @@ namespace MongoWebApiStarter.Biz.Base
     {
         protected TRepo Repo { get; set; } = new TRepo();
 
-        private ModelStateDictionary modelState = new ModelStateDictionary();
+        private readonly ModelStateDictionary modelState = new ModelStateDictionary();
 
         public abstract void Save();
 

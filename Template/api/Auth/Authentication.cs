@@ -9,6 +9,7 @@ using MongoWebApiStarter.Biz.Settings;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 
 namespace MongoWebApiStarter.Api.Auth
@@ -94,12 +95,20 @@ namespace MongoWebApiStarter.Api.Auth
         /// Generates a JWT token with the given claims
         /// </summary>
         /// <param name="action">x => x.WithClaim("type1","value1").WithClaim("type2","value2")</param>
-        /// <returns></returns>
         public static JwtToken GenerateToken(Action<ClaimBuilder> action)
         {
             var builder = new ClaimBuilder();
             action(builder);
             return GenerateToken(builder.GetClaims());
+        }
+
+        /// <summary>
+        /// Generates a JWT token with the given dictionary of claims
+        /// </summary>
+        /// <param name="claims">A dictionary of claims</param>
+        public static JwtToken GenerateToken(Dictionary<string, string> claims)
+        {
+            return GenerateToken(claims.Select(c => new Claim(c.Key, c.Value)));
         }
     }
 }
