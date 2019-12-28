@@ -3,6 +3,7 @@ using MongoWebApiStarter.Data.Entities;
 using MongoWebApiStarter.Data.Repos;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MongoWebApiStarter.Biz.Models
 {
@@ -31,9 +32,11 @@ namespace MongoWebApiStarter.Biz.Models
         {
             if (MergeFields.Count == 0) throw new InvalidOperationException("Cannot proceed without any MergeFields!");
 
+            var sb = new StringBuilder(template);
+
             foreach (var f in MergeFields)
             {
-                template = template.Replace("{" + f.Key + "}", f.Value);
+                sb.Replace("{" + f.Key + "}", f.Value);
             }
 
             Repo.Save(new EmailMessage
@@ -43,7 +46,7 @@ namespace MongoWebApiStarter.Biz.Models
                 ToEmail = toEmail,
                 ToName = toName,
                 Subject = subject,
-                BodyHTML = template
+                BodyHTML = sb.ToString()
             });
         }
 
