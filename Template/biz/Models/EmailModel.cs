@@ -14,7 +14,7 @@ namespace MongoWebApiStarter.Biz.Models
         private readonly string toName;
         private readonly string toEmail;
         private readonly string subject;
-        private string template;
+        private readonly string template;
 
         public Dictionary<string, string> MergeFields { get; set; } = new Dictionary<string, string>();
 
