@@ -18,10 +18,9 @@ namespace MongoWebApiStarter.Biz.Models
                 sb.Replace("{" + f.Key + "}", f.Value);
             }
 
-            var msg = ToEntity(this);
-            msg.BodyHTML = sb.ToString();
-
-            Repo.Save(msg);
+            template = sb.ToString();
+                        
+            Repo.Save(ToEntity(this));
         }
 
         public override void Load()

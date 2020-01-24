@@ -19,7 +19,8 @@ namespace MongoWebApiStarter.Biz.Models
                 FromEmail = m.fromEmail,
                 ToEmail = m.toEmail,
                 ToName = m.toName,
-                Subject = m.subject
+                Subject = m.subject,
+                BodyHTML = m.template
             };
         }
     }
