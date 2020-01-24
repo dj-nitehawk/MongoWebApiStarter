@@ -7,13 +7,13 @@ namespace MongoWebApiStarter.Biz.Interfaces
     /// </summary>
     /// <typeparam name="TModel">The type of model class</typeparam>
     /// <typeparam name="TEntity">The type of entity class</typeparam>
-    public interface IMapper<TModel, TEntity> where TEntity : Entity
+    public interface IMapper<TEntity> where TEntity : Entity
     {
         /// <summary>
         /// Maps a model to an entity
         /// </summary>
         /// <param name="model">The model instance</param>
-        public TEntity ToEntity(TModel model);
+        public TEntity ToEntity();
 
         /// <summary>
         /// Hydrates a model from a supplied entity

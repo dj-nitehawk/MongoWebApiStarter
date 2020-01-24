@@ -3,7 +3,7 @@ using MongoWebApiStarter.Data.Entities;
 
 namespace MongoWebApiStarter.Biz.Models
 {
-    public partial class AccountModel : IMapper<AccountModel, Account>
+    public partial class AccountModel : IMapper<Account>
     {
         public void LoadFrom(Account a)
         {
@@ -19,25 +19,25 @@ namespace MongoWebApiStarter.Biz.Models
             IsEmailVerified = a.IsEmailVerified;
         }
 
-        public Account ToEntity(AccountModel m)
+        public Account ToEntity()
         {
             return new Account
             {
-                ID = m.ID,
-                Email = m.EmailAddress.ToLower(),
-                PasswordHash = m.Password.ToSaltedHash(),
-                Title = m.Title,
-                FirstName = m.FirstName,
-                LastName = m.LastName,
+                ID = ID,
+                Email = EmailAddress.ToLower(),
+                PasswordHash = Password.ToSaltedHash(),
+                Title = Title,
+                FirstName = FirstName,
+                LastName = LastName,
                 Address = new Address
                 {
-                    Street = m.Street,
-                    City = m.City,
-                    State = m.State,
-                    ZipCode = m.ZipCode,
-                    CountryCode = m.CountryCode
+                    Street = Street,
+                    City = City,
+                    State = State,
+                    ZipCode = ZipCode,
+                    CountryCode = CountryCode
                 },
-                IsEmailVerified = m.IsEmailVerified
+                IsEmailVerified = IsEmailVerified
             };
         }
     }

@@ -34,7 +34,7 @@ namespace MongoWebApiStarter.Biz.Models
             img.SaveAsJpeg(strOutput, new JpegEncoder { Quality = 80 });
             FileBytes = strOutput.ToArray();
 
-            ID = await Repo.SaveAsync(ToEntity(this));
+            ID = await Repo.SaveAsync(ToEntity());
         }
 
         public bool IsAllowedType()

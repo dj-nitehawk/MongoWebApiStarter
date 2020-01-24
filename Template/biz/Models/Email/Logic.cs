@@ -20,7 +20,7 @@ namespace MongoWebApiStarter.Biz.Models
 
             template = sb.ToString();
 
-            Repo.Save(ToEntity(this));
+            Repo.Save(ToEntity());
         }
 
         public override void Load()

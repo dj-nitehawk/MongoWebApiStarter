@@ -4,23 +4,23 @@ using System;
 
 namespace MongoWebApiStarter.Biz.Models
 {
-    public partial class EmailModel : IMapper<EmailModel, EmailMessage>
+    public partial class EmailModel : IMapper<EmailMessage>
     {
         public void LoadFrom(EmailMessage entity)
         {
             throw new NotImplementedException();
         }
 
-        public EmailMessage ToEntity(EmailModel m)
+        public EmailMessage ToEntity()
         {
             return new EmailMessage
             {
-                FromName = m.fromName,
-                FromEmail = m.fromEmail,
-                ToEmail = m.toEmail,
-                ToName = m.toName,
-                Subject = m.subject,
-                BodyHTML = m.template
+                FromName = fromName,
+                FromEmail = fromEmail,
+                ToEmail = toEmail,
+                ToName = toName,
+                Subject = subject,
+                BodyHTML = template
             };
         }
     }

@@ -8,7 +8,7 @@ namespace MongoWebApiStarter.Biz.Models
     {
         public override void Save()
         {
-            var account = ToEntity(this);
+            var account = ToEntity();
 
             CheckIfEmailValidationIsNeeded();
 
