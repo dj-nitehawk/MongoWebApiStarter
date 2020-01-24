@@ -19,7 +19,7 @@ namespace MongoWebApiStarter.Biz.Models
             }
 
             template = sb.ToString();
-                        
+
             Repo.Save(ToEntity(this));
         }
 

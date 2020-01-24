@@ -1,10 +1,10 @@
-﻿using System;
-using MongoWebApiStarter.Biz.Base;
+﻿using MongoWebApiStarter.Biz.Base;
 using MongoWebApiStarter.Data.Repos;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.Primitives;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
