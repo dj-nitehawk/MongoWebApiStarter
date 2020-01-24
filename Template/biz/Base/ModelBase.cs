@@ -14,8 +14,14 @@ namespace MongoWebApiStarter.Biz.Base
 
         private readonly ModelStateDictionary modelState = new ModelStateDictionary();
 
+        /// <summary>
+        /// The logic for saving the model
+        /// </summary>
         public abstract void Save();
 
+        /// <summary>
+        /// The logic for loading the model
+        /// </summary>
         public abstract void Load();
 
         /// <summary>
@@ -38,8 +44,16 @@ namespace MongoWebApiStarter.Biz.Base
             modelState.AddModelError("GeneralErrors", errorMessage);
         }
 
+        /// <summary>
+        /// Returns true if modelstate is not valid
+        /// </summary>
+        /// <returns></returns>
         public bool HasErrors() => !modelState.IsValid;
 
+        /// <summary>
+        /// Returns the model state dictionary
+        /// </summary>
+        /// <returns></returns>
         public ModelStateDictionary Errors() => modelState;
     }
 }
