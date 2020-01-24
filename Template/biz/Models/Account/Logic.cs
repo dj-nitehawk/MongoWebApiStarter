@@ -1,9 +1,10 @@
 ﻿using MlkPwgen;
+using MongoWebApiStarter.Biz.Base;
 using MongoWebApiStarter.Data.Repos;
 
 namespace MongoWebApiStarter.Biz.Models
 {
-    public partial class AccountModel
+    public partial class AccountModel : ModelBase<AccountRepo>
     {
         public override void Save()
         {

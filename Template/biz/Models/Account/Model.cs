@@ -1,9 +1,6 @@
-﻿using MongoWebApiStarter.Biz.Base;
-using MongoWebApiStarter.Data.Repos;
-
-namespace MongoWebApiStarter.Biz.Models
+﻿namespace MongoWebApiStarter.Biz.Models
 {
-    public partial class AccountModel : ModelBase<AccountRepo>
+    public partial class AccountModel
     {
         public bool NeedsEmailVerification = false;
 
@@ -23,5 +20,5 @@ namespace MongoWebApiStarter.Biz.Models
         public string CountryCode { get; set; }
 
         public bool IsEmailVerified { get; set; }
-    }   
+    }
 }
