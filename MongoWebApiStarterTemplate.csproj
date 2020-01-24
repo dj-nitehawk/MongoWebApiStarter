@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>2.6.0</PackageVersion>
+    <PackageVersion>2.6.1</PackageVersion>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
