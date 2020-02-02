@@ -13,28 +13,25 @@ namespace MongoWebApiStarter.Biz.Models
 {
     public partial class ImageModel : ModelBase<ImageRepo>
     {
-        public async Task LoadAsync()
-        {
-            LoadFrom(await Repo.GetAsync(ID));
-        }
-
         public async Task SaveAsync()
         {
             using var strInput = File.OpenReadStream();
             using var img = Image.Load(strInput);
-
-            img.Mutate(x =>
-                       x.Resize(new ResizeOptions
-                       {
-                           Mode = ResizeMode.Crop,
-                           Size = new Size { Width = Width, Height = Height }
-                       }));
-
+            img.Mutate(
+                x => x.Resize(new ResizeOptions
+                {
+                    Mode = ResizeMode.Crop,
+                    Size = new Size { Width = Width, Height = Height }
+                }));
             using var strOutput = new MemoryStream();
             img.SaveAsJpeg(strOutput, new JpegEncoder { Quality = 80 });
-            FileBytes = strOutput.ToArray();
 
-            ID = await Repo.SaveAsync(ToEntity());
+            ID = await Repo.UploadAsync(ToEntity(), strOutput);
+        }
+
+        public Task WriteImageData(Stream stream)
+        {
+            return Repo.DownloadAsync(ID, stream);
         }
 
         public bool IsAllowedType()
@@ -48,14 +45,16 @@ namespace MongoWebApiStarter.Biz.Models
             return (File?.Length >= 100 && File?.Length <= 10485760);
         }
 
+        #region unused
         public override void Save()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void Load()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
+        #endregion
     }
 }

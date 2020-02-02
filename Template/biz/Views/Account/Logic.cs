@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MongoWebApiStarter.Biz.Views
 {
-    public partial class  AccountsView : ViewBase<AccountRepo>
+    public partial class AccountsView : ViewBase<AccountRepo>
     {
         public override void Load()
         {

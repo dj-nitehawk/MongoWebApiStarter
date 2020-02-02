@@ -20,7 +20,7 @@ namespace MongoWebApiStarter.Biz.Auth
             {
                 AllRoles.Add(f.Name, f.GetValue(null) as string);
             }
-        }        
+        }
 
         /// <summary>
         /// Get an array of role names given an array of role values

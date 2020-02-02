@@ -89,12 +89,12 @@ namespace MongoWebApiStarter.Test
                     Height = 200,
                     Width = 200
                 };
-                var id = ((await controller.CreateAsync(editor)).Result as OkObjectResult).Value.ToString();
+                var id = ((await controller.CreateAsync(editor)).Result as OkObjectResult)?.Value.ToString();
 
                 var result = await controller.Retrieve(id);
-                result.Should().BeOfType<FileContentResult>();
+                result.Should().BeOfType<FileStreamResult>();
 
-                var type = (result as FileContentResult).ContentType;
+                var type = (result as FileStreamResult).ContentType;
                 type.Should().Be("image/jpeg");
             }
         }

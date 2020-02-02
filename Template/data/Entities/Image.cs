@@ -1,13 +1,12 @@
-﻿using MongoDB.Entities.Core;
+﻿using MongoDB.Entities;
 using System;
 
 namespace MongoWebApiStarter.Data.Entities
 {
-    public class Image : Entity
+    public class Image : FileEntity
     {
         public int Width { get; set; }
         public int Height { get; set; }
         public DateTime AccessedOn { get; set; }
-        public byte[] Bytes { get; set; }
     }
 }

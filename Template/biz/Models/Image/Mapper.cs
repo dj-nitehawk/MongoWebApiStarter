@@ -6,9 +6,11 @@ namespace MongoWebApiStarter.Biz.Models
 {
     public partial class ImageModel : IMapper<Image>
     {
-        public void LoadFrom(Image img)
+        public void LoadFrom(Image i)
         {
-            FileBytes = img?.Bytes;
+            ID = i.ID;
+            Height = i.Height;
+            Width = i.Width;
         }
 
         public Image ToEntity()
@@ -18,8 +20,7 @@ namespace MongoWebApiStarter.Biz.Models
                 AccessedOn = DateTime.UtcNow,
                 Height = Height,
                 Width = Width,
-                ID = ID,
-                Bytes = FileBytes
+                ID = ID
             };
         }
     }
