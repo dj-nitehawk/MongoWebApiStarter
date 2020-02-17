@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Entities" Version="11.3.3" />
+    <PackageReference Include="MongoDB.Entities" Version="11.4.0" />
   </ItemGroup>
 
 </Project>

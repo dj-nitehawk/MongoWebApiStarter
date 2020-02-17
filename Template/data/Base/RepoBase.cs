@@ -12,7 +12,7 @@ namespace MongoWebApiStarter.Data.Base
     /// Base class for repos.
     /// </summary>
     /// <typeparam name="TEntity">The type of entity for the repo</typeparam>
-    public class RepoBase<TEntity> where TEntity : Entity
+    public class RepoBase<TEntity> where TEntity : IEntity
     {
         //FIND
 
@@ -118,6 +118,19 @@ namespace MongoWebApiStarter.Data.Base
         }
 
         /// <summary>
+        /// Persists an entity to the database replacing the existing data, while preserving some property values from the database. 
+        /// The properties to be preserved can be specified with a 'New' expression.
+        /// <para>TIP: Only root level properties are allowed in the 'New' expression.</para>
+        /// </summary>
+        /// <param name="entity">The entity to save</param>
+        /// <param name="preservation">x => new { x.PropOne, x.PropTwo }</param>
+        public string Save(TEntity entity, Expression<Func<TEntity, object>> preservation)
+        {
+            entity.SavePreserving(preservation);
+            return entity.ID;
+        }
+
+        /// <summary>
         /// Persists an entity to the database replacing the existing data.
         /// </summary>
         /// <param name="entity">The entity to save</param>
@@ -125,6 +138,19 @@ namespace MongoWebApiStarter.Data.Base
         public async Task<string> SaveAsync(TEntity entity)
         {
             await entity.SaveAsync();
+            return entity.ID;
+        }
+
+        /// <summary>
+        /// Persists an entity to the database replacing the existing data, while preserving some property values from the database. 
+        /// The properties to be preserved can be specified with a 'New' expression.
+        /// <para>TIP: Only root level properties are allowed in the 'New' expression.</para>
+        /// </summary>
+        /// <param name="entity">The entity to save</param>
+        /// <param name="preservation">x => new { x.PropOne, x.PropTwo }</param>
+        public async Task<string> SaveAsync(TEntity entity, Expression<Func<TEntity, object>> preservation)
+        {
+            await entity.SavePreservingAsync(preservation);
             return entity.ID;
         }
 

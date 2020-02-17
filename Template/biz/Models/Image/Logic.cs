@@ -42,7 +42,7 @@ namespace MongoWebApiStarter.Biz.Models
 
         public bool IsAllowedSize()
         {
-            return (File?.Length >= 100 && File?.Length <= 10485760);
+            return File?.Length >= 100 && File?.Length <= 10485760;
         }
 
         #region unused

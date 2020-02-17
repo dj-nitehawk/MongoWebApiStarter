@@ -47,6 +47,7 @@ namespace MongoWebApiStarter.Biz.Models
             Claims.Add(Auth.Claims.Role, Auth.Roles.Owner);
         }
 
+        #region unused
         public override void Load()
         {
             throw new System.NotImplementedException();
@@ -56,5 +57,6 @@ namespace MongoWebApiStarter.Biz.Models
         {
             throw new System.NotImplementedException();
         }
+        #endregion
     }
 }

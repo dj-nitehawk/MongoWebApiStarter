@@ -12,23 +12,19 @@ namespace MongoWebApiStarter.Biz.Models
 
             CheckIfEmailValidationIsNeeded();
 
-            if (ID.HasValue()) // it's an existing account being updated
+            if (ID.HasValue() && NeedsEmailVerification) // it's an existing account being updated
             {
-                if (NeedsEmailVerification) // don't replace the two fields below
-                {
-                    var acc = Repo.Find(
-                                ID,
-                                a => new
-                                {
-                                    a.IsEmailVerified,
-                                    a.EmailVerificationCode
-                                });
-                    account.IsEmailVerified = acc.IsEmailVerified;
-                    account.EmailVerificationCode = acc.EmailVerificationCode;
-                }
+                ID = Repo.Save(account,
+                    a => new // preserve these two property values in the db
+                    {
+                        a.IsEmailVerified,
+                        a.EmailVerificationCode
+                    });
             }
-
-            ID = Repo.Save(account);
+            else
+            {
+                ID = Repo.Save(account);
+            }
         }
 
         public override void Load()
