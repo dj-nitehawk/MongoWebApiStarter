@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BCrypt.Net-Next" Version="3.2.1" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
-    <PackageReference Include="MailKit" Version="2.5.1" />
+    <PackageReference Include="BCrypt.Net-Next" Version="3.3.3" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
+    <PackageReference Include="MailKit" Version="2.5.2" />
     <PackageReference Include="MlkPwgen" Version="0.3.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
   </ItemGroup>
