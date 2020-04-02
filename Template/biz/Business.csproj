@@ -12,6 +12,7 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
     <PackageReference Include="MailKit" Version="2.5.2" />
     <PackageReference Include="MlkPwgen" Version="0.3.0" />
+    <PackageReference Include="NodaTime" Version="2.4.7" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
   </ItemGroup>
 

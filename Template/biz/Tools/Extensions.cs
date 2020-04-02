@@ -1,7 +1,36 @@
-﻿namespace MongoWebApiStarter.Biz
+﻿using System.Globalization;
+
+namespace MongoWebApiStarter.Biz
 {
     public static class Extensions
     {
+        private static readonly TextInfo txt = new CultureInfo("en-US", false).TextInfo;
+
+        /// <summary>
+        /// Converts a string to TitleCase and trims whites space
+        /// </summary>
+        public static string ToTitleCase(this string value)
+        {
+            if (value.HasNoValue()) return value;
+            return txt.ToTitleCase(value.Trim());
+        }
+
+        /// <summary>
+        /// Converts a string to lower-case and trims whites space
+        /// </summary>
+        public static string ToLowerCase(this string value)
+        {
+            return txt.ToLower(value.Trim());
+        }
+
+        /// <summary>
+        /// Converts a string to UPPER-CASE and trims whites space
+        /// </summary>
+        public static string ToUpperCase(this string value)
+        {
+            return txt.ToUpper(value.Trim());
+        }
+
         /// <summary>
         /// Not a null or empty string
         /// </summary>
