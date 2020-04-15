@@ -47,7 +47,6 @@ namespace MongoWebApiStarter.Api.Controllers
         {
             var model = new ImageModel { ID = id };
             var stream = Response?.Body ?? new MemoryStream();
-
             try
             {
                 if (Response == null) //handle unit test
@@ -61,9 +60,11 @@ namespace MongoWebApiStarter.Api.Controllers
                 await model.WriteImageData(stream);
                 return new EmptyResult();
             }
-            catch (Exception x)
+            catch (Exception)
             {
-                return Problem(x.Message);
+                Response.StatusCode = (int)HttpStatusCode.NotFound;
+                Response.ContentType = "image/jpeg";
+                return new EmptyResult();
             }
         }
     }

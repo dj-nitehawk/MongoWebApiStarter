@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# RCS1090: Call 'ConfigureAwait(false)'.
+dotnet_diagnostic.RCS1090.severity = none
