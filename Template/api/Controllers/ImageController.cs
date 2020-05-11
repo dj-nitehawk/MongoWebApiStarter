@@ -37,7 +37,7 @@ namespace MongoWebApiStarter.Api.Controllers
                     return Problem("Image ID is needed for patching!");
 
                 await model.SaveAsync();
-                return Ok();
+                return Ok(model.ID);
             }
             catch (Exception x)
             {

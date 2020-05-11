@@ -11,7 +11,7 @@ namespace MongoWebApiStarter.Data.Repos
         public List<EmailMessage> FetchNextBatch(int batchSize)
         {
             return DB.Find<EmailMessage>()
-                     .Match(e => e.Sent == false)
+                     .Match(e => !e.Sent)
                      .Sort(e => e.ModifiedOn, Order.Ascending)
                      .Limit(batchSize)
                      .Execute();

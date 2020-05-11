@@ -21,7 +21,7 @@ namespace MongoWebApiStarter.Test
         [TestMethod]
         public void saving_a_new_account()
         {
-            var email = $"{Guid.NewGuid().ToString()}@email.com";
+            var email = $"{Guid.NewGuid()}@email.com";
             var account = new AccountModel
             {
                 EmailAddress = email,
@@ -210,7 +210,7 @@ namespace MongoWebApiStarter.Test
             var cnt = new AccountController();
             cnt.Save(account);
 
-            var acsView = cnt.ViewAccounts().Value;
+            var acsView = cnt.ViewAccounts();
 
             acsView.AccountList.Should().BeOfType<AccountDetailView[]>();
         }

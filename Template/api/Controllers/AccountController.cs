@@ -76,7 +76,7 @@ namespace MongoWebApiStarter.Api.Controllers
 
         [NeedPermission(AccountsView.Perms.View)]
         [HttpGet("/api/accounts")]
-        public ActionResult<AccountsView> ViewAccounts()
+        public AccountsView ViewAccounts()
         {
             var view = new AccountsView();
             view.Load();

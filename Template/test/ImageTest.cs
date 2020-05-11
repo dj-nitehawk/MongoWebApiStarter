@@ -119,7 +119,8 @@ namespace MongoWebApiStarter.Test
                     ID = ObjectId.GenerateNewId().ToString()
                 };
                 var res = await controller.UpdateAsync(editor);
-                res.Should().BeOfType<OkResult>();
+                res.Should().BeOfType<OkObjectResult>();
+                
             }
         }
     }
