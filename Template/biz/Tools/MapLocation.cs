@@ -11,6 +11,7 @@ namespace MongoWebApiStarter.Biz
     {
         private static readonly Regex rxOne = new Regex("@(.*),(.*),", RegexOptions.Compiled); //map link
         private static readonly Regex rxTwo = new Regex(@"(?:2d|3d)([-\d].*?)!", RegexOptions.Compiled); //embed code
+        private static readonly Regex rxThree = new Regex(@"src=""(.+?)""", RegexOptions.Compiled); //extract url from embed code
 
         /// <summary>
         /// Extracts lon+lat info from a google map link or embed code and returns a Coordinates2D object
@@ -53,6 +54,31 @@ namespace MongoWebApiStarter.Biz
             if (gMapLinkOrCode.HasNoValue()) return true;
 
             return Get2DCoordinates(gMapLinkOrCode) != null;
+        }
+
+        /// <summary>
+        /// Extracts the URL from Google Map Embed code
+        /// </summary>
+        /// <param name="gMapEmbedCode">The Google Map Embed code</param>
+        public static string EmbedCodeToURL(string gMapEmbedCode)
+        {
+            if (gMapEmbedCode.HasNoValue())
+                return gMapEmbedCode;
+
+            var match = rxThree.Match(gMapEmbedCode);
+
+            return match.Success
+                    ? match.Groups[1].Value
+                    : gMapEmbedCode;
+        }
+
+        /// <summary>
+        /// Returns true if the supplied link is a Google Map Embed URL
+        /// </summary>
+        /// <param name="link">The URL to check</param>
+        public static bool IsEmbedLink(string link)
+        {
+            return link.HasNoValue() || link.StartsWith("https://www.google.com/maps/embed");
         }
     }
 }
