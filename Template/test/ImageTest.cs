@@ -3,6 +3,7 @@ using FluentValidation.TestHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MongoDB.Bson;
 using MongoWebApiStarter.Api.Controllers;
 using MongoWebApiStarter.Biz.Models;
 using System;
@@ -114,7 +115,8 @@ namespace MongoWebApiStarter.Test
                 {
                     File = file,
                     Height = 200,
-                    Width = 200
+                    Width = 200,
+                    ID = ObjectId.GenerateNewId().ToString()
                 };
                 var res = await controller.UpdateAsync(editor);
                 res.Should().BeOfType<OkResult>();

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoWebApiStarter.Api.Auth;
 using MongoWebApiStarter.Api.Base;
+using MongoWebApiStarter.Api.Extensions;
 using MongoWebApiStarter.Biz.Models;
 using System;
 using System.IO;
@@ -32,6 +33,9 @@ namespace MongoWebApiStarter.Api.Controllers
         {
             try
             {
+                if (model.ID.HasNoValue())
+                    return Problem("Image ID is needed for patching!");
+
                 await model.SaveAsync();
                 return Ok();
             }

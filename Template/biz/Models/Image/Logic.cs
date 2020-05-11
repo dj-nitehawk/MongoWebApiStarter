@@ -15,6 +15,13 @@ namespace MongoWebApiStarter.Biz.Models
     {
         public async Task SaveAsync()
         {
+            if (ID.HasValue())
+            {
+                //delete old image (cause of cloudflare caching) and nullify image ID so a new ID will be set
+                _ = Repo.DeleteAsync(ID);
+                ID = null;
+            }
+
             using var strInput = File.OpenReadStream();
             using var img = Image.Load(strInput);
             img.Mutate(
