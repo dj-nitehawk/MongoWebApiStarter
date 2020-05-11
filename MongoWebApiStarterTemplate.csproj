@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>2.10.0</PackageVersion>
+    <PackageVersion>2.11.0</PackageVersion>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
@@ -14,8 +14,12 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- updated dependencies
-- improved image controller</PackageReleaseNotes>
+    <PackageReleaseNotes>- added model template folder
+- improve gmap class
+- updating images deletes old image and returns new ID
+- set access date when retrieving images
+- refactor api return types
+- updated dependencies</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
