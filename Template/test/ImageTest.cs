@@ -120,7 +120,7 @@ namespace MongoWebApiStarter.Test
                 };
                 var res = await controller.UpdateAsync(editor);
                 res.Should().BeOfType<OkObjectResult>();
-                
+
             }
         }
     }

@@ -19,6 +19,11 @@ namespace MongoWebApiStarter.Data.Repos
 
         public Task DownloadAsync(string id, Stream destination)
         {
+            DB.Update<Image>()
+              .Match(i => i.ID == id)
+              .Modify(b => b.CurrentDate(i => i.AccessedOn))
+              .ExecuteAsync();
+
             return DB.File<Image>(id)
                      .DownloadWithTimeoutAsync(destination, 30);
         }
