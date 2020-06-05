@@ -20,7 +20,6 @@ namespace MongoWebApiStarter.Data.Base
         /// Find an entity by ID
         /// </summary>
         /// <param name="id">The ID to search by</param>
-        /// <returns></returns>
         public TEntity Find(string id)
         {
             return FindAsync<TEntity>(e => e.ID == id, null).GetAwaiter().GetResult().SingleOrDefault();
@@ -30,7 +29,6 @@ namespace MongoWebApiStarter.Data.Base
         /// Find an entity by ID
         /// </summary>
         /// <param name="id">The ID to search by</param>
-        /// <returns></returns>
         public async Task<TEntity> FindAsync(string id)
         {
             return (await FindAsync<TEntity>(e => e.ID == id, null)).SingleOrDefault();
@@ -42,7 +40,6 @@ namespace MongoWebApiStarter.Data.Base
         /// <typeparam name="TResult">The projected entity type</typeparam>
         /// <param name="id">The ID to search by</param>
         /// <param name="projection">A projection expression</param>
-        /// <returns></returns>
         public TResult Find<TResult>(string id, Expression<Func<TEntity, TResult>> projection)
         {
             return FindAsync(e => e.ID == id, projection).GetAwaiter().GetResult().SingleOrDefault();
@@ -54,7 +51,6 @@ namespace MongoWebApiStarter.Data.Base
         /// <typeparam name="TResult">The projected entity type</typeparam>
         /// <param name="id">The ID to search by</param>
         /// <param name="projection">A projection expression</param>
-        /// <returns></returns>
         public async Task<TResult> FindAsync<TResult>(string id, Expression<Func<TEntity, TResult>> projection)
         {
             return (await FindAsync(e => e.ID == id, projection)).SingleOrDefault();
@@ -66,7 +62,7 @@ namespace MongoWebApiStarter.Data.Base
         /// <param name="condition">An expression specifiying the search criteria</param>
         public List<TEntity> Find(Expression<Func<TEntity, bool>> condition)
         {
-            return FindAsync<TEntity>(condition, null).GetAwaiter().GetResult();
+            return FindAsync<TEntity>(condition).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -75,32 +71,67 @@ namespace MongoWebApiStarter.Data.Base
         /// <param name="condition">An expression specifiying the search criteria</param>
         public async Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> condition)
         {
-            return await FindAsync<TEntity>(condition, null);
+            return await FindAsync<TEntity>(condition);
         }
 
         /// <summary>
-        /// Find entities with a search criteria with an optional projection
+        /// Find entities with a search expression and optional projecting, sorting and paging
         /// </summary>
-        /// <typeparam name="TResult"></typeparam>
+        /// <typeparam name="TResult">The type of the result</typeparam>
         /// <param name="condition">An expression specifiying the search criteria</param>
-        /// <param name="projection">A projection expression</param>
-        /// <returns></returns>
-        public List<TResult> Find<TResult>(Expression<Func<TEntity, bool>> condition, Expression<Func<TEntity, TResult>> projection = null)
+        /// <param name="projection">An optional projection expression</param>
+        /// <param name="sortBy">x => x.FirstName (optional)</param>
+        /// <param name="sortOrder">The sorting order (optional)</param>
+        /// <param name="skip">The number of entities to skip (optional)</param>
+        /// <param name="take">The number of entities to take (optional)</param>
+        public List<TResult> Find<TResult>(
+            Expression<Func<TEntity, bool>> condition,
+            Expression<Func<TEntity, TResult>> projection = null,
+            Expression<Func<TEntity, object>> sortBy = null,
+            Sort sortOrder = Sort.None,
+            int skip = 0,
+            int take = 0)
         {
-            return FindAsync(condition, projection).GetAwaiter().GetResult();
+            return FindAsync(condition, projection, sortBy, sortOrder, skip, take).GetAwaiter().GetResult();
         }
 
         /// <summary>
-        /// Find entities with a search criteria with an optional projection
+        /// Find entities with a search expression and optional projecting, sorting and paging
         /// </summary>
-        /// <typeparam name="TResult"></typeparam>
+        /// <typeparam name="TResult">The type of the result</typeparam>
         /// <param name="condition">An expression specifiying the search criteria</param>
-        /// <param name="projection">A projection expression</param>
-        /// <returns></returns>
-        public async Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>> condition, Expression<Func<TEntity, TResult>> projection = null)
+        /// <param name="projection">An optional projection expression</param>
+        /// <param name="sortBy">x => x.FirstName (optional)</param>
+        /// <param name="sortOrder">The sorting order (optional)</param>
+        /// <param name="skip">The number of entities to skip (optional)</param>
+        /// <param name="take">The number of entities to take (optional)</param>
+        public async Task<List<TResult>> FindAsync<TResult>(
+            Expression<Func<TEntity, bool>> condition,
+            Expression<Func<TEntity, TResult>> projection = null,
+            Expression<Func<TEntity, object>> sortBy = null,
+            Sort sortOrder = Sort.None,
+            int skip = 0,
+            int take = 0
+            )
         {
             var cmd = DB.Find<TEntity, TResult>().Match(condition);
-            if (projection != null) cmd = cmd.Project(projection);
+
+            if (projection != null)
+                cmd = cmd.Project(projection);
+
+            if (sortOrder != Sort.None && sortBy != null)
+                cmd = cmd.Sort(
+                    sortBy,
+                    sortOrder == Sort.Ascending
+                    ? Order.Ascending
+                    : Order.Descending);
+
+            if (skip > 0)
+                cmd.Skip(skip);
+
+            if (take > 0)
+                cmd.Limit(take);
+
             return await cmd.ExecuteAsync();
         }
 
