@@ -7,35 +7,69 @@ namespace MongoWebApiStarter.Biz.Auth
 {
     public static class Policies
     {
-        public static void EnablePolicies(this AuthorizationOptions opts)
+        public static void EnablePolicies(this AuthorizationOptions x)
         {
-            // account holders have full access to accounts
-            opts.AddPolicy(AccountModel.Perms.Full,
-                           b => b.RequireClaim(AccountModel.Claims.ID));
+            #region Account
+            //read
+            x.AddPolicy(
+                AccountModel.Perms.Read,
+                b => b.RequireClaim(AccountModel.Claims.ID)
+                      .RequireRole(
+                        Roles.Admin,
+                        Roles.Owner));
+            //write
+            x.AddPolicy(
+                AccountModel.Perms.Write,
+                b => b.RequireClaim(AccountModel.Claims.ID)
+                      .RequireRole(
+                        Roles.Admin,
+                        Roles.Owner));
+            //delete
+            x.AddPolicy(
+                AccountModel.Perms.Delete,
+                b => b.RequireClaim(AccountModel.Claims.ID)
+                      .RequireRole(Roles.Admin));
+            #endregion
 
-            // account holders have full access to images
-            opts.AddPolicy(ImageModel.Perms.Full,
-                           b => b.RequireClaim(AccountModel.Claims.ID));
+            #region Image
+            //read
+            x.AddPolicy(
+                ImageModel.Perms.Read,
+                b => b.RequireAuthenticatedUser());
+            //write
+            x.AddPolicy(
+                ImageModel.Perms.Write,
+                b => b.RequireAuthenticatedUser());
+            //delete
+            x.AddPolicy(
+                ImageModel.Perms.Delete,
+                b => b.RequireAuthenticatedUser());
+            #endregion
 
-            // admins can view account list
-            opts.AddPolicy(AccountsView.Perms.View,
-                           b => b.RequireRole(Roles.Admin));
-
-            // gmail users can view account list regardless of role
-            opts.AddPolicy(AccountsView.Perms.View,
-                           b => b.RequireAssertion(UserHasGmailAddress));
-
+            #region AccountList
+            //read
+            x.AddPolicy(
+                AccountsView.Perms.Read,
+                b => b.RequireClaim(AccountModel.Claims.ID)
+                      .RequireRole(
+                        Roles.Admin,
+                        Roles.Owner));
+            //custom
+            x.AddPolicy(
+                AccountsView.Perms.Read,
+                b => b.RequireAssertion(UserHasGmailAddress));
+            #endregion       
         }
 
-        // CUSTOM REQUIREMENTS:        
+        #region CUSTOM REQUIREMENTS
+
         private static readonly Func<AuthorizationHandlerContext, bool> UserHasGmailAddress =
             ctx =>
             {
                 var email = ctx.User.FindFirst(AccountModel.Claims.Email)?.Value;
-                return email == null ?
-                       false :
-                       email.Split('@')[1].Equals("gmail.com");
+                return email != null && email.Split('@')[1].Equals("gmail.com");
             };
 
+        #endregion
     }
 }

@@ -7,13 +7,13 @@ namespace MongoWebApiStarter.Api.Auth
     /// Restrict access based on Role claim type
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
-    public class AllowedRolesAttribute : AuthorizeAttribute
+    public class RolesAttribute : AuthorizeAttribute
     {
         /// <summary>
         /// Only allow certain Roles to access an action
         /// </summary>
         /// <param name="roles">The roles to allow</param>
-        public AllowedRolesAttribute(params string[] roles)
+        public RolesAttribute(params string[] roles)
         {
             Roles = string.Join(",", roles);
         }
@@ -23,13 +23,13 @@ namespace MongoWebApiStarter.Api.Auth
     /// Restrict access based on application policies/ permissions
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
-    public class NeedPermissionAttribute : AuthorizeAttribute
+    public class PermissionAttribute : AuthorizeAttribute
     {
         /// <summary>
         /// Only allow users matching a given security policy/ permission
         /// </summary>
         /// <param name="policyName">The policy to allow access with</param>
-        public NeedPermissionAttribute(string policyName = null)
+        public PermissionAttribute(string policyName = null)
         {
             Policy = policyName;
         }

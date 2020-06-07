@@ -4,8 +4,8 @@
     {
         public static class Perms
         {
-            public const string Full = "perm.template.full-access";
-            public const string Save = "perm.template.save";
+            public const string Read = "perm.template.read";
+            public const string Write = "perm.template.write";
             public const string Delete = "perm.template.delete";
         }
 

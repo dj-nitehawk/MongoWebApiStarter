@@ -105,10 +105,10 @@ namespace MongoWebApiStarter.Api.Auth
         /// <summary>
         /// Generates a JWT token with the given dictionary of claims
         /// </summary>
-        /// <param name="claims">A dictionary of claims</param>
-        public static JwtToken GenerateToken(Dictionary<string, string> claims)
+        /// <param name="claims">A list of claim tuples</param>
+        public static JwtToken GenerateToken(List<(string claimType, string claimValue)> claims)
         {
-            return GenerateToken(claims.Select(c => new Claim(c.Key, c.Value)));
+            return GenerateToken(claims.Select(c => new Claim(c.claimType, c.claimValue)));
         }
     }
 }

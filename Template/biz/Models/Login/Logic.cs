@@ -1,4 +1,5 @@
-﻿using MongoWebApiStarter.Biz.Base;
+﻿using MongoWebApiStarter.Biz.Auth;
+using MongoWebApiStarter.Biz.Base;
 using MongoWebApiStarter.Data.Repos;
 using System.Linq;
 
@@ -42,9 +43,11 @@ namespace MongoWebApiStarter.Biz.Models
 
             AccountID = acc.ID;
             FullName = $"{acc.Title}. {acc.FirstName} {acc.LastName}";
-            Claims.Add(AccountModel.Claims.ID, AccountID);
-            Claims.Add(AccountModel.Claims.Email, UserName);
-            Claims.Add(Auth.Claims.Role, Auth.Roles.Owner);
+
+            Claims.Add((AccountModel.Claims.ID, AccountID));
+            Claims.Add((AccountModel.Claims.Email, UserName));
+            Claims.Add((Auth.Claims.Role, Roles.Admin));
+            Claims.Add((Auth.Claims.Role, Roles.Owner));
         }
 
         #region unused

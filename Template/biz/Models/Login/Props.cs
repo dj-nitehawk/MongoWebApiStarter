@@ -11,6 +11,6 @@ namespace MongoWebApiStarter.Biz.Models
         public string Password { get; set; }
 
         [JsonIgnore]
-        public Dictionary<string, string> Claims { get; set; } = new Dictionary<string, string>();
+        public List<(string claimType, string claimValue)> Claims { get; set; } = new List<(string claimType, string claimValue)>();
     }
 }

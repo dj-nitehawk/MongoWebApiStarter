@@ -41,6 +41,11 @@ namespace MongoWebApiStarter.Biz.Models
             return Repo.DownloadAsync(ID, stream);
         }
 
+        public Task DeleteAsync(string id)
+        {
+            return Repo.DeleteAsync(id);
+        }
+
         public bool IsAllowedType()
         {
             var allowedTypes = new[] { "image/jpeg", "image/png" };

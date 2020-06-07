@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Api.Controllers
 {
-    [NeedPermission(ImageModel.Perms.Full)]
     public class ImageController : BaseController
     {
+        [Permission(ImageModel.Perms.Write)]
         [HttpPost("api/image")]
-        public async Task<ActionResult<string>> CreateAsync([FromForm]ImageModel model)
+        public async Task<ActionResult<string>> CreateAsync([FromForm] ImageModel model)
         {
             try
             {
@@ -28,8 +28,9 @@ namespace MongoWebApiStarter.Api.Controllers
             }
         }
 
+        [Permission(ImageModel.Perms.Write)]
         [HttpPatch("api/image")]
-        public async Task<ActionResult> UpdateAsync([FromForm]ImageModel model)
+        public async Task<ActionResult> UpdateAsync([FromForm] ImageModel model)
         {
             try
             {
@@ -43,6 +44,15 @@ namespace MongoWebApiStarter.Api.Controllers
             {
                 return BadRequest(x.Message);
             }
+        }
+
+        [Permission(ImageModel.Perms.Delete)]
+        [HttpDelete("api/image/{id}")]
+        public async Task<ActionResult> DeleteAsync(string id)
+        {
+            var model = new ImageModel();
+            await model.DeleteAsync(id);
+            return Ok();
         }
 
         [AllowAnonymous]

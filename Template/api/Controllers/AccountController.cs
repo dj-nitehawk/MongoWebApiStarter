@@ -9,7 +9,6 @@ using System.Security.Claims;
 
 namespace MongoWebApiStarter.Api.Controllers
 {
-    [NeedPermission(AccountModel.Perms.Full)]
     public class AccountController : BaseController
     {
         [AllowAnonymous]
@@ -25,6 +24,7 @@ namespace MongoWebApiStarter.Api.Controllers
             });
         }
 
+        [Permission(AccountModel.Perms.Write)]
         [HttpPatch("api/account")]
         public ActionResult Update(AccountModel model)
         {
@@ -33,6 +33,7 @@ namespace MongoWebApiStarter.Api.Controllers
             return Save(model);
         }
 
+        [Permission(AccountModel.Perms.Read)]
         [HttpGet("api/account/{id}")]
         public ActionResult<AccountModel> Retrieve(string id)
         {
@@ -74,7 +75,7 @@ namespace MongoWebApiStarter.Api.Controllers
                 });
         }
 
-        [NeedPermission(AccountsView.Perms.View)]
+        [Permission(AccountsView.Perms.Read)]
         [HttpGet("/api/accounts")]
         public AccountsView ViewAccounts()
         {

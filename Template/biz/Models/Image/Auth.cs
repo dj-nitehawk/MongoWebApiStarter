@@ -4,8 +4,8 @@
     {
         public static class Perms
         {
-            public const string Full = "perm.image.full";
-            public const string Save = "perm.image.save";
+            public const string Read = "perm.image.read";
+            public const string Write = "perm.image.write";
             public const string Delete = "perm.image.delete";
         }
     }

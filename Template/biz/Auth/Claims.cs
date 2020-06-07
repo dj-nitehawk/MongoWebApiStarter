@@ -2,7 +2,7 @@
 {
     public static class Claims
     {
-        public const string Role = "claim.role";
-        public const string Permission = "claim.permission";
+        public const string Role = "role";
+        public const string Permission = "permission";
     }
 }
