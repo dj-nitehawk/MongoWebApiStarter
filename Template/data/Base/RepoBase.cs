@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Data.Base
 {
+    public interface IRepo { }
+
     /// <summary>
     /// Base class for repos.
     /// </summary>
     /// <typeparam name="TEntity">The type of entity for the repo</typeparam>
-    public class RepoBase<TEntity> where TEntity : IEntity
+    public class RepoBase<TEntity> : IRepo where TEntity : IEntity
     {
         //FIND
 

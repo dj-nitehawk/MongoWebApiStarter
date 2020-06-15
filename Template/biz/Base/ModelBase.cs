@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using MongoWebApiStarter.Data.Base;
 using System;
 using System.Linq.Expressions;
 
@@ -8,7 +9,7 @@ namespace MongoWebApiStarter.Biz.Base
     /// Base class for models
     /// </summary>
     /// <typeparam name="TRepo">The type of repo for the model</typeparam>
-    public abstract class ModelBase<TRepo> where TRepo : new()
+    public abstract class ModelBase<TRepo> where TRepo : IRepo, new()
     {
         protected TRepo Repo { get; set; } = new TRepo();
 
