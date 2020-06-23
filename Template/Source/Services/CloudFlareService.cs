@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace SCVault.Services
+namespace MongoWebApiStarter.Services
 {
     public class CloudFlareService
     {

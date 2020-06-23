@@ -6,15 +6,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Entities;
-using SCVault.Auth;
-using SCVault.Middleware;
-using SCVault.Services;
-using SCVault.Tools;
+using MongoWebApiStarter.Auth;
+using MongoWebApiStarter.Middleware;
+using MongoWebApiStarter.Services;
+using MongoWebApiStarter.Tools;
 using ServiceStack;
 using ServiceStack.Text;
 using ServiceStack.Validation;
 
-namespace SCVault
+namespace MongoWebApiStarter
 {
     internal static class Program
     {
@@ -84,7 +84,7 @@ namespace SCVault
             ServiceExceptionHandlers.Add((_, __, x) =>
             {
                 if (x is ValidationError ex)
-                    return ValidationErrorService.GetErrorResponse(ex);
+                    return Validation.GetErrorResponse(ex);
 
                 return null;
             });

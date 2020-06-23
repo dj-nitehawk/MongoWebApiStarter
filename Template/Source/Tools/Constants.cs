@@ -1,4 +1,4 @@
-﻿namespace SCVault.Tools
+﻿namespace MongoWebApiStarter.Tools
 {
     public static class Constants
     {

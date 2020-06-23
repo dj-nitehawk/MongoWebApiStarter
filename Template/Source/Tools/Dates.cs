@@ -2,7 +2,7 @@
 using NodaTime.Text;
 using System;
 
-namespace SCVault.Tools
+namespace MongoWebApiStarter.Tools
 {
     /// <summary>
     /// Utility for converting local DateTime to UTC and vise versa

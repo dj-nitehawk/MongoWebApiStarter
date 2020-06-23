@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SCVault": {
+    "MongoWebApiStarter": {
       "commandName": "Project",
       "launchBrowser": false,
       "environmentVariables": {

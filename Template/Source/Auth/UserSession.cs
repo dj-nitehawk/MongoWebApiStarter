@@ -1,7 +1,7 @@
 ﻿using ServiceStack;
 using System.Collections.Generic;
 
-namespace SCVault.Auth
+namespace MongoWebApiStarter.Auth
 {
     /// <summary>
     /// A custom user session class for the application

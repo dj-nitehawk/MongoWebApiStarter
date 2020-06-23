@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SCVault.Models
+namespace MongoWebApiStarter.Models
 {
     public class Email
     {

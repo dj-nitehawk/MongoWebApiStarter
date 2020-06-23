@@ -1,6 +1,6 @@
 ﻿using MongoDB.Entities;
-using SCVault;
-using SCVault.Auth;
+using MongoWebApiStarter;
+using MongoWebApiStarter.Auth;
 using System.Linq;
 
 namespace Data.Migrations

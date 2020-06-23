@@ -1,6 +1,6 @@
 ﻿using ServiceStack;
 
-namespace SCVault
+namespace MongoWebApiStarter
 {
     /// <summary>
     /// Marker interface for request DTOs

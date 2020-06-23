@@ -1,4 +1,4 @@
-﻿namespace SCVault.Auth
+﻿namespace MongoWebApiStarter.Auth
 {
     /// <summary>
     /// Custom claim types for the application

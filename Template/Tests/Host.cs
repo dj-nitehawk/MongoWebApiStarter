@@ -1,13 +1,13 @@
 ﻿using Funq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
-using SCVault.Auth;
+using MongoWebApiStarter.Auth;
 using ServiceStack;
 using ServiceStack.Auth;
 using ServiceStack.Validation;
 using System;
 
-namespace SCVault.Tests
+namespace MongoWebApiStarter.Tests
 {
     [TestClass]
     public static class Init
@@ -29,27 +29,19 @@ namespace SCVault.Tests
 
     public class AppHost : AppSelfHostBase
     {
-        public AppHost() : base("SCVaultTests", typeof(Main.Account.Save.Service).Assembly) { }
+        public AppHost() : base("MongoWebApiStarterTests", typeof(Main.Account.Save.Service).Assembly) { }
 
         public override void Configure(Container container)
         {
             var settings = new Settings();
 
             container.AddSingleton(settings);
-            container.AddSingleton(new DB("SCVaultTEST"));
+            container.AddSingleton(new DB("MongoWebApiTEST"));
 
             Authentication.Initialize(settings);
-
             Plugins.Add(new AuthFeature(
                 () => new UserSession(),
-                new[]
-                {
-                    new JwtAuthProvider()
-                    {
-                        AuthKeyBase64 = settings.Auth.SigningKey,
-                        ExpireTokensIn = TimeSpan.FromMinutes(10)
-                    }
-                })
+                new[] { Authentication.JWTProvider })
             { HtmlRedirect = null });
 
             Plugins.Add(new ValidationFeature());

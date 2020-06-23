@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SCVault
+namespace MongoWebApiStarter
 {
     public class Settings
     {

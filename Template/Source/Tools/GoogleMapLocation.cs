@@ -2,7 +2,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace SCVault.Tools
+namespace MongoWebApiStarter.Tools
 {
     /// <summary>
     /// Utility for working Google map links and embed codes

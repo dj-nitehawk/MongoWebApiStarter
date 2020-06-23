@@ -1,6 +1,6 @@
 ﻿using ServiceStack;
 
-namespace SCVault
+namespace MongoWebApiStarter
 {
     /// <summary>
     /// A response DTO to use when there's nothing to return from a service method

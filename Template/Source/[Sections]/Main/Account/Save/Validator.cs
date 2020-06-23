@@ -1,4 +1,4 @@
-﻿using SCVault;
+﻿using MongoWebApiStarter;
 using ServiceStack.FluentValidation;
 
 namespace Main.Account.Save

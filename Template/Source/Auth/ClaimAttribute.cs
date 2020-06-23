@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace SCVault.Auth
+namespace MongoWebApiStarter.Auth
 {
     /// <summary>
     /// Use this attribute to only allow users who has all the given ClaimTypes

@@ -1,4 +1,4 @@
-﻿namespace SCVault.Auth
+﻿namespace MongoWebApiStarter.Auth
 {
     public class JwtToken
     {

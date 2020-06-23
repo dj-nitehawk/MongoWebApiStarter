@@ -1,7 +1,7 @@
 ﻿using Data;
 using MlkPwgen;
-using SCVault;
-using SCVault.Auth;
+using MongoWebApiStarter;
+using MongoWebApiStarter.Auth;
 using ServiceStack;
 
 namespace Main.Account.Save
@@ -9,7 +9,7 @@ namespace Main.Account.Save
     [Authenticate(ApplyTo.Patch)]
     public class Service : Service<Request, Response, Data.Account>
     {
-        public bool NeedsEmailVerification = false;
+        public bool NeedsEmailVerification;
 
         public override Response Post(Request r)
         {
@@ -19,7 +19,7 @@ namespace Main.Account.Save
         [Need(Claim.AccountID)]
         public override Response Patch(Request r)
         {
-            r.ID = User.ClaimValue(Claim.AccountID); //tamper protection
+            r.ID = User.ClaimValue(Claim.AccountID); //post tampering protection
 
             CheckIfEmailValidationIsNeeded(r);
 
@@ -73,7 +73,7 @@ namespace Main.Account.Save
 
                 var salutation = $"{a.Title} {a.FirstName} {a.LastName}";
 
-                var email = new SCVault.Models.Email(
+                var email = new MongoWebApiStarter.Models.Email(
                     Settings.Email.FromName,
                     Settings.Email.FromEmail,
                     salutation,

@@ -1,4 +1,4 @@
-﻿using SCVault.Tools;
+﻿using MongoWebApiStarter.Tools;
 using ServiceStack;
 using ServiceStack.Auth;
 using ServiceStack.Text;
@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SCVault.Auth
+namespace MongoWebApiStarter.Auth
 {
     public static class Authentication
     {

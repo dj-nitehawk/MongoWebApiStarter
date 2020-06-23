@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace SCVault.Middleware
+namespace MongoWebApiStarter.Middleware
 {
     public class MaintenanceMode
     {

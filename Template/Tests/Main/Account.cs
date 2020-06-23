@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
-using SCVault.Tests;
+using MongoWebApiStarter.Tests;
 using ServiceStack;
 using System;
 
-namespace SCVault.Tests_Main
+namespace MongoWebApiStarter.Tests_Main
 {
     [TestClass]
     public class Account
@@ -24,14 +24,12 @@ namespace SCVault.Tests_Main
                 EmailAddress = $"{guid}@email.com",
                 FirstName = "firstname",
                 LastName = "surname",
-                Mobile = "0713429292",
+                Mobile = "0773469292",
                 Password = "qqqqq123Q",
                 State = "state",
                 Street = "street",
-                TimeZoneOffsetHrs = 5.5m,
                 Title = "mr.",
-                VPName = "my vp",
-                ZipCode = "10100"
+                ZipCode = "10100",
             };
 
             var res = client.Post(req);

@@ -1,5 +1,5 @@
 ﻿using Data;
-using SCVault;
+using MongoWebApiStarter;
 using ServiceStack;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;

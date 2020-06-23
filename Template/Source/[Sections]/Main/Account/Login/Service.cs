@@ -1,6 +1,6 @@
 ﻿using Data;
-using SCVault;
-using SCVault.Auth;
+using MongoWebApiStarter;
+using MongoWebApiStarter.Auth;
 using ServiceStack;
 using System.Linq;
 

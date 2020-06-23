@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace SCVault.Auth
+namespace MongoWebApiStarter.Auth
 {
     /// <summary>
     /// Use this attribute to allow access only to users who has at least one of the given permissions

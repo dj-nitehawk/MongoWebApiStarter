@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace SCVault
+namespace MongoWebApiStarter
 {
     public static class Extensions
     {

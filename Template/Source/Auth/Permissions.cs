@@ -1,4 +1,4 @@
-﻿namespace SCVault.Auth
+﻿namespace MongoWebApiStarter.Auth
 {
     /// <summary>
     /// The allowed operations/permissions for the application

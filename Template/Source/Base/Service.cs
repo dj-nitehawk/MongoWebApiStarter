@@ -1,11 +1,11 @@
 ﻿using MongoDB.Entities.Core;
-using SCVault.Auth;
+using MongoWebApiStarter.Auth;
 using ServiceStack;
 using ServiceStack.Validation;
 using System;
 using System.Linq.Expressions;
 
-namespace SCVault
+namespace MongoWebApiStarter
 {
     /// <summary>
     /// Abstract class for services

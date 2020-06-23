@@ -1,7 +1,7 @@
-﻿using SCVault.Auth;
+﻿using MongoWebApiStarter.Auth;
 using System.Linq;
 
-namespace SCVault.Base
+namespace MongoWebApiStarter.Base
 {
     /// <summary>
     /// Abstract class for login responses
