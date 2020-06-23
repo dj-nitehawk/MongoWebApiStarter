@@ -57,7 +57,7 @@ namespace MongoWebApiStarter
     {
         private readonly Settings settings = new Settings();
 
-        public AppHost() : base("SCVault", typeof(Main.Account.Save.Service).Assembly) { }
+        public AppHost() : base("MongoWebApiStarter", typeof(Main.Account.Save.Service).Assembly) { }
 
         public override void Configure(Container container)
         {

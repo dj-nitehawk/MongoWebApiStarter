@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>3.0.0</PackageVersion>
+    <PackageVersion>3.0.1</PackageVersion>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
     <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net Core 3.1 Web-Api project with MongoDB as the data store.</Description>
-    <PackageTags>dotnet-new;templates;mongodb;web-api;netcore3;aspnet</PackageTags>
+    <PackageTags>dotnet-new;templates;mongodb;web-api;netcore3;aspnet,servicestack</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -15,7 +15,8 @@
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
     <PackageReleaseNotes>- switched framework to servicestack
-- re-architectured with vertlical slices</PackageReleaseNotes>
+- re-architectured with vertlical slices
+- misc. updates</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
