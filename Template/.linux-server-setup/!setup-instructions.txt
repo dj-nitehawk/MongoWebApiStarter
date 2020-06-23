@@ -34,8 +34,8 @@ sudo mkdir /MongoWebApiStarter
 sudo chown -R www-data:www-data /MongoWebApiStarter
 	[copy the files over via sFTP]
 cd /MongoWebApiStarter
-sudo chmod +x MongoWebApiStarter.Api.dll
-dotnet ./MongoWebApiStarter.Api.dll
+sudo chmod +x MongoWebApiStarter.dll
+dotnet ./MongoWebApiStarter.dll
 
 INSTALL NGINX
 -------------

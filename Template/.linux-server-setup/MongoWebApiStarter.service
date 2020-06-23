@@ -3,7 +3,7 @@ Description=MongoWebApiStarter
 
 [Service]
 WorkingDirectory=/MongoWebApiStarter
-ExecStart=/usr/bin/dotnet  /MongoWebApiStarter/MongoWebApiStarter.Api.dll
+ExecStart=/usr/bin/dotnet  /MongoWebApiStarter/MongoWebApiStarter.dll
 StandardOutput=file:/MongoWebApiStarter/output.log
 StandardError=file:/MongoWebApiStarter/error.log
 Restart=always
