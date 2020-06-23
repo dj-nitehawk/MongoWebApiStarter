@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>3.0.1</PackageVersion>
+    <PackageVersion>3.0.2</PackageVersion>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
@@ -26,10 +26,6 @@
   <ItemGroup>
     <Content Include="Template\**\*" Exclude="Template\**\bin\**;Template\**\obj\**" />
     <Compile Remove="**\*" />
-    <Compile Remove="Template\api\dp_keys\**" />
-    <Content Remove="Template\api\dp_keys\**" />
-    <EmbeddedResource Remove="Template\api\dp_keys\**" />
-    <None Remove="Template\api\dp_keys\**" />
   </ItemGroup>
 
   <ItemGroup>
