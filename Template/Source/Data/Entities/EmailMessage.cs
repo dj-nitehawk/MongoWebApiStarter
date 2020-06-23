@@ -11,7 +11,7 @@ namespace Data
         public string ToEmail { get; set; }
         public string Subject { get; set; }
         public string BodyHTML { get; set; }
-        public bool Sent { get; set; } = false;
+        public bool Sent { get; set; }
         public DateTime SentOn { get; set; }
     }
 }

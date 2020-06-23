@@ -40,30 +40,12 @@ namespace Main.Account.Login
 
             ThrowIfAnyErrors();
 
-            var vp = RepoVP.Find(v =>
-                        v.OwnerAccount.ID == acc.ID,
-                        v => new
-                        {
-                            v.ID,
-                            v.Name,
-                            v.CreationComplete,
-                            v.SubDomain
-                        }).Single();
+            var permissions = default(Allow).All().ToArray();
 
-            var permissions = default(Allow).All().Except(new[]
-                    {
-                        Allow.Consultation_Update_Nurse_Notes //todo: fix this hack to let owner update consultation
-                    }).ToArray();
-
-            var session = new UserSession(
-                (Claim.AccountID, acc.ID),
-                (Claim.VirtualPractiseID, vp.ID));
+            var session = new UserSession((Claim.AccountID, acc.ID));
 
             Response.SignIn(session, permissions);
-            Response.OwnerName = $"{acc.Title} {acc.FirstName} {acc.LastName}";
-            Response.VPCreationDone = vp.CreationComplete;
-            Response.VPName = vp.Name;
-            Response.VPSubdomain = vp.SubDomain;
+            Response.FullName = $"{acc.Title} {acc.FirstName} {acc.LastName}";
 
             return Response;
         }

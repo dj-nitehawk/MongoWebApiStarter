@@ -15,10 +15,6 @@ namespace Main.Account.Save
             RuleFor(a => a.Password)
                 .Must(p => p.IsAValidPassword()).WithMessage("Password format is not acceptable");
 
-            RuleFor(a => a.VPName)
-                .NotEmpty().WithMessage("Practice name can't be empty")
-                .MinimumLength(5).WithMessage("Practice name must be longer than 5 characters");
-
             RuleFor(a => a.FirstName)
                 .NotEmpty().WithMessage("First name can't be empty")
                 .MinimumLength(3).WithMessage("First name must be longer than 3 characters");

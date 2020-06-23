@@ -21,12 +21,27 @@ namespace Main.Account.Get
             if (acc == null) throw HttpError.NotFound("Unable to find the right Account!");
 
             Response = ToResponse(acc);
-
-            Response.VPName = RepoVP.Find(acc.VirtualPractice.ID, v => v.Name);
-
             return Response;
         }
 
-
+        protected override Response ToResponse(Data.Account a)
+        {
+            return new Response
+            {
+                City = a.Address.City,
+                CountryCode = a.Address.CountryCode,
+                EmailAddress = a.Email,
+                FirstName = a.FirstName,
+                ID = a.ID,
+                IsEmailVerified = a.IsEmailVerified,
+                LastName = a.LastName,
+                Mobile = a.Mobile,
+                Password = "",
+                State = a.Address.State,
+                Street = a.Address.Street,
+                Title = a.Title,
+                ZipCode = a.Address.ZipCode
+            };
+        }
     }
 }

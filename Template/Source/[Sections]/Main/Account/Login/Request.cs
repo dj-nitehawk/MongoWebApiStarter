@@ -3,7 +3,7 @@ using ServiceStack;
 
 namespace Main.Account.Login
 {
-    [Route("/api/account/login")]
+    [Route("/account/login")]
     public class Request : IRequest<Response>
     {
         public string UserName { get; set; }

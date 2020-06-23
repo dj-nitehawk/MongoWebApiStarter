@@ -106,16 +106,6 @@ namespace SCVault
         public static Dictionary<string, T> ToDictionary<T>(this T _) where T : Enum
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToDictionary(i => i.ToString(), i => i);
-        }
-
-        public static string DurationString(this SymptomRecord sr)
-        {
-            var duration = "";
-            if (sr.Months > 0) duration += $"<b>{sr.Months}</b><i>Mths</i> ";
-            if (sr.Days > 0) duration += $"<b>{sr.Days}</b><i>Days</i> ";
-            if (sr.Hours > 0) duration += $"<b>{sr.Hours}</b><i>Hrs</i> ";
-            if (sr.Minutes > 0) duration += $"<b>{sr.Minutes}</b><i>Mins</i> ";
-            return duration.TrimEnd(' ');
-        }
+        }        
     }
 }

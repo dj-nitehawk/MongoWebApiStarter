@@ -70,8 +70,8 @@ namespace Data
 
             <p>Thank you for using Shared Care Vault!</p>
 
-            <p>--The Shared Care Vault Team<br>
-              <a href='https://sharedcarevault.com' target='_blank'>https://sharedcarevault.com</a></p>
+            <p>--The MongoWebApiStarter Team<br>
+              <a href='https://MongoWebApiStarter.com' target='_blank'>https://MongoWebApiStarter.com</a></p>
             <p style='margin:3px auto;font:10px arial,sans-serif;color:#999'>© 2019 Copyright </p>
           </td>
         </tr>
@@ -99,7 +99,7 @@ namespace Data
                         ";
 
                 case EmailTemplates.Welcome_New_VirtualPractice:
-                    return @"";
+                    return "";
             }
 
             return null;

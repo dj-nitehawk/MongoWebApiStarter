@@ -3,7 +3,7 @@ using ServiceStack;
 
 namespace Main.Account.Verify
 {
-    [Route("/api/account/{ID}/{Code}/validate")]
+    [Route("/account/{ID}/{Code}/validate")]
     public class Request : IRequest<Nothing>
     {
         public string ID { get; set; }

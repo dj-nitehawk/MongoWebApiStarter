@@ -29,23 +29,10 @@ namespace Main.Account.Save
             if (r.ID.HasValue()) // existing account
             {
                 RepoAccount.SavePreserving(acc);
-
-                var vpID = RepoVP.Find(v => v.OwnerAccount.ID == r.ID, v => v.ID).Single();
-
-                RepoVP.UpdateName(vpID, r.VPName);
             }
             else // new account
             {
-                var vp = new VirtualPractice
-                {
-                    Name = r.VPName,
-                };
-                RepoVP.Save(vp);
-
-                acc.VirtualPractice = vp.ID;
-
                 RepoAccount.Save(acc);
-                RepoVP.SetOwnerAccount(vp.ID, acc.ID);
             }
 
             SendVerificationEmail(acc);
@@ -74,7 +61,6 @@ namespace Main.Account.Save
                     ZipCode = r.ZipCode,
                     CountryCode = r.CountryCode
                 },
-                TimeZoneOffsetHrs = r.TimeZoneOffsetHrs,
                 Mobile = r.Mobile,
             };
         }

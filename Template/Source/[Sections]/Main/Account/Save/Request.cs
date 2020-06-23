@@ -4,7 +4,7 @@ using ServiceStack;
 
 namespace Main.Account.Save
 {
-    [Route("/api/account")]
+    [Route("/account")]
     public class Request : Model, IRequest<Response>
     {
         public bool EmailBelongsToSomeOneElse()
