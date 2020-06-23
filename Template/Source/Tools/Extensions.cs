@@ -1,5 +1,4 @@
-﻿using Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -106,6 +105,6 @@ namespace SCVault
         public static Dictionary<string, T> ToDictionary<T>(this T _) where T : Enum
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToDictionary(i => i.ToString(), i => i);
-        }        
+        }
     }
 }
