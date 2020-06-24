@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>3.0.2</PackageVersion>
+    <PackageVersion>3.0.3</PackageVersion>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
