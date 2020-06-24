@@ -3,9 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
 using MongoWebApiStarter.Auth;
 using ServiceStack;
-using ServiceStack.Auth;
 using ServiceStack.Validation;
-using System;
 
 namespace MongoWebApiStarter.Tests
 {

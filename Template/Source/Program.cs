@@ -31,39 +31,31 @@ namespace MongoWebApiStarter
 
     public class Startup : ModularStartup
     {
+        private static Settings settings;
+
         public new void ConfigureServices(IServiceCollection services)
         {
-            var settings = new Settings();
-            Configuration.Bind("Settings", settings);
+            settings = new Settings();
+            Configuration.Bind(nameof(Settings), settings);
             services.AddSingleton(settings);
             services.AddHostedService<EmailService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment _)
         {
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-
             app.UseMaintenanceModeMiddleware();
-
-            app.UseServiceStack(new AppHost()
-            {
-                AppSettings = new NetCoreAppSettings(Configuration)
-            });
+            app.UseServiceStack(new AppHost());
         }
     }
 
     public class AppHost : AppHostBase
     {
-        private readonly Settings settings = new Settings();
-
         public AppHost() : base("MongoWebApiStarter", typeof(Main.Account.Save.Service).Assembly) { }
 
         public override void Configure(Container container)
         {
-            Configuration.Bind("Settings", settings);
+            var settings = container.Resolve<Settings>();
 
-            container.AddSingleton(settings);
             container.AddSingleton<CloudFlareService>(); container.Resolve<CloudFlareService>();
             container.AddSingleton(new DB(settings.Database.Name));
 
