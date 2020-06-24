@@ -50,8 +50,8 @@ namespace Main.Account.Save
                 Email = r.EmailAddress.LowerCase(),
                 PasswordHash = r.Password.SaltedHash(),
                 Title = r.Title,
-                FirstName = r.FirstName.ToTitleCase(),
-                LastName = r.LastName.ToTitleCase(),
+                FirstName = r.FirstName.TitleCase(),
+                LastName = r.LastName.TitleCase(),
                 Address = new Address
                 {
                     Street = r.Street.ToTitleCase(),

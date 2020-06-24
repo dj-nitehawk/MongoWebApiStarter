@@ -2,16 +2,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
 using MongoWebApiStarter.Tests;
-using ServiceStack;
 using System;
 
-namespace MongoWebApiStarter.Tests_Main
+namespace MongoWebApiStarter.Main_Account
 {
     [TestClass]
     public class Account
     {
-        private static readonly JsonServiceClient client = new JsonServiceClient(Init.BaseUrl);
-
         [TestMethod]
         public void Create()
         {
@@ -32,7 +29,7 @@ namespace MongoWebApiStarter.Tests_Main
                 ZipCode = "10100",
             };
 
-            var res = client.Post(req);
+            var res = CTX.Client.Post(req);
 
             res.EmailSent.Should().BeTrue();
             res.ID.Should().NotBeNullOrEmpty();
@@ -41,6 +38,12 @@ namespace MongoWebApiStarter.Tests_Main
 
             acc.Email.Should().BeEquivalentTo(req.EmailAddress);
             acc.IsEmailVerified.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Validate()
+        {
+
         }
     }
 }
