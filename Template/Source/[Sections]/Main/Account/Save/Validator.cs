@@ -1,4 +1,5 @@
-﻿using MongoWebApiStarter;
+﻿using Data;
+using MongoWebApiStarter;
 using ServiceStack.FluentValidation;
 
 namespace Main.Account.Save
@@ -7,10 +8,10 @@ namespace Main.Account.Save
     {
         public Validator()
         {
-            RuleFor(a => a.EmailAddress)
+            RuleFor(x => x.EmailAddress)
                 .NotEmpty().WithMessage("Email address can't be empty")
                 .EmailAddress().WithMessage("Email format is wrong")
-                .Must((a, _) => !a.EmailBelongsToSomeOneElse()).WithMessage("Email address already in use");
+                .Must((x, _) => !EmailBelongsToSomeOneElse(x)).WithMessage("Email address already in use");
 
             RuleFor(a => a.Password)
                 .Must(p => p.IsAValidPassword()).WithMessage("Password format is not acceptable");
@@ -26,6 +27,14 @@ namespace Main.Account.Save
             RuleFor(a => a.Mobile)
                 .NotEmpty().WithMessage("Mobile number can't be empty")
                 .Length(10).WithMessage("Mobile number must be 10 digits");
+        }
+
+        private bool EmailBelongsToSomeOneElse(Request r)
+        {
+            if (r.EmailAddress == null) return true;
+
+            var idForEmail = RepoAccount.GetID(r.EmailAddress.LowerCase());
+            return idForEmail != r.ID;
         }
     }
 }

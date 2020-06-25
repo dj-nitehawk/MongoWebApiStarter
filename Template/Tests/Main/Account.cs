@@ -11,7 +11,7 @@ namespace MongoWebApiStarter.Main_Account
     [TestClass]
     public class Account
     {
-        private JsonServiceClient client = new JsonServiceClient(Context.BaseURL);
+        private readonly JsonServiceClient client = new JsonServiceClient(Context.BaseURL);
 
         private string CreateAccount()
         {
@@ -132,7 +132,7 @@ namespace MongoWebApiStarter.Main_Account
                 acc.Address.CountryCode == res.CountryCode &&
                 acc.Mobile == res.Mobile;
 
-            match.Should().BeTrue();    
+            match.Should().BeTrue();
         }
     }
 }
