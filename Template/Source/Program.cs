@@ -55,6 +55,7 @@ namespace MongoWebApiStarter
         public override void Configure(Container container)
         {
             var settings = container.Resolve<Settings>();
+            var isDevelopment = container.Resolve<IWebHostEnvironment>().IsDevelopment();
 
             container.AddSingleton<CloudFlareService>(); container.Resolve<CloudFlareService>();
             container.AddSingleton(new DB(settings.Database.Name));
@@ -62,7 +63,7 @@ namespace MongoWebApiStarter
             SetConfig(new HostConfig
             {
                 UseCamelCase = false,
-                EnableFeatures = Feature.All.Remove(Feature.All).Add(Feature.Json)
+                EnableFeatures = isDevelopment ? Feature.All : Feature.All.Remove(Feature.All).Add(Feature.Json)
             });
 
             Config.GlobalResponseHeaders.Remove("X-Powered-By");
@@ -71,7 +72,9 @@ namespace MongoWebApiStarter
             Authentication.Initialize(settings);
             Plugins.Add(Authentication.AuthFeature);
             Plugins.Add(new ValidationFeature());
-            Plugins.Add(new CorsFeature(allowedHeaders: "*")); //todo: remove wildcard after deploymenet to production
+            
+            if (isDevelopment)
+                Plugins.Add(new CorsFeature(allowedHeaders: "*"));
 
             ServiceExceptionHandlers.Add((_, __, x) =>
             {
