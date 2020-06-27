@@ -8,7 +8,7 @@ namespace Main.Account.Get
     public class Service : Service<Request, Response, Data.Account>
     {
         [Permission(Allow.Account_Read)]
-        public override Response Any(Request r)
+        public override Response Get(Request r)
         {
             var acc = RepoAccount.FindExcluding(
                 r.ID,

@@ -9,7 +9,7 @@ namespace Main.Image.Get
     [Authenticate(ApplyTo.None)]
     public class Service : Service<Request, Nothing, Data.Image>
     {
-        public new async Task Any(Request r)
+        public new async Task Get(Request r)
         {
             HttpResponse.ContentType = "image/jpeg";
 

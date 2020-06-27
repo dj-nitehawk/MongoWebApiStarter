@@ -9,7 +9,7 @@ namespace Main.Account.Login
     [Authenticate(ApplyTo.None)]
     public class Service : Service<Request, Response, Data.Account>
     {
-        public override Response Any(Request r)
+        public override Response Post(Request r)
         {
             var acc = RepoAccount.Find(a =>
             a.Email == r.UserName.LowerCase(),

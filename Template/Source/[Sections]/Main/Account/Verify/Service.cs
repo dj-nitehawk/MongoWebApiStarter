@@ -7,7 +7,7 @@ namespace Main.Account.Verify
     [Authenticate(ApplyTo.None)]
     public class Service : Service<Request, Nothing, Data.Account>
     {
-        public override Nothing Any(Request r)
+        public override Nothing Get(Request r)
         {
             if (RepoAccount.ValidateEmail(r.ID, r.Code))
             {

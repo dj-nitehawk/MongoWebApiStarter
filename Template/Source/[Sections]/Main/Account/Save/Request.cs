@@ -3,7 +3,7 @@ using ServiceStack;
 
 namespace Main.Account.Save
 {
-    [Route("/account", "POST,PATCH")]
+    [Route("/account")]
     public class Request : Model, IRequest<Response>
     { }
 }

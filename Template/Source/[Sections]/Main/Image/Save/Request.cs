@@ -3,7 +3,7 @@ using ServiceStack;
 
 namespace Main.Image.Save
 {
-    [Route("/image", "POST,PATCH")]
+    [Route("/image")]
     public class Request : IRequest<Nothing>
     {
         public string ID { get; set; }

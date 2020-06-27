@@ -16,7 +16,7 @@ namespace Utility
     {
         public IWebHostEnvironment Env { get; set; }
 
-        public object Any(ShowLog _)
+        public object Get(ShowLog _)
         {
             if (File.Exists("output.log"))
             {

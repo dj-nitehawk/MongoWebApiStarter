@@ -5,7 +5,7 @@ namespace Main.Image.Delete
 {
     public class Service : Service<Request, Nothing, Data.Image>
     {
-        public override Nothing Any(Request r)
+        public override Nothing Delete(Request r)
         {
             _ = RepoImage.DeleteAsync(r.ID);
 
