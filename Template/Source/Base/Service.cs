@@ -51,35 +51,41 @@ namespace MongoWebApiStarter
 
         private readonly ValidationError error = new ValidationError("Validation Error", "There were some problems!");
 
-        /// <summary>
-        /// Handler for GET requests
-        /// </summary>
-        /// <param name="r">The request DTO</param>
-        public virtual TResponse Get(TRequest r) => throw new NotImplementedException();
+        ///// <summary>
+        ///// The handler logic for any type of http verb
+        ///// </summary>
+        ///// <param name="r">The request DTO</param>
+        public virtual TResponse Any(TRequest r) => throw new NotImplementedException();
 
-        /// <summary>
-        /// Handler for POST requests
-        /// </summary>
-        /// <param name="r">The request DTO</param>
-        public virtual TResponse Post(TRequest r) => throw new NotImplementedException();
+        ///// <summary>
+        ///// Handler for GET requests
+        ///// </summary>
+        ///// <param name="r">The request DTO</param>
+        //public virtual TResponse Get(TRequest r) => throw new NotImplementedException();
 
-        /// <summary>
-        /// Handler for PUT requests
-        /// </summary>
-        /// <param name="r">The request DTO</param>
-        public virtual TResponse Put(TRequest r) => throw new NotImplementedException();
+        ///// <summary>
+        ///// Handler for POST requests
+        ///// </summary>
+        ///// <param name="r">The request DTO</param>
+        //public virtual TResponse Post(TRequest r) => throw new NotImplementedException();
 
-        /// <summary>
-        /// Handler for PATCH requests
-        /// </summary>
-        /// <param name="r">The request DTO</param>
-        public virtual TResponse Patch(TRequest r) => throw new NotImplementedException();
+        ///// <summary>
+        ///// Handler for PUT requests
+        ///// </summary>
+        ///// <param name="r">The request DTO</param>
+        //public virtual TResponse Put(TRequest r) => throw new NotImplementedException();
 
-        /// <summary>
-        /// Handler for DELETE requests
-        /// </summary>
-        /// <param name="r">The request DTO</param>
-        public virtual TResponse Delete(TRequest r) => throw new NotImplementedException();
+        ///// <summary>
+        ///// Handler for PATCH requests
+        ///// </summary>
+        ///// <param name="r">The request DTO</param>
+        //public virtual TResponse Patch(TRequest r) => throw new NotImplementedException();
+
+        ///// <summary>
+        ///// Handler for DELETE requests
+        ///// </summary>
+        ///// <param name="r">The request DTO</param>
+        //public virtual TResponse Delete(TRequest r) => throw new NotImplementedException();
 
         /// <summary>
         /// Convert a request DTO to a data entity

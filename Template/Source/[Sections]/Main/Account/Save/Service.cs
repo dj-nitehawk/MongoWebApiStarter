@@ -11,13 +11,13 @@ namespace Main.Account.Save
     {
         public bool NeedsEmailVerification;
 
-        public override Response Post(Request r)
+        public Response Post(Request r)
         {
-            return Patch(r);
+            return Any(r);
         }
 
         [Need(Claim.AccountID)]
-        public override Response Patch(Request r)
+        public override Response Any(Request r)
         {
             r.ID = User.ClaimValue(Claim.AccountID); //post tampering protection
 
