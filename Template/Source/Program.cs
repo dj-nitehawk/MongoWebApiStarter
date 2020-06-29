@@ -58,7 +58,6 @@ namespace MongoWebApiStarter
             var isDevelopment = container.Resolve<IWebHostEnvironment>().IsDevelopment();
 
             container.AddSingleton<CloudFlareService>(); container.Resolve<CloudFlareService>();
-            container.AddSingleton(new DB(settings.Database.Name));
 
             SetConfig(new HostConfig
             {
@@ -84,6 +83,8 @@ namespace MongoWebApiStarter
                 return null;
             });
 
+            new DB(settings.Database.Name, settings.Database.Host);
+            new DB(Data.Constants.FileBucketDB, settings.FileBucket.Host);
             DB.Migrate();
         }
     }

@@ -13,7 +13,7 @@ namespace MongoWebApiStarter.Services
 {
     public class EmailService : BackgroundService
     {
-        private readonly Email settings;
+        private readonly Settings.EmailSettings settings;
         private readonly bool isProduction;
         private bool startMsgLogged;
         private readonly ILogger log;
