@@ -2,7 +2,7 @@
 
 namespace NAMESPACE
 {
-    public class Service : Service<Request, Response, Data.ENTITY>
+    public class Service : Service<Request, Response>
     {
 
     }

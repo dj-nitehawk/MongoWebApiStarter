@@ -3,7 +3,7 @@ using MongoWebApiStarter;
 
 namespace Main.Image.Delete
 {
-    public class Service : Service<Request, Nothing, Data.Image>
+    public class Service : Service<Request, Nothing>
     {
         public override Nothing Delete(Request r)
         {

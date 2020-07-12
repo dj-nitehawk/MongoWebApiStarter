@@ -1,5 +1,4 @@
-﻿using MongoDB.Entities.Core;
-using MongoWebApiStarter.Auth;
+﻿using MongoWebApiStarter.Auth;
 using ServiceStack;
 using ServiceStack.Validation;
 using System;
@@ -14,10 +13,9 @@ namespace MongoWebApiStarter
     /// <typeparam name="TResponse">The type of the response DTO</typeparam>
     /// <typeparam name="TEntity">The type of main data entity of the service</typeparam>
     [Authenticate]
-    public abstract class Service<TRequest, TResponse, TEntity> : Service
+    public abstract class Service<TRequest, TResponse> : Service
         where TRequest : IRequest<TResponse>
         where TResponse : IResponse, new()
-        where TEntity : Entity
     {
         /// <summary>
         /// The app settings object
@@ -80,18 +78,6 @@ namespace MongoWebApiStarter
         /// </summary>
         /// <param name="r">The request DTO</param>
         public virtual TResponse Delete(TRequest r) => throw new NotImplementedException();
-
-        /// <summary>
-        /// Convert a request DTO to a data entity
-        /// </summary>
-        /// <param name="r">The request DTO</param>
-        protected virtual TEntity ToEntity(TRequest r) => throw new NotImplementedException();
-
-        /// <summary>
-        /// Convert a data entity to a response DTO
-        /// </summary>
-        /// <param name="e">The request DTO</param>
-        protected virtual TResponse ToResponse(TEntity e) => throw new NotImplementedException();
 
         /// <summary>
         /// Check if teh current user has a given permission

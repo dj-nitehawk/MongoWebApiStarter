@@ -5,7 +5,7 @@ using ServiceStack;
 
 namespace Main.Account.Get
 {
-    public class Service : Service<Request, Response, Data.Account>
+    public class Service : Service<Request, Response>
     {
         [Permission(Allow.Account_Read)]
         public override Response Get(Request r)
@@ -20,28 +20,9 @@ namespace Main.Account.Get
 
             if (acc == null) throw HttpError.NotFound("Unable to find the right Account!");
 
-            Response = ToResponse(acc);
-            return Response;
-        }
+            Response.FromEntity(acc);
 
-        protected override Response ToResponse(Data.Account a)
-        {
-            return new Response
-            {
-                City = a.Address.City,
-                CountryCode = a.Address.CountryCode,
-                EmailAddress = a.Email,
-                FirstName = a.FirstName,
-                ID = a.ID,
-                IsEmailVerified = a.IsEmailVerified,
-                LastName = a.LastName,
-                Mobile = a.Mobile,
-                Password = "",
-                State = a.Address.State,
-                Street = a.Address.Street,
-                Title = a.Title,
-                ZipCode = a.Address.ZipCode
-            };
+            return Response;
         }
     }
 }

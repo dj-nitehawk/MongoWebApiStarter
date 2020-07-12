@@ -2,7 +2,7 @@
 
 namespace NAMESPACE
 {
-    public class Response : IResponse
+    public class Response : IResponse<Domain.ENTITY>
     {
 
     }

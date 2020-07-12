@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Main.Image.Save
 {
     [Authenticate(ApplyTo.Patch)]
-    public class Service : Service<Request, Nothing, Data.Image>
+    public class Service : Service<Request, Nothing>
     {
         public new Task<string> Post(Request r)
         {
@@ -53,18 +53,7 @@ namespace Main.Image.Save
             using var strOutput = new MemoryStream();
             img.SaveAsJpeg(strOutput, new JpegEncoder { Quality = 80 });
 
-            return await RepoImage.UploadAsync(ToEntity(r), strOutput);
-        }
-
-        protected override Data.Image ToEntity(Request r)
-        {
-            return new Data.Image
-            {
-                AccessedOn = DateTime.UtcNow,
-                Height = r.Height,
-                Width = r.Width,
-                ID = r.ID
-            };
+            return await RepoImage.UploadAsync(r.ToEntity(), strOutput);
         }
 
         public bool IsAllowedType(string contentType)

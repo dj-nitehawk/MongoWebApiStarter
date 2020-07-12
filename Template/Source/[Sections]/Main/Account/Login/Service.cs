@@ -7,7 +7,7 @@ using System.Linq;
 namespace Main.Account.Login
 {
     [Authenticate(ApplyTo.None)]
-    public class Service : Service<Request, Response, Data.Account>
+    public class Service : Service<Request, Response>
     {
         public override Response Post(Request r)
         {

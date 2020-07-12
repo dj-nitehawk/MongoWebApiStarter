@@ -5,7 +5,7 @@ using ServiceStack;
 namespace Main.Account.Verify
 {
     [Authenticate(ApplyTo.None)]
-    public class Service : Service<Request, Nothing, Data.Account>
+    public class Service : Service<Request, Nothing>
     {
         public override Nothing Get(Request r)
         {

@@ -7,7 +7,7 @@ using ServiceStack;
 namespace Main.Account.Save
 {
     [Authenticate(ApplyTo.Patch)]
-    public class Service : Service<Request, Response, Data.Account>
+    public class Service : Service<Request, Response>
     {
         public bool NeedsEmailVerification;
 
@@ -23,7 +23,7 @@ namespace Main.Account.Save
 
             CheckIfEmailValidationIsNeeded(r);
 
-            var acc = ToEntity(r);
+            var acc = r.ToEntity();
 
             if (r.ID.HasValue()) // existing account
             {
@@ -40,28 +40,6 @@ namespace Main.Account.Save
             Response.ID = acc.ID;
 
             return Response;
-        }
-
-        protected override Data.Account ToEntity(Request r)
-        {
-            return new Data.Account()
-            {
-                ID = r.ID,
-                Email = r.EmailAddress.LowerCase(),
-                PasswordHash = r.Password.SaltedHash(),
-                Title = r.Title,
-                FirstName = r.FirstName.TitleCase(),
-                LastName = r.LastName.TitleCase(),
-                Address = new Address
-                {
-                    Street = r.Street.ToTitleCase(),
-                    City = r.City,
-                    State = r.State,
-                    ZipCode = r.ZipCode,
-                    CountryCode = r.CountryCode
-                },
-                Mobile = r.Mobile,
-            };
         }
 
         private void SendVerificationEmail(Data.Account a)
