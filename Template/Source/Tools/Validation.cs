@@ -2,7 +2,7 @@
 using ServiceStack.Validation;
 using System.Linq;
 
-namespace MongoWebApiStarter.Tools
+namespace MongoWebApiStarter
 {
     public static class Validation
     {

@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="[Sections]\[Template]\**" />
-    <Content Remove="[Sections]\[Template]\**" />
-    <EmbeddedResource Remove="[Sections]\[Template]\**" />
-    <None Remove="[Sections]\[Template]\**" />
+    <Compile Remove="[Features]\[Template]\**" />
+    <Content Remove="[Features]\[Template]\**" />
+    <EmbeddedResource Remove="[Features]\[Template]\**" />
+    <None Remove="[Features]\[Template]\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,16 +17,16 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.0" />
     <PackageReference Include="Flurl" Version="2.8.2" />
     <PackageReference Include="Flurl.Http" Version="2.4.2" />
-    <PackageReference Include="MailKit" Version="2.7.0" />
+    <PackageReference Include="MailKit" Version="2.8.0" />
     <PackageReference Include="MlkPwgen" Version="0.3.0" />
     <PackageReference Include="NodaTime" Version="3.0.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="MongoDB.Entities" Version="13.0.0" />
+    <PackageReference Include="MongoDB.Entities" Version="13.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="[Sections]\Admin\" />
+    <Folder Include="[Features]\Admin\" />
   </ItemGroup>
 
 </Project>

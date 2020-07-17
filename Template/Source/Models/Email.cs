@@ -1,4 +1,4 @@
-﻿using Data;
+﻿using Dom;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,7 +29,7 @@ namespace MongoWebApiStarter.Models
             this.toName = toName;
             this.toEmail = toEmail;
             this.subject = subject;
-            this.template = RepoEmail.GetTemplate(template);
+            this.template = EmailMessage.GetTemplate(template);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace MongoWebApiStarter.Models
 
             template = sb.ToString();
 
-            RepoEmail.Save(ToEntity());
+            EmailMessage.Save(ToEntity());
         }
 
         public EmailMessage ToEntity()

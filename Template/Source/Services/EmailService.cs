@@ -1,4 +1,4 @@
-﻿using Data;
+﻿using Dom;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -40,7 +40,7 @@ namespace MongoWebApiStarter.Services
                         log.LogWarning("EMAIL SERVICE HAS STARTED...[" + settings.Username + "]" + Environment.NewLine);
                     }
 
-                    msgs = RepoEmail.FetchNextBatch(settings.BatchSize);
+                    msgs = EmailMessage.FetchNextBatch(settings.BatchSize);
 
                     if (msgs.Count > 0)
                     {
@@ -67,7 +67,7 @@ namespace MongoWebApiStarter.Services
                                 {
                                     await smtp.SendAsync(ComposeEmail(m), stoppingToken);
                                     lastActiveAt = DateTime.UtcNow;
-                                    RepoEmail.MarkAsSent(m.ID);
+                                    EmailMessage.MarkAsSent(m.ID);
                                 }
                                 catch (Exception x)
                                 {

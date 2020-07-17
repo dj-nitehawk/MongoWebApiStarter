@@ -5,3 +5,5 @@ dotnet_diagnostic.RCS1090.severity = none
 
 # RCS1079: Throwing of new NotImplementedException.
 dotnet_diagnostic.RCS1079.severity = silent
+
+dotnet_diagnostic.IDE1006.severity = silent

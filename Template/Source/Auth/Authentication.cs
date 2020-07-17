@@ -1,5 +1,4 @@
-﻿using MongoWebApiStarter.Tools;
-using ServiceStack;
+﻿using ServiceStack;
 using ServiceStack.Auth;
 using ServiceStack.Text;
 using System;

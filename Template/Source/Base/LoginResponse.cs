@@ -1,7 +1,7 @@
 ﻿using MongoWebApiStarter.Auth;
 using System.Linq;
 
-namespace MongoWebApiStarter.Base
+namespace MongoWebApiStarter
 {
     /// <summary>
     /// Abstract class for login responses

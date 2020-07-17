@@ -35,7 +35,7 @@ namespace MongoWebApiStarter.Main_Account
             res.EmailSent.Should().BeTrue();
             res.ID.Should().NotBeNullOrEmpty();
 
-            var acc = DB.Find<Data.Account>().One(res.ID);
+            var acc = DB.Find<Dom.Account>().One(res.ID);
 
             acc.Email.Should().Be(savReq.EmailAddress);
             acc.IsEmailVerified.Should().BeFalse();
@@ -51,7 +51,7 @@ namespace MongoWebApiStarter.Main_Account
 
         private void ValidateAccount(string id)
         {
-            var code = DB.Find<Data.Account>().One(id).EmailVerificationCode;
+            var code = DB.Find<Dom.Account>().One(id).EmailVerificationCode;
 
             var vReq = new Main.Account.Verify.Request
             {
@@ -61,7 +61,7 @@ namespace MongoWebApiStarter.Main_Account
 
             client.Get(vReq);
 
-            var verified = DB.Find<Data.Account, bool>()
+            var verified = DB.Find<Dom.Account, bool>()
                              .Match(a => a.ID == id)
                              .Project(a => a.IsEmailVerified)
                              .Execute()
@@ -79,7 +79,7 @@ namespace MongoWebApiStarter.Main_Account
 
         private string AccountLogin(string id)
         {
-            var acc = DB.Find<Data.Account>().One(id);
+            var acc = DB.Find<Dom.Account>().One(id);
 
             var req = new Main.Account.Login.Request
             {
@@ -118,7 +118,7 @@ namespace MongoWebApiStarter.Main_Account
 
             var res = client.Get(req);
 
-            var acc = DB.Find<Data.Account>().One(id);
+            var acc = DB.Find<Dom.Account>().One(id);
 
             var match =
                 acc.Email == res.EmailAddress &&

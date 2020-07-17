@@ -2,7 +2,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace MongoWebApiStarter.Tools
+namespace MongoWebApiStarter
 {
     /// <summary>
     /// Utility for working Google map links and embed codes

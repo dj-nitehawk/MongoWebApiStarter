@@ -9,7 +9,6 @@ using MongoDB.Entities;
 using MongoWebApiStarter.Auth;
 using MongoWebApiStarter.Middleware;
 using MongoWebApiStarter.Services;
-using MongoWebApiStarter.Tools;
 using ServiceStack;
 using ServiceStack.Text;
 using ServiceStack.Validation;
@@ -39,6 +38,7 @@ namespace MongoWebApiStarter
             Configuration.Bind(nameof(Settings), settings);
             services.AddSingleton(settings);
             services.AddHostedService<EmailService>();
+            services.AddHostedService<FileCleanerService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment _)
@@ -84,7 +84,8 @@ namespace MongoWebApiStarter
             });
 
             new DB(settings.Database.Name, settings.Database.Host);
-            new DB(Data.Constants.FileBucketDB, settings.FileBucket.Host);
+            new DB(Constants.FileBucketDB, settings.FileBucket.Host);
+
             DB.Migrate();
         }
     }
