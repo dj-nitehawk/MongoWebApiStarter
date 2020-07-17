@@ -38,7 +38,7 @@ namespace Migrations
                 {
                     Allow.Employee_Create,
                     Allow.Employee_Read,
-                     Allow.Employee_Delete,
+                    Allow.Employee_Delete,
                 }).Cast<ushort>()
             };
 
