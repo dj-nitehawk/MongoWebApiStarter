@@ -46,7 +46,7 @@ namespace Dom
             //fetch from db after they can be edited from admin backend.
             return template switch
             {
-                EmailTemplates.VP_Email_Validation => @"
+                EmailTemplates.Email_Address_Validation => @"
 <html>
 <body>
   <div>
@@ -58,7 +58,7 @@ namespace Dom
             <h1 style='color:#000;font:bold 23px arial;margin:5px 0'>
               <span
                 style='color:rgb(74,176,156);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;font-size:35px;font-weight:400'>
-                Shared Care Vault</span>
+                MongoWebApiStarter</span>
               <br>
             </h1>
             <p style='font-family:Arial,Helvetica,sans-serif;font-size:small'>Thank you for creating a Virtual Practice
@@ -78,8 +78,8 @@ namespace Dom
 
             <p>Thank you for using Shared Care Vault!</p>
 
-            <p>--The Shared Care Vault Team<br>
-              <a href='https://sharedcarevault.com' target='_blank'>https://sharedcarevault.com</a></p>
+            <p>--MongoWebApiStarter Team<br>
+              <a href='https://MongoWebApiStarter.com' target='_blank'>https://MongoWebApiStarter.com</a></p>
             <p style='margin:3px auto;font:10px arial,sans-serif;color:#999'>© 2019 Copyright </p>
           </td>
         </tr>
@@ -128,7 +128,7 @@ namespace Dom
 
     public enum EmailTemplates
     {
-        VP_Email_Validation = 0,
+        Email_Address_Validation = 0,
         Employee_Invitation = 1,
         Patient_Welcome = 2
     }
