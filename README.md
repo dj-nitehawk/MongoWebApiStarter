@@ -43,5 +43,11 @@ A full-featured starter template for `dotnet new` to quickly scaffold a .Net Cor
 - uses mstest framework
 - uses [fluentassertions](https://fluentassertions.com/)
 
-#### Bonus
-instructions & config files for setting up a linux server for deployment.
+#### Bonuses
+
+##### Visual Studio New Item Template
+a visual studio extension is availabe in the `.vs-new-item-template` folder that will enable you to quickly add a new vertical slice feature file set.
+after you install the `vsix`, you will have a new item called "Vertical Slice Feature" in the "add > new item" dialog of visual studio.
+
+##### Linux Server Configuration
+instructions & config files for setting up a linux server for deployment are available in the `.linux-server-setup` folder
