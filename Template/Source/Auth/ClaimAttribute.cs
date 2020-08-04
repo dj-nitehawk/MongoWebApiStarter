@@ -42,7 +42,7 @@ namespace MongoWebApiStarter.Auth
             if (res.IsClosed)
                 return; //AuthenticateAttribute already closed the request (ie auth failed)
 
-            if (claims.Except(req.GetClaims().Select(c => c.Type)).Any())
+            if (!claims.Except(req.SessionAs<UserSession>().Claims.Select(c => c.Key)).Any())
                 return;
 
             if (DoHtmlRedirectAccessDeniedIfConfigured(req, res))
