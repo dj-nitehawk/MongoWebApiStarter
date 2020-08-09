@@ -49,7 +49,7 @@ namespace MongoWebApiStarter.Auth
                 return;
 
             res.StatusCode = (int)HttpStatusCode.Forbidden;
-            res.StatusDescription = ErrorMessages.ClaimDoesNotExistFmt.Fmt(claims).Localize(req);
+            res.StatusDescription = "The user doesn't have a required claim!";
             await HostContext.AppHost.HandleShortCircuitedErrors(req, res, requestDto);
         }
 

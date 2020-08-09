@@ -62,7 +62,7 @@ namespace MongoWebApiStarter
             SetConfig(new HostConfig
             {
                 UseCamelCase = false,
-                EnableFeatures = isDevelopment ? Feature.All : Feature.All.Remove(Feature.All).Add(Feature.Json)
+                EnableFeatures = isDevelopment ? Feature.All.Remove(Feature.Html) : Feature.All.Remove(Feature.All).Add(Feature.Json),
             });
 
             Config.GlobalResponseHeaders.Remove("X-Powered-By");
@@ -88,5 +88,7 @@ namespace MongoWebApiStarter
 
             DB.Migrate();
         }
+
+
     }
 }
