@@ -34,11 +34,12 @@ namespace MongoWebApiStarter.Auth
 
         private static readonly Action<IAuthSession, JsonObject, ServiceStack.Web.IRequest> PopulateSession = (s, p, _) =>
         {
+            var session = (UserSession)s;
+
             foreach (var f in typeof(Claim).GetFields().Select(f => f.Name))
             {
-                var val = p[f];
-                if (val != null)
-                    ((UserSession)s).Claims.Add(f, p[f]);
+                if (p[f] != null)
+                    session.Claims.Add(f, p[f]);
             }
         };
 
