@@ -1,11 +1,10 @@
 ﻿using MongoDB.Entities;
-using MongoDB.Entities.Core;
 using System;
 using System.Collections.Generic;
 
 namespace Dom
 {
-    public class EmailMessage : Entity
+    public class EmailMessage : Entity, ICreatedOn
     {
         public string FromName { get; set; }
         public string FromEmail { get; set; }
@@ -15,6 +14,7 @@ namespace Dom
         public string BodyHTML { get; set; }
         public bool Sent { get; set; }
         public DateTime SentOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         static EmailMessage()
         {
@@ -26,8 +26,8 @@ namespace Dom
         public static List<EmailMessage> FetchNextBatch(int batchSize)
         {
             return DB.Find<EmailMessage>()
-                     .Match(e => e.Sent != true)
-                     .Sort(e => e.ModifiedOn, Order.Ascending)
+                     .Match(e => !e.Sent)
+                     .Sort(e => e.CreatedOn, Order.Ascending)
                      .Limit(batchSize)
                      .Execute();
         }

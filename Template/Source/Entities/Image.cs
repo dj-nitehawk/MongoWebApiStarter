@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace Dom
 {
     [Database(Constants.FileBucketDB)]
-    public class Image : FileEntity
+    public class Image : FileEntity, ICreatedOn
     {
         public int Width { get; set; }
         public int Height { get; set; }
         public DateTime AccessedOn { get; set; }
         public bool IsLinked { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public static void Delete(string imageID)
         {
@@ -33,8 +34,8 @@ namespace Dom
             var anHourAgo = DateTime.UtcNow.AddHours(-1);
             return (await
                 DB.DeleteAsync<Image>(i =>
-                    i.ModifiedOn <= anHourAgo &&
-                    i.IsLinked == false))
+                    i.CreatedOn <= anHourAgo &&
+                    !i.IsLinked))
                 .DeletedCount;
         }
     }

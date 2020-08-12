@@ -6,7 +6,7 @@ namespace Main.Account.Verify
     [Authenticate(ApplyTo.None)]
     public class Service : Service<Request, Nothing, Database>
     {
-        public override Nothing Get(Request r)
+        public Nothing Get(Request r)
         {
             if (Data.ValidateEmail(r.ID, r.Code))
                 return Nothing;

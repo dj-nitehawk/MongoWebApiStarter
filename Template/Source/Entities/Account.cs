@@ -1,6 +1,5 @@
 ﻿
 using MongoDB.Entities;
-using MongoDB.Entities.Core;
 
 namespace Dom
 {

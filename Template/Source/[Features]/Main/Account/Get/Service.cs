@@ -7,7 +7,7 @@ namespace Main.Account.Get
     public class Service : Service<Request, Response, Database>
     {
         [Permission(Allow.Account_Read)]
-        public override Response Get(Request r)
+        public Response Get(Request r)
         {
             var acc = Data.GetAccount(r.ID);
 

@@ -1,4 +1,4 @@
-﻿using MongoDB.Entities.Core;
+﻿using MongoDB.Entities;
 using ServiceStack;
 
 namespace MongoWebApiStarter

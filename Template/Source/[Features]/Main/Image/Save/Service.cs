@@ -13,12 +13,12 @@ namespace Main.Image.Save
     [Authenticate(ApplyTo.Patch)]
     public class Service : Service<Request, Nothing, Database>
     {
-        public new Task<string> Post(Request r)
+        public Task<string> Post(Request r)
         {
             return Patch(r);
         }
 
-        public new async Task<string> Patch(Request r)
+        public async Task<string> Patch(Request r)
         {
             var file = Request.Files.FirstOrDefault();
 

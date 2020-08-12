@@ -8,7 +8,7 @@ namespace Main.Account.Login
     [Authenticate(ApplyTo.None)]
     public class Service : Service<Request, Response, Database>
     {
-        public override Response Post(Request r)
+        public Response Post(Request r)
         {
             var acc = Data.GetAccount(r.UserName);
 
