@@ -15,19 +15,15 @@ namespace Main.Account.Login
             if (acc != null)
             {
                 if (!BCrypt.Net.BCrypt.Verify(r.Password, acc.PasswordHash))
-                    AddError("The supplied credentials are invalid. Please try again...");
+                    ThrowError("The supplied credentials are invalid. Please try again...");
             }
             else
             {
-                AddError("Sorry, couldn't locate your account...");
+                ThrowError("Sorry, couldn't locate your account...");
             }
 
-            ThrowIfAnyErrors();
-
             if (!acc.IsEmailVerified)
-                AddError("Please verify your email address before logging in...");
-
-            ThrowIfAnyErrors();
+                ThrowError("Please verify your email address before logging in...");
 
             var permissions = default(Allow).All().ToArray();
 

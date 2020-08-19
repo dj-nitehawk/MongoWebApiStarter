@@ -22,11 +22,13 @@ namespace Dom
 
         public static void Link(params string[] imageIDs)
         {
-            if (imageIDs.Any())
+            if (imageIDs.Length > 0)
+            {
                 DB.Update<Image>()
                   .Match(i => imageIDs.Contains(i.ID))
                   .Modify(i => i.IsLinked, true)
                   .Execute();
+            }
         }
 
         public static async Task<long> DeleteUnlinked()
