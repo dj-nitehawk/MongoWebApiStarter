@@ -1,12 +1,12 @@
 ﻿using MongoDB.Entities;
 using MongoWebApiStarter;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Main.Account.Get
 {
     public class Database : IDatabase
     {
-        public Dom.Account GetAccount(string accountID)
+        public Task<Dom.Account> GetAccountAsync(string accountID)
         {
             return DB.Find<Dom.Account>()
                      .Match(a => a.ID == accountID)
@@ -15,8 +15,7 @@ namespace Main.Account.Get
                          a.PasswordHash,
                          a.EmailVerificationCode
                      })
-                     .Execute()
-                     .SingleOrDefault();
+                     .ExecuteSingleAsync();
         }
     }
 }

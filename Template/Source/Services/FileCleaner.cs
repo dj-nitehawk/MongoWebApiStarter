@@ -22,7 +22,7 @@ namespace MongoWebApiStarter.Services
             {
                 await Task.Delay(TimeSpan.FromHours(6), cancellation);
 
-                var imageCount = await Dom.Image.DeleteUnlinked();
+                var imageCount = await Dom.Image.DeleteUnlinkedAsync();
 
                 if (imageCount > 0)
                     log.LogWarning($"CLEANED: {imageCount} Images at {DateTime.UtcNow.ToTimePart()} on {DateTime.UtcNow.ToDatePart()}" + Environment.NewLine);

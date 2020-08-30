@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Models
 {
@@ -35,20 +36,18 @@ namespace MongoWebApiStarter.Models
         /// <summary>
         /// Add this email message to the queue for sending out by the email service.
         /// </summary>
-        public void AddToSendingQueue()
+        public Task AddToSendingQueueAsync()
         {
             if (MergeFields.Count == 0) throw new InvalidOperationException("Cannot proceed without any MergeFields!");
 
             var sb = new StringBuilder(template);
 
             foreach (var f in MergeFields)
-            {
                 sb.Replace("{" + f.Key + "}", f.Value);
-            }
 
             template = sb.ToString();
 
-            EmailMessage.Save(ToEntity());
+            return EmailMessage.SaveAsync(ToEntity());
         }
 
         public EmailMessage ToEntity()
@@ -63,6 +62,5 @@ namespace MongoWebApiStarter.Models
                 BodyHTML = template
             };
         }
-
     }
 }

@@ -20,8 +20,11 @@ namespace Utility
         {
             if (File.Exists("output.log"))
             {
-                var file = new FileInfo(Path.Combine(Env.ContentRootPath, "output.log"));
-                return new HttpResult(file, "text/plain");
+                return new HttpResult(
+                    new FileInfo(
+                        Path.Combine(Env.ContentRootPath,
+                        "output.log")),
+                    "text/plain");
             }
 
             return HttpError.NotFound("Hmmmmm....");
@@ -29,7 +32,7 @@ namespace Utility
 
         public async Task<object> Get(ClearCloudflareCache _)
         {
-            if (await CloudFlareService.PurgeCache())
+            if (await CloudFlareService.PurgeCacheAsync())
                 return "SUCCESS!!!";
 
             return new HttpError(400, "FAILED TO CLEAR CLOUDFLARE CACHE. CHECK APP LOG.");

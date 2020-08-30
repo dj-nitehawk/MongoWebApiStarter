@@ -1,6 +1,7 @@
 ﻿using MongoDB.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Dom
 {
@@ -23,22 +24,22 @@ namespace Dom
               .CreateAsync();
         }
 
-        public static List<EmailMessage> FetchNextBatch(int batchSize)
+        public static Task<List<EmailMessage>> FetchNextBatchAsync(int batchSize)
         {
             return DB.Find<EmailMessage>()
                      .Match(e => !e.Sent)
                      .Sort(e => e.CreatedOn, Order.Ascending)
                      .Limit(batchSize)
-                     .Execute();
+                     .ExecuteAsync();
         }
 
-        public static void MarkAsSent(string id)
+        public static Task MarkAsSentAsync(string id)
         {
-            DB.Update<EmailMessage>()
-              .Match(e => e.ID == id)
-              .Modify(e => e.SentOn, DateTime.UtcNow)
-              .Modify(e => e.Sent, true)
-              .Execute();
+            return DB.Update<EmailMessage>()
+                     .Match(e => e.ID == id)
+                     .Modify(e => e.SentOn, DateTime.UtcNow)
+                     .Modify(e => e.Sent, true)
+                     .ExecuteAsync();
         }
 
         public static string GetTemplate(EmailTemplates template)
@@ -76,7 +77,7 @@ namespace Dom
             <p>This is the address you will log in with, and the address to which we will deliver all email messages and
               other system mail.</p>
 
-            <p>Thank you for using Shared Care Vault!</p>
+            <p>Thank you for using MongoWebApiStarter!</p>
 
             <p>--MongoWebApiStarter Team<br>
               <a href='https://MongoWebApiStarter.com' target='_blank'>https://MongoWebApiStarter.com</a></p>
@@ -120,9 +121,9 @@ namespace Dom
             };
         }
 
-        public static void Save(EmailMessage emailMessage)
+        public static Task SaveAsync(EmailMessage emailMessage)
         {
-            emailMessage.Save();
+            return emailMessage.SaveAsync();
         }
     }
 

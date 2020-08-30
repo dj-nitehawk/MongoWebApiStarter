@@ -3,14 +3,15 @@ using MongoDB.Entities;
 using MongoWebApiStarter;
 using MongoWebApiStarter.Auth;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Migrations
 {
     public class _001_seed_default_roles : IMigration
     {
-        public void Upgrade()
+        public async Task UpgradeAsync()
         {
-            DB.Delete<Role>(_ => true);
+            await DB.DeleteAsync<Role>(_ => true);
 
             var manager = new Role
             {
@@ -42,7 +43,7 @@ namespace Migrations
                 }).Cast<ushort>()
             };
 
-            DB.Save(new[] { manager, employee });
+            await DB.SaveAsync(new[] { manager, employee });
         }
     }
 }

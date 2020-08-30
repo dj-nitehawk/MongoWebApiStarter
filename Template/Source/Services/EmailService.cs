@@ -40,7 +40,7 @@ namespace MongoWebApiStarter.Services
                         log.LogWarning("EMAIL SERVICE HAS STARTED...[" + settings.Username + "]" + Environment.NewLine);
                     }
 
-                    msgs = EmailMessage.FetchNextBatch(settings.BatchSize);
+                    msgs = await EmailMessage.FetchNextBatchAsync(settings.BatchSize);
 
                     if (msgs.Count > 0)
                     {
@@ -67,7 +67,7 @@ namespace MongoWebApiStarter.Services
                                 {
                                     await smtp.SendAsync(ComposeEmail(m), stoppingToken);
                                     lastActiveAt = DateTime.UtcNow;
-                                    EmailMessage.MarkAsSent(m.ID);
+                                    await EmailMessage.MarkAsSentAsync(m.ID);
                                 }
                                 catch (Exception x)
                                 {

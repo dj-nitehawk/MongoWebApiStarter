@@ -1,12 +1,12 @@
 ﻿using MongoDB.Entities;
 using MongoWebApiStarter;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Main.Account.Login
 {
     public class Database : IDatabase
     {
-        public Dom.Account GetAccount(string userName)
+        public Task<Dom.Account> GetAccountAsync(string userName)
         {
             return DB.Find<Dom.Account>()
                      .Match(a => a.Email == userName.LowerCase())
@@ -19,8 +19,7 @@ namespace Main.Account.Login
                          FirstName = a.FirstName,
                          LastName = a.LastName
                      })
-                     .Execute()
-                     .SingleOrDefault();
+                     .ExecuteSingleAsync();
         }
     }
 }

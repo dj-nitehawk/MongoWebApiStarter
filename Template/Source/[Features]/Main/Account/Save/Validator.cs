@@ -1,5 +1,6 @@
 ﻿using MongoWebApiStarter;
 using ServiceStack.FluentValidation;
+using System.Threading.Tasks;
 
 namespace Main.Account.Save
 {
@@ -12,7 +13,7 @@ namespace Main.Account.Save
             RuleFor(x => x.EmailAddress)
                 .NotEmpty().WithMessage("Email address can't be empty")
                 .EmailAddress().WithMessage("Email format is wrong")
-                .Must((x, _) => !EmailBelongsToSomeOneElse(x)).WithMessage("Email address already in use");
+                .MustAsync(async (x, _, __) => !await EmailBelongsToSomeOneElseAsync(x)).WithMessage("Email address already in use");
 
             RuleFor(a => a.Password)
                 .Must(p => p.IsAValidPassword()).WithMessage("Password format is not acceptable");
@@ -30,11 +31,11 @@ namespace Main.Account.Save
                 .Length(10).WithMessage("Mobile number must be 10 digits");
         }
 
-        private bool EmailBelongsToSomeOneElse(Request r)
+        private async Task<bool> EmailBelongsToSomeOneElseAsync(Request r)
         {
             if (r.EmailAddress == null) return true;
 
-            var idForEmail = Data.GetAccountID(r.EmailAddress);
+            var idForEmail = await Data.GetAccountIDAsync(r.EmailAddress);
             return idForEmail != r.ID;
         }
     }

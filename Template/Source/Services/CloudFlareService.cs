@@ -19,7 +19,7 @@ namespace MongoWebApiStarter.Services
             FlurlHttp.Configure(x => x.Timeout = TimeSpan.FromSeconds(10));
         }
 
-        public static async Task<bool> PurgeCache()
+        public static async Task<bool> PurgeCacheAsync()
         {
             try
             {

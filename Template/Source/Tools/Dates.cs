@@ -68,5 +68,19 @@ namespace MongoWebApiStarter
                 .InZoneStrictly(DateTimeZoneProviders.Tzdb[timeZone])
                 .ToDateTimeUtc();
         }
+
+        /// <summary>
+        /// Returns the first day of the week for a given datetime.
+        /// The time is set to midnight (00:00:00)
+        /// </summary>
+        public static DateTime FirstDayOfWeek(this DateTime dayInWeek)
+        {
+            const DayOfWeek firstDay = DayOfWeek.Sunday;
+            DateTime firstDayInWeek = dayInWeek.Date;
+            while (firstDayInWeek.DayOfWeek != firstDay)
+                firstDayInWeek = firstDayInWeek.AddDays(-1);
+
+            return firstDayInWeek;
+        }
     }
 }

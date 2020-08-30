@@ -15,30 +15,31 @@ namespace Dom
         public bool IsLinked { get; set; }
         public DateTime CreatedOn { get; set; }
 
-        public static void Delete(string imageID)
+        public static Task DeleteAsync(string imageID)
         {
-            DB.Delete<Image>(imageID);
+            return DB.DeleteAsync<Image>(imageID);
         }
 
-        public static void Link(params string[] imageIDs)
+        public static Task LinkAsync(params string[] imageIDs)
         {
             if (imageIDs.Length > 0)
             {
-                DB.Update<Image>()
-                  .Match(i => imageIDs.Contains(i.ID))
-                  .Modify(i => i.IsLinked, true)
-                  .Execute();
+                return DB.Update<Image>()
+                         .Match(i => imageIDs.Contains(i.ID))
+                         .Modify(i => i.IsLinked, true)
+                         .ExecuteAsync();
             }
+
+            return Task.CompletedTask;
         }
 
-        public static async Task<long> DeleteUnlinked()
+        public static async Task<long> DeleteUnlinkedAsync()
         {
             var anHourAgo = DateTime.UtcNow.AddHours(-1);
-            return (await
-                DB.DeleteAsync<Image>(i =>
+            return (await DB.DeleteAsync<Image>(i =>
                     i.CreatedOn <= anHourAgo &&
                     !i.IsLinked))
-                .DeletedCount;
+                    .DeletedCount;
         }
     }
 }

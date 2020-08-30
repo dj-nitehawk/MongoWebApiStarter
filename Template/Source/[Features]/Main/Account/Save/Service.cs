@@ -3,6 +3,7 @@ using MlkPwgen;
 using MongoWebApiStarter;
 using MongoWebApiStarter.Auth;
 using ServiceStack;
+using System.Threading.Tasks;
 
 namespace Main.Account.Save
 {
@@ -11,23 +12,22 @@ namespace Main.Account.Save
     {
         public bool NeedsEmailVerification;
 
-        public Response Post(Request r)
-        {
-            return Patch(r);
-        }
+        public Task<Response> Post(Request r) => Patch(r);
 
-        [Need(Claim.AccountID)]
-        public Response Patch(Request r)
+        [
+            Need(Claim.AccountID)
+        ]
+        public async Task<Response> Patch(Request r)
         {
             r.ID = User.ClaimValue(Claim.AccountID); //post tampering protection
 
-            CheckIfEmailValidationIsNeeded(r);
+            await CheckIfEmailValidationIsNeededAsync(r);
 
             var acc = r.ToEntity();
 
-            Data.CreateOrUpdate(acc);
+            await Data.CreateOrUpdateAsync(acc);
 
-            SendVerificationEmail(acc);
+            await SendVerificationEmailAsync(acc);
 
             Response.EmailSent = NeedsEmailVerification;
             Response.ID = acc.ID;
@@ -35,12 +35,12 @@ namespace Main.Account.Save
             return Response;
         }
 
-        private void SendVerificationEmail(Dom.Account a)
+        private async Task SendVerificationEmailAsync(Dom.Account a)
         {
             if (NeedsEmailVerification)
             {
                 var code = PasswordGenerator.Generate(20);
-                Data.SetEmailValidationCode(code, a.ID);
+                await Data.SetEmailValidationCodeAsync(code, a.ID);
 
                 var salutation = $"{a.Title} {a.FirstName} {a.LastName}";
 
@@ -55,17 +55,17 @@ namespace Main.Account.Save
                 email.MergeFields.Add("Salutation", salutation);
                 email.MergeFields.Add("ValidationLink", $"{BaseURL}#/account/{a.ID}-{code}/validate");
 
-                email.AddToSendingQueue();
+                await email.AddToSendingQueueAsync();
             }
         }
 
-        private void CheckIfEmailValidationIsNeeded(Request r)
+        private async Task CheckIfEmailValidationIsNeededAsync(Request r)
         {
             if (r.ID.HasNoValue())
             {
                 NeedsEmailVerification = true;
             }
-            else if (r.ID != Data.GetAccountID(r.EmailAddress))
+            else if (r.ID != await Data.GetAccountIDAsync(r.EmailAddress))
             {
                 NeedsEmailVerification = true;
             }

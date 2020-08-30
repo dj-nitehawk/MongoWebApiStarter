@@ -1,12 +1,13 @@
 ﻿using MongoWebApiStarter;
+using System.Threading.Tasks;
 
 namespace Main.Image.Delete
 {
     public class Service : Service<Request, Nothing, Database>
     {
-        public Nothing Delete(Request r)
+        public async Task<Nothing> Delete(Request r)
         {
-            Dom.Image.Delete(r.ID);
+            await Dom.Image.DeleteAsync(r.ID);
             return Nothing;
         }
     }

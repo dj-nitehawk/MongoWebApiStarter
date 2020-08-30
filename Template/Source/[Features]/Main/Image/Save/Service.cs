@@ -13,10 +13,7 @@ namespace Main.Image.Save
     [Authenticate(ApplyTo.Patch)]
     public class Service : Service<Request, Nothing, Database>
     {
-        public Task<string> Post(Request r)
-        {
-            return Patch(r);
-        }
+        public Task<string> Post(Request r) => Patch(r);
 
         public async Task<string> Patch(Request r)
         {
@@ -34,9 +31,7 @@ namespace Main.Image.Save
             ThrowIfAnyErrors();
 
             if (r.ID.HasValue())
-            {
-                _ = Data.DeleteImage(r.ID); //delete old image (cause of cloudflare caching) and nullify image ID so a new ID will be set
-            }
+                _ = Data.DeleteImageAsync(r.ID); //delete old image (cause of cloudflare caching) and nullify image ID so a new ID will be set
 
             r.ID = null;
 
@@ -56,10 +51,15 @@ namespace Main.Image.Save
 
         public bool IsAllowedType(string contentType)
         {
-            var allowedTypes = new[] { "image/jpeg", "image/png" };
-            return allowedTypes.Contains(contentType.ToLower());
+            return (new[]
+            {
+                "image/jpeg",
+                "image/png"
+            })
+            .Contains(contentType.ToLower());
         }
 
-        public bool IsAllowedSize(long fileLength) => fileLength >= 100 && fileLength <= 10485760;
+        public bool IsAllowedSize(long fileLength) =>
+            fileLength >= 100 && fileLength <= 10485760;
     }
 }

@@ -2,15 +2,16 @@
 using MongoWebApiStarter.Auth;
 using ServiceStack;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Main.Account.Login
 {
     [Authenticate(ApplyTo.None)]
     public class Service : Service<Request, Response, Database>
     {
-        public Response Post(Request r)
+        public async Task<Response> Post(Request r)
         {
-            var acc = Data.GetAccount(r.UserName);
+            var acc = await Data.GetAccountAsync(r.UserName);
 
             if (acc != null)
             {
@@ -25,7 +26,7 @@ namespace Main.Account.Login
             if (!acc.IsEmailVerified)
                 ThrowError("Please verify your email address before logging in...");
 
-            var permissions = default(Allow).All().ToArray();
+            var permissions = default(Allow).All();
 
             var session = new UserSession((Claim.AccountID, acc.ID));
 

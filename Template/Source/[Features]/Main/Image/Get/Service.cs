@@ -23,7 +23,7 @@ namespace Main.Image.Get
             }
             finally
             {
-                HttpResponse.EndRequest();
+                await HttpResponse.EndRequestAsync();
             }
         }
     }

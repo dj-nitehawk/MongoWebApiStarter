@@ -12,6 +12,7 @@ using MongoWebApiStarter.Services;
 using ServiceStack;
 using ServiceStack.Text;
 using ServiceStack.Validation;
+using System.Threading.Tasks;
 
 namespace MongoWebApiStarter
 {
@@ -50,7 +51,7 @@ namespace MongoWebApiStarter
 
     public class AppHost : AppHostBase
     {
-        public AppHost() : base("MongoWebApiStarter", typeof(Main.Account.Save.Service).Assembly) { }
+        public AppHost() : base("MongoWebApiStarter", typeof(AppHost).Assembly) { }
 
         public override void Configure(Container container)
         {
@@ -83,10 +84,14 @@ namespace MongoWebApiStarter
                 return null;
             });
 
-            new DB(settings.Database.Name, settings.Database.Host);
-            new DB(Constants.FileBucketDB, settings.FileBucket.Host);
-
-            DB.Migrate();
+            Task.Run(async () =>
+            {
+                await DB.InitAsync(settings.Database.Name, settings.Database.Host);
+                await DB.InitAsync(Constants.FileBucketDB, settings.FileBucket.Host);
+                await DB.MigrateAsync();
+            })
+            .GetAwaiter()
+            .GetResult();
         }
 
 

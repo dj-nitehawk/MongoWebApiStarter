@@ -1,42 +1,41 @@
 ﻿using MongoDB.Entities;
 using MongoWebApiStarter;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Main.Account.Save
 {
     public class Database : IDatabase
     {
-        public void CreateOrUpdate(Dom.Account acc)
+        public async Task CreateOrUpdateAsync(Dom.Account acc)
         {
             using var TN = DB.Transaction();
 
             if (acc.ID.HasValue()) // existing account
             {
-                TN.SavePreserving(acc);
+                await TN.SavePreservingAsync(acc);
             }
             else // new account
             {
-                TN.Save(acc);
+                await TN.SaveAsync(acc);
             }
 
-            TN.Commit();
+            await TN.CommitAsync();
         }
 
-        public void SetEmailValidationCode(string code, string accoundID)
+        public Task SetEmailValidationCodeAsync(string code, string accoundID)
         {
-            DB.Update<Dom.Account>()
-              .Match(a => a.ID == accoundID)
-              .Modify(a => a.EmailVerificationCode, code)
-              .Execute();
+            return DB.Update<Dom.Account>()
+                     .Match(a => a.ID == accoundID)
+                     .Modify(a => a.EmailVerificationCode, code)
+                     .ExecuteAsync();
         }
 
-        public string GetAccountID(string emailAddress)
+        public Task<string> GetAccountIDAsync(string emailAddress)
         {
             return DB.Find<Dom.Account, string>()
                      .Match(a => a.Email == emailAddress.LowerCase())
                      .Project(a => a.ID)
-                     .Execute()
-                     .SingleOrDefault();
+                     .ExecuteSingleAsync();
         }
     }
 }
