@@ -5,6 +5,7 @@ using MongoWebApiStarter.Tests;
 using ServiceStack;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Main_Account
 {
@@ -13,7 +14,7 @@ namespace MongoWebApiStarter.Main_Account
     {
         private readonly JsonServiceClient client = new JsonServiceClient(Context.BaseURL);
 
-        private string CreateAccount()
+        private async Task<string> CreateAccount()
         {
             var savReq = new Main.Account.Save.Request
             {
@@ -30,12 +31,12 @@ namespace MongoWebApiStarter.Main_Account
                 ZipCode = "10100",
             };
 
-            var res = client.Post(savReq);
+            var res = await client.PostAsync(savReq);
 
             res.EmailSent.Should().BeTrue();
             res.ID.Should().NotBeNullOrEmpty();
 
-            var acc = DB.Find<Dom.Account>().One(res.ID);
+            var acc = await DB.Find<Dom.Account>().OneAsync(res.ID);
 
             acc.Email.Should().Be(savReq.EmailAddress);
             acc.IsEmailVerified.Should().BeFalse();
@@ -44,14 +45,15 @@ namespace MongoWebApiStarter.Main_Account
         }
 
         [TestMethod]
-        public void Create()
+        public Task Create()
         {
-            CreateAccount();
+            return CreateAccount();
         }
 
-        private void ValidateAccount(string id)
+        private async Task ValidateAccount(string id)
         {
-            var code = DB.Find<Dom.Account>().One(id).EmailVerificationCode;
+            var code = (await DB.Find<Dom.Account>().OneAsync(id))
+                       .EmailVerificationCode;
 
             var vReq = new Main.Account.Verify.Request
             {
@@ -59,27 +61,26 @@ namespace MongoWebApiStarter.Main_Account
                 Code = code
             };
 
-            client.Get(vReq);
+            await client.GetAsync(vReq);
 
-            var verified = DB.Find<Dom.Account, bool>()
-                             .Match(a => a.ID == id)
-                             .Project(a => a.IsEmailVerified)
-                             .Execute()
-                             .Single();
+            var verified = await DB.Find<Dom.Account, bool>()
+                                   .Match(a => a.ID == id)
+                                   .Project(a => a.IsEmailVerified)
+                                   .ExecuteSingleAsync();
 
             verified.Should().Be(true);
         }
 
         [TestMethod]
-        public void Validate()
+        public async Task Validate()
         {
-            var id = CreateAccount();
-            ValidateAccount(id);
+            var id = await CreateAccount();
+            await ValidateAccount(id);
         }
 
-        private string AccountLogin(string id)
+        private async Task<string> AccountLogin(string id)
         {
-            var acc = DB.Find<Dom.Account>().One(id);
+            var acc = await DB.Find<Dom.Account>().OneAsync(id);
 
             var req = new Main.Account.Login.Request
             {
@@ -87,7 +88,7 @@ namespace MongoWebApiStarter.Main_Account
                 Password = "qqqqq123Q"
             };
 
-            var res = client.Post(req);
+            var res = await client.PostAsync(req);
 
             res.FullName.Should().Be($"{acc.Title} {acc.FirstName} {acc.LastName}");
 
@@ -95,19 +96,19 @@ namespace MongoWebApiStarter.Main_Account
         }
 
         [TestMethod]
-        public void Login()
+        public async Task Login()
         {
-            var id = CreateAccount();
-            ValidateAccount(id);
-            AccountLogin(id);
+            var id = await CreateAccount();
+            await ValidateAccount(id);
+            await AccountLogin(id);
         }
 
         [TestMethod]
-        public void Get()
+        public async Task Get()
         {
-            var id = CreateAccount();
-            ValidateAccount(id);
-            var token = AccountLogin(id);
+            var id = await CreateAccount();
+            await ValidateAccount(id);
+            var token = await AccountLogin(id);
 
             var req = new Main.Account.Get.Request
             {
@@ -116,9 +117,9 @@ namespace MongoWebApiStarter.Main_Account
 
             client.BearerToken = token;
 
-            var res = client.Get(req);
+            var res = await client.GetAsync(req);
 
-            var acc = DB.Find<Dom.Account>().One(id);
+            var acc = await DB.Find<Dom.Account>().OneAsync(id);
 
             var match =
                 acc.Email == res.EmailAddress &&

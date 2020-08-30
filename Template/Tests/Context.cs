@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MongoDB.Entities;
 using ServiceStack;
+using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Tests
 {
@@ -14,8 +16,12 @@ namespace MongoWebApiStarter.Tests
         public static void Initialize(TestContext _)
         {
             appHost = new AppHost()
-                .Init()
-                .Start(BaseURL);
+                          .Init()
+                          .Start(BaseURL);
+
+            Task.Run(async () => await DB.InitAsync("MongoWebApiStarterTEST"))
+            .GetAwaiter()
+            .GetResult();
         }
 
         [AssemblyCleanup]
