@@ -14,7 +14,9 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- update vsix extension</PackageReleaseNotes>
+    <PackageReleaseNotes>- use async/await for io bound work
+- update data access library
+- update vsix extension</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
