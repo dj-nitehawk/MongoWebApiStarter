@@ -4,7 +4,6 @@ using MongoDB.Entities;
 using MongoWebApiStarter.Tests;
 using ServiceStack;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Main_Account

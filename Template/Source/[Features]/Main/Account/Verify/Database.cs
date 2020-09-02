@@ -14,7 +14,7 @@ namespace Main.Account.Verify
             var accExists = await DB.Queryable<Dom.Account>()
                                     .Where(a => a.ID == accountID && a.EmailVerificationCode == code)
                                     .AnyAsync();
-            
+
             if (!accExists) return false;
 
             await DB.Update<Dom.Account>()

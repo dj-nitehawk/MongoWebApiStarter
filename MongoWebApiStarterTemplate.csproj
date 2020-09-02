@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>5.0.0</PackageVersion>
+    <PackageVersion>5.1.0</PackageVersion>
     <PackageType>Template</PackageType>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
@@ -14,9 +14,8 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- use async/await for io bound work
-- update data access library
-- update vsix extension</PackageReleaseNotes>
+    <PackageReleaseNotes>- improve startup
+- improve validation handler</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 

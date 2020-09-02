@@ -6,20 +6,28 @@ namespace MongoWebApiStarter
 {
     public static class Validation
     {
-        public static HttpError GetErrorResponse(ValidationError ex)
+        public static void AddExceptionHandler(AppHost appHost)
         {
-            return new HttpError(
-                new
+            appHost.ServiceExceptionHandlers.Add((_, __, x) =>
+            {
+                if (x is ValidationError ex)
                 {
-                    errors = ex.Violations
-                               .GroupBy(f => f.FieldName)
-                               .ToDictionary(x => x.Key,
-                                             x => x.Select(e => e.ErrorMessage).ToArray()),
-                    status = 400,
-                    title = "One or more validation errors occurred."
-                },
-                400,
-                "Validation Error");
+                    return new HttpError(
+                        new
+                        {
+                            errors = ex.Violations
+                                       .GroupBy(f => f.FieldName)
+                                       .ToDictionary(x => x.Key,
+                                                     x => x.Select(e => e.ErrorMessage)),
+                            status = 400,
+                            title = "One or more validation errors occurred."
+                        },
+                        400,
+                        "Validation Error");
+                }
+
+                return null;
+            });
         }
     }
 }
