@@ -11,7 +11,6 @@ namespace MongoWebApiStarter
     /// </summary>
     /// <typeparam name="TRequest">The type of the request DTO</typeparam>
     /// <typeparam name="TResponse">The type of the response DTO</typeparam>
-    /// <typeparam name="TEntity">The type of main data entity of the service</typeparam>
     [Authenticate]
     public abstract class Service<TRequest, TResponse, TDatabase> : Service
         where TRequest : IRequest<TResponse>

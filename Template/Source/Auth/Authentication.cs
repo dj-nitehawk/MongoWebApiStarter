@@ -9,9 +9,10 @@ namespace MongoWebApiStarter.Auth
 {
     public static class Authentication
     {
+        public static JwtAuthProvider JWTProvider { get; set; }
+        public static AuthFeature AuthFeature { get; set; }
+
         private static Settings Settings;
-        public static JwtAuthProvider JWTProvider;
-        public static AuthFeature AuthFeature;
 
         public static void Initialize(Settings settings)
         {
@@ -57,15 +58,10 @@ namespace MongoWebApiStarter.Auth
         /// <param name="userSession">The user to sign in</param>
         /// <param name="permissions">Permissions to assign to the user</param>
         /// <param name="roles">Roles to assign to the user</param>
-        public static JwtToken GenerateToken(UserSession userSession, IEnumerable<Allow> permissions, string[] roles = default)
+        public static JwtToken GenerateToken(UserSession userSession, IEnumerable<Allow> permissions, string[] roles = default) => new JwtToken
         {
-            var token = JWTProvider.CreateJwtBearerToken(userSession, roles, permissions.Select(p => p.ToString("D")));
-
-            return new JwtToken
-            {
-                Value = token,
-                Expiry = DateTime.UtcNow.AddMinutes(Settings.Auth.TokenValidityMinutes).ToLocal().ToString("yyyy-MM-ddTHH:mm:ss")
-            };
-        }
+            Value = JWTProvider.CreateJwtBearerToken(userSession, roles, permissions.Select(p => p.ToString("D"))),
+            Expiry = DateTime.UtcNow.AddMinutes(Settings.Auth.TokenValidityMinutes).ToLocal().ToString("yyyy-MM-ddTHH:mm:ss")
+        };
     }
 }

@@ -71,7 +71,7 @@ namespace MongoWebApiStarter
             Plugins.Add(Authentication.AuthFeature);
 
             Plugins.Add(new ValidationFeature());
-            Validation.AddExceptionHandler(this);
+            ServiceExceptionHandlers.Add(Validation.CustomHandler);
 
             if (isDevelopment)
                 Plugins.Add(new CorsFeature(allowedHeaders: "*"));
