@@ -11,14 +11,10 @@ namespace MongoWebApiStarter.Tests
 
         public override void Configure(Container container)
         {
-            container.AddSingleton(new Settings());
+            var settings = new Settings();
+            container.AddSingleton(settings);
 
-            Authentication.Initialize(container.Resolve<Settings>());
-
-            Plugins.Add(new AuthFeature(
-                () => new UserSession(),
-                new[] { Authentication.JWTProvider })
-            { HtmlRedirect = null });
+            Plugins.Add(Authentication.Feature(settings.Auth));
 
             Plugins.Add(new ValidationFeature());
         }

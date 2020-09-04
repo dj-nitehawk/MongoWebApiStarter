@@ -44,7 +44,7 @@ namespace MongoWebApiStarter
 
         public class JWTAuthSettings
         {
-            public int TokenValidityMinutes { get; set; } = 60;
+            public int TokenValidityMinutes { get; set; } = 10; //default expiry for tests
             public string SigningKey { get; set; } = "ZGVmYXVsdC1zaWduaW5nLWtleQ=="; //has to be a base64 string for tests
         }
 
