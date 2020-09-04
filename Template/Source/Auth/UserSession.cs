@@ -9,21 +9,21 @@ namespace MongoWebApiStarter.Auth
     public class UserSession : AuthUserSession
     {
         /// <summary>
+        /// The claims for the user
+        /// </summary>
+        public Dictionary<string, string> Claims { get; set; } = new Dictionary<string, string>();
+
+        /// <summary>
         /// Instantiate a user session with the given claims
         /// </summary>
         /// <param name="claims">A tuple of claimTypes & claimValues</param>
-        public UserSession(params (string claimType, string ClaimValue)[] claims)
+        public UserSession(params (string ClaimType, string ClaimValue)[] claims)
         {
             foreach (var (claimType, ClaimValue) in claims)
             {
                 Claims.Add(claimType, ClaimValue);
             }
         }
-
-        /// <summary>
-        /// The claims for the user
-        /// </summary>
-        public Dictionary<string, string> Claims { get; set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Returns the claim value for a given claim type if the user has the claim. if not found, returns default value.

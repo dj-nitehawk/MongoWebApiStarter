@@ -9,27 +9,23 @@ namespace MongoWebApiStarter.Auth
 {
     public static class Authentication
     {
-        public static JwtAuthProvider JWTProvider { get; set; }
-        public static AuthFeature AuthFeature { get; set; }
+        private static Settings.JWTAuthSettings settings;
+        private static JwtAuthProvider jwtProvider;
 
-        private static Settings Settings;
-
-        public static void Initialize(Settings settings)
+        public static AuthFeature Feature(Settings.JWTAuthSettings authSettings)
         {
-            Settings = settings;
-            JWTProvider = new JwtAuthProvider()
+            settings = authSettings;
+            jwtProvider = new JwtAuthProvider()
             {
-                AuthKeyBase64 = Settings.Auth.SigningKey,
-                ExpireTokensIn = TimeSpan.FromMinutes(Settings.Auth.TokenValidityMinutes),
+                AuthKeyBase64 = settings.SigningKey,
+                ExpireTokensIn = TimeSpan.FromMinutes(settings.TokenValidityMinutes),
                 CreatePayloadFilter = CreatePayload,
                 PopulateSessionFilter = PopulateSession,
                 RequireSecureConnection = false
             };
-            AuthFeature = new AuthFeature(
+            return new AuthFeature(
                 () => new UserSession(),
-                new[] {
-                    JWTProvider
-                })
+                new[] { jwtProvider })
             { HtmlRedirect = null, IncludeAssignRoleServices = false };
         }
 
@@ -60,8 +56,8 @@ namespace MongoWebApiStarter.Auth
         /// <param name="roles">Roles to assign to the user</param>
         public static JwtToken GenerateToken(UserSession userSession, IEnumerable<Allow> permissions, string[] roles = default) => new JwtToken
         {
-            Value = JWTProvider.CreateJwtBearerToken(userSession, roles, permissions.Select(p => p.ToString("D"))),
-            Expiry = DateTime.UtcNow.AddMinutes(Settings.Auth.TokenValidityMinutes).ToLocal().ToString("yyyy-MM-ddTHH:mm:ss")
+            Value = jwtProvider.CreateJwtBearerToken(userSession, roles, permissions.Select(p => p.ToString("D"))),
+            Expiry = DateTime.UtcNow.AddMinutes(settings.TokenValidityMinutes).ToLocal().ToString("yyyy-MM-ddTHH:mm:ss")
         };
     }
 }

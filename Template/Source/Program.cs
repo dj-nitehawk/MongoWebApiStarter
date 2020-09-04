@@ -67,8 +67,7 @@ namespace MongoWebApiStarter
             Config.GlobalResponseHeaders.Remove("X-Powered-By");
             JsConfig.IncludeNullValues = true;
 
-            Authentication.Initialize(settings);
-            Plugins.Add(Authentication.AuthFeature);
+            Plugins.Add(Authentication.Feature(settings.Auth));
 
             Plugins.Add(new ValidationFeature());
             ServiceExceptionHandlers.Add(Validation.CustomHandler);
@@ -85,7 +84,5 @@ namespace MongoWebApiStarter
             .GetAwaiter()
             .GetResult();
         }
-
-
     }
 }
