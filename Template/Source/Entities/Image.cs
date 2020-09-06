@@ -1,12 +1,10 @@
 ﻿using MongoDB.Entities;
-using MongoWebApiStarter;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Dom
 {
-    [Database(Constants.FileBucketDB)]
     public class Image : FileEntity, ICreatedOn
     {
         public int Width { get; set; }

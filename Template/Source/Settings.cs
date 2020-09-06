@@ -27,6 +27,7 @@ namespace MongoWebApiStarter
         {
             public string Host { get; set; } = "DEFAULT";
             public int Port { get; set; }
+            public string Name { get; set; } = "DEFAULT";
             public string Username { get; set; } = "DEFAULT";
             public string Password { get; set; } = "DEFAULT";
         }
