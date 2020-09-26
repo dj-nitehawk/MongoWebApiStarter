@@ -14,17 +14,17 @@ dotnet --info
 
 INSTALL MONGODB SERVER
 ----------------------
-wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
 sudo apt-get update
-sudo apt-get install -y mongodb-org
+sudo apt-get install -y mongodb-org=4.4.0 mongodb-org-server=4.4.0 mongodb-org-shell=4.4.0 mongodb-org-mongos=4.4.0 mongodb-org-tools=4.4.0
 mkdir /mongodb
 mkdir /mongodb/log
 sudo chown -R mongodb:mongodb /mongodb
 echo "" > /etc/mongod.conf
 nano /etc/mongod.conf
 	[copy+paste from "mongod.conf"]
-systemctl enable mongod.service
+sudo systemctl enable mongod.service
 sudo service mongod start
 sudo service mongod status
 
