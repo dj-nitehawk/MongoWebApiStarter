@@ -54,7 +54,7 @@ namespace MongoWebApiStarter.Services
                             }
                             catch (Exception x)
                             {
-                                log.LogError(x, "COULD NOT CONNECT TO SMTP SERVER SUCCESSFULLY!!!" + "[" + settings.Username + "]" + Environment.NewLine);
+                                log.LogError(x, "COULD NOT CONNECT TO SMTP SERVER SUCCESSFULLY!!![" + settings.Username + "]" + Environment.NewLine);
                                 await Task.Delay((int)TimeSpan.FromMinutes(10).TotalMilliseconds);
                             }
                         }

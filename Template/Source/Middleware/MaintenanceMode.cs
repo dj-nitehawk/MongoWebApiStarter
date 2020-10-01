@@ -25,7 +25,7 @@ namespace MongoWebApiStarter.Middleware
             {
                 case "/turn-site-off": //todo: protect this route with nginx or disable in production
                     maintenanceMode = true;
-                    break; ;
+                    break;
                 case "/turn-site-on": //todo: protect this route with nginx or disable in production
                     maintenanceMode = false;
                     context.Response.Clear();
