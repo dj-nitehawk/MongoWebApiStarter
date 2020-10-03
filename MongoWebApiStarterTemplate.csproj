@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>5.4.0</PackageVersion>
+    <PackageVersion>5.4.1-beta1</PackageVersion>
     <PackageType>Template</PackageType>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
