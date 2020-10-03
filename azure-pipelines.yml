@@ -37,7 +37,6 @@ steps:
     command: 'test'
     projects: 'Template/Tests/MongoWebApiStarter.Tests.csproj'
     arguments: '--configuration $(BuildConfiguration)'
-    workingDirectory: 'Tests'
 
 - task: DotNetCoreCLI@2
   displayName: 'Make Nuget Package'
