@@ -79,9 +79,9 @@ namespace MongoWebApiStarter
             Task.Run(async () =>
             {
                 await DB.InitAsync(settings.Database.Name, settings.Database.Host);
+                await DB.InitAsync(settings.FileBucket.Name, settings.FileBucket.Host);
 
                 DB.DatabaseFor<Image>(settings.FileBucket.Name);
-                await DB.InitAsync(settings.FileBucket.Name, settings.FileBucket.Host);
 
                 await DB.MigrateAsync();
             })

@@ -30,7 +30,7 @@ namespace MongoWebApiStarter.Models
             this.toName = toName;
             this.toEmail = toEmail;
             this.subject = subject;
-            this.template = EmailMessage.GetTemplate(template);
+            this.template = EmailService.Data.GetTemplate(template);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace MongoWebApiStarter.Models
 
             template = sb.ToString();
 
-            return EmailMessage.SaveAsync(ToEntity());
+            return EmailService.Data.SaveAsync(ToEntity());
         }
 
         public EmailMessage ToEntity()

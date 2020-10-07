@@ -38,7 +38,6 @@ namespace Migrations
                 Permissions = default(Allow).All().Except(new[] //EVERYTHING EXCLUDING FOLLOWING:
                 {
                     Allow.Employee_Create,
-                    Allow.Employee_Read,
                     Allow.Employee_Delete,
                 }).Cast<ushort>()
             };

@@ -49,8 +49,8 @@ namespace Main.Account.Save
                     Settings.Email.FromEmail,
                     salutation,
                     a.Email,
-                    "Please validate your Virtual Practice account...",
-                    EmailTemplates.Email_Address_Validation);
+                    "Please validate your account...",
+                    EmailTemplates.Account_Welcome);
 
                 email.MergeFields.Add("Salutation", salutation);
                 email.MergeFields.Add("ValidationLink", $"{BaseURL}#/account/{a.ID}-{code}/validate");
