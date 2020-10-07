@@ -20,9 +20,7 @@ namespace MongoWebApiStarter.Auth
         public UserSession(params (string ClaimType, string ClaimValue)[] claims)
         {
             foreach (var (claimType, ClaimValue) in claims)
-            {
                 Claims.Add(claimType, ClaimValue);
-            }
         }
 
         /// <summary>
