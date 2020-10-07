@@ -34,18 +34,13 @@ namespace MongoWebApiStarter.Auth
             var session = (UserSession)s;
 
             foreach (var f in typeof(Claim).GetFields().Select(f => f.Name))
-            {
-                if (p[f] != null)
-                    session.Claims.Add(f, p[f]);
-            }
+                if (p[f] != null) session.Claims.Add(f, p[f]);
         };
 
         private static readonly Action<JsonObject, IAuthSession> CreatePayload = (p, s) =>
         {
             foreach (var c in ((UserSession)s).Claims)
-            {
                 p[c.Key] = c.Value;
-            }
         };
 
         /// <summary>
