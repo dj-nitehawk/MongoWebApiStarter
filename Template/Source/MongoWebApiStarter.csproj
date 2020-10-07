@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="[Features]\Admin\**" />
     <Compile Remove="[Features]\[Template]\**" />
+    <Content Remove="[Features]\Admin\**" />
     <Content Remove="[Features]\[Template]\**" />
+    <EmbeddedResource Remove="[Features]\Admin\**" />
     <EmbeddedResource Remove="[Features]\[Template]\**" />
+    <None Remove="[Features]\Admin\**" />
     <None Remove="[Features]\[Template]\**" />
   </ItemGroup>
 
@@ -23,10 +27,6 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
     <PackageReference Include="MongoDB.Entities" Version="20.2.1-beta1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="[Features]\Admin\" />
   </ItemGroup>
 
 </Project>

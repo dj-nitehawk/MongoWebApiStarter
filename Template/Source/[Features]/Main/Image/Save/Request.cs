@@ -15,7 +15,6 @@ namespace Main.Image.Save
         {
             return new Dom.Image
             {
-                AccessedOn = DateTime.UtcNow,
                 Height = Height,
                 Width = Width,
                 ID = ID

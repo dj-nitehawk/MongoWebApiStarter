@@ -7,7 +7,7 @@ namespace Main.Image.Delete
     {
         public async Task<Nothing> Delete(Request r)
         {
-            await Dom.Image.DeleteAsync(r.ID);
+            await Logic.Image.DeleteAsync(r.ID);
             return Nothing;
         }
     }
