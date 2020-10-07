@@ -2,15 +2,15 @@
 Description=MongoWebApiStarter
 
 [Service]
-WorkingDirectory=/MongoWebApiStarter
-ExecStart=/usr/bin/dotnet  /MongoWebApiStarter/MongoWebApiStarter.dll
-StandardOutput=file:/MongoWebApiStarter/output.log
-StandardError=file:/MongoWebApiStarter/error.log
+WorkingDirectory=/home/MongoWebApiStarter/app
+ExecStart=/usr/bin/dotnet /home/MongoWebApiStarter/app/MongoWebApiStarter.dll
+StandardOutput=file:/home/MongoWebApiStarter/app/output.log
+StandardError=file:/home/MongoWebApiStarter/app/error.log
 Restart=always
 RestartSec=10
 KillSignal=SIGINT
 SyslogIdentifier=MongoWebApiStarter
-User=www-data
+User=MongoWebApiStarter
 Environment=ASPNETCORE_ENVIRONMENT=Production
 Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 EnvironmentFile=/etc/environment

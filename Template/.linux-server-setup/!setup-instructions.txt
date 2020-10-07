@@ -1,82 +1,91 @@
 UBUNTU SERVER SETUP [tested on ubuntu server 18.04]
 ===================
 
+UPDATE PKGS [login as root]
+-----------
+apt-get update
+apt-get upgrade
+
+SETUP ACCOUNT FOR APPLICATION
+-----------------------------
+adduser MongoWebApiStarter
+
 INSTALL DOTNET CORE RUNTIME
 ---------------------------
-wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-sudo rm packages-microsoft-prod.deb
-sudo add-apt-repository universe
-sudo apt-get update
-sudo apt-get install -y apt-transport-https
-sudo apt-get install -y aspnetcore-runtime-3.1
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+apt-get update
+apt-get install -y apt-transport-https aspnetcore-runtime-3.1
 dotnet --info
 
 INSTALL MONGODB SERVER
 ----------------------
-wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
-sudo apt-get update
-sudo apt-get install -y mongodb-org=4.4.0 mongodb-org-server=4.4.0 mongodb-org-shell=4.4.0 mongodb-org-mongos=4.4.0 mongodb-org-tools=4.4.0
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+apt-get update
+apt-get install -y mongodb-org
 mkdir /mongodb
 mkdir /mongodb/log
-sudo chown -R mongodb:mongodb /mongodb
+chown -R mongodb:mongodb /mongodb
 echo "" > /etc/mongod.conf
 nano /etc/mongod.conf
 	[copy+paste from "mongod.conf"]
-sudo systemctl enable mongod.service
-sudo service mongod start
-sudo service mongod status
-
-DEPLOY .NET CORE APP
---------------------
-sudo mkdir /MongoWebApiStarter
-sudo chown -R www-data:www-data /MongoWebApiStarter
-	[copy the files over via sFTP]
-cd /MongoWebApiStarter
-sudo chmod +x MongoWebApiStarter.dll
-dotnet ./MongoWebApiStarter.dll
-
-INSTALL NGINX
--------------
-add-apt-repository ppa:nginx/stable
-apt-get update
-apt-get install -y nginx
-sudo systemctl start nginx
-sudo systemctl status nginx
-sudo openssl req -x509 -nodes -days 36500 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
-echo "" > /etc/nginx/sites-available/default
-nano /etc/nginx/sites-available/default
-	[copy+paste from "nginx.conf"]
-sudo nginx -t
-sudo systemctl restart nginx
-sudo systemctl status nginx
-
-INSTALL KESTRAL SERVICE
------------------------
-sudo nano /etc/systemd/system/MongoWebApiStarter.service
-	[copy+paste from "MongoWebApiStarter.service"]
-sudo systemctl enable MongoWebApiStarter.service
-sudo systemctl start MongoWebApiStarter.service
-sudo systemctl status MongoWebApiStarter.service
-
-CONFIGURE FIREWALL
-------------------
-sudo apt-get install -y ufw
-sudo ufw reset
-sudo ufw allow 22
-sudo ufw allow 80
-sudo ufw allow 443
-sudo ufw deny from any
-sudo ufw enable
-sudo ufw status
+systemctl enable mongod.service
+service mongod start
+service mongod status
+mongo --eval "rs.initiate()"
 
 SETUP APP SECRETS
 -----------------
 nano /etc/environment
 	[copy+paste from "env-variables.txt"]
 	[set the correct secrets]
+shutdown -r 0
+
+DEPLOY .NET CORE APP [login with MongoWebApiStarter account]
+--------------------
+mkdir /home/MongoWebApiStarter/app
+	[copy the files over via sFTP]
+cd /home/MongoWebApiStarter/app
+sudo chmod +x MongoWebApiStarter.dll
+dotnet ./MongoWebApiStarter.dll
+exit
+
+INSTALL NGINX WITH LETSENCRYPT SSL [login as root]
+----------------------------------
+apt-get install -y software-properties-common certbot python3-certbot-nginx nginx
+systemctl start nginx
+systemctl status nginx
+echo "" > /etc/nginx/sites-available/default
+nano /etc/nginx/sites-available/default
+	[copy+paste from "nginx.conf"]
+certbot certonly -d MongoWebApiStarter.com -i nginx
+certbot renew --dry-run
+systemctl list-timers
+nginx -t
+systemctl restart nginx
+systemctl status nginx
+
+INSTALL KESTRAL SERVICE
+-----------------------
+nano /etc/systemd/system/MongoWebApiStarter.service
+	[copy+paste from "MongoWebApiStarter.service"]
+systemctl enable MongoWebApiStarter.service
+systemctl start MongoWebApiStarter.service
+systemctl status MongoWebApiStarter.service
+
+CONFIGURE FIREWALL
+------------------
+apt-get install -y ufw
+ufw reset
+ufw allow 22
+ufw allow 80
+ufw allow 443
+ufw deny from any
+ufw enable
+ufw status
 
 RESTART
 -------
-sudo shutdown -r 0
+shutdown -r 0
