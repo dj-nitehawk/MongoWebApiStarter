@@ -4,8 +4,6 @@ namespace Dom
 {
     public class EmailMessage : Entity
     {
-        [Ignore] public bool IsSent { get; set; }
-
         public string FromName { get; set; }
         public string FromEmail { get; set; }
         public string ToName { get; set; }
@@ -13,11 +11,6 @@ namespace Dom
         public string Subject { get; set; }
         public string BodyHTML { get; set; }
 
-        static EmailMessage()
-        {
-            DB.Index<EmailMessage>()
-              .Key(e => e.IsSent, KeyType.Ascending)
-              .CreateAsync();
-        }
+        [Ignore] public bool IsSent { get; set; }
     }
 }
