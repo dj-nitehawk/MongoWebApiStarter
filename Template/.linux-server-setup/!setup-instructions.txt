@@ -1,4 +1,4 @@
-UBUNTU SERVER SETUP [tested on ubuntu server 18.04]
+UBUNTU SERVER SETUP [tested on ubuntu server 20.04]
 ===================
 
 UPDATE PKGS [login as root]
