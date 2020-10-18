@@ -1,21 +1,20 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
-using MongoWebApiStarter.Tests;
 using ServiceStack;
 using System;
 using System.Threading.Tasks;
 
-namespace MongoWebApiStarter.Main_Account
+namespace MongoWebApiStarter.Tests
 {
     [TestClass]
-    public class Account
+    public class Account_Tests
     {
         private readonly JsonServiceClient client = new JsonServiceClient(Context.BaseURL);
 
         private async Task<string> CreateAccount()
         {
-            var savReq = new Main.Account.Save.Request
+            var savReq = new Account.Save.Request
             {
                 City = "City",
                 CountryCode = "LKA",
@@ -54,7 +53,7 @@ namespace MongoWebApiStarter.Main_Account
             var code = (await DB.Find<Dom.Account>().OneAsync(id))
                        .EmailVerificationCode;
 
-            var vReq = new Main.Account.Verify.Request
+            var vReq = new Account.Verify.Request
             {
                 ID = id,
                 Code = code
@@ -81,7 +80,7 @@ namespace MongoWebApiStarter.Main_Account
         {
             var acc = await DB.Find<Dom.Account>().OneAsync(id);
 
-            var req = new Main.Account.Login.Request
+            var req = new Account.Login.Request
             {
                 UserName = acc.Email,
                 Password = "qqqqq123Q"
@@ -109,7 +108,7 @@ namespace MongoWebApiStarter.Main_Account
             await ValidateAccount(id);
             var token = await AccountLogin(id);
 
-            var req = new Main.Account.Get.Request
+            var req = new Account.Get.Request
             {
                 ID = id
             };

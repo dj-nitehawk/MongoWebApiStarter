@@ -1,5 +1,4 @@
-﻿using Dom;
-using Funq;
+﻿using Funq;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -81,7 +80,7 @@ namespace MongoWebApiStarter
                 await DB.InitAsync(settings.Database.Name, settings.Database.Host);
                 await DB.InitAsync(settings.FileBucket.Name, settings.FileBucket.Host);
 
-                DB.DatabaseFor<Image>(settings.FileBucket.Name);
+                DB.DatabaseFor<Dom.Image>(settings.FileBucket.Name);
 
                 await DB.MigrateAsync();
             })
