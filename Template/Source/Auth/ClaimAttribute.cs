@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Auth
@@ -75,22 +76,46 @@ namespace MongoWebApiStarter.Auth
             if (res.IsClosed)
                 return; //AuthenticateAttribute already closed the request (ie auth failed)
 
-            if (allowAny && claims.Intersect(req.SessionAs<UserSession>().Claims.Select(c => c.Key)).Any())
-                return; //user does have at least one required claim
-            else if (!claims.Except(req.SessionAs<UserSession>().Claims.Select(c => c.Key)).Any())
-                return; //user has all required claims
+            var userClaims = req.SessionAs<UserSession>().Claims;
+
+            if ((allowAny && claims.Intersect(userClaims.Select(c => c.Key)).Any()) || //user has at least one required claim when allowAny is true or
+                (!allowAny && !claims.Except(userClaims.Select(c => c.Key)).Any())) //user has all required claims when allowAny is false
+            {
+                int populateCount = 0;
+
+                foreach (var claimType in claims) // populate values of public fields if field name matches a ClaimType
+                {
+                    var field = requestDto.GetType().GetField(
+                        claimType,
+                        BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
+
+                    if (field != null && userClaims.TryGetValue(claimType, out string claimValue))
+                    {
+                        field.SetValue(requestDto, claimValue);
+                        populateCount++;
+                    }
+                }
+
+                if ((allowAny && populateCount == 0) || (!allowAny && populateCount != claims.Length))
+                {
+                    throw new InvalidOperationException(
+                        $"Please declare public fields with matching names for needed claims on the request dto [{requestDto.GetType().FullName}]");
+                }
+
+                return;
+            }
 
             if (DoHtmlRedirectAccessDeniedIfConfigured(req, res))
                 return;
 
             res.StatusCode = (int)HttpStatusCode.Forbidden;
-            res.StatusDescription = "The user doesn't have the required claim(s)!";
+            res.StatusDescription = "The user doesn't have one or more required claims to access this resource!";
             await HostContext.AppHost.HandleShortCircuitedErrors(req, res, requestDto);
         }
 
         protected bool Equals(NeedAttribute other)
         {
-            return base.Equals(other) && string.Equals(claims, other.claims);
+            return base.Equals(other) && Equals(claims, other.claims);
         }
 
         public override bool Equals(object obj)

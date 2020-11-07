@@ -16,7 +16,7 @@ namespace MongoWebApiStarter.Auth
         /// <summary>
         /// Instantiate a user session with the given claims
         /// </summary>
-        /// <param name="claims">A tuple of claimTypes & claimValues</param>
+        /// <param name="claims">An array of ClaimType/ClaimValue tuples</param>
         public UserSession(params (string ClaimType, string ClaimValue)[] claims)
         {
             foreach (var (claimType, ClaimValue) in claims)

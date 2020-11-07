@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>5.5.1</PackageVersion>
+    <PackageVersion>5.6.0</PackageVersion>
     <PackageType>Template</PackageType>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
@@ -14,7 +14,7 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- upgraded packages</PackageReleaseNotes>
+    <PackageReleaseNotes>- auto populate dto fields from user claims</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
