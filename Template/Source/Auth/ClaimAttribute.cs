@@ -81,8 +81,6 @@ namespace MongoWebApiStarter.Auth
             if ((allowAny && claims.Intersect(userClaims.Select(c => c.Key)).Any()) || //user has at least one required claim when allowAny is true or
                 (!allowAny && !claims.Except(userClaims.Select(c => c.Key)).Any())) //user has all required claims when allowAny is false
             {
-                int populateCount = 0;
-
                 foreach (var claimType in claims) // populate values of public fields if field name matches a ClaimType
                 {
                     var field = requestDto.GetType().GetField(
@@ -92,14 +90,7 @@ namespace MongoWebApiStarter.Auth
                     if (field != null && userClaims.TryGetValue(claimType, out string claimValue))
                     {
                         field.SetValue(requestDto, claimValue);
-                        populateCount++;
                     }
-                }
-
-                if ((allowAny && populateCount == 0) || (!allowAny && populateCount != claims.Length))
-                {
-                    throw new InvalidOperationException(
-                        $"Please declare public fields with matching names for needed claims on the request dto [{requestDto.GetType().FullName}]");
                 }
 
                 return;
