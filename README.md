@@ -37,7 +37,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold a .Net 5 W
 #### Data Access
 - data access done using [mongodb.entities](https://github.com/dj-nitehawk/MongoDB.Entities) library
 - most data access logic is self contained in each vertical slice.
-- shared data access logic is located in the domain entity itself.
+- shared data access logic is located in the Logic.* namespace.
 
 #### Integration Tests
 - uses mstest framework
