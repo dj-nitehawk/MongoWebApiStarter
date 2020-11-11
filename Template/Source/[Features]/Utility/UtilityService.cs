@@ -30,7 +30,7 @@ namespace Utility
             return HttpError.NotFound("Hmmmmm....");
         }
 
-        public async Task<object> Get(ClearCloudflareCache _)
+        public async Task<object> GetAsync(ClearCloudflareCache _)
         {
             if (await CloudFlareService.PurgeCacheAsync())
                 return "SUCCESS!!!";

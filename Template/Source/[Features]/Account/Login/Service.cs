@@ -9,7 +9,7 @@ namespace Account.Login
     [Authenticate(ApplyTo.None)]
     public class Service : Service<Request, Response, Database>
     {
-        public async Task<Response> Post(Request r)
+        public async Task<Response> PostAsync(Request r)
         {
             var acc = await Data.GetAccountAsync(r.UserName);
 

@@ -8,7 +8,7 @@ namespace Image.Get
     [Authenticate(ApplyTo.None)]
     public class Service : Service<Request, Nothing, Database>
     {
-        public async Task Get(Request r)
+        public async Task GetAsync(Request r)
         {
             HttpResponse.ContentType = "image/jpeg";
 

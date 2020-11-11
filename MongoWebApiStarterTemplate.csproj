@@ -1,20 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>5.6.0</PackageVersion>
+    <PackageVersion>5.7.0</PackageVersion>
     <PackageType>Template</PackageType>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
-    <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net Core 3.1 Web-Api project with MongoDB as the data store.</Description>
-    <PackageTags>dotnet-new;templates;mongodb;web-api;netcore3;aspnet,servicestack</PackageTags>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net 5 Web-Api project with MongoDB as the data store.</Description>
+    <PackageTags>dotnet-new;templates;mongodb;web-api;net5;aspnet,servicestack</PackageTags>
+    <TargetFramework>net5.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- auto populate dto fields from user claims</PackageReleaseNotes>
+    <PackageReleaseNotes>- auto populate dto fields from user claims
+- upgrade project target framework to .net 5
+- update linux server setup instructions
+- upgrade servicestack to latest</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 

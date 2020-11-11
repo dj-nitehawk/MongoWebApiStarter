@@ -5,7 +5,7 @@ namespace Image.Delete
 {
     public class Service : Service<Request, Nothing, Database>
     {
-        public async Task<Nothing> Delete(Request r)
+        public async Task<Nothing> DeleteAsync(Request r)
         {
             await Logic.Image.DeleteAsync(r.ID);
             return Nothing;

@@ -11,7 +11,7 @@ namespace Account.Get
             Need(Claim.AccountID),
             Permission(Allow.Account_Read)
         ]
-        public async Task<Response> Get(Request r)
+        public async Task<Response> GetAsync(Request r)
         {
             var acc = await Data.GetAccountAsync(r.AccountID);
 

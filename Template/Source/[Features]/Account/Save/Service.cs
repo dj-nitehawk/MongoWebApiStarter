@@ -11,12 +11,12 @@ namespace Account.Save
     {
         public bool NeedsEmailVerification;
 
-        public Task<Response> Post(Request r) => Patch(r);
+        public Task<Response> PostAsync(Request r) => PatchAsync(r);
 
         [
             Need(Claim.AccountID)
         ]
-        public async Task<Response> Patch(Request r)
+        public async Task<Response> PatchAsync(Request r)
         {
             r.ID = User.ClaimValue(Claim.AccountID); //post tampering protection
 

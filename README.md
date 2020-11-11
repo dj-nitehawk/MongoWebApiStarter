@@ -1,5 +1,5 @@
 # MongoWebApiStarter
-A full-featured starter template for `dotnet new` to quickly scaffold a .Net Core 3.1 Web-Api project using pure vertical slice architecture with MongoDB as the data store.
+A full-featured starter template for `dotnet new` to quickly scaffold a .Net 5 Web-Api project using pure vertical slice architecture with MongoDB as the data store.
 
 ## Install & Scaffold
 ```csharp
@@ -10,7 +10,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold a .Net Cor
 ## Features
 
 ### Platform
-- base framework: .net core 3.1
+- base framework: .net 5
 - api/web-service framework: [servicestack](https://servicestack.net/)
 - language: c#
 - database: mongodb
