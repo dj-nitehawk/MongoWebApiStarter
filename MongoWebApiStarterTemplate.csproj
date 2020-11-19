@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>6.0.0</PackageVersion>
+    <PackageVersion>6.1.0</PackageVersion>
     <PackageType>Template</PackageType>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
@@ -14,10 +14,9 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- auto populate dto fields from user claims
-- upgrade project target framework to .net 5
-- update linux server setup instructions
-- upgrade servicestack to latest</PackageReleaseNotes>
+    <PackageReleaseNotes>- make data classes static
+- auto bind claim values from jwt token with [From] attribute
+- update vsix</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
