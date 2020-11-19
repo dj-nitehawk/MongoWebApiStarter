@@ -9,13 +9,11 @@ namespace Account.Save
     [Authenticate(ApplyTo.Patch)]
     public class Service : Service<Request, Response>
     {
-        public bool NeedsEmailVerification;
+        private bool needsEmailVerification;
 
         public Task<Response> PostAsync(Request r) => PatchAsync(r);
 
-        [
-            Need(Claim.AccountID)
-        ]
+        [Need(Claim.AccountID)]
         public async Task<Response> PatchAsync(Request r)
         {
             r.ID = User.ClaimValue(Claim.AccountID); //post tampering protection
@@ -28,7 +26,7 @@ namespace Account.Save
 
             await SendVerificationEmailAsync(acc);
 
-            Response.EmailSent = NeedsEmailVerification;
+            Response.EmailSent = needsEmailVerification;
             Response.ID = acc.ID;
 
             return Response;
@@ -36,7 +34,7 @@ namespace Account.Save
 
         private async Task SendVerificationEmailAsync(Dom.Account a)
         {
-            if (NeedsEmailVerification)
+            if (needsEmailVerification)
             {
                 var code = PasswordGenerator.Generate(20);
                 await Data.SetEmailValidationCodeAsync(code, a.ID);
@@ -62,15 +60,15 @@ namespace Account.Save
         {
             if (r.ID.HasNoValue())
             {
-                NeedsEmailVerification = true;
+                needsEmailVerification = true;
             }
             else if (r.ID != await Data.GetAccountIDAsync(r.EmailAddress))
             {
-                NeedsEmailVerification = true;
+                needsEmailVerification = true;
             }
             else
             {
-                NeedsEmailVerification = false;
+                needsEmailVerification = false;
             }
         }
     }

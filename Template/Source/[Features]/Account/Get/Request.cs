@@ -1,4 +1,5 @@
 ﻿using MongoWebApiStarter;
+using MongoWebApiStarter.Auth;
 using ServiceStack;
 
 namespace Account.Get
@@ -8,7 +9,7 @@ namespace Account.Get
     {
         public string ID { get; set; }
 
-        public string AccountID; // public fields are auto populated from user claim if names match
-        public string EmployeeID;
+        [From(Claim.AccountID)]
+        public string AccountID { get; set; }
     }
 }
