@@ -81,16 +81,15 @@ namespace MongoWebApiStarter.Auth
             if ((allowAny && claims.Intersect(userClaims.Select(c => c.Key)).Any()) || //user has at least one required claim when allowAny is true or
                 (!allowAny && !claims.Except(userClaims.Select(c => c.Key)).Any())) //user has all required claims when allowAny is false
             {
-                foreach (var claimType in claims) // populate values of public fields if field name matches a ClaimType
-                {
-                    var field = requestDto.GetType().GetField(
-                        claimType,
-                        BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
+                var props = requestDto.GetType()
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                    .Where(p => p.IsDefined(typeof(FromAttribute), false));
 
-                    if (field != null && userClaims.TryGetValue(claimType, out string claimValue))
-                    {
-                        field.SetValue(requestDto, claimValue);
-                    }
+                foreach (var prop in props)
+                {
+                    var attrib = prop.GetCustomAttribute<FromAttribute>(false);
+                    if (userClaims.TryGetValue(attrib.ClaimType, out string claimValue))
+                        prop.SetValue(requestDto, claimValue);
                 }
 
                 return;
