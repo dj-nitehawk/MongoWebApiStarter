@@ -1,18 +1,17 @@
 ﻿using MongoDB.Entities;
-using MongoWebApiStarter;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace Image.Save
 {
-    public class Database : IDatabase
+    public static class Data
     {
-        public Task DeleteImageAsync(string id)
+        public static Task DeleteImageAsync(string id)
         {
             return DB.DeleteAsync<Dom.Image>(id);
         }
 
-        public async Task<string> UploadAsync(Dom.Image image, Stream stream)
+        public static async Task<string> UploadAsync(Dom.Image image, Stream stream)
         {
             await image.SaveAsync();
             await image.Data.UploadWithTimeoutAsync(stream, 60, 128);

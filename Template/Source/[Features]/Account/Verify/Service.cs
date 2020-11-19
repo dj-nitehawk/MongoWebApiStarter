@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Account.Verify
 {
     [Authenticate(ApplyTo.None)]
-    public class Service : Service<Request, Nothing, Database>
+    public class Service : Service<Request, Nothing>
     {
         public async Task<Nothing> GetAsync(Request r)
         {

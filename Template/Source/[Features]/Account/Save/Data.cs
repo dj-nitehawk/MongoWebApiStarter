@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Account.Save
 {
-    public class Database : IDatabase
+    public static class Data
     {
-        public async Task CreateOrUpdateAsync(Dom.Account acc)
+        public static async Task CreateOrUpdateAsync(Dom.Account acc)
         {
             using var TN = DB.Transaction();
 
@@ -22,7 +22,7 @@ namespace Account.Save
             await TN.CommitAsync();
         }
 
-        public Task SetEmailValidationCodeAsync(string code, string accoundID)
+        public static Task SetEmailValidationCodeAsync(string code, string accoundID)
         {
             return DB.Update<Dom.Account>()
                      .Match(a => a.ID == accoundID)
@@ -30,7 +30,7 @@ namespace Account.Save
                      .ExecuteAsync();
         }
 
-        public Task<string> GetAccountIDAsync(string emailAddress)
+        public static Task<string> GetAccountIDAsync(string emailAddress)
         {
             return DB.Find<Dom.Account, string>()
                      .Match(a => a.Email == emailAddress.LowerCase())

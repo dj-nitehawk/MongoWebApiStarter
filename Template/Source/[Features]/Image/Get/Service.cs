@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Image.Get
 {
     [Authenticate(ApplyTo.None)]
-    public class Service : Service<Request, Nothing, Database>
+    public class Service : Service<Request, Nothing>
     {
         public async Task GetAsync(Request r)
         {

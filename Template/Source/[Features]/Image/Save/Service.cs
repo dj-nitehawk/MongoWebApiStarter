@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Image.Save
 {
     [Authenticate(ApplyTo.Patch)]
-    public class Service : Service<Request, Nothing, Database>
+    public class Service : Service<Request, Nothing>
     {
         public Task<string> PostAsync(Request r) => PatchAsync(r);
 

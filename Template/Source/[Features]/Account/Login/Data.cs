@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Account.Login
 {
-    public class Database : IDatabase
+    public static class Data
     {
-        public Task<Dom.Account> GetAccountAsync(string userName)
+        public static Task<Dom.Account> GetAccountAsync(string userName)
         {
             return DB.Find<Dom.Account>()
                      .Match(a => a.Email == userName.LowerCase())

@@ -12,17 +12,14 @@ namespace MongoWebApiStarter
     /// <typeparam name="TRequest">The type of the request DTO</typeparam>
     /// <typeparam name="TResponse">The type of the response DTO</typeparam>
     [Authenticate]
-    public abstract class Service<TRequest, TResponse, TDatabase> : Service
+    public abstract class Service<TRequest, TResponse> : Service
         where TRequest : IRequest<TResponse>
         where TResponse : IResponse, new()
-        where TDatabase : IDatabase, new()
     {
         /// <summary>
         /// The app settings object
         /// </summary>
         public Settings Settings { get; set; }
-
-        protected TDatabase Data { get; set; } = new TDatabase();
 
         /// <summary>
         /// The response DTO for the current service

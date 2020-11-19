@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Account.Login
 {
     [Authenticate(ApplyTo.None)]
-    public class Service : Service<Request, Response, Database>
+    public class Service : Service<Request, Response>
     {
         public async Task<Response> PostAsync(Request r)
         {

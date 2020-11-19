@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Image.Delete
 {
-    public class Service : Service<Request, Nothing, Database>
+    public class Service : Service<Request, Nothing>
     {
         public async Task<Nothing> DeleteAsync(Request r)
         {

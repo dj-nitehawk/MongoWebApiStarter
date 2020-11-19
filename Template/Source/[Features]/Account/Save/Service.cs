@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Account.Save
 {
     [Authenticate(ApplyTo.Patch)]
-    public class Service : Service<Request, Response, Database>
+    public class Service : Service<Request, Response>
     {
         public bool NeedsEmailVerification;
 

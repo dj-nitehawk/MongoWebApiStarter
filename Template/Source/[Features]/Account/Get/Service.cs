@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Account.Get
 {
-    public class Service : Service<Request, Response, Database>
+    public class Service : Service<Request, Response>
     {
         [
             Need(Claim.AccountID),

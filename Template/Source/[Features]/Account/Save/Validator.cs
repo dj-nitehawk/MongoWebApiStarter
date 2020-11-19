@@ -6,8 +6,6 @@ namespace Account.Save
 {
     public class Validator : AbstractValidator<Request>
     {
-        private readonly Database Data = new Database();
-
         public Validator()
         {
             RuleFor(x => x.EmailAddress)
@@ -31,7 +29,7 @@ namespace Account.Save
                 .Length(10).WithMessage("Mobile number must be 10 digits");
         }
 
-        private async Task<bool> EmailBelongsToSomeOneElseAsync(Request r)
+        private static async Task<bool> EmailBelongsToSomeOneElseAsync(Request r)
         {
             if (r.EmailAddress == null) return true;
 
