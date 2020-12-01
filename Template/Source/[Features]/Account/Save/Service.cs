@@ -39,20 +39,19 @@ namespace Account.Save
                 var code = PasswordGenerator.Generate(20);
                 await Data.SetEmailValidationCodeAsync(code, a.ID);
 
-                var salutation = $"{a.Title} {a.FirstName} {a.LastName}";
-
-                var email = new MongoWebApiStarter.Models.Email(
-                    Settings.Email.FromName,
-                    Settings.Email.FromEmail,
-                    salutation,
-                    a.Email,
-                    "Please validate your account...",
-                    EmailTemplates.Account_Welcome);
-
-                email.MergeFields.Add("Salutation", salutation);
-                email.MergeFields.Add("ValidationLink", $"{BaseURL}#/account/{a.ID}-{code}/validate");
-
-                await email.AddToSendingQueueAsync();
+                await new Notification
+                {
+                    Type = NotificationType.Account_Welcome,
+                    Email = a.Email,
+                    EmailSubject = "Please validate your account...",
+                    ReceiverName = $"{a.FirstName} {a.LastName}",
+                    SendEmail = true,
+                    Mobile = a.Mobile,
+                    SendSMS = a.Mobile.HasValue()
+                }
+                .Merge("{Salutation}", $"{a.FirstName}")
+                .Merge("{ValidationLink}", $"{BaseURL}#/account/{a.ID}-{code}/validate")
+                .AddToSendingQueueAsync();
             }
         }
 

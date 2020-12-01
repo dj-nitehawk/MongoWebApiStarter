@@ -5,8 +5,8 @@
         //public const string FileBucketDB = "MongoWebApiStarterFILES";
     }
 
-    public enum EmailTemplates
+    public static class NotificationType
     {
-        Account_Welcome = 1
+        public const string Account_Welcome = "Account_Welcome";
     }
 }

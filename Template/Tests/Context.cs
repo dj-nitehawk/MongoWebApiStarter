@@ -19,7 +19,12 @@ namespace MongoWebApiStarter.Tests
                           .Init()
                           .Start(BaseURL);
 
-            Task.Run(async () => await DB.InitAsync("MongoWebApiStarterTEST"))
+            Task.Run(async () =>
+            {
+                await DB.InitAsync("MongoWebApiStarterTEST");
+                await DB.MigrateAsync();
+                await Notification.Initialize();
+            })
             .GetAwaiter()
             .GetResult();
         }

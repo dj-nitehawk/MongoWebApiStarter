@@ -83,6 +83,8 @@ namespace MongoWebApiStarter
                 DB.DatabaseFor<Dom.Image>(settings.FileBucket.Name);
 
                 await DB.MigrateAsync();
+
+                await Notification.Initialize();
             })
             .GetAwaiter()
             .GetResult();
