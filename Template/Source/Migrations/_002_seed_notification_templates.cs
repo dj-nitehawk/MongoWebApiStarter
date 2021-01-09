@@ -13,6 +13,7 @@ namespace Migrations
 
                 new NotificationTemplate {
                     ID = NotificationType.Account_Welcome,
+                    EmailSubject = "Please validate your account {Salutation}...",
                     EmailBody = @"
 <html>
 <body>
@@ -50,7 +51,7 @@ namespace Migrations
   </div>
 </body>
 </html>",
-                    SMSBody = "Thank you for creating a Virtual Practise on Shared Care Vault. Please check your email and click the verification link in order to activate your account."
+                    SMSBody = "Thank you for creating an account {Salutation}. Please check your email and click the verification link in order to activate your account."
                 }
 
             }.SaveAsync();

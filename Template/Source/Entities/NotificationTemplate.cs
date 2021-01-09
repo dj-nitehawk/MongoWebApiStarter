@@ -7,6 +7,7 @@ namespace Dom
     {
         [BsonId] public string ID { get; set; } //set the template name as id
         public string SMSBody { get; set; }
+        public string EmailSubject { get; set; }
         public string EmailBody { get; set; }
 
         public void SetNewID()

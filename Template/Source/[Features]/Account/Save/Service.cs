@@ -42,11 +42,10 @@ namespace Account.Save
                 await new Notification
                 {
                     Type = NotificationType.Account_Welcome,
-                    Email = a.Email,
-                    EmailSubject = "Please validate your account...",
-                    ReceiverName = $"{a.FirstName} {a.LastName}",
+                    ToEmail = a.Email,
+                    ToName = $"{a.FirstName} {a.LastName}",
                     SendEmail = true,
-                    Mobile = a.Mobile,
+                    ToMobile = a.Mobile,
                     SendSMS = a.Mobile.HasValue()
                 }
                 .Merge("{Salutation}", $"{a.FirstName}")

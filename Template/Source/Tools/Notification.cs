@@ -20,10 +20,9 @@ namespace MongoWebApiStarter
                 templates.Add(t.ID, t);
         }
 
-        public string ReceiverName { get; init; }
-        public string Email { get; init; }
-        public string EmailSubject { get; init; }
-        public string Mobile { get; init; }
+        public string ToName { get; init; }
+        public string ToEmail { get; init; }
+        public string ToMobile { get; init; }
         public bool SendEmail { get; init; }
         public bool SendSMS { get; init; }
         public string Type { get; init; }
@@ -39,9 +38,9 @@ namespace MongoWebApiStarter
 
         public Task AddToSendingQueueAsync()
         {
-            if (ReceiverName.HasNoValue() ||
-                (SendEmail && (Email.HasNoValue() || EmailSubject.HasNoValue())) ||
-                (SendSMS && Mobile.HasNoValue()) ||
+            if (ToName.HasNoValue() ||
+                (SendEmail && ToEmail.HasNoValue()) ||
+                (SendSMS && ToMobile.HasNoValue()) ||
                 Type.HasNoValue())
             {
                 throw new ArgumentNullException("Unable to send notification without all required parameters!");
@@ -52,35 +51,38 @@ namespace MongoWebApiStarter
             if (template == null)
                 throw new ApplicationException($"Unable to find a message template for [{Type}]");
 
-            string emailBody = null, smsBody = null;
+            string emailBody = null, emailSubject = null, smsBody = null;
 
             if (SendEmail)
-                emailBody = MergeFields(template.EmailBody, "Email");
+            {
+                emailBody = MergeFields(template.EmailBody, nameof(NotificationTemplate.EmailBody));
+                emailSubject = MergeFields(template.EmailSubject, nameof(NotificationTemplate.EmailSubject));
+            }
 
             if (SendSMS)
-                smsBody = MergeFields(template.SMSBody, "SMS");
+                smsBody = MergeFields(template.SMSBody, nameof(NotificationTemplate.SMSBody));
 
             if (missingTags.Count > 0)
                 throw new ApplicationException($"Replacements are missing for: [{string.Join(",", missingTags.Distinct())}]");
 
             Task emlTask = Task.CompletedTask, smsTask = Task.CompletedTask;
 
-            if (emailBody.HasValue())
+            if (SendEmail)
             {
                 emlTask = new EmailMessage
                 {
-                    ToEmail = Email,
-                    ToName = ReceiverName,
-                    Subject = EmailSubject,
+                    ToEmail = ToEmail,
+                    ToName = ToName,
+                    Subject = emailSubject,
                     Body = emailBody
                 }.SaveAsync();
             }
 
-            if (smsBody.HasValue())
+            if (SendSMS)
             {
                 smsTask = new SMSMessage
                 {
-                    Mobile = Mobile,
+                    Mobile = ToMobile,
                     Body = smsBody
                 }.SaveAsync();
                 //todo: create sms sending background service
@@ -89,12 +91,12 @@ namespace MongoWebApiStarter
             return Task.WhenAll(emlTask, smsTask);
         }
 
-        private string MergeFields(string template, string callerName)
+        private string MergeFields(string input, string fieldName)
         {
-            if (template.HasNoValue())
-                throw new ApplicationException($"The template [{Type}] has no {callerName} message body!");
+            if (input.HasNoValue())
+                throw new ApplicationException($"The template [{Type}] has no {fieldName} value!");
 
-            var sb = new StringBuilder(template);
+            var sb = new StringBuilder(input);
             foreach (var (Name, Value) in mergeFields)
                 sb.Replace(Name, Value);
             var body = sb.ToString();
