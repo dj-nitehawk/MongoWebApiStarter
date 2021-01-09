@@ -13,10 +13,15 @@ namespace Account.Login
         {
             var acc = await Data.GetAccountAsync(r.UserName);
 
-            if (acc != null && !BCrypt.Net.BCrypt.Verify(r.Password, acc.PasswordHash))
-                ThrowError("The supplied credentials are invalid. Please try again...");
+            if (acc != null)
+            {
+                if (!BCrypt.Net.BCrypt.Verify(r.Password, acc.PasswordHash))
+                    ThrowError("The supplied credentials are invalid. Please try again...");
+            }
             else
+            {
                 ThrowError("Sorry, couldn't locate your account...");
+            }
 
             if (!acc.IsEmailVerified)
                 ThrowError("Please verify your email address before logging in...");

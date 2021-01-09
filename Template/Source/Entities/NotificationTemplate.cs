@@ -10,7 +10,9 @@ namespace Dom
         public string EmailSubject { get; set; }
         public string EmailBody { get; set; }
 
-        public void SetNewID()
-            => throw new System.NotImplementedException();
+        public string GenerateNewID()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
