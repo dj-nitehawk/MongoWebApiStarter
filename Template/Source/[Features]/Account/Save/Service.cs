@@ -16,8 +16,6 @@ namespace Account.Save
         [Need(Claim.AccountID)]
         public async Task<Response> PatchAsync(Request r)
         {
-            r.ID = User.ClaimValue(Claim.AccountID); //post tampering protection
-
             await CheckIfEmailValidationIsNeededAsync(r);
 
             var acc = r.ToEntity();
@@ -57,17 +55,13 @@ namespace Account.Save
         private async Task CheckIfEmailValidationIsNeededAsync(Request r)
         {
             if (r.ID.HasNoValue())
-            {
                 needsEmailVerification = true;
-            }
+
             else if (r.ID != await Data.GetAccountIDAsync(r.EmailAddress))
-            {
                 needsEmailVerification = true;
-            }
+
             else
-            {
                 needsEmailVerification = false;
-            }
         }
     }
 }

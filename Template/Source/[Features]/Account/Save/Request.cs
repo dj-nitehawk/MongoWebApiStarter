@@ -1,5 +1,6 @@
 ﻿using Dom;
 using MongoWebApiStarter;
+using MongoWebApiStarter.Auth;
 using ServiceStack;
 
 namespace Account.Save
@@ -7,6 +8,9 @@ namespace Account.Save
     [Route("/account")]
     public class Request : Model, IRequest<Dom.Account, Response>
     {
+        [From(Claim.AccountID)]
+        public string AccountID { get; set; }
+
         public Dom.Account ToEntity()
         {
             return new Dom.Account()
