@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "89d5669e-30ec-472f-8432-b4244ed437d6",
+		"name": "MongoWebApiStarter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "create new account",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"EmailAddress\": \"you@me.com\",\r\n    \"Password\": \"qqqqq123Q\",\r\n    \"Title\": \"Ms.\",\r\n    \"FirstName\": \"Donna\",\r\n    \"LastName\": \"Summer\",\r\n    \"Street\": \"123 Street Name\",\r\n    \"City\": \"New York\",\r\n    \"State\": \"NY\",\r\n    \"ZipCode\": \"90219\",\r\n    \"CountryCode\": \"USA\",\r\n    \"Mobile\": \"1234567890\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/account",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify account",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/account/6063378ad86a7fd08a928b05/6V55JfbApaMn13rPDHVo/validate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"account",
+								"6063378ad86a7fd08a928b05",
+								"6V55JfbApaMn13rPDHVo",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login to account",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\":\"you@me.com\",\r\n    \"Password\":\"qqqqq123Q\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/account/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retrieve account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/account/6063378ad86a7fd08a928b05/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"account",
+								"6063378ad86a7fd08a928b05",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update existing account",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ID\": \"6063378ad86a7fd08a928b05\",\r\n    \"EmailAddress\": \"you@me.com\",\r\n    \"Password\": \"qqqqq123Q\",\r\n    \"Title\": \"Ms.\",\r\n    \"FirstName\": \"Donna\",\r\n    \"LastName\": \"Summer\",\r\n    \"Street\": \"123 Street Name\",\r\n    \"City\": \"New York\",\r\n    \"State\": \"NY\",\r\n    \"ZipCode\": \"90219\",\r\n    \"CountryCode\": \"USA\",\r\n    \"Mobile\": \"0000000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/account",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "upload image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Width",
+									"value": "1500",
+									"type": "text"
+								},
+								{
+									"key": "Height",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "File",
+									"type": "file",
+									"src": "/D:/SYNCED/DOCUMENTS/graphic designs/mongo-csharp.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/image",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retrieve image",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/image/60633b1dd86a7fd08a928b08.jpg",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"image",
+								"60633b1dd86a7fd08a928b08.jpg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/image/60633b1dd86a7fd08a928b08",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"image",
+								"60633b1dd86a7fd08a928b08"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IlpHViJ9.eyJpc3MiOiJzc2p3dCIsImlhdCI6MTYxNzExNTUxNywiZXhwIjoxNjE3MjAxOTE3LCJwZXJtcyI6WyIxIiwiMiIsIjMiLCIxMDAiLCIxMDEiLCIxMDIiLCIxMDMiXSwiQWNjb3VudElEIjoiNjA2MzM3OGFkODZhN2ZkMDhhOTI4YjA1In0.nzw_hhRzEvia5ViX64ahqGocbqCl3yV4ZaTxqv6N5is",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8888/"
+		}
+	]
+}

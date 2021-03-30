@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="[Features]\API-Reference-Postman-Export.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ServiceStack" Version="5.10.4" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="Flurl" Version="3.0.1" />
