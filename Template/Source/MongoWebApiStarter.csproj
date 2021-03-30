@@ -17,16 +17,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceStack" Version="5.10.2" />
+    <PackageReference Include="ServiceStack" Version="5.10.4" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="Flurl" Version="3.0.1" />
     <PackageReference Include="Flurl.Http" Version="3.0.1" />
-    <PackageReference Include="MailKit" Version="2.10.1" />
+    <PackageReference Include="MailKit" Version="2.11.1" />
     <PackageReference Include="MlkPwgen" Version="0.3.0" />
-    <PackageReference Include="NodaTime" Version="3.0.3" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.2" />
+    <PackageReference Include="NodaTime" Version="3.0.5" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="MongoDB.Entities" Version="20.5.1" />
+    <PackageReference Include="MongoDB.Entities" Version="20.9.2" />
   </ItemGroup>
 
 </Project>
