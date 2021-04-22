@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceStack" Version="5.10.4" />
+    <PackageReference Include="ServiceStack" Version="5.11.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="Flurl" Version="3.0.1" />
     <PackageReference Include="Flurl.Http" Version="3.0.1" />
@@ -30,7 +30,7 @@
     <PackageReference Include="NodaTime" Version="3.0.5" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="MongoDB.Entities" Version="20.9.2" />
+    <PackageReference Include="MongoDB.Entities" Version="20.10.0" />
   </ItemGroup>
 
 </Project>
