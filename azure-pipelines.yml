@@ -15,15 +15,15 @@ variables:
 steps:
 - script: |
    wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
    sudo apt-get update
    sudo apt-get install -y mongodb-org
    mkdir $(System.DefaultWorkingDirectory)/mongodb
    mkdir $(System.DefaultWorkingDirectory)/mongodb/log
    mongod --fork --replSet 'MyRep' --dbpath $(System.DefaultWorkingDirectory)/mongodb --logpath $(System.DefaultWorkingDirectory)/mongodb/log/mongod.log
    mongosh --eval "rs.initiate()"
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Install MongoDB'
+   workingDirectory: '$(System.DefaultWorkingDirectory)'
+   displayName: 'Install MongoDB'
 
 - task: UseDotNet@2
   displayName: 'Use .Net Core SDK 5.x'
@@ -54,4 +54,3 @@ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb
     nuGetFeedType: 'external'
     publishFeedCredentials: 'nuget-djnitehawk'
     verbosityPush: 'Normal'
-
