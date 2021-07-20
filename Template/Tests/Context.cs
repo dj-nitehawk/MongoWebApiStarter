@@ -10,7 +10,7 @@ namespace MongoWebApiStarter.Tests
     {
         private static ServiceStackHost appHost;
 
-        public static string BaseURL { get; set; } = "http://localhost:54321/";
+        public static string BaseURL { get; set; } = "http://localhost:12345/";
 
         [AssemblyInitialize]
         public static void Initialize(TestContext _)
