@@ -25,12 +25,12 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="Flurl" Version="3.0.2" />
     <PackageReference Include="Flurl.Http" Version="3.2.0" />
-    <PackageReference Include="MailKit" Version="2.14.0" />
+    <PackageReference Include="MailKit" Version="2.15.0" />
     <PackageReference Include="MlkPwgen" Version="0.3.0" />
     <PackageReference Include="NodaTime" Version="3.0.5" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="MongoDB.Entities" Version="20.20.0" />
+    <PackageReference Include="MongoDB.Entities" Version="20.22.1" />
   </ItemGroup>
 
 </Project>

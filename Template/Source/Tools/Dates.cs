@@ -20,6 +20,8 @@ namespace MongoWebApiStarter
         /// <param name="timeZone">The time zone to convert the DateTime in to</param>
         public static string ToDatePart(this DateTime UTCDateTime, string timeZone = default_timezone)
         {
+            if (UTCDateTime == default) return null;
+
             return ToLocal(UTCDateTime, timeZone)
                     .ToString(year_month_date);
         }
@@ -31,6 +33,8 @@ namespace MongoWebApiStarter
         /// <param name="timeZone">The time zone to convert the DateTime in to</param>
         public static string ToTimePart(this DateTime UTCDateTime, string timeZone = default_timezone)
         {
+            if (UTCDateTime == default) return null;
+
             return ToLocal(UTCDateTime, timeZone)
                     .ToString(hour_minute);
         }
@@ -42,7 +46,9 @@ namespace MongoWebApiStarter
         /// <param name="timeZone">The time zone to convert the DateTime in to</param>
         public static DateTime ToLocal(this DateTime UTCDateTime, string timeZone = default_timezone)
         {
-            if (UTCDateTime.Kind != DateTimeKind.Utc) throw new ArgumentException("The supplied date must be a UTC date/time");
+            if (UTCDateTime == default) throw new ArgumentException("Cannot convert default dates to local dates!");
+
+            if (UTCDateTime.Kind != DateTimeKind.Utc) throw new ArgumentException("The supplied date must be a UTC date/time!");
 
             return Instant.FromDateTimeUtc(UTCDateTime)
                           .InZone(DateTimeZoneProviders.Tzdb[timeZone])
@@ -81,6 +87,21 @@ namespace MongoWebApiStarter
                 firstDayInWeek = firstDayInWeek.AddDays(-1);
 
             return firstDayInWeek;
+        }
+
+        /// <summary>
+        /// Check if a date and time string format is correct.
+        /// </summary>
+        /// <param name="date">Local date string "2020-12-31"</param>
+        /// <param name="time">Local time string "12:12 AM"</param>
+        public static bool DateTimeFormatIsCorrect(string date, string time = "00:00")
+        {
+            var result = LocalDateTimePattern
+                .CreateWithInvariantCulture(
+                    $"{year_month_date} {hour_minute}")
+                .Parse(date + " " + time);
+
+            return result.Success;
         }
     }
 }
