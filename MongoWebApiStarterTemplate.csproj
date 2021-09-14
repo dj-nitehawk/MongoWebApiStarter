@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>6.6.0</PackageVersion>
+    <PackageVersion>6.7.0</PackageVersion>
     <PackageType>Template</PackageType>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
@@ -14,7 +14,7 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- update Dates tool class
+    <PackageReleaseNotes>- update vs extension
 - upgrade packages</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
@@ -22,6 +22,9 @@
   <ItemGroup>
     <Content Include="Template\**\*" Exclude="Template\**\bin\**;Template\**\obj\**" />
     <Compile Remove="**\*" />
+    <Compile Remove="VisualStudioExtension\**" />
+    <EmbeddedResource Remove="VisualStudioExtension\**" />
+    <None Remove="VisualStudioExtension\**" />
   </ItemGroup>
 
   <ItemGroup>

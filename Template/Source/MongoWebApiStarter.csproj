@@ -30,7 +30,7 @@
     <PackageReference Include="NodaTime" Version="3.0.5" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="MongoDB.Entities" Version="20.22.1" />
+    <PackageReference Include="MongoDB.Entities" Version="20.24.0" />
   </ItemGroup>
 
 </Project>
