@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
   <TemplateData>
+    <DefaultName>ENTER-FEATURE-NAMESPACE-HERE.cs</DefaultName>
     <Name>Vertical Slice Feature</Name>
     <Description>Insert a vertical slice feature with this item template. The file name you enter here (excluding .cs extension) will be used as the namespace for the feature.</Description>
-    <Icon>VerticalSlicesFeatureItemTemplate.ico</Icon>
-    <TemplateID>5bb50189-997c-4f58-a3b7-7f76d00fa6e3</TemplateID>
     <ProjectType>CSharp</ProjectType>
-    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
-    <DefaultName>ENTER-FEATURE-NAMESPACE-HERE.cs</DefaultName>
+    <TemplateGroupID>AspNetCore</TemplateGroupID>
     <SortOrder>10</SortOrder>
+    <Icon>VerticalSlicesFeatureItemTemplate.ico</Icon>
   </TemplateData>
   <TemplateContent>
     <References />
