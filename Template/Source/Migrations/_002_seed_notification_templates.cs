@@ -1,7 +1,6 @@
 ﻿using Dom;
 using MongoDB.Entities;
 using MongoWebApiStarter;
-using System.Threading.Tasks;
 
 namespace Migrations
 {

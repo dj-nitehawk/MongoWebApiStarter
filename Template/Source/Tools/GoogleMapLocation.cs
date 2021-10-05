@@ -1,5 +1,4 @@
 ﻿using MongoDB.Entities;
-using System;
 using System.Text.RegularExpressions;
 
 namespace MongoWebApiStarter
@@ -22,7 +21,7 @@ namespace MongoWebApiStarter
             double lon, lat;
 
             if (gMapLinkOrCode.HasNoValue())
-                return null;
+                throw new ArgumentException("Supplied gmap link or code is empty!");
 
             var match = rxOne.Match(gMapLinkOrCode);
 
@@ -42,7 +41,7 @@ namespace MongoWebApiStarter
                 return new Coordinates2D(lon, lat);
             }
 
-            return null;
+            throw new InvalidOperationException("Unable to extract 2d coordinates from the supplied gmap link or code!");
         }
 
         /// <summary>

@@ -1,13 +1,9 @@
-﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace MongoWebApiStarter.Services
+﻿namespace MongoWebApiStarter.Services
 {
     public class FileCleanerService : BackgroundService
     {
+        //todo: remove this background service and let mongodb auto purge unlinked images with index
+
         private readonly ILogger log;
 
         public FileCleanerService(ILogger<FileCleanerService> log)

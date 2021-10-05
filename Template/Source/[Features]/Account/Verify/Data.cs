@@ -1,8 +1,6 @@
 ﻿using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using MongoDB.Entities;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Account.Verify
 {

@@ -1,7 +1,16 @@
-﻿using MongoWebApiStarter;
+﻿using FastEndpoints;
+using MongoWebApiStarter.Auth;
 
 namespace Account.Get
 {
+    public class Request
+    {
+        public string ID { get; set; }
+
+        [From(Claim.AccountID)]
+        public string AccountID { get; set; }
+    }
+
     public class Response : Model, IResponse<Dom.Account>
     {
         public bool IsEmailVerified { get; set; }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
+
 
 namespace MongoWebApiStarter
 {
@@ -39,7 +37,7 @@ namespace MongoWebApiStarter
         /// <summary>
         /// Not a null or empty string
         /// </summary>
-        public static bool HasValue(this string value)
+        public static bool HasValue(this string? value)
         {
             return value != "null" && !string.IsNullOrEmpty(value);
         }
@@ -47,7 +45,7 @@ namespace MongoWebApiStarter
         /// <summary>
         /// Is either null or an empty string
         /// </summary>
-        public static bool HasNoValue(this string value)
+        public static bool HasNoValue(this string? value)
         {
             return value == "null" || string.IsNullOrEmpty(value);
         }
@@ -89,22 +87,6 @@ namespace MongoWebApiStarter
                    hasUpperCaseLetter &&
                    hasLowerCaseLetter &&
                    hasDecimalDigit;
-        }
-
-        /// <summary>
-        /// Returns an IEnumerable of enum values
-        /// </summary>
-        public static IEnumerable<T> All<T>(this T _) where T : Enum
-        {
-            return Enum.GetValues(typeof(T)).Cast<T>();
-        }
-
-        /// <summary>
-        /// Returns a dictionary of enum name & enum value
-        /// </summary>
-        public static Dictionary<string, T> ToDictionary<T>(this T _) where T : Enum
-        {
-            return Enum.GetValues(typeof(T)).Cast<T>().ToDictionary(i => i.ToString(), i => i);
         }
     }
 }

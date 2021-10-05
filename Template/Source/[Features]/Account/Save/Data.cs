@@ -1,6 +1,5 @@
 ﻿using MongoDB.Entities;
 using MongoWebApiStarter;
-using System.Threading.Tasks;
 
 namespace Account.Save
 {

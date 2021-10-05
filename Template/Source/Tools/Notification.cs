@@ -1,11 +1,7 @@
 ﻿using Dom;
 using MongoDB.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace MongoWebApiStarter
 {
@@ -20,12 +16,14 @@ namespace MongoWebApiStarter
                 templates.Add(t.ID, t);
         }
 
+#pragma warning disable CS8618
         public string ToName { get; init; }
         public string ToEmail { get; init; }
         public string ToMobile { get; init; }
         public bool SendEmail { get; init; }
         public bool SendSMS { get; init; }
         public string Type { get; init; }
+#pragma warning restore CS8618
 
         private readonly HashSet<(string Name, string Value)> mergeFields = new HashSet<(string Name, string Value)>();
         private readonly List<string> missingTags = new List<string>();
@@ -51,7 +49,7 @@ namespace MongoWebApiStarter
             if (template == null)
                 throw new ApplicationException($"Unable to find a message template for [{Type}]");
 
-            string emailBody = null, emailSubject = null, smsBody = null;
+            string? emailBody = null, emailSubject = null, smsBody = null;
 
             if (SendEmail)
             {
@@ -73,8 +71,8 @@ namespace MongoWebApiStarter
                 {
                     ToEmail = ToEmail,
                     ToName = ToName,
-                    Subject = emailSubject,
-                    Body = emailBody
+                    Subject = emailSubject ?? "",
+                    Body = emailBody ?? ""
                 }.SaveAsync();
             }
 
@@ -83,7 +81,7 @@ namespace MongoWebApiStarter
                 smsTask = new SMSMessage
                 {
                     Mobile = ToMobile,
-                    Body = smsBody
+                    Body = smsBody ?? ""
                 }.SaveAsync();
                 //todo: create sms sending background service
             }

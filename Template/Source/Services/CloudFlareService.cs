@@ -1,8 +1,5 @@
 ﻿using Flurl;
 using Flurl.Http;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Services
 {

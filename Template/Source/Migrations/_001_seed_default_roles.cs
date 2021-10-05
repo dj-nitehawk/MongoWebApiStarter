@@ -1,9 +1,6 @@
 ﻿using Dom;
 using MongoDB.Entities;
-using MongoWebApiStarter;
 using MongoWebApiStarter.Auth;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Migrations
 {
@@ -27,7 +24,7 @@ namespace Migrations
                     Allow.Employee_Read,
                     Allow.Employee_Update,
                     Allow.Employee_Delete,
-                }.Cast<ushort>()
+                }
             };
 
             var employee = new Role
@@ -35,11 +32,11 @@ namespace Migrations
                 ID = "5ee2298f74057809db6cf5c0",
                 SystemRole = true,
                 Name = "Employee",
-                Permissions = default(Allow).All().Except(new[] //EVERYTHING EXCLUDING FOLLOWING:
+                Permissions = new Allow().Select(x => x.PermissionCode).Except(new[] //EVERYTHING EXCLUDING FOLLOWING:
                 {
                     Allow.Employee_Create,
                     Allow.Employee_Delete,
-                }).Cast<ushort>()
+                })
             };
 
             await DB.SaveAsync(new[] { manager, employee });

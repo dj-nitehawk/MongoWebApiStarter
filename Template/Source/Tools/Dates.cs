@@ -1,6 +1,5 @@
 ﻿using NodaTime;
 using NodaTime.Text;
-using System;
 
 namespace MongoWebApiStarter
 {
@@ -20,7 +19,7 @@ namespace MongoWebApiStarter
         /// <param name="timeZone">The time zone to convert the DateTime in to</param>
         public static string ToDatePart(this DateTime UTCDateTime, string timeZone = default_timezone)
         {
-            if (UTCDateTime == default) return null;
+            if (UTCDateTime == default) throw new ArgumentException("Cannot convert default dates to local dates!");
 
             return ToLocal(UTCDateTime, timeZone)
                     .ToString(year_month_date);
@@ -33,7 +32,7 @@ namespace MongoWebApiStarter
         /// <param name="timeZone">The time zone to convert the DateTime in to</param>
         public static string ToTimePart(this DateTime UTCDateTime, string timeZone = default_timezone)
         {
-            if (UTCDateTime == default) return null;
+            if (UTCDateTime == default) throw new ArgumentException("Cannot convert default dates to local dates!");
 
             return ToLocal(UTCDateTime, timeZone)
                     .ToString(hour_minute);

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
 using ServiceStack;
-using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Tests
 {

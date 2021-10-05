@@ -2,20 +2,14 @@
 using MongoDB.Driver.Linq;
 using MongoDB.Entities;
 using MongoWebApiStarter;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Logic
 {
     public static class Image
     {
-
         public static Task DeleteAsync(string imageID)
         {
-            return DB.DeleteAsync<Dom.Image>(
-                i =>
-                i.ID == imageID);
+            return DB.DeleteAsync<Dom.Image>(i => i.ID == imageID);
         }
 
         public static Task LinkAsync(string[] imageIDs)

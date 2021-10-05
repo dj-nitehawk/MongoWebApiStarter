@@ -2,8 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
 using ServiceStack;
-using System;
-using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Tests
 {
@@ -14,7 +12,7 @@ namespace MongoWebApiStarter.Tests
 
         private async Task<string> CreateAccount()
         {
-            var savReq = new Account.Save.Request
+            var savReq = new Account.Save.Models
             {
                 City = "City",
                 CountryCode = "LKA",
@@ -53,7 +51,7 @@ namespace MongoWebApiStarter.Tests
             var code = (await DB.Find<Dom.Account>().OneAsync(id))
                        .EmailVerificationCode;
 
-            var vReq = new Account.Verify.Request
+            var vReq = new Account.Verify.Models
             {
                 ID = id,
                 Code = code
@@ -80,7 +78,7 @@ namespace MongoWebApiStarter.Tests
         {
             var acc = await DB.Find<Dom.Account>().OneAsync(id);
 
-            var req = new Account.Login.Request
+            var req = new Account.Login.Models
             {
                 UserName = acc.Email,
                 Password = "qqqqq123Q"

@@ -1,5 +1,4 @@
 ﻿using MongoDB.Entities;
-using System.Threading.Tasks;
 
 namespace Account.Get
 {

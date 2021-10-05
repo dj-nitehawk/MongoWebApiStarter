@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MongoWebApiStarter
+﻿namespace MongoWebApiStarter
 {
     public class Settings
     {

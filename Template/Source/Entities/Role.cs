@@ -1,5 +1,4 @@
 ﻿using MongoDB.Entities;
-using System.Collections.Generic;
 
 namespace Dom
 {
@@ -7,10 +6,8 @@ namespace Dom
     {
         public string Name { get; set; }
         public bool SystemRole { get; set; }
-        public IEnumerable<ushort> Permissions { get; set; }
+        public IEnumerable<string> Permissions { get; set; }
         public One<Account> Account { get; set; }
-
-
 
         static Role()
         {

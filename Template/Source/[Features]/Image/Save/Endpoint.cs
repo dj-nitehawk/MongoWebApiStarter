@@ -1,28 +1,34 @@
-﻿using MongoWebApiStarter;
-using ServiceStack;
+﻿using FastEndpoints;
+using MongoWebApiStarter;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Image.Save
 {
-    [Authenticate(ApplyTo.Patch)]
-    public class Service : Service<Request, Nothing>
+    public class Endpoint : Endpoint<Request>
     {
-        public Task<string> PostAsync(Request r) => PatchAsync(r);
-
-        public async Task<string> PatchAsync(Request r)
+        public Endpoint()
         {
-            var file = Request.Files.FirstOrDefault();
+            Verbs(Http.POST, Http.PUT);
+            Routes("/image");
+            AllowAnnonymous();
+        }
 
-            if (file == null)
+        protected override async Task HandleAsync(Request r, CancellationToken ct)
+        {
+            if (HttpMethod is Http.PUT && User?.Identity?.IsAuthenticated is false)
+            {
+                await SendUnauthorizedAsync();
+                return;
+            }
+
+            var file = (await GetFilesAsync())[0];
+
+            if (file is null)
                 ThrowError("No file data was detected in the request!");
 
-            if (!IsAllowedSize(file.ContentLength))
+            if (!IsAllowedSize(file.Length))
                 AddError("The file size is not acceptable!");
 
             if (!IsAllowedType(file.ContentType))
@@ -35,18 +41,19 @@ namespace Image.Save
 
             r.ID = null;
 
-            using var strInput = file.InputStream;
-            using var img = SixLabors.ImageSharp.Image.Load(strInput);
+            using var img = SixLabors.ImageSharp.Image.Load(file.OpenReadStream());
             img.Mutate(
                 x => x.Resize(new ResizeOptions
                 {
                     Mode = ResizeMode.Crop,
                     Size = new Size { Width = r.Width, Height = r.Height }
                 }));
-            using var strOutput = new MemoryStream();
-            img.SaveAsJpeg(strOutput, new JpegEncoder { Quality = 80 });
+            using var memStream = new MemoryStream();
+            img.SaveAsJpeg(memStream, new JpegEncoder { Quality = 80 });
 
-            return await Data.UploadAsync(r.ToEntity(), strOutput);
+            await Data.UploadAsync(r.ToEntity(), memStream);
+
+            await SendOkAsync();
         }
 
         public bool IsAllowedType(string contentType)

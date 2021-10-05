@@ -1,15 +1,8 @@
 ﻿using Dom;
 using MailKit.Net.Smtp;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using MimeKit;
 using MimeKit.Text;
 using MongoDB.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MongoWebApiStarter.Services
 {

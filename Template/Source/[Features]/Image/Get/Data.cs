@@ -1,6 +1,4 @@
 ﻿using MongoDB.Entities;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace Image.Get
 {

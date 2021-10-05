@@ -1,24 +1,26 @@
-﻿namespace MongoWebApiStarter.Auth
+﻿using FastEndpoints.Security;
+
+namespace MongoWebApiStarter.Auth
 {
     /// <summary>
     /// The allowed operations/permissions for the application
     /// </summary>
-    public enum Allow : ushort
+    public class Allow : Permissions
     {
         //NOTE: these permission names are sent to the UI with the login response in a field called PermissionSet[]. 
-        //      if they change, UI code needs to change too.
+        //      if they change; UI code needs to change too.
         //      values are only added to the jwt token to enable authorization attributes on every request.
 
         //ACCOUNT
-        Account_Read = 1,
-        Account_Update = 2,
-        Account_Delete = 3,
+        public const string Account_Read = "100";
+        public const string Account_Update = "101";
+        public const string Account_Delete = "102";
 
         //EMPLOYEE
-        Employee_Create = 100,
-        Employee_Read = 101,
-        Employee_Update = 102,
-        Employee_Delete = 103,
+        public const string Employee_Create = "200";
+        public const string Employee_Read = "201";
+        public const string Employee_Update = "202";
+        public const string Employee_Delete = "203";
 
     }
 }

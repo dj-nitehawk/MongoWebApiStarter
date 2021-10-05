@@ -1,5 +1,4 @@
 ﻿using Funq;
-using MongoWebApiStarter.Auth;
 using ServiceStack;
 using ServiceStack.Validation;
 

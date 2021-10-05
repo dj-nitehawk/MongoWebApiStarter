@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace MongoWebApiStarter
+﻿namespace MongoWebApiStarter
 {
     public static class Tasks
     {

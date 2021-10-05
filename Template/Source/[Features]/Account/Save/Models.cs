@@ -1,10 +1,37 @@
-﻿using MongoWebApiStarter;
-using ServiceStack.FluentValidation;
-using System.Threading.Tasks;
+﻿using Dom;
+using FastEndpoints;
+using FastEndpoints.Validation;
+using MongoWebApiStarter;
+using MongoWebApiStarter.Auth;
 
 namespace Account.Save
 {
-    public class Validator : AbstractValidator<Request>
+    public class Request : Model, IRequest<Dom.Account>
+    {
+        [From(Claim.AccountID, IsRequired = false)]
+        public string AccountID { get; set; }
+
+        public Dom.Account ToEntity() => new()
+        {
+            ID = ID,
+            Email = EmailAddress.LowerCase(),
+            PasswordHash = Password.SaltedHash(),
+            Title = Title,
+            FirstName = FirstName.TitleCase(),
+            LastName = LastName.TitleCase(),
+            Address = new Address
+            {
+                Street = Street.TitleCase(),
+                City = City,
+                State = State,
+                ZipCode = ZipCode,
+                CountryCode = CountryCode
+            },
+            Mobile = Mobile,
+        };
+    }
+
+    public class Validator : Validator<Request>
     {
         public Validator()
         {
@@ -36,5 +63,11 @@ namespace Account.Save
             var idForEmail = await Data.GetAccountIDAsync(r.EmailAddress);
             return idForEmail != r.ID;
         }
+    }
+
+    public class Response
+    {
+        public string ID { get; set; }
+        public bool EmailSent { get; set; }
     }
 }
