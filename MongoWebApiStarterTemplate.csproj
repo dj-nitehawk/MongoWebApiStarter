@@ -1,21 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>6.7.1</PackageVersion>
+    
+    <PackageVersion>7.0.0</PackageVersion>
+    
+    <PackageReleaseNotes>migrated project to FastEndpoints</PackageReleaseNotes>
+    
     <PackageType>Template</PackageType>
     <PackageId>MongoWebApiStarter</PackageId>
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
-    <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net 5 Web-Api project with MongoDB as the data store.</Description>
+    <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net 6 Web-Api project with MongoDB as the data store.</Description>
     <PackageTags>dotnet-new;templates;mongodb;web-api;net5;aspnet,servicestack</PackageTags>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageProjectUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dj-nitehawk/MongoWebApiStarter</RepositoryUrl>
-    <PackageReleaseNotes>- update vs extension
-- upgrade packages</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 

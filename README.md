@@ -1,5 +1,5 @@
 # MongoWebApiStarter
-A full-featured starter template for `dotnet new` to quickly scaffold a .Net 5 Web-Api project using pure vertical slice architecture with MongoDB as the data store.
+A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net 6 Web-Api project using pure vertical slice architecture with MongoDB as the data store.
 
 ## Install & Scaffold
 ```csharp
@@ -10,8 +10,8 @@ A full-featured starter template for `dotnet new` to quickly scaffold a .Net 5 W
 ## Features
 
 ### Platform
-- base framework: .net 5
-- api/web-service framework: [servicestack](https://servicestack.net/)
+- base framework: .net 6
+- api/web-service framework: [FastEndpoints](https://github.com/dj-nitehawk/FastEndpoints)
 - language: c#
 - database: mongodb
 
@@ -24,7 +24,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold a .Net 5 W
 #### Misc. Features
 - strongly typed app settings which binds to `appsettings.json`
 - JWT token authentication with embedded claims & permissions
-- permission & claim based authorization with attribute decorators
+- permission & claim based authorization
 - custom middleware for putting site offline (maintenance mode)
 
 #### Api Features
@@ -47,7 +47,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold a .Net 5 W
 
 ##### Visual Studio New Item Template
 a visual studio extension is availabe in the `.vs-new-item-template` folder that will enable you to quickly add a new vertical slice feature file set.
-after you install the `vsix`, you will have a new item called "Vertical Slice Feature" in the "add > new item" dialog of visual studio.
+after you install the `vsix`, you will have a new item called "FastEndpoints Feature FileSet" in the "add > new item" dialog of visual studio.
 
 ##### Linux Server Configuration
 instructions & config files for setting up a linux server for deployment are available in the `.linux-server-setup` folder
