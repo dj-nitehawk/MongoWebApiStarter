@@ -30,6 +30,7 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '6.x'
+    includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
   displayName: 'Run Tests'
