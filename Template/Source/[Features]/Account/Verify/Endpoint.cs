@@ -6,8 +6,8 @@ namespace Account.Verify
     {
         public Endpoint()
         {
-            Verbs(Http.GET);
-            Routes("/account/{ID}/{Code}/validate");
+            Verbs(Http.POST);
+            Routes("/account/validate");
             AllowAnnonymous();
         }
 
