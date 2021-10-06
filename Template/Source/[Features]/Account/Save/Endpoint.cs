@@ -11,7 +11,7 @@ namespace Account.Save
         public Endpoint()
         {
             Verbs(Http.POST, Http.PUT);
-            Routes("/account");
+            Routes("/account/save");
             AllowAnnonymous();
         }
 
@@ -61,10 +61,10 @@ namespace Account.Save
 
         private async Task CheckIfEmailValidationIsNeededAsync(Request r)
         {
-            if (r.ID.HasNoValue())
+            if (r.AccountID.HasNoValue())
                 needsEmailVerification = true;
 
-            else if (r.ID != await Data.GetAccountIDAsync(r.EmailAddress))
+            else if (r.AccountID != await Data.GetAccountIDAsync(r.EmailAddress))
                 needsEmailVerification = true;
 
             else

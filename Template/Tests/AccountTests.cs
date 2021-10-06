@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
 using FluentAssertions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,12 +16,18 @@ namespace Test
     {
         public static HttpClient AccountClient { get; } = new WebApplicationFactory<Program>()
             .WithWebHostBuilder(b =>
+            {
+                b.UseEnvironment("Testing");//not working
                 b.ConfigureTestServices(s =>
+                {
                     s.Configure<Settings>(x =>
                     {
                         x.Database.Name += "-TEST";
                         x.FileBucket.Name += "-TEST";
-                    })))
+                    });
+                });
+
+            })
             .CreateClient();
 
         private string accountID = string.Empty;

@@ -13,7 +13,7 @@ namespace Account.Save
 
         public Dom.Account ToEntity() => new()
         {
-            ID = ID,
+            ID = AccountID,
             Email = EmailAddress.LowerCase(),
             PasswordHash = Password.SaltedHash(),
             Title = Title,
@@ -61,7 +61,7 @@ namespace Account.Save
             if (r.EmailAddress == null) return true;
 
             var idForEmail = await Data.GetAccountIDAsync(r.EmailAddress);
-            return idForEmail != r.ID;
+            return idForEmail != r.AccountID;
         }
     }
 

@@ -5,23 +5,22 @@ namespace Account.Get
 {
     public class Request
     {
-        public string ID { get; set; }
-
-        [From(Claim.AccountID)]
+        [From(Claim.AccountID, IsRequired = true)]
         public string AccountID { get; set; }
     }
 
     public class Response : Model, IResponse<Dom.Account>
     {
+        public string AccountID { get; set; }
         public bool IsEmailVerified { get; set; }
 
         public void FromEntity(Dom.Account a)
         {
+            AccountID = a.ID;
             City = a.Address.City;
             CountryCode = a.Address.CountryCode;
             EmailAddress = a.Email;
             FirstName = a.FirstName;
-            ID = a.ID;
             IsEmailVerified = a.IsEmailVerified;
             LastName = a.LastName;
             Mobile = a.Mobile;

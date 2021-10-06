@@ -5,7 +5,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>9e108e2f-e4c3-4f9e-8d2c-732a90ccba10</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -18,8 +17,8 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
-    <PackageReference Include="FastEndpoints" Version="1.6.0-beta3" />
-    <PackageReference Include="FastEndpoints.Security" Version="1.6.0-beta3" />
+    <PackageReference Include="FastEndpoints" Version="1.6.0-beta4" />
+    <PackageReference Include="FastEndpoints.Security" Version="1.6.0-beta4" />
     <PackageReference Include="Flurl" Version="3.0.2" />
     <PackageReference Include="Flurl.Http" Version="3.2.0" />
     <PackageReference Include="MailKit" Version="2.15.0" />
@@ -31,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="MongoWebApiStarter.Tests"/>
+    <InternalsVisibleTo Include="MongoWebApiStarter.Tests" />
   </ItemGroup>
 
 </Project>

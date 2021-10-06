@@ -13,6 +13,7 @@ namespace Image.Save
             Verbs(Http.POST, Http.PUT);
             Routes("/image");
             AllowAnnonymous();
+            Options(b => b.Accepts<IFormFile>("multipart/form-data")); //todo: move this to lib .AcceptFileUploads();
         }
 
         protected override async Task HandleAsync(Request r, CancellationToken ct)

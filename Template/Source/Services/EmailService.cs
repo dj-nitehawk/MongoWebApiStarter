@@ -15,11 +15,12 @@ namespace MongoWebApiStarter.Services
         private bool startMsgLogged;
         private readonly ILogger log;
 
-        public EmailService(IOptions<Settings> settings, IHostEnvironment environment, ILogger<EmailService> log)
+        public EmailService(IOptions<Settings> settings, IWebHostEnvironment environment, ILogger<EmailService> log)
         {
             this.settings = settings.Value.Email;
             isProduction = environment.IsProduction();
-            isTesting = environment.IsEnvironment("Testing");
+            isTesting = environment.IsEnvironment("Testing");//not working
+            isTesting = environment.ApplicationName == "testhost";
             this.log = log;
         }
 

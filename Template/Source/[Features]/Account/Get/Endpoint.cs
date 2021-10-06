@@ -8,7 +8,7 @@ namespace Account.Get
         public Endpoint()
         {
             Verbs(Http.GET);
-            Routes("/account/{ID}");
+            Routes("/account/get");
             Permissions(Allow.Account_Read);
         }
 

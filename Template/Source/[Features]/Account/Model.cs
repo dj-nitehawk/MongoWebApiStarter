@@ -2,7 +2,6 @@
 {
     public class Model
     {
-        public string ID { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
         public string Title { get; set; }
