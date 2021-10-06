@@ -15,7 +15,7 @@
     <Title>MongoDB Web Api Starter</Title>
     <Authors>Ryan Gunner</Authors>
     <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net 6 Web-Api project with MongoDB as the data store.</Description>
-    <PackageTags>dotnet-new;templates;mongodb;web-api;net5;aspnet,servicestack</PackageTags>
+    <PackageTags>dotnet-new;templates;mongodb;web-api;net6;aspnet</PackageTags>
     <TargetFramework>net6.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -28,8 +28,20 @@
   <ItemGroup>
     <Content Include="Template\**\*" Exclude="Template\**\bin\**;Template\**\obj\**" />
     <Compile Remove="**\*" />
+    <Compile Remove="Template\.vs\**" />
+    <Compile Remove="Template\Source\bin\**" />
+    <Compile Remove="Template\Source\obj\**" />
     <Compile Remove="VisualStudioExtension\**" />
+    <Content Remove="Template\.vs\**" />
+    <Content Remove="Template\Source\bin\**" />
+    <Content Remove="Template\Source\obj\**" />
+    <EmbeddedResource Remove="Template\.vs\**" />
+    <EmbeddedResource Remove="Template\Source\bin\**" />
+    <EmbeddedResource Remove="Template\Source\obj\**" />
     <EmbeddedResource Remove="VisualStudioExtension\**" />
+    <None Remove="Template\.vs\**" />
+    <None Remove="Template\Source\bin\**" />
+    <None Remove="Template\Source\obj\**" />
     <None Remove="VisualStudioExtension\**" />
   </ItemGroup>
 
