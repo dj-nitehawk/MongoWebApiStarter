@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     
-    <PackageVersion>7.0.0</PackageVersion>
+    <PackageVersion>7.1.0</PackageVersion>
     
-    <PackageReleaseNotes>migrated project to FastEndpoints</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      - fix duplicate handler issue
+      - use options pattern for config/settings
+      - improve image upload/download handling
+    </PackageReleaseNotes>
     
     <PackageType>Template</PackageType>
     <PackageId>MongoWebApiStarter</PackageId>
