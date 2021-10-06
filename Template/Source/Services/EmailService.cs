@@ -1,5 +1,6 @@
 ﻿using Dom;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
 using MongoDB.Entities;
@@ -10,18 +11,22 @@ namespace MongoWebApiStarter.Services
     {
         private readonly Settings.EmailSettings settings;
         private readonly bool isProduction;
+        private readonly bool isTesting;
         private bool startMsgLogged;
         private readonly ILogger log;
 
-        public EmailService(Settings settings, IHostEnvironment environment, ILogger<EmailService> log)
+        public EmailService(IOptions<Settings> settings, IHostEnvironment environment, ILogger<EmailService> log)
         {
-            this.settings = settings.Email;
+            this.settings = settings.Value.Email;
             isProduction = environment.IsProduction();
+            isTesting = environment.IsEnvironment("Testing");
             this.log = log;
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellation)
         {
+            if (isTesting) return;
+
             using var smtp = new SmtpClient();
             var lastActiveAt = DateTime.UtcNow;
             var msgs = new List<EmailMessage>();

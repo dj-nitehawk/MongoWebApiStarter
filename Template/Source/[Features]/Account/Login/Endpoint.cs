@@ -1,12 +1,13 @@
 ﻿using FastEndpoints;
 using FastEndpoints.Security;
+using Microsoft.Extensions.Options;
 using MongoWebApiStarter;
 using MongoWebApiStarter.Auth;
 namespace Account.Login
 {
     public class Endpoint : Endpoint<Request, Response>
     {
-        public Settings Settings { get; set; }
+        public IOptions<Settings> Settings { get; set; }
 
         public Endpoint()
         {
@@ -37,7 +38,7 @@ namespace Account.Login
             Response.FullName = $"{acc.Title} {acc.FirstName} {acc.LastName}";
             Response.Token.Expiry = expiryDate.ToLocal().ToString("yyyy-MM-ddTHH:mm:ss");
             Response.Token.Value = JWTBearer.CreateToken(
-                signingKey: Settings.Auth.SigningKey,
+                signingKey: Settings.Value.Auth.SigningKey,
                 expireAt: expiryDate,
                 permissions: new Allow().Select(x => x.PermissionCode),
                 claims: (Claim.AccountID, acc.ID));

@@ -1,6 +1,7 @@
 ﻿using FastEndpoints;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
@@ -14,19 +15,12 @@ namespace Test
     {
         public static HttpClient AccountClient { get; } = new WebApplicationFactory<Program>()
             .WithWebHostBuilder(b =>
-            {
-                b.ConfigureServices(s =>
-                {
-                    var settings = new Settings();
-                    settings.Database.Host = "localhost";
-                    settings.Database.Port = 27017;
-                    settings.Database.Name = "MongoWebApiStarter-TEST";
-                    settings.FileBucket.Host = "localhost";
-                    settings.FileBucket.Port = 27017;
-                    settings.FileBucket.Name = "MongoWebApiStarter-FileBucket-TEST";
-                    s.AddSingleton(settings);
-                });
-            })
+                b.ConfigureTestServices(s =>
+                    s.Configure<Settings>(x =>
+                    {
+                        x.Database.Name += "-TEST";
+                        x.FileBucket.Name += "-TEST";
+                    })))
             .CreateClient();
 
         private string accountID = string.Empty;

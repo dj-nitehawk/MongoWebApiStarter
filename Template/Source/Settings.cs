@@ -1,56 +1,56 @@
-﻿namespace MongoWebApiStarter
+﻿#pragma warning disable CS8618
+namespace MongoWebApiStarter
 {
     public class Settings
     {
-        public string AppName { get; set; } = "DEFAULT";
-        public Version AppVersion { get; set; } = new Version(0, 0, 0);
-        public DatabaseSettings Database { get; set; } = new DatabaseSettings();
-        public FileBucketSettings FileBucket { get; set; } = new FileBucketSettings();
-        public EmailSettings Email { get; set; } = new EmailSettings();
-        public JWTAuthSettings Auth { get; set; } = new JWTAuthSettings();
-        public CloudFlareSettings CloudFlare { get; set; } = new CloudFlareSettings();
-        public SMSSettings SMS { get; set; } = new SMSSettings();
-        public PaymentGatewaySettings PaymentGateway { get; set; } = new PaymentGatewaySettings();
+        public string AppName { get; set; }
+        public DatabaseSettings Database { get; set; }
+        public FileBucketSettings FileBucket { get; set; }
+        public EmailSettings Email { get; set; }
+        public JWTAuthSettings Auth { get; set; }
+        public CloudFlareSettings CloudFlare { get; set; }
+        public SMSSettings SMS { get; set; }
+        public PaymentGatewaySettings PaymentGateway { get; set; }
 
         public class DatabaseSettings
         {
-            public string Host { get; set; } = "DEFAULT";
+            public string Host { get; set; }
             public int Port { get; set; }
-            public string Name { get; set; } = "DEFAULT";
-            public string Username { get; set; } = "DEFAULT";
-            public string Password { get; set; } = "DEFAULT";
+            public string Name { get; set; }
+            public string Username { get; set; }
+            public string Password { get; set; }
         }
 
         public class FileBucketSettings
         {
-            public string Host { get; set; } = "DEFAULT";
+            public string Host { get; set; }
             public int Port { get; set; }
-            public string Name { get; set; } = "DEFAULT";
-            public string Username { get; set; } = "DEFAULT";
-            public string Password { get; set; } = "DEFAULT";
+            public string Name { get; set; }
+            public string Username { get; set; }
+            public string Password { get; set; }
         }
 
         public class EmailSettings
         {
-            public string Server { get; set; } = "DEFAULT";
+            public string Server { get; set; }
             public int Port { get; set; }
-            public string Username { get; set; } = "DEFAULT";
-            public string Password { get; set; } = "DEFAULT";
-            public string FromName { get; set; } = "DEFAULT";
-            public string FromEmail { get; set; } = "DEFAULT";
-            public int BatchSize { get; set; } = 10;
+            public string Username { get; set; }
+            public string Password { get; set; }
+            public string FromName { get; set; }
+            public string FromEmail { get; set; }
+            public int BatchSize { get; set; }
         }
 
         public class JWTAuthSettings
         {
-            public int TokenValidityMinutes { get; set; } = 10; //default expiry for tests
-            public string SigningKey { get; set; } = "xxxxxxxxxxxxxxxx";
+            public int TokenValidityMinutes { get; set; }
+            public string SigningKey { get; set; }
         }
 
         public class CloudFlareSettings
         {
-            public string Token { get; set; } = "DEFAULT";
-            public string ZoneID { get; set; } = "DEFAULT";
+            public string Token { get; set; }
+            public string ZoneID { get; set; }
         }
 
         public class SMSSettings

@@ -8,6 +8,10 @@
     <UserSecretsId>9e108e2f-e4c3-4f9e-8d2c-732a90ccba10</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn>1701;1702;CA2016;RCS1090;CA2254</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Remove="[Features]\API-Reference-Postman-Export.json" />
   </ItemGroup>
