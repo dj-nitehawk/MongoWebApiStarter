@@ -6,14 +6,14 @@ using SixLabors.ImageSharp.Processing;
 
 namespace Image.Save
 {
-    public class Endpoint : Endpoint<Request>
+    public class Endpoint : Endpoint<Request, object>
     {
         public Endpoint()
         {
             Verbs(Http.POST, Http.PUT);
             Routes("/image");
+            AllowFileUploads();
             AllowAnnonymous();
-            Options(b => b.Accepts<IFormFile>("multipart/form-data")); //todo: move this to lib .AcceptFileUploads();
         }
 
         protected override async Task HandleAsync(Request r, CancellationToken ct)
@@ -24,7 +24,7 @@ namespace Image.Save
                 return;
             }
 
-            var file = (await GetFilesAsync())[0];
+            var file = Files[0];
 
             if (file is null)
                 ThrowError("No file data was detected in the request!");
@@ -52,9 +52,9 @@ namespace Image.Save
             using var memStream = new MemoryStream();
             img.SaveAsJpeg(memStream, new JpegEncoder { Quality = 80 });
 
-            await Data.UploadAsync(r.ToEntity(), memStream);
+            var newID = await Data.UploadAsync(r.ToEntity(), memStream);
 
-            await SendOkAsync();
+            await SendAsync(new { ImageID = newID });
         }
 
         public bool IsAllowedType(string contentType)
