@@ -18,7 +18,7 @@ namespace Test
             .WithWebHostBuilder(b =>
             {
                 b.UseEnvironment("Testing");//not working
-                b.ConfigureTestServices(s =>
+                b.ConfigureServices(s =>
                 {
                     s.Configure<Settings>(x =>
                     {

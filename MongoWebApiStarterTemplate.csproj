@@ -2,12 +2,11 @@
 
   <PropertyGroup>
     
-    <PackageVersion>7.1.0</PackageVersion>
+    <PackageVersion>7.1.1</PackageVersion>
     
     <PackageReleaseNotes>
-      - fix duplicate handler issue
-      - use options pattern for config/settings
-      - improve image upload/download handling
+      - upgrade dependancies
+      - misc. code changes
     </PackageReleaseNotes>
     
     <PackageType>Template</PackageType>
@@ -31,25 +30,17 @@
     <Compile Remove="Template\.vs\**" />
     <Compile Remove="Template\Source\bin\**" />
     <Compile Remove="Template\Source\obj\**" />
-    <Compile Remove="VisualStudioExtension\**" />
     <Content Remove="Template\.vs\**" />
-    <Content Remove="Template\Source\bin\**" />
-    <Content Remove="Template\Source\obj\**" />
     <EmbeddedResource Remove="Template\.vs\**" />
     <EmbeddedResource Remove="Template\Source\bin\**" />
     <EmbeddedResource Remove="Template\Source\obj\**" />
-    <EmbeddedResource Remove="VisualStudioExtension\**" />
     <None Remove="Template\.vs\**" />
     <None Remove="Template\Source\bin\**" />
     <None Remove="Template\Source\obj\**" />
-    <None Remove="VisualStudioExtension\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+    <None Include="LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
