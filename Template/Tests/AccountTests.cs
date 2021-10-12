@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Entities;
@@ -38,7 +37,7 @@ namespace Test
         {
             var email = $"{Guid.NewGuid()}@email.com";
 
-            var (rsp, res) = await AccountClient.PostAsync<
+            var (rsp, res) = await AccountClient.POSTAsync<
                 Account.Save.Endpoint,
                 Account.Save.Request,
                 Account.Save.Response>(new()
@@ -77,7 +76,7 @@ namespace Test
                 .Find<Dom.Account>().OneAsync(accountID))
                 .EmailVerificationCode;
 
-            await AccountClient.PostAsync<
+            await AccountClient.POSTAsync<
                 Account.Verify.Endpoint,
                 Account.Verify.Request>(new()
                 {
@@ -100,7 +99,7 @@ namespace Test
 
             var acc = await DB.Find<Dom.Account>().OneAsync(accountID);
 
-            var (rsp, res) = await AccountClient.PostAsync<
+            var (rsp, res) = await AccountClient.POSTAsync<
                 Account.Login.Endpoint,
                 Account.Login.Request,
                 Account.Login.Response>(new()
@@ -123,7 +122,7 @@ namespace Test
             AccountClient.DefaultRequestHeaders.Authorization
                 = new AuthenticationHeaderValue("Bearer", jwtToken);
 
-            var res = await AccountClient.GetAsync<
+            var (_, res) = await AccountClient.GETAsync<
                 Account.Get.Endpoint,
                 Account.Get.Response>();
 
