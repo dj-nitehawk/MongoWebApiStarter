@@ -1,7 +1,7 @@
-﻿namespace Image.Get
+﻿namespace Image.Get;
+
+public class Request
 {
-    public class Request
-    {
-        public string ID { get; set; }
-    }
+    public string ID { get; set; }
 }
+

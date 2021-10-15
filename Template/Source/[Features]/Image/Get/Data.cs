@@ -1,13 +1,11 @@
-﻿using MongoDB.Entities;
+﻿namespace Image.Get;
 
-namespace Image.Get
+public static class Data
 {
-    public static class Data
+    public static Task DownloadAsync(string id, Stream destination)
     {
-        public static Task DownloadAsync(string id, Stream destination)
-        {
-            return DB.File<Dom.Image>(id)
-                     .DownloadWithTimeoutAsync(destination, 30);
-        }
+        return DB.File<Dom.Image>(id)
+                 .DownloadWithTimeoutAsync(destination, 30);
     }
 }
+

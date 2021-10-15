@@ -1,32 +1,30 @@
-﻿using FastEndpoints;
+﻿namespace Utility.ShowLog;
 
-namespace Utility.ShowLog
+public class Endpoint : EndpointWithoutRequest
 {
-    public class Endpoint : EndpointWithoutRequest
+    public override void Configure()
     {
-        public Endpoint()
+        Verbs(Http.GET);
+        Routes("/show-log");
+        AllowAnonymous();
+    }
+
+    public override async Task HandleAsync(EmptyRequest req, CancellationToken ct)
+    {
+        if (File.Exists("output.log"))
         {
-            Verbs(Http.GET);
-            Routes("/show-log");
-            AllowAnnonymous();
+            var fileInfo = new FileInfo(Path.Combine(Env.ContentRootPath, "output.log"));
+
+            await SendStreamAsync(
+                stream: fileInfo.OpenRead(),
+                contentType: "text/plain",
+                fileName: null,
+                fileLengthBytes: null);
         }
-
-        protected override async Task HandleAsync(EmptyRequest req, CancellationToken ct)
+        else
         {
-            if (File.Exists("output.log"))
-            {
-                var fileInfo = new FileInfo(Path.Combine(Env.ContentRootPath, "output.log"));
-
-                await SendStreamAsync(
-                    stream: fileInfo.OpenRead(),
-                    contentType: "text/plain",
-                    fileName: null,
-                    fileLengthBytes: null);
-            }
-            else
-            {
-                await SendNotFoundAsync();
-            }
+            await SendNotFoundAsync();
         }
     }
 }
+

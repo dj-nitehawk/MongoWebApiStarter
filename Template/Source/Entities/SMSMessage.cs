@@ -1,12 +1,10 @@
-﻿using MongoDB.Entities;
+﻿namespace Dom;
 
-namespace Dom
+public class SMSMessage : Entity
 {
-    public class SMSMessage : Entity
-    {
-        public string Mobile { get; set; }
-        public string Body { get; set; }
+    public string Mobile { get; set; }
+    public string Body { get; set; }
 
-        [Ignore] public bool IsSent { get; set; }
-    }
+    [Ignore] public bool IsSent { get; set; }
 }
+

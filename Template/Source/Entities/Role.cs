@@ -1,23 +1,21 @@
-﻿using MongoDB.Entities;
+﻿namespace Dom;
 
-namespace Dom
+public class Role : Entity
 {
-    public class Role : Entity
+    public string Name { get; set; }
+    public bool SystemRole { get; set; }
+    public IEnumerable<string> Permissions { get; set; }
+    public One<Account> Account { get; set; }
+
+    static Role()
     {
-        public string Name { get; set; }
-        public bool SystemRole { get; set; }
-        public IEnumerable<string> Permissions { get; set; }
-        public One<Account> Account { get; set; }
+        DB.Index<Role>()
+          .Key(r => r.Account.ID, KeyType.Ascending)
+          .CreateAsync();
 
-        static Role()
-        {
-            DB.Index<Role>()
-              .Key(r => r.Account.ID, KeyType.Ascending)
-              .CreateAsync();
-
-            DB.Index<Role>()
-              .Key(r => r.SystemRole, KeyType.Ascending)
-              .CreateAsync();
-        }
+        DB.Index<Role>()
+          .Key(r => r.SystemRole, KeyType.Ascending)
+          .CreateAsync();
     }
 }
+

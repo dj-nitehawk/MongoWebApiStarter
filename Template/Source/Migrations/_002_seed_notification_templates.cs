@@ -1,19 +1,17 @@
 ﻿using Dom;
-using MongoDB.Entities;
 using MongoWebApiStarter;
 
-namespace Migrations
-{
-    public class _002_seed_notification_templates : IMigration
-    {
-        public Task UpgradeAsync()
-        {
-            return new[] {
+namespace Migrations;
 
-                new NotificationTemplate {
-                    ID = NotificationType.Account_Welcome,
-                    EmailSubject = "Please validate your account {Salutation}...",
-                    EmailBody = @"
+public class _002_seed_notification_templates : IMigration
+{
+    public Task UpgradeAsync()
+    {
+        return new[] {
+            new NotificationTemplate {
+                ID = NotificationType.Account_Welcome,
+                EmailSubject = "Please validate your account {Salutation}...",
+                EmailBody = @"
 <html>
 <body>
   <div>
@@ -50,10 +48,9 @@ namespace Migrations
   </div>
 </body>
 </html>",
-                    SMSBody = "Thank you for creating an account {Salutation}. Please check your email and click the verification link in order to activate your account."
+                SMSBody = "Thank you for creating an account {Salutation}. Please check your email and click the verification link in order to activate your account."
                 }
-
-            }.SaveAsync();
-        }
+        }.SaveAsync();
     }
 }
+

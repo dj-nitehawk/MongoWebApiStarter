@@ -1,24 +1,23 @@
-﻿using MongoDB.Entities;
-using MongoWebApiStarter;
+﻿using MongoWebApiStarter;
 
-namespace Account.Login
+namespace Account.Login;
+
+public static class Data
 {
-    public static class Data
+    public static Task<Dom.Account> GetAccountAsync(string userName)
     {
-        public static Task<Dom.Account> GetAccountAsync(string userName)
-        {
-            return DB.Find<Dom.Account>()
-                     .Match(a => a.Email == userName.LowerCase())
-                     .Project(a => new Dom.Account
-                     {
-                         PasswordHash = a.PasswordHash,
-                         IsEmailVerified = a.IsEmailVerified,
-                         ID = a.ID,
-                         Title = a.Title,
-                         FirstName = a.FirstName,
-                         LastName = a.LastName
-                     })
-                     .ExecuteSingleAsync();
-        }
+        return DB.Find<Dom.Account>()
+                 .Match(a => a.Email == userName.LowerCase())
+                 .Project(a => new Dom.Account
+                 {
+                     PasswordHash = a.PasswordHash,
+                     IsEmailVerified = a.IsEmailVerified,
+                     ID = a.ID,
+                     Title = a.Title,
+                     FirstName = a.FirstName,
+                     LastName = a.LastName
+                 })
+                 .ExecuteSingleAsync();
     }
 }
+

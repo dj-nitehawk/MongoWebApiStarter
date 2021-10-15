@@ -1,28 +1,26 @@
-﻿using FastEndpoints;
-using MongoWebApiStarter.Services;
+﻿using MongoWebApiStarter.Services;
 
-namespace Utility.ClearCloudFlareCache
+namespace Utility.ClearCloudFlareCache;
+
+public class Endpoint : EndpointWithoutRequest
 {
-    public class Endpoint : EndpointWithoutRequest
+    public override void Configure()
     {
-        public Endpoint()
-        {
-            Verbs(Http.GET);
-            Routes("/purge-cf-cache");//todo: protect this route with nginx or disable in production
-            AllowAnnonymous();
-        }
+        Verbs(Http.GET);
+        Routes("/purge-cf-cache");//todo: protect this route with nginx or disable in production
+        AllowAnonymous();
+    }
 
-        protected override async Task HandleAsync(EmptyRequest r, CancellationToken ct)
+    public override async Task HandleAsync(EmptyRequest r, CancellationToken ct)
+    {
+        if (await CloudFlareService.PurgeCacheAsync())
         {
-            if (await CloudFlareService.PurgeCacheAsync())
-            {
-                await SendAsync("SUCCESS!!!");
-                return;
-            }
-            else
-            {
-                ThrowError("FAILED TO CLEAR CLOUDFLARE CACHE. CHECK APP LOG.");
-            }
+            await SendAsync("SUCCESS!!!");
+            return;
+        }
+        else
+        {
+            ThrowError("FAILED TO CLEAR CLOUDFLARE CACHE. CHECK APP LOG.");
         }
     }
 }

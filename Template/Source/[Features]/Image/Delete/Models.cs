@@ -1,8 +1,7 @@
-﻿
-namespace Image.Delete
+﻿namespace Image.Delete;
+
+public class Request
 {
-    public class Request
-    {
-        public string ID { get; set; }
-    }
+    public string ID { get; set; }
 }
+

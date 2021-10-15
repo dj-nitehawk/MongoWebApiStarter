@@ -1,10 +1,10 @@
-﻿using FastEndpoints;
-using FastEndpoints.Security;
-using Microsoft.AspNetCore.Http.Json;
-using Microsoft.Extensions.Options;
-using MongoDB.Entities;
+﻿global using FastEndpoints;
+global using FastEndpoints.Security;
+global using MongoDB.Entities;
 using MongoWebApiStarter;
 using MongoWebApiStarter.Services;
+using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder();
 var configSection = builder.Configuration.GetSection(nameof(Settings));

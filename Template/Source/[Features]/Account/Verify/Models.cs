@@ -1,8 +1,8 @@
-﻿namespace Account.Verify
+﻿namespace Account.Verify;
+
+public class Request
 {
-    public class Request
-    {
-        public string ID { get; set; }
-        public string Code { get; set; }
-    }
+    public string ID { get; set; }
+    public string Code { get; set; }
 }
+

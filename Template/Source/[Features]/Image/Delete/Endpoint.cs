@@ -1,19 +1,17 @@
-﻿using FastEndpoints;
+﻿namespace Image.Delete;
 
-namespace Image.Delete
+public class Endpoint : Endpoint<Request>
 {
-    public class Endpoint : Endpoint<Request>
+    public override void Configure()
     {
-        public Endpoint()
-        {
-            Verbs(Http.DELETE);
-            Routes("/image/{ID}");
-        }
+        Verbs(Http.DELETE);
+        Routes("/image/{ID}");
+    }
 
-        protected override async Task HandleAsync(Request r, CancellationToken ct)
-        {
-            await Logic.Image.DeleteAsync(r.ID);
-            await SendOkAsync();
-        }
+    public override async Task HandleAsync(Request r, CancellationToken ct)
+    {
+        await Logic.Image.DeleteAsync(r.ID);
+        await SendOkAsync();
     }
 }
+

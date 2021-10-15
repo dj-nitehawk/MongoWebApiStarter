@@ -1,19 +1,17 @@
-﻿using MongoDB.Entities;
+﻿namespace Account.Get;
 
-namespace Account.Get
+public static class Data
 {
-    public static class Data
+    public static Task<Dom.Account> GetAccountAsync(string accountID)
     {
-        public static Task<Dom.Account> GetAccountAsync(string accountID)
-        {
-            return DB.Find<Dom.Account>()
-                     .Match(a => a.ID == accountID)
-                     .ProjectExcluding(a => new
-                     {
-                         a.PasswordHash,
-                         a.EmailVerificationCode
-                     })
-                     .ExecuteSingleAsync();
-        }
+        return DB.Find<Dom.Account>()
+                 .Match(a => a.ID == accountID)
+                 .ProjectExcluding(a => new
+                 {
+                     a.PasswordHash,
+                     a.EmailVerificationCode
+                 })
+                 .ExecuteSingleAsync();
     }
 }
+

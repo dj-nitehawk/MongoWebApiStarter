@@ -1,50 +1,49 @@
-﻿using FastEndpoints;
-using FastEndpoints.Security;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using MongoWebApiStarter;
 using MongoWebApiStarter.Auth;
-namespace Account.Login
+
+namespace Account.Login;
+
+public class Endpoint : Endpoint<Request, Response>
 {
-    public class Endpoint : Endpoint<Request, Response>
+    public IOptions<Settings> Settings { get; set; }
+
+    public override void Configure()
     {
-        public IOptions<Settings> Settings { get; set; }
+        Verbs(Http.POST);
+        Routes("/account/login");
+        AllowAnonymous();
+    }
 
-        public Endpoint()
+    public override async Task HandleAsync(Request r, CancellationToken ct)
+    {
+        var acc = await Data.GetAccountAsync(r.UserName);
+
+        if (acc is not null)
         {
-            Verbs(Http.POST);
-            Routes("/account/login");
-            AllowAnnonymous();
+            if (!BCrypt.Net.BCrypt.Verify(r.Password, acc.PasswordHash))
+                ThrowError("The supplied credentials are invalid. Please try again...");
+        }
+        else
+        {
+            ThrowError("Sorry, couldn't locate your account...");
         }
 
-        protected override async Task HandleAsync(Request r, CancellationToken ct)
-        {
-            var acc = await Data.GetAccountAsync(r.UserName);
+        if (acc?.IsEmailVerified is false)
+            ThrowError("Please verify your email address before logging in...");
 
-            if (acc is not null)
-            {
-                if (!BCrypt.Net.BCrypt.Verify(r.Password, acc.PasswordHash))
-                    ThrowError("The supplied credentials are invalid. Please try again...");
-            }
-            else
-            {
-                ThrowError("Sorry, couldn't locate your account...");
-            }
+        var expiryDate = DateTime.UtcNow.AddDays(1);
 
-            if (acc?.IsEmailVerified is false)
-                ThrowError("Please verify your email address before logging in...");
+        Response.FullName = $"{acc.Title} {acc.FirstName} {acc.LastName}";
+        Response.Token.Expiry = expiryDate.ToLocal().ToString("yyyy-MM-ddTHH:mm:ss");
+        Response.Token.Value = JWTBearer.CreateToken(
+            signingKey: Settings.Value.Auth.SigningKey,
+            expireAt: expiryDate,
+            permissions: new Allow().Select(x => x.PermissionCode),
+            claims: (Claim.AccountID, acc.ID));
+        Response.PermissionSet = new Allow().Select(x => x.PermissionName);
 
-            var expiryDate = DateTime.UtcNow.AddDays(1);
-
-            Response.FullName = $"{acc.Title} {acc.FirstName} {acc.LastName}";
-            Response.Token.Expiry = expiryDate.ToLocal().ToString("yyyy-MM-ddTHH:mm:ss");
-            Response.Token.Value = JWTBearer.CreateToken(
-                signingKey: Settings.Value.Auth.SigningKey,
-                expireAt: expiryDate,
-                permissions: new Allow().Select(x => x.PermissionCode),
-                claims: (Claim.AccountID, acc.ID));
-            Response.PermissionSet = new Allow().Select(x => x.PermissionName);
-
-            await SendAsync(Response, cancellation: ct);
-        }
+        await SendAsync(Response, cancellation: ct);
     }
 }
+

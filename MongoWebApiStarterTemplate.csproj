@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     
-    <PackageVersion>7.1.1</PackageVersion>
+    <PackageVersion>7.2.0</PackageVersion>
     
     <PackageReleaseNotes>
       - upgrade dependancies
+      - update vs extension
+      - update linux config
       - misc. code changes
     </PackageReleaseNotes>
     
