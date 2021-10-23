@@ -12,36 +12,17 @@ public class Endpoint : Endpoint<Request, object>
         Verbs(Http.POST, Http.PUT);
         Routes("/image");
         AllowFileUploads();
-        AllowAnonymous();
+        AllowAnonymous(Http.POST);
     }
 
     public override async Task HandleAsync(Request r, CancellationToken ct)
     {
-        if (HttpMethod is Http.PUT && User?.Identity?.IsAuthenticated is false)
-        {
-            await SendUnauthorizedAsync();
-            return;
-        }
-
-        var file = Files[0];
-
-        if (file is null)
-            ThrowError("No file data was detected in the request!");
-
-        if (!IsAllowedSize(file.Length))
-            AddError("The file size is not acceptable!");
-
-        if (!IsAllowedType(file.ContentType))
-            AddError("Only JPG or PNG format is allowed!");
-
-        ThrowIfAnyErrors();
-
         if (r.ID.HasValue())
             _ = Data.DeleteImageAsync(r.ID); //delete old image (cause of cloudflare caching) and nullify image ID so a new ID will be set
 
         r.ID = null;
 
-        using var img = SixLabors.ImageSharp.Image.Load(file.OpenReadStream());
+        using var img = SixLabors.ImageSharp.Image.Load(r.File.OpenReadStream());
         img.Mutate(
             x => x.Resize(new ResizeOptions
             {
@@ -55,18 +36,5 @@ public class Endpoint : Endpoint<Request, object>
 
         await SendAsync(new { ImageID = newID });
     }
-
-    public bool IsAllowedType(string contentType)
-    {
-        return (new[]
-        {
-                "image/jpeg",
-                "image/png"
-            })
-        .Contains(contentType.ToLower());
-    }
-
-    public bool IsAllowedSize(long fileLength) =>
-        fileLength >= 100 && fileLength <= 10485760;
 }
 

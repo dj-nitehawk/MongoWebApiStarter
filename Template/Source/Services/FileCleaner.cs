@@ -2,7 +2,7 @@
 
 public class FileCleanerService : BackgroundService
 {
-    //todo: remove this background service and let mongodb auto purge unlinked images with index
+    //todo: remove this background service and let mongodb auto purge unlinked images with a TTL index
 
     private readonly ILogger log;
 

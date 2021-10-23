@@ -17,14 +17,14 @@ public class AccountTests
         .WithWebHostBuilder(b =>
         {
             b.UseEnvironment("Testing");//not working
-                b.ConfigureServices(s =>
+            b.ConfigureServices(s =>
+        {
+            s.Configure<Settings>(x =>
             {
-                s.Configure<Settings>(x =>
-                {
-                    x.Database.Name += "-TEST";
-                    x.FileBucket.Name += "-TEST";
-                });
+                x.Database.Name += "-TEST";
+                x.FileBucket.Name += "-TEST";
             });
+        });
 
         })
         .CreateClient();

@@ -8,22 +8,19 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <NoWarn>1701;1702;CA2016;RCS1090;CA2254</NoWarn>
+    <NoWarn>1701;1702;CA2016;RCS1090;CA2254;CS8618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="[Features]\API-Reference-Postman-Export.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
-    <PackageReference Include="FastEndpoints" Version="2.0.0" />
-    <PackageReference Include="FastEndpoints.Security" Version="2.0.0" />
+    <PackageReference Include="FastEndpoints" Version="2.7.1" />
+    <PackageReference Include="FastEndpoints.Security" Version="2.7.1" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="2.7.1" />
     <PackageReference Include="Flurl" Version="3.0.2" />
     <PackageReference Include="Flurl.Http" Version="3.2.0" />
     <PackageReference Include="MailKit" Version="2.15.0" />
     <PackageReference Include="MlkPwgen" Version="0.3.0" />
-    <PackageReference Include="NodaTime" Version="3.0.7" />
+    <PackageReference Include="NodaTime" Version="3.0.9" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
     <PackageReference Include="MongoDB.Entities" Version="20.25.1" />
@@ -31,6 +28,10 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="MongoWebApiStarter.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\launchSettings.json" CopyToOutputDirectory="Always"/>
   </ItemGroup>
 
 </Project>

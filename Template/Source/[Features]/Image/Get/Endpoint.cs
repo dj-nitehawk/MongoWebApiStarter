@@ -4,8 +4,7 @@ public class Endpoint : Endpoint<Request>
 {
     public override void Configure()
     {
-        Verbs(Http.GET);
-        Routes("/image/{ID}.jpg"); //jpg extension is used so files can be cached by CDNs and browsers
+        Get("/image/{ID}.jpg"); //jpg extension is used so files can be cached by CDNs and browsers
         AllowAnonymous();
     }
 

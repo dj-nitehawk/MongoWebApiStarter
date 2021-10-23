@@ -6,8 +6,7 @@ public class Endpoint : Endpoint<Request, Response>
 {
     public override void Configure()
     {
-        Verbs(Http.GET);
-        Routes("/account/get");
+        Get("/account/get");
         Permissions(Allow.Account_Read);
     }
 

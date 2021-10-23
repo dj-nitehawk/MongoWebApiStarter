@@ -6,8 +6,7 @@ public class Endpoint : EndpointWithoutRequest
 {
     public override void Configure()
     {
-        Verbs(Http.GET);
-        Routes("/purge-cf-cache");//todo: protect this route with nginx or disable in production
+        Get("/purge-cf-cache");//todo: protect this route with nginx or disable in production
         AllowAnonymous();
     }
 

@@ -18,7 +18,7 @@ public class EmailService : BackgroundService
     {
         this.settings = settings.Value.Email;
         isProduction = environment.IsProduction();
-        isTesting = environment.IsEnvironment("Testing");//not working
+        //isTesting = environment.IsEnvironment("Testing");//not working
         isTesting = environment.ApplicationName == "testhost";
         this.log = log;
     }

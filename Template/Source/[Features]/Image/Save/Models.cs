@@ -1,35 +1,47 @@
-﻿using FastEndpoints.Validation;
-
-namespace Image.Save;
+﻿namespace Image.Save;
 
 public class Request : IRequest<Dom.Image>
 {
     public string? ID { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }
+    public IFormFile File { get; set; }
 
-    public Dom.Image ToEntity()
+    public Dom.Image ToEntity() => new()
     {
-        return new Dom.Image
-        {
-            Height = Height,
-            Width = Width,
-            ID = ID
-        };
-    }
+        Height = Height,
+        Width = Width,
+        ID = ID
+    };
 }
 
 public class Validator : Validator<Request>
 {
     public Validator()
     {
-        RuleFor(i => i.Width)
+        RuleFor(x => x.Width)
             .GreaterThan(10).WithMessage("Image width too small")
             .LessThan(2000).WithMessage("Image width is too large");
 
-        RuleFor(i => i.Height)
+        RuleFor(x => x.Height)
             .GreaterThan(10).WithMessage("Image height too small")
             .LessThan(2000).WithMessage("Image width is too large");
+
+        RuleFor(x => x.File)
+            .NotEmpty().WithMessage("File is required!");
+
+        RuleFor(x => x.File)
+            .Must(f => IsAllowedType(f.ContentType)).WithMessage("Invalid image type!")
+            .Must(f => IsAllowedSize(f.Length)).WithMessage("File is too small!");
     }
+
+    private static bool IsAllowedType(string contentType) => new[]
+{
+        "image/jpeg",
+        "image/png"
+    }.Contains(contentType.ToLower());
+
+    private static bool IsAllowedSize(long fileLength) =>
+        fileLength >= 100 && fileLength <= 10485760;
 }
 

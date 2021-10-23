@@ -11,9 +11,9 @@ public class _001_seed_default_roles : IMigration
 
         var manager = new Role
         {
-            ID = "5ee2298f74057809db6cf5bf",
+            ID = Roles.Manager,
             SystemRole = true,
-            Name = "Manager",
+            Name = nameof(Roles.Manager),
             Permissions = new[] //ONLY THE FOLLOWING:
             {
                     Allow.Account_Read,
@@ -28,10 +28,10 @@ public class _001_seed_default_roles : IMigration
 
         var employee = new Role
         {
-            ID = "5ee2298f74057809db6cf5c0",
+            ID = Roles.Employee,
             SystemRole = true,
-            Name = "Employee",
-            Permissions = new Allow().Select(x => x.PermissionCode).Except(new[] //EVERYTHING EXCLUDING FOLLOWING:
+            Name = nameof(Roles.Employee),
+            Permissions = new Allow().AllCodes().Except(new[] //EVERYTHING EXCLUDING FOLLOWING:
             {
                     Allow.Employee_Create,
                     Allow.Employee_Delete,

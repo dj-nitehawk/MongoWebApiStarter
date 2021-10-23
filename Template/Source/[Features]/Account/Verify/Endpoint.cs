@@ -4,8 +4,7 @@ public class Endpoint : Endpoint<Request>
 {
     public override void Configure()
     {
-        Verbs(Http.POST);
-        Routes("/account/validate");
+        Post("/account/validate");
         AllowAnonymous();
     }
 

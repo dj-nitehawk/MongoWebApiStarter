@@ -1,5 +1,4 @@
 ﻿using Dom;
-using FastEndpoints.Validation;
 using MongoWebApiStarter;
 using MongoWebApiStarter.Auth;
 

@@ -7,7 +7,7 @@ namespace MongoWebApiStarter;
 public record Notification
 {
     private static readonly Dictionary<string, NotificationTemplate> templates = new Dictionary<string, NotificationTemplate>();
-    private static readonly Regex rx = new Regex("{.*}", RegexOptions.Compiled);
+    private static readonly Regex rx = new("{.*}", RegexOptions.Compiled);
 
     public static async Task Initialize()
     {
