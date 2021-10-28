@@ -11,17 +11,11 @@ public class Endpoint : Endpoint<Request, Response>
     {
         Verbs(Http.POST, Http.PUT);
         Routes("/account/save");
-        AllowAnonymous();
+        AllowAnonymous(Http.POST);
     }
 
     public override async Task HandleAsync(Request r, CancellationToken ct)
     {
-        if (HttpMethod is Http.PUT && User?.Identity?.IsAuthenticated is false)
-        {
-            await SendUnauthorizedAsync();
-            return;
-        }
-
         await CheckIfEmailValidationIsNeededAsync(r);
 
         var acc = r.ToEntity();
