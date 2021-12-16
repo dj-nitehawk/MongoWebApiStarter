@@ -6,26 +6,26 @@ namespace MongoWebApiStarter.Services;
 
 public class CloudFlareService
 {
-    private static readonly string base_url = "https://api.cloudflare.com/client/v4";
-    private static Settings? settings;
-    private static ILogger? log;
+    private const string base_url = "https://api.cloudflare.com/client/v4";
+    private readonly Settings.CloudFlareSettings? settings;
+    private readonly ILogger? log;
 
     public CloudFlareService(IOptions<Settings> appSettings, ILogger<CloudFlareService> logger)
     {
-        settings = appSettings.Value;
+        settings = appSettings.Value.CloudFlare;
         log = logger;
         FlurlHttp.Configure(x => x.Timeout = TimeSpan.FromSeconds(10));
     }
 
-    public static async Task<bool> PurgeCacheAsync()
+    public async Task<bool> PurgeCacheAsync()
     {
         try
         {
             var response = await base_url
                 .AppendPathSegment("zones")
-                .AppendPathSegment(settings?.CloudFlare.ZoneID)
+                .AppendPathSegment(settings?.ZoneID)
                 .AppendPathSegment("purge_cache")
-                .WithOAuthBearerToken(settings?.CloudFlare.Token)
+                .WithOAuthBearerToken(settings?.Token)
                 .PostJsonAsync(new { purge_everything = true })
                 .ReceiveJson<CfPurgeCacheResponse>();
 

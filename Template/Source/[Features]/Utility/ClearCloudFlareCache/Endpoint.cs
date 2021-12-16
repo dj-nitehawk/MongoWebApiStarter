@@ -4,6 +4,8 @@ namespace Utility.ClearCloudFlareCache;
 
 public class Endpoint : EndpointWithoutRequest
 {
+    public CloudFlareService CloudFlare { get; set; }
+
     public override void Configure()
     {
         Get("/purge-cf-cache");//todo: protect this route with nginx or disable in production
@@ -12,7 +14,7 @@ public class Endpoint : EndpointWithoutRequest
 
     public override async Task HandleAsync(EmptyRequest r, CancellationToken ct)
     {
-        if (await CloudFlareService.PurgeCacheAsync())
+        if (await CloudFlare.PurgeCacheAsync())
         {
             await SendAsync("SUCCESS!!!");
             return;
