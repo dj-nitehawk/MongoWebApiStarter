@@ -2,11 +2,11 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.3.1</PackageVersion>
+        <PackageVersion>7.4.0</PackageVersion>
 
         <PackageReleaseNotes>
+            - improve cloudflare cache cleaner service
             - upgrade dependancies
-            - misc. code changes
         </PackageReleaseNotes>
 
         <PackageType>Template</PackageType>

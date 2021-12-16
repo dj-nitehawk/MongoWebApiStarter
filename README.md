@@ -11,7 +11,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 
 ### Platform
 - base framework: .net 6
-- api/web-service framework: [FastEndpoints](https://github.com/dj-nitehawk/FastEndpoints)
+- api/web-service framework: [FastEndpoints](https://fast-endpoints.com/)
 - language: c#
 - database: mongodb
 
@@ -35,7 +35,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 - image uploading & retrieval
 
 #### Data Access
-- data access done using [mongodb.entities](https://github.com/dj-nitehawk/MongoDB.Entities) library
+- data access done using [mongodb.entities](https://mongodb-entities.com/) library
 - most data access logic is self contained in each vertical slice.
 - shared data access logic is located in the Logic.* namespace.
 
