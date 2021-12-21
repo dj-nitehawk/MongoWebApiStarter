@@ -2,10 +2,10 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.4.0</PackageVersion>
+        <PackageVersion>7.5.0</PackageVersion>
 
         <PackageReleaseNotes>
-            - improve cloudflare cache cleaner service
+            - refactor dto to/from domain entity mapping
             - upgrade dependancies
         </PackageReleaseNotes>
 

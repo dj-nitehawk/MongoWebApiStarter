@@ -1,9 +1,10 @@
-﻿using MlkPwgen;
+﻿using Dom;
+using MlkPwgen;
 using MongoWebApiStarter;
 
 namespace Account.Save;
 
-public class Endpoint : Endpoint<Request, Response>
+public class Endpoint : Endpoint<Request, Response, Dom.Account>
 {
     private bool needsEmailVerification;
 
@@ -18,7 +19,7 @@ public class Endpoint : Endpoint<Request, Response>
     {
         await CheckIfEmailValidationIsNeededAsync(r);
 
-        var acc = r.ToEntity();
+        var acc = MapToEntity(r);
 
         await Data.CreateOrUpdateAsync(acc);
 
@@ -29,6 +30,25 @@ public class Endpoint : Endpoint<Request, Response>
 
         await SendAsync(Response, cancellation: ct);
     }
+
+    public override Dom.Account MapToEntity(Request r) => new()
+    {
+        ID = r.AccountID,
+        Email = r.EmailAddress.LowerCase(),
+        PasswordHash = r.Password.SaltedHash(),
+        Title = r.Title,
+        FirstName = r.FirstName.TitleCase(),
+        LastName = r.LastName.TitleCase(),
+        Address = new Address
+        {
+            Street = r.Street.TitleCase(),
+            City = r.City,
+            State = r.State,
+            ZipCode = r.ZipCode,
+            CountryCode = r.CountryCode
+        },
+        Mobile = r.Mobile,
+    };
 
     private async Task SendVerificationEmailAsync(Dom.Account a)
     {

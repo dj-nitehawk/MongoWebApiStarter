@@ -1,18 +1,11 @@
 ﻿namespace Image.Save;
 
-public class Request : IRequest<Dom.Image>
+public class Request
 {
     public string? ID { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }
     public IFormFile File { get; set; }
-
-    public Dom.Image ToEntity() => new()
-    {
-        Height = Height,
-        Width = Width,
-        ID = ID
-    };
 }
 
 public class Validator : Validator<Request>

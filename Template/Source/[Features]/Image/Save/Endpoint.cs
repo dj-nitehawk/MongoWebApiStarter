@@ -5,7 +5,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace Image.Save;
 
-public class Endpoint : Endpoint<Request, object>
+public class Endpoint : Endpoint<Request, object, Dom.Image>
 {
     public override void Configure()
     {
@@ -18,7 +18,7 @@ public class Endpoint : Endpoint<Request, object>
     public override async Task HandleAsync(Request r, CancellationToken ct)
     {
         if (r.ID.HasValue())
-            _ = Data.DeleteImageAsync(r.ID); //delete old image (cause of cloudflare caching) and nullify image ID so a new ID will be set
+            _ = Data.DeleteImageAsync(r.ID!); //delete old image (cause of cloudflare caching) and nullify image ID so a new ID will be set
 
         r.ID = null;
 
@@ -32,9 +32,16 @@ public class Endpoint : Endpoint<Request, object>
         using var memStream = new MemoryStream();
         img.SaveAsJpeg(memStream, new JpegEncoder { Quality = 80 });
 
-        var newID = await Data.UploadAsync(r.ToEntity(), memStream);
+        var newID = await Data.UploadAsync(MapToEntity(r), memStream);
 
         await SendAsync(new { ImageID = newID });
     }
+
+    public override Dom.Image MapToEntity(Request r) => new()
+    {
+        Height = r.Height,
+        Width = r.Width,
+        ID = r.ID
+    };
 }
 
