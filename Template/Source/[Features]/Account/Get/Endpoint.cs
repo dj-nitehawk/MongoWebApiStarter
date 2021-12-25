@@ -2,7 +2,7 @@
 
 namespace Account.Get;
 
-public class Endpoint : Endpoint<Request, Response, Dom.Account>
+public class Endpoint : Endpoint<Request, Response, Mapper>
 {
     public override void Configure()
     {
@@ -20,24 +20,7 @@ public class Endpoint : Endpoint<Request, Response, Dom.Account>
             return;
         }
 
-        await SendAsync(MapFromEntity(acc), 200, ct);
+        await SendAsync(Map.FromEntity(acc), 200, ct);
     }
-
-    public override Response MapFromEntity(Dom.Account a) => new()
-    {
-        AccountID = a.ID,
-        City = a.Address.City,
-        CountryCode = a.Address.CountryCode,
-        EmailAddress = a.Email,
-        FirstName = a.FirstName,
-        IsEmailVerified = a.IsEmailVerified,
-        LastName = a.LastName,
-        Mobile = a.Mobile,
-        Password = "",
-        State = a.Address.State,
-        Street = a.Address.Street,
-        Title = a.Title,
-        ZipCode = a.Address.ZipCode
-    };
 }
 

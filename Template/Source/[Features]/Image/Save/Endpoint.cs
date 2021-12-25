@@ -5,7 +5,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace Image.Save;
 
-public class Endpoint : Endpoint<Request, object, Dom.Image>
+public class Endpoint : Endpoint<Request, object, Mapper>
 {
     public override void Configure()
     {
@@ -32,16 +32,9 @@ public class Endpoint : Endpoint<Request, object, Dom.Image>
         using var memStream = new MemoryStream();
         img.SaveAsJpeg(memStream, new JpegEncoder { Quality = 80 });
 
-        var newID = await Data.UploadAsync(MapToEntity(r), memStream);
+        var newID = await Data.UploadAsync(Map.ToEntity(r), memStream);
 
         await SendAsync(new { ImageID = newID });
     }
-
-    public override Dom.Image MapToEntity(Request r) => new()
-    {
-        Height = r.Height,
-        Width = r.Width,
-        ID = r.ID
-    };
 }
 

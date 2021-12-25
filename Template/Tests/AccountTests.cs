@@ -25,7 +25,6 @@ public class AccountTests
                 x.FileBucket.Name += "-TEST";
             });
         });
-
         })
         .CreateClient();
 
@@ -55,7 +54,7 @@ public class AccountTests
                 ZipCode = "10100",
             });
 
-        accountID = res.ID;
+        accountID = res?.ID!;
 
         rsp?.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         res?.EmailSent.Should().BeTrue();
@@ -108,7 +107,7 @@ public class AccountTests
                 Password = "qqqqq123Q"
             });
 
-        jwtToken = res.Token.Value;
+        jwtToken = res?.Token.Value!;
 
         rsp?.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         res?.FullName.Should().Be($"{acc.Title} {acc.FirstName} {acc.LastName}");

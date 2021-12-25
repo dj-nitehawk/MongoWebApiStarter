@@ -35,6 +35,6 @@ public class Validator : Validator<Request>
     }.Contains(contentType.ToLower());
 
     private static bool IsAllowedSize(long fileLength) =>
-        fileLength >= 100 && fileLength <= 10485760;
+        fileLength is >= 100 and <= 10485760;
 }
 

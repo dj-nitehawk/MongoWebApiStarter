@@ -2,10 +2,11 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.5.1</PackageVersion>
+        <PackageVersion>7.6.0</PackageVersion>
 
         <PackageReleaseNotes>
-            - refactor dto to/from domain entity mapping
+            - implement separate domain entity mappers
+            - update vs extension
             - upgrade dependancies
         </PackageReleaseNotes>
 
