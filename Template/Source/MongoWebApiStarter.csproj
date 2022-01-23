@@ -13,12 +13,12 @@
 
     <ItemGroup>
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
-        <PackageReference Include="FastEndpoints" Version="2.16.0" />
-        <PackageReference Include="FastEndpoints.Security" Version="2.16.0" />
-        <PackageReference Include="FastEndpoints.Swagger" Version="2.16.0" />
-        <PackageReference Include="Flurl" Version="3.0.2" />
-        <PackageReference Include="Flurl.Http" Version="3.2.0" />
-        <PackageReference Include="MailKit" Version="3.0.0" />
+        <PackageReference Include="FastEndpoints" Version="3.0.0" />
+        <PackageReference Include="FastEndpoints.Security" Version="3.0.0" />
+        <PackageReference Include="FastEndpoints.Swagger" Version="3.0.0" />
+        <PackageReference Include="Flurl" Version="3.0.3" />
+        <PackageReference Include="Flurl.Http" Version="3.2.1" />
+        <PackageReference Include="MailKit" Version="3.1.0" />
         <PackageReference Include="MlkPwgen" Version="0.3.0" />
         <PackageReference Include="NodaTime" Version="3.0.9" />
         <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />

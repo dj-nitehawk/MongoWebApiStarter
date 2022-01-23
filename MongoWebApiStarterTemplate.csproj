@@ -2,12 +2,10 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.6.0</PackageVersion>
+        <PackageVersion>7.6.1</PackageVersion>
 
         <PackageReleaseNotes>
-            - implement separate domain entity mappers
-            - update vs extension
-            - upgrade dependancies
+            - upgrade fastendpoints to v3.0
         </PackageReleaseNotes>
 
         <PackageType>Template</PackageType>

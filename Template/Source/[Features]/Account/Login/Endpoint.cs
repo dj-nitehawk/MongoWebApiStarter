@@ -33,7 +33,7 @@ public class Endpoint : Endpoint<Request, Response>
 
         var expiryDate = DateTime.UtcNow.AddDays(1);
 
-        Response.FullName = $"{acc.Title} {acc.FirstName} {acc.LastName}";
+        Response.FullName = $"{acc!.Title} {acc.FirstName} {acc.LastName}";
         Response.Token.Expiry = expiryDate.ToLocal().ToString("yyyy-MM-ddTHH:mm:ss");
         Response.Token.Value = JWTBearer.CreateToken(
             signingKey: Settings.Value.Auth.SigningKey,
