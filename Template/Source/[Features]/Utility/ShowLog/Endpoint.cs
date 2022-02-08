@@ -8,7 +8,7 @@ public class Endpoint : EndpointWithoutRequest
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(EmptyRequest req, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
         if (File.Exists("output.log"))
         {
@@ -26,4 +26,3 @@ public class Endpoint : EndpointWithoutRequest
         }
     }
 }
-

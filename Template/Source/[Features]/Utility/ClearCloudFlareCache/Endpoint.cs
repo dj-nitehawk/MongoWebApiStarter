@@ -12,7 +12,7 @@ public class Endpoint : EndpointWithoutRequest
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(EmptyRequest r, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
         if (await CloudFlare.PurgeCacheAsync())
         {

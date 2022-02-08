@@ -2,10 +2,11 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.6.1</PackageVersion>
+        <PackageVersion>7.6.2</PackageVersion>
 
         <PackageReleaseNotes>
-            - upgrade fastendpoints to v3.0
+            - upgrade dependancies to latest
+            - update EndpointWithoutRequest endpoints
         </PackageReleaseNotes>
 
         <PackageType>Template</PackageType>
