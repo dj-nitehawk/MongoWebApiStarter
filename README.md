@@ -18,7 +18,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 ### Vertical Slice Architecture
 - each use case/action/feature is isolated in it's own namespace (vertical slice).
 - there is no cross contamination between feature slices.
-- domain entities are contained in a seperate namespace as they are cross contaminating by nature.
+- domain entities are contained in a separate namespace as they are cross contaminating by nature.
 - does not use the mediator pattern like most other templates.
 
 #### Misc. Features
@@ -46,7 +46,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 #### Bonuses
 
 ##### Visual Studio New Item Template
-a visual studio extension is availabe in the `.vs-new-item-template` folder that will enable you to quickly add a new vertical slice feature file set.
+a [visual studio extension](https://marketplace.visualstudio.com/items?itemName=dj-nitehawk.FastEndpointsVSExtension) is available to enable you to quickly add a new vertical slice feature file set.
 after you install the `vsix`, you will have a new item called "FastEndpoints Feature FileSet" in the "add > new item" dialog of visual studio.
 
 ##### Linux Server Configuration

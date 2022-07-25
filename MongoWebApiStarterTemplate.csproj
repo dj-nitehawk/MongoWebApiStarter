@@ -2,12 +2,7 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.6.2</PackageVersion>
-
-        <PackageReleaseNotes>
-            - upgrade dependancies to latest
-            - update EndpointWithoutRequest endpoints
-        </PackageReleaseNotes>
+        <PackageVersion>7.6.3</PackageVersion>
 
         <PackageType>Template</PackageType>
         <PackageId>MongoWebApiStarter</PackageId>

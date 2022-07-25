@@ -1,1 +1,3 @@
-- upgrade mongodb library to latest
+- fix project to support latest `FastEndpoints`
+- move global usings to separate file
+- upgrade project dependancies to latest

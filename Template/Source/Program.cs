@@ -1,8 +1,4 @@
-﻿global using FastEndpoints;
-global using FastEndpoints.Security;
-global using FastEndpoints.Validation;
-global using MongoDB.Entities;
-using FastEndpoints.Swagger;
+﻿using FastEndpoints.Swagger;
 using Microsoft.Extensions.Options;
 using MongoWebApiStarter;
 using MongoWebApiStarter.Services;
