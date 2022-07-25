@@ -1,0 +1,41 @@
+name: Publish Nuget Package
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-replica-set: MyRep
+
+      - name: Setup .Net SDK
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.x
+
+      - name: Run Tests
+        run: dotnet test Template/Tests/MongoWebApiStarter.Tests.csproj --configuration Release --verbosity minimal
+
+      - name: Make Nuget Packages
+        run: dotnet pack MongoWebApiStarterTemplate.csproj -c Release
+
+      - name: Publish To Nuget
+        run: dotnet nuget push /bin/Release/**/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_KEY }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: ${{ !contains(github.ref, 'beta') }}
+        with:
+          draft: false
+          name: ${{ github.ref_name }} Release
+          body_path: changelog.md
