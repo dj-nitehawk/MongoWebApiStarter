@@ -1,3 +1,4 @@
-- fix project to support latest `FastEndpoints`
-- move global usings to separate file
-- upgrade project dependancies to latest
+- upgrade dependencies to latest
+- improve nullable support in extension methods
+- suppress `CS8618` via `.editorconfig` files instead of globally
+- code cleanup & minor refactors

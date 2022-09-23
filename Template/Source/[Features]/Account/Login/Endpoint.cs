@@ -45,4 +45,3 @@ public class Endpoint : Endpoint<Request, Response>
         await SendAsync(Response, cancellation: ct);
     }
 }
-

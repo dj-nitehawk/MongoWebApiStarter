@@ -6,7 +6,7 @@ namespace MongoWebApiStarter;
 
 public record Notification
 {
-    private static readonly Dictionary<string, NotificationTemplate> templates = new Dictionary<string, NotificationTemplate>();
+    private static readonly Dictionary<string, NotificationTemplate> templates = new();
     private static readonly Regex rx = new("{.*}", RegexOptions.Compiled);
 
     public static async Task Initialize()
@@ -15,17 +15,15 @@ public record Notification
             templates.Add(t.ID, t);
     }
 
-#pragma warning disable CS8618
-    public string ToName { get; init; }
-    public string ToEmail { get; init; }
-    public string ToMobile { get; init; }
+    public string ToName { get; init; } = null!;
+    public string ToEmail { get; init; } = null!;
+    public string ToMobile { get; init; } = null!;
     public bool SendEmail { get; init; }
     public bool SendSMS { get; init; }
-    public string Type { get; init; }
-#pragma warning restore CS8618
+    public string Type { get; init; } = null!;
 
-    private readonly HashSet<(string Name, string Value)> mergeFields = new HashSet<(string Name, string Value)>();
-    private readonly List<string> missingTags = new List<string>();
+    private readonly HashSet<(string Name, string Value)> mergeFields = new();
+    private readonly List<string> missingTags = new();
 
     public Notification Merge(string fieldName, string fieldValue)
     {
@@ -36,8 +34,8 @@ public record Notification
     public Task AddToSendingQueueAsync()
     {
         if (ToName.HasNoValue() ||
-            (SendEmail && ToEmail.HasNoValue()) ||
-            (SendSMS && ToMobile.HasNoValue()) ||
+           (SendEmail && ToEmail.HasNoValue()) ||
+           (SendSMS && ToMobile.HasNoValue()) ||
             Type.HasNoValue())
         {
             throw new ArgumentNullException("Unable to send notification without all required parameters!");
@@ -101,4 +99,3 @@ public record Notification
         return body;
     }
 }
-

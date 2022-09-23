@@ -48,4 +48,3 @@ public class Response
     public string ID { get; set; }
     public bool EmailSent { get; set; }
 }
-

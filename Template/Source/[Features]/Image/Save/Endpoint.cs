@@ -10,9 +10,9 @@ public class Endpoint : Endpoint<Request, object, Mapper>
     public override void Configure()
     {
         Verbs(Http.POST, Http.PUT);
+        AllowAnonymous(Http.POST);
         Routes("/image");
         AllowFileUploads();
-        AllowAnonymous(Http.POST);
     }
 
     public override async Task HandleAsync(Request r, CancellationToken ct)

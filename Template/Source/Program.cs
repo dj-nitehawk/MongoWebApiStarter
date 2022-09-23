@@ -33,7 +33,7 @@ if (!app.Environment.IsProduction())
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseResponseCaching();
-app.UseFastEndpoints(c => c.SerializerOptions = o => o.PropertyNamingPolicy = null);
+app.UseFastEndpoints(c => c.Serializer.Options.PropertyNamingPolicy = null);
 
 var settings = app.Services.GetRequiredService<IOptions<Settings>>().Value;
 await DB.InitAsync(settings.Database.Name, settings.Database.Host);

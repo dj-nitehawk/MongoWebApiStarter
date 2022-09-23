@@ -13,4 +13,3 @@ public class Response : Model
     public string AccountID { get; set; }
     public bool IsEmailVerified { get; set; }
 }
-

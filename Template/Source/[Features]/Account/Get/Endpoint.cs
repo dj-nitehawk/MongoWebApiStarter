@@ -17,10 +17,10 @@ public class Endpoint : Endpoint<Request, Response, Mapper>
         if (acc is null)
         {
             await SendNotFoundAsync();
-            return;
         }
-
-        await SendAsync(Map.FromEntity(acc), 200, ct);
+        else
+        {
+            await SendAsync(Map.FromEntity(acc));
+        }
     }
 }
-

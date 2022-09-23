@@ -19,10 +19,9 @@ public static class Dates
     /// <param name="timeZone">The time zone to convert the DateTime in to</param>
     public static string ToDatePart(this DateTime UTCDateTime, string timeZone = default_timezone)
     {
-        if (UTCDateTime == default) throw new ArgumentException("Cannot convert default dates to local dates!");
-
-        return ToLocal(UTCDateTime, timeZone)
-                .ToString(year_month_date);
+        return UTCDateTime == default
+            ? throw new ArgumentException("Cannot convert default dates to local dates!")
+            : ToLocal(UTCDateTime, timeZone).ToString(year_month_date);
     }
 
     /// <summary>
@@ -32,10 +31,9 @@ public static class Dates
     /// <param name="timeZone">The time zone to convert the DateTime in to</param>
     public static string ToTimePart(this DateTime UTCDateTime, string timeZone = default_timezone)
     {
-        if (UTCDateTime == default) throw new ArgumentException("Cannot convert default dates to local dates!");
-
-        return ToLocal(UTCDateTime, timeZone)
-                .ToString(hour_minute);
+        return UTCDateTime == default
+            ? throw new ArgumentException("Cannot convert default dates to local dates!")
+            : ToLocal(UTCDateTime, timeZone).ToString(hour_minute);
     }
 
     /// <summary>
@@ -45,13 +43,13 @@ public static class Dates
     /// <param name="timeZone">The time zone to convert the DateTime in to</param>
     public static DateTime ToLocal(this DateTime UTCDateTime, string timeZone = default_timezone)
     {
-        if (UTCDateTime == default) throw new ArgumentException("Cannot convert default dates to local dates!");
-
-        if (UTCDateTime.Kind != DateTimeKind.Utc) throw new ArgumentException("The supplied date must be a UTC date/time!");
-
-        return Instant.FromDateTimeUtc(UTCDateTime)
-                      .InZone(DateTimeZoneProviders.Tzdb[timeZone])
-                      .ToDateTimeUnspecified();
+        return UTCDateTime == default
+            ? throw new ArgumentException("Cannot convert default dates to local dates!")
+            : UTCDateTime.Kind != DateTimeKind.Utc
+                ? throw new ArgumentException("The supplied date must be a UTC date/time!")
+                : Instant.FromDateTimeUtc(UTCDateTime)
+                         .InZone(DateTimeZoneProviders.Tzdb[timeZone])
+                         .ToDateTimeUnspecified();
     }
 
     /// <summary>
@@ -63,15 +61,14 @@ public static class Dates
     public static DateTime ToUTC(string date, string time = "00:00", string timeZone = default_timezone)
     {
         var result = LocalDateTimePattern
-            .CreateWithInvariantCulture(
-                $"{year_month_date} {hour_minute}")
+            .CreateWithInvariantCulture($"{year_month_date} {hour_minute}")
             .Parse(date + " " + time);
 
-        if (!result.Success) throw new InvalidPatternException(result.Exception.Message);
-
-        return result.Value
-            .InZoneStrictly(DateTimeZoneProviders.Tzdb[timeZone])
-            .ToDateTimeUtc();
+        return !result.Success
+            ? throw new InvalidPatternException(result.Exception.Message)
+            : result.Value
+                    .InZoneStrictly(DateTimeZoneProviders.Tzdb[timeZone])
+                    .ToDateTimeUtc();
     }
 
     /// <summary>
@@ -96,11 +93,9 @@ public static class Dates
     public static bool DateTimeFormatIsCorrect(string date, string time = "00:00")
     {
         var result = LocalDateTimePattern
-            .CreateWithInvariantCulture(
-                $"{year_month_date} {hour_minute}")
+            .CreateWithInvariantCulture($"{year_month_date} {hour_minute}")
             .Parse(date + " " + time);
 
         return result.Success;
     }
 }
-

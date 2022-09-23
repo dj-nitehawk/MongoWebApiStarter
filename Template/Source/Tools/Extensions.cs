@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace MongoWebApiStarter;
 
@@ -11,8 +12,7 @@ public static class Extensions
     /// </summary>
     public static string TitleCase(this string value)
     {
-        if (value.HasNoValue()) return value;
-        return txt.ToTitleCase(value.Trim());
+        return value.HasNoValue() ? value : txt.ToTitleCase(value.Trim());
     }
 
     /// <summary>
@@ -20,8 +20,7 @@ public static class Extensions
     /// </summary>
     public static string LowerCase(this string value)
     {
-        if (value.HasNoValue()) return value;
-        return txt.ToLower(value.Trim());
+        return value.HasNoValue() ? value : txt.ToLower(value.Trim());
     }
 
     /// <summary>
@@ -29,14 +28,13 @@ public static class Extensions
     /// </summary>
     public static string UpperCase(this string value)
     {
-        if (value.HasNoValue()) return value;
-        return txt.ToUpper(value.Trim());
+        return value.HasNoValue() ? value : txt.ToUpper(value.Trim());
     }
 
     /// <summary>
     /// Not a null or empty string
     /// </summary>
-    public static bool HasValue(this string? value)
+    public static bool HasValue([AllowNull, NotNullWhen(true)] this string? value)
     {
         return value != "null" && !string.IsNullOrEmpty(value);
     }
@@ -44,7 +42,7 @@ public static class Extensions
     /// <summary>
     /// Is either null or an empty string
     /// </summary>
-    public static bool HasNoValue(this string? value)
+    public static bool HasNoValue([AllowNull, NotNullWhen(false)] this string? value)
     {
         return value == "null" || string.IsNullOrEmpty(value);
     }
@@ -67,7 +65,7 @@ public static class Extensions
 
         if (password == null) return false;
 
-        bool meetsLengthRequirements = password.Length >= MIN_LENGTH && password.Length <= MAX_LENGTH;
+        bool meetsLengthRequirements = password.Length is >= MIN_LENGTH and <= MAX_LENGTH;
         bool hasUpperCaseLetter = false;
         bool hasLowerCaseLetter = false;
         bool hasDecimalDigit = false;

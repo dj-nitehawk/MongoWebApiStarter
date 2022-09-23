@@ -13,8 +13,6 @@ public class Account : Entity
     [Preserve] public bool IsEmailVerified { get; set; }
     [Preserve] public string EmailVerificationCode { get; set; }
 
-
-
     static Account()
     {
         DB.Index<Account>()

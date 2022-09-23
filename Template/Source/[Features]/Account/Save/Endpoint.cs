@@ -10,8 +10,8 @@ public class Endpoint : Endpoint<Request, Response, Mapper>
     public override void Configure()
     {
         Verbs(Http.POST, Http.PUT);
-        Routes("/account/save");
         AllowAnonymous(Http.POST);
+        Routes("/account/save");
     }
 
     public override async Task HandleAsync(Request r, CancellationToken ct)
@@ -53,13 +53,6 @@ public class Endpoint : Endpoint<Request, Response, Mapper>
     }
 
     private async Task CheckIfEmailValidationIsNeededAsync(Request r)
-    {
-        if (r.AccountID.HasNoValue())
-            needsEmailVerification = true;
-        else if (r.AccountID != await Data.GetAccountIDAsync(r.EmailAddress))
-            needsEmailVerification = true;
-        else
-            needsEmailVerification = false;
-    }
+        => needsEmailVerification = r.AccountID.HasNoValue() ||
+           r.AccountID != await Data.GetAccountIDAsync(r.EmailAddress);
 }
-

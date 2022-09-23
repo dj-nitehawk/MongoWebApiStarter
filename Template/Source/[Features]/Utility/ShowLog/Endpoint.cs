@@ -4,7 +4,7 @@ public class Endpoint : EndpointWithoutRequest
 {
     public override void Configure()
     {
-        Get("/show-log");
+        Get("/show-log"); //todo: protect this route with nginx
         AllowAnonymous();
     }
 

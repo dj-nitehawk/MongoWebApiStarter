@@ -1,15 +1,12 @@
-﻿using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-
-namespace Account.Verify;
+﻿namespace Account.Verify;
 
 public static class Data
 {
     public static async Task<bool> ValidateEmailAsync(string accountID, string code)
     {
-        var accExists = await DB.Queryable<Dom.Account>()
-                                .Where(a => a.ID == accountID && a.EmailVerificationCode == code)
-                                .AnyAsync();
+        var accExists = await DB.Find<Dom.Account>()
+                                .Match(a => a.ID == accountID && a.EmailVerificationCode == code)
+                                .ExecuteAnyAsync();
 
         if (!accExists) return false;
 
@@ -21,4 +18,3 @@ public static class Data
         return true;
     }
 }
-
