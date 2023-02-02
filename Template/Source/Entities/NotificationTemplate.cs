@@ -14,4 +14,3 @@ public class NotificationTemplate : IEntity
         throw new NotImplementedException();
     }
 }
-

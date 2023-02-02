@@ -13,17 +13,17 @@
 
     <ItemGroup>
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-        <PackageReference Include="FastEndpoints" Version="5.1.0" />
-        <PackageReference Include="FastEndpoints.Security" Version="5.1.0" />
-        <PackageReference Include="FastEndpoints.Swagger" Version="5.1.0" />
-        <PackageReference Include="Flurl" Version="3.0.6" />
+        <PackageReference Include="FastEndpoints" Version="5.7.0" />
+        <PackageReference Include="FastEndpoints.Security" Version="5.7.0" />
+        <PackageReference Include="FastEndpoints.Swagger" Version="5.7.0" />
+        <PackageReference Include="Flurl" Version="3.0.7" />
         <PackageReference Include="Flurl.Http" Version="3.2.4" />
-        <PackageReference Include="MailKit" Version="3.4.1" />
+        <PackageReference Include="MailKit" Version="3.5.0" />
         <PackageReference Include="MlkPwgen" Version="0.3.0" />
-        <PackageReference Include="NodaTime" Version="3.1.2" />
+        <PackageReference Include="NodaTime" Version="3.1.6" />
         <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
         <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-        <PackageReference Include="MongoDB.Entities" Version="20.26.5" />
+        <PackageReference Include="MongoDB.Entities" Version="21.0.2" />
     </ItemGroup>
 
     <ItemGroup>

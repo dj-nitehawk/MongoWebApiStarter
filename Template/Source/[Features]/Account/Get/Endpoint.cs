@@ -15,12 +15,8 @@ public class Endpoint : Endpoint<Request, Response, Mapper>
         var acc = await Data.GetAccountAsync(r.AccountID);
 
         if (acc is null)
-        {
             await SendNotFoundAsync();
-        }
         else
-        {
             await SendAsync(Map.FromEntity(acc));
-        }
     }
 }

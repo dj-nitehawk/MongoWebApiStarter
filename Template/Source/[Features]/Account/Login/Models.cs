@@ -14,4 +14,3 @@ public class Response
     public JwtToken Token { get; set; } = new JwtToken();
     public IEnumerable<string> PermissionSet { get; set; }
 }
-

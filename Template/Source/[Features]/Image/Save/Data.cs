@@ -14,4 +14,3 @@ public static class Data
         return image.ID;
     }
 }
-

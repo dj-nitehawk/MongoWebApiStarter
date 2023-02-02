@@ -53,4 +53,3 @@ public class _002_seed_notification_templates : IMigration
         }.SaveAsync();
     }
 }
-

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.7.0</PackageVersion>
+        <PackageVersion>7.8.0</PackageVersion>
 
         <PackageType>Template</PackageType>
         <PackageId>MongoWebApiStarter</PackageId>

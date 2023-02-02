@@ -8,4 +8,3 @@ public static class Claim
     public const string AccountID = "AccountID";
     public const string EmployeeID = "EmployeeID";
 }
-

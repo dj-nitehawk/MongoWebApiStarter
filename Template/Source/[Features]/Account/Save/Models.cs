@@ -36,7 +36,7 @@ public class Validator : Validator<Request>
 
     private static async Task<bool> EmailBelongsToSomeOneElseAsync(Request r)
     {
-        if (r.EmailAddress == null) return true;
+        if (r.EmailAddress is null) return true;
 
         var idForEmail = await Data.GetAccountIDAsync(r.EmailAddress);
         return idForEmail != r.AccountID;

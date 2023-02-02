@@ -5,29 +5,28 @@ using MongoWebApiStarter.Services;
 
 var builder = WebApplication.CreateBuilder();
 var configSection = builder.Configuration.GetSection(nameof(Settings));
-builder.Services.Configure<Settings>(configSection);
+var notProduction = !builder.Environment.IsProduction();
 
+builder.Services.Configure<Settings>(configSection);
 builder.Services.AddHostedService<EmailService>();
 builder.Services.AddHostedService<FileCleanerService>();
 builder.Services.AddSingleton<CloudFlareService>();
-
-builder.Services.AddCors();
 builder.Services.AddResponseCaching();
 builder.Services.AddFastEndpoints();
-builder.Services.AddAuthenticationJWTBearer(configSection.Get<Settings>().Auth.SigningKey);
-builder.Services.AddSwaggerDoc();
+builder.Services.AddJWTBearerAuth(configSection.Get<Settings>().Auth.SigningKey);
+
+if (notProduction)
+{
+    builder.Services.AddCors();
+    builder.Services.AddSwaggerDoc();
+}
 
 var app = builder.Build();
 
-if (!app.Environment.IsProduction())
+if (notProduction)
 {
-    app.UseCors(b => b
-       .AllowAnyOrigin()
-       .AllowAnyHeader()
-       .AllowAnyMethod());
-
-    app.UseOpenApi();
-    app.UseSwaggerUi3(c => c.ConfigureDefaults());
+    app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+    app.UseSwaggerGen();
 }
 
 app.UseAuthentication();

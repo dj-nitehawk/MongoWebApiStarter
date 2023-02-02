@@ -13,4 +13,3 @@ public class Endpoint : Endpoint<Request>
         await SendOkAsync();
     }
 }
-

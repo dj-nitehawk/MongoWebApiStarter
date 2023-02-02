@@ -37,4 +37,3 @@ public class Endpoint : Endpoint<Request, object, Mapper>
         await SendAsync(new { ImageID = newID });
     }
 }
-

@@ -26,8 +26,6 @@ public class Endpoint : Endpoint<Request, Response, Mapper>
 
         Response.EmailSent = needsEmailVerification;
         Response.ID = acc.ID;
-
-        await SendAsync(Response, cancellation: ct);
     }
 
     private async Task SendVerificationEmailAsync(Dom.Account a)
@@ -53,6 +51,5 @@ public class Endpoint : Endpoint<Request, Response, Mapper>
     }
 
     private async Task CheckIfEmailValidationIsNeededAsync(Request r)
-        => needsEmailVerification = r.AccountID.HasNoValue() ||
-           r.AccountID != await Data.GetAccountIDAsync(r.EmailAddress);
+        => needsEmailVerification = r.AccountID.HasNoValue() || r.AccountID != await Data.GetAccountIDAsync(r.EmailAddress);
 }

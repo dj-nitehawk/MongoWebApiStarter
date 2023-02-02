@@ -29,7 +29,7 @@ public class Validator : Validator<Request>
     }
 
     private static bool IsAllowedType(string contentType) => new[]
-{
+    {
         "image/jpeg",
         "image/png"
     }.Contains(contentType.ToLower());
@@ -37,4 +37,3 @@ public class Validator : Validator<Request>
     private static bool IsAllowedSize(long fileLength) =>
         fileLength is >= 100 and <= 10485760;
 }
-

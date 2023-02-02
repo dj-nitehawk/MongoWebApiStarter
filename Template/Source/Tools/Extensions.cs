@@ -86,4 +86,3 @@ public static class Extensions
                hasDecimalDigit;
     }
 }
-

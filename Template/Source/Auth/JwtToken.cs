@@ -1,4 +1,5 @@
-﻿namespace MongoWebApiStarter.Auth;
+﻿#pragma warning disable CS8618
+namespace MongoWebApiStarter.Auth;
 
 public class JwtToken
 {
@@ -12,4 +13,3 @@ public class JwtToken
     /// </summary>
     public string Expiry { get; set; }
 }
-

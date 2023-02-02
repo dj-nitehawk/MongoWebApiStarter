@@ -36,4 +36,3 @@ public static class Data
                  .ExecuteSingleAsync();
     }
 }
-

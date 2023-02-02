@@ -35,10 +35,9 @@ public class _001_seed_default_roles : IMigration
             {
                     Allow.Employee_Create,
                     Allow.Employee_Delete,
-                })
+            })
         };
 
         await DB.SaveAsync(new[] { manager, employee });
     }
 }
-

@@ -4,7 +4,7 @@ namespace Account.Get;
 
 public class Request
 {
-    [From(Claim.AccountID, IsRequired = true)]
+    [From(Claim.AccountID)]
     public string AccountID { get; set; }
 }
 

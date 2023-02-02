@@ -16,4 +16,3 @@ public class Endpoint : Endpoint<Request>
             ThrowError("Sorry! Could not validate your email address...");
     }
 }
-

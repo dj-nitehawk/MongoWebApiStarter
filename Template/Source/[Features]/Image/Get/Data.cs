@@ -8,4 +8,3 @@ public static class Data
                  .DownloadWithTimeoutAsync(destination, 30);
     }
 }
-

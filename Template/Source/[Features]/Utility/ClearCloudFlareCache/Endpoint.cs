@@ -4,7 +4,7 @@ namespace Utility.ClearCloudFlareCache;
 
 public class Endpoint : EndpointWithoutRequest
 {
-    public CloudFlareService CloudFlare { get; set; }
+    public CloudFlareService CloudFlare { get; set; } = null!;
 
     public override void Configure()
     {
@@ -15,13 +15,8 @@ public class Endpoint : EndpointWithoutRequest
     public override async Task HandleAsync(CancellationToken ct)
     {
         if (await CloudFlare.PurgeCacheAsync())
-        {
             await SendAsync("SUCCESS!!!");
-            return;
-        }
         else
-        {
             ThrowError("FAILED TO CLEAR CLOUDFLARE CACHE. CHECK APP LOG.");
-        }
     }
 }

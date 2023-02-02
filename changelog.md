@@ -1,4 +1,2 @@
+- code cleanups & minor refactors
 - upgrade dependencies to latest
-- improve nullable support in extension methods
-- suppress `CS8618` via `.editorconfig` files instead of globally
-- code cleanup & minor refactors

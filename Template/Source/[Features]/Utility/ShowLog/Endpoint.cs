@@ -16,9 +16,9 @@ public class Endpoint : EndpointWithoutRequest
 
             await SendStreamAsync(
                 stream: fileInfo.OpenRead(),
-                contentType: "text/plain",
                 fileName: null,
-                fileLengthBytes: null);
+                fileLengthBytes: null,
+                contentType: "text/plain");
         }
         else
         {

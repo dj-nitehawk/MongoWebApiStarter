@@ -8,7 +8,7 @@ public static class Data
     {
         return DB.Find<Dom.Account>()
                  .Match(a => a.Email == userName.LowerCase())
-                 .Project(a => new Dom.Account
+                 .Project(a => new()
                  {
                      PasswordHash = a.PasswordHash,
                      IsEmailVerified = a.IsEmailVerified,
@@ -20,4 +20,3 @@ public static class Data
                  .ExecuteSingleAsync();
     }
 }
-
