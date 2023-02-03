@@ -32,8 +32,10 @@
 
     <ItemGroup>
         <None Update="Properties\launchSettings.json" CopyToOutputDirectory="Always" />
+        <!--#if (remove) -->
         <None Include="..\..\changelog.md" Link="Content\ChangeLog" Pack="false"></None>
         <None Include="..\..\MongoWebApiStarterTemplate.csproj" Link="Content\Version" Pack="false"></None>
+        <!--#endif -->
     </ItemGroup>
 
 </Project>

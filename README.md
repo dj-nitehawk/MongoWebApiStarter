@@ -3,7 +3,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 
 ## Install & Scaffold
 ```csharp
-  dotnet new -i MongoWebApiStarter
+  dotnet new install MongoWebApiStarter
   dotnet new mongowebapi -n MyAwesomeApp
 ```
 

@@ -12,15 +12,11 @@
   },
   "sourceName": "MongoWebApiStarter",
   "preferNameDirectory": true,
-  "symbols": {
-    "name": {
-      "type": "parameter",
-      "defaultValue": "MongoWebApiStarter",
-      "replaces": "MongoWebApiStarter"
-    }
-  },
   "sources": [
     {
+      "rename": {
+        "vs.editorconfig": ".editorconfig"
+      },
       "exclude": [
         "**/.vs/**",
         "**/dp_keys/**",

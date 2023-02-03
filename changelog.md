@@ -1,2 +1,3 @@
 - code cleanups & minor refactors
+- add `.editorconfig` files
 - upgrade dependencies to latest
