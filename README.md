@@ -1,5 +1,5 @@
 # MongoWebApiStarter
-A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net 6 Web-Api project using pure vertical slice architecture with MongoDB as the data store.
+A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net 7.0 Web-Api project using pure vertical slice architecture with MongoDB as the data store.
 
 ## Install & Scaffold
 ```csharp
@@ -10,7 +10,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 ## Features
 
 ### Platform
-- base framework: .net 6
+- base framework: .net 7.0
 - api/web-service framework: [FastEndpoints](https://fast-endpoints.com/)
 - language: c#
 - database: mongodb
@@ -31,7 +31,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 - input validation with [fluentvalidation](https://fluentvalidation.net/) rules
 - account creation, email validation, login
 - salted hash password storage and verification with bcrypt
-- email queue with background service for sending emails with smtp
+- email/sms queue for sending emails with amazon ses
 - image uploading & retrieval
 
 #### Data Access
@@ -46,7 +46,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 #### Bonuses
 
 ##### Visual Studio New Item Template
-a [visual studio extension](https://marketplace.visualstudio.com/items?itemName=dj-nitehawk.FastEndpointsVSExtension) is available to enable you to quickly add a new vertical slice feature file set.
+a [visual studio extension](https://marketplace.visualstudio.com/items?itemName=dj-nitehawk.FastEndpoints) is available to enable you to quickly add a new vertical slice feature file set.
 after you install the `vsix`, you will have a new item called "FastEndpoints Feature FileSet" in the "add > new item" dialog of visual studio.
 
 ##### Linux Server Configuration
