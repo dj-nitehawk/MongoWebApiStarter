@@ -4,7 +4,7 @@ using MongoWebApiStarter;
 
 namespace Logic;
 
-public static class Image
+internal static class Image
 {
     public static Task DeleteAsync(string imageID)
     {

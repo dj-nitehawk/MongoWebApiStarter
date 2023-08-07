@@ -1,6 +1,6 @@
 ﻿namespace Dom;
 
-public class Role : Entity
+internal sealed class Role : Entity
 {
     public string Name { get; set; }
     public bool SystemRole { get; set; }
@@ -18,4 +18,3 @@ public class Role : Entity
           .CreateAsync();
     }
 }
-

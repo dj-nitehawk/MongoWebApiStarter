@@ -2,9 +2,9 @@
 
 namespace Dom;
 
-public class NotificationTemplate : IEntity
+internal sealed class NotificationTemplate : IEntity
 {
-    [BsonId] public string ID { get; set; } //set the template name as id
+    [BsonId] public string? ID { get; set; } //set the template name as id
     public string SMSBody { get; set; }
     public string EmailSubject { get; set; }
     public string EmailBody { get; set; }

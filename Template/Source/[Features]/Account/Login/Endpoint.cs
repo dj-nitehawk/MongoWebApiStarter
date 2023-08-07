@@ -4,7 +4,7 @@ using MongoWebApiStarter.Auth;
 
 namespace Account.Login;
 
-public class Endpoint : Endpoint<Request, Response>
+internal sealed class Endpoint : Endpoint<Request, Response>
 {
     public IOptions<Settings> Settings { get; set; } = null!;
 
@@ -38,7 +38,7 @@ public class Endpoint : Endpoint<Request, Response>
             priviledges: u =>
             {
                 u.Permissions.AddRange(permissions.AllCodes());
-                u[Claim.AccountID] = acc.ID;
+                u[Claim.AccountID] = acc.ID!;
             });
     }
 }

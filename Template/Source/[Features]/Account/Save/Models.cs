@@ -3,13 +3,13 @@ using MongoWebApiStarter.Auth;
 
 namespace Account.Save;
 
-public class Request : Model
+internal sealed class Request : Model
 {
-    [From(Claim.AccountID, IsRequired = false)]
-    public string AccountID { get; set; }
+    [From(Claim.AccountID, IsRequired = false, RemoveFromSchema = true)]
+    public string? AccountID { get; set; }
 }
 
-public class Validator : Validator<Request>
+internal sealed class Validator : Validator<Request>
 {
     public Validator()
     {
@@ -43,7 +43,7 @@ public class Validator : Validator<Request>
     }
 }
 
-public class Response
+internal sealed class Response
 {
     public string ID { get; set; }
     public bool EmailSent { get; set; }

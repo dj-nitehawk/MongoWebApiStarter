@@ -1,6 +1,6 @@
 ﻿namespace Image.Delete;
 
-public class Endpoint : Endpoint<Request>
+internal sealed class Endpoint : Endpoint<Request>
 {
     public override void Configure()
     {

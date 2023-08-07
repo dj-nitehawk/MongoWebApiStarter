@@ -2,9 +2,9 @@
 
 namespace Account.Login;
 
-public static class Data
+internal static class Data
 {
-    public static Task<Dom.Account> GetAccountAsync(string userName)
+    public static Task<Dom.Account?> GetAccountAsync(string userName)
     {
         return DB.Find<Dom.Account>()
                  .Match(a => a.Email == userName.LowerCase())

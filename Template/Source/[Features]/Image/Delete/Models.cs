@@ -1,7 +1,6 @@
 ﻿namespace Image.Delete;
 
-public class Request
+internal sealed class Request
 {
     public string ID { get; set; }
 }
-

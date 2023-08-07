@@ -1,6 +1,6 @@
 ﻿namespace Utility.ShowLog;
 
-public class Endpoint : EndpointWithoutRequest
+internal sealed class Endpoint : EndpointWithoutRequest
 {
     public override void Configure()
     {

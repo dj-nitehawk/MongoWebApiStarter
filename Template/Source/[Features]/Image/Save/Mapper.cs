@@ -1,6 +1,6 @@
 ﻿namespace Image.Save;
 
-public class Mapper : Mapper<Request, object, Dom.Image>
+internal sealed class Mapper : Mapper<Request, object, Dom.Image>
 {
     public override Dom.Image ToEntity(Request r) => new()
     {

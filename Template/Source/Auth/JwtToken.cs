@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS8618
 namespace MongoWebApiStarter.Auth;
 
-public class JwtToken
+internal sealed class JwtToken
 {
     /// <summary>
     /// The JWT token string

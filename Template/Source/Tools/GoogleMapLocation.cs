@@ -5,7 +5,7 @@ namespace MongoWebApiStarter;
 /// <summary>
 /// Utility for working Google map links and embed codes
 /// </summary>
-public static class MapLocation
+internal static class MapLocation
 {
     private static readonly Regex rxOne = new("@(.*),(.*),", RegexOptions.Compiled); //map link
     private static readonly Regex rxTwo = new(@"(?:2d|3d)([-\d].*?)!", RegexOptions.Compiled); //extract lon+lat from embed code

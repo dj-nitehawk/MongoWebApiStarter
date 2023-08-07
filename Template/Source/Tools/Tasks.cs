@@ -1,6 +1,6 @@
 ﻿namespace MongoWebApiStarter;
 
-public static class Tasks
+internal static class Tasks
 {
     /// <summary>
     /// Executes multiple async methods (mostly in parallel) and returns a Task containing a tuple of results
@@ -66,4 +66,3 @@ public static class Tasks
         return (first.Result, second.Result, third.Result, fourth.Result, fifth.Result);
     }
 }
-

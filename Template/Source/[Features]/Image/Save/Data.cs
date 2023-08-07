@@ -1,6 +1,6 @@
 ﻿namespace Image.Save;
 
-public static class Data
+internal static class Data
 {
     public static Task DeleteImageAsync(string id)
     {
@@ -11,6 +11,6 @@ public static class Data
     {
         await image.SaveAsync();
         await image.Data.UploadWithTimeoutAsync(stream, 60, 128);
-        return image.ID;
+        return image.ID!;
     }
 }

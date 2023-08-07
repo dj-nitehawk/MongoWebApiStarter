@@ -1,6 +1,6 @@
 ﻿namespace Dom;
 
-public class Account : Entity
+internal sealed class Account : Entity
 {
     public string Email { get; set; }
     public string PasswordHash { get; set; }

@@ -3,9 +3,15 @@ using MongoWebApiStarter;
 
 namespace Account.Save;
 
-public class Endpoint : Endpoint<Request, Response, Mapper>
+internal sealed class Endpoint : Endpoint<Request, Response, Mapper>
 {
     private bool needsEmailVerification;
+    private readonly bool isTestEnv;
+
+    public Endpoint(IWebHostEnvironment env)
+    {
+        isTestEnv = env.ApplicationName == "testhost";
+    }
 
     public override void Configure()
     {
@@ -25,15 +31,15 @@ public class Endpoint : Endpoint<Request, Response, Mapper>
         await SendVerificationEmailAsync(acc);
 
         Response.EmailSent = needsEmailVerification;
-        Response.ID = acc.ID;
+        Response.ID = acc.ID!;
     }
 
     private async Task SendVerificationEmailAsync(Dom.Account a)
     {
-        if (needsEmailVerification)
+        if (needsEmailVerification && !isTestEnv)
         {
             var code = PasswordGenerator.Generate(20);
-            await Data.SetEmailValidationCodeAsync(code, a.ID);
+            await Data.SetEmailValidationCodeAsync(code, a.ID!);
 
             await new Notification
             {

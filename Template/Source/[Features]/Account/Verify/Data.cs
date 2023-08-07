@@ -1,6 +1,6 @@
 ﻿namespace Account.Verify;
 
-public static class Data
+internal static class Data
 {
     public static async Task<bool> ValidateEmailAsync(string accountID, string code)
     {

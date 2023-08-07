@@ -6,7 +6,7 @@ namespace MongoWebApiStarter;
 /// <summary>
 /// Utility for converting local DateTime to UTC and vise versa
 /// </summary>
-public static class Dates
+internal static class Dates
 {
     public const string year_month_date = "yyyy-MM-dd";
     public const string hour_minute = "HH:mm";

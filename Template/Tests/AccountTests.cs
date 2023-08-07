@@ -16,7 +16,7 @@ public class AccountTests
     public static HttpClient AccountClient { get; } = new WebApplicationFactory<Program>()
         .WithWebHostBuilder(b =>
         {
-            b.UseEnvironment("Testing");//not working
+            b.UseEnvironment("Development");//not working
             b.ConfigureServices(s =>
         {
             s.Configure<Settings>(x =>
@@ -62,7 +62,7 @@ public class AccountTests
 
         var acc = await DB.Find<Dom.Account>().OneAsync(res?.ID);
 
-        acc.Email.Should().Be(email);
+        acc!.Email.Should().Be(email);
         acc.IsEmailVerified.Should().BeFalse();
     }
 
@@ -72,7 +72,7 @@ public class AccountTests
         await CreateAccount();
 
         var code = (await DB
-            .Find<Dom.Account>().OneAsync(accountID))
+            .Find<Dom.Account>().OneAsync(accountID))!
             .EmailVerificationCode;
 
         await AccountClient.POSTAsync<
@@ -103,7 +103,7 @@ public class AccountTests
             Account.Login.Request,
             Account.Login.Response>(new()
             {
-                UserName = acc.Email,
+                UserName = acc!.Email,
                 Password = "qqqqq123Q"
             });
 
@@ -128,7 +128,7 @@ public class AccountTests
         var acc = await DB.Find<Dom.Account>().OneAsync(accountID);
 
         var match =
-            acc.Email == res?.EmailAddress &&
+            acc!.Email == res?.EmailAddress &&
             acc.Title == res.Title &&
             acc.FirstName == res.FirstName &&
             acc.LastName == res.LastName &&
@@ -142,4 +142,3 @@ public class AccountTests
         match.Should().BeTrue();
     }
 }
-

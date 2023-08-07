@@ -2,15 +2,15 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.8.1</PackageVersion>
+        <PackageVersion>7.9.0</PackageVersion>
 
         <PackageType>Template</PackageType>
         <PackageId>MongoWebApiStarter</PackageId>
         <Title>MongoDB Web Api Starter</Title>
         <Authors>Ryan Gunner</Authors>
-        <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net 6 Web-Api project with MongoDB as the data store.</Description>
-        <PackageTags>dotnet-new;templates;mongodb;web-api;net6;aspnet</PackageTags>
-        <TargetFramework>net6.0</TargetFramework>
+        <Description>A full-featured starter template for "dotnet new" to quickly scaffold a .Net 7 Web-Api project with MongoDB as the data store.</Description>
+        <PackageTags>dotnet-new;templates;mongodb;web-api;net7;aspnet</PackageTags>
+        <TargetFramework>net7.0</TargetFramework>
         <IncludeContentInPack>true</IncludeContentInPack>
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <ContentTargetFolders>content</ContentTargetFolders>

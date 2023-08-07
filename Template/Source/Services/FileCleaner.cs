@@ -9,7 +9,7 @@ public class FileCleanerService : BackgroundService
     public FileCleanerService(ILogger<FileCleanerService> log)
     {
         this.log = log;
-        log.LogWarning("FILE CLEANER SERVICE HAS STARTED..." + Environment.NewLine);
+        log.LogWarning("{msg}", "FILE CLEANER SERVICE HAS STARTED..." + Environment.NewLine);
     }
 
     protected override async Task ExecuteAsync(CancellationToken cancellation)
@@ -21,7 +21,12 @@ public class FileCleanerService : BackgroundService
             var imageCount = await Logic.Image.DeleteUnlinkedAsync();
 
             if (imageCount > 0)
-                log.LogWarning($"CLEANED: {imageCount} Images at {DateTime.UtcNow.ToTimePart()} on {DateTime.UtcNow.ToDatePart()}" + Environment.NewLine);
+            {
+                log.LogWarning("CLEANED: {imageCount} Images at {time} on {date}",
+                    imageCount,
+                    DateTime.UtcNow.ToTimePart(),
+                    DateTime.UtcNow.ToDatePart());
+            }
         }
     }
 }

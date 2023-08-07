@@ -3,7 +3,7 @@ using MongoWebApiStarter.Auth;
 
 namespace Migrations;
 
-public class _001_seed_default_roles : IMigration
+internal sealed class _001_seed_default_roles : IMigration
 {
     public async Task UpgradeAsync()
     {

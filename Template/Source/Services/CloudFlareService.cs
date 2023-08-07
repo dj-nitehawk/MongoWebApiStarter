@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 
 namespace MongoWebApiStarter.Services;
 
-public class CloudFlareService
+internal sealed class CloudFlareService
 {
     private const string base_url = "https://api.cloudflare.com/client/v4";
     private readonly Settings.CloudFlareSettings? settings;
@@ -32,13 +32,13 @@ public class CloudFlareService
             if (response.success) return true;
 
             var msg = $"COULD NOT CLEAR CF CACHE: {string.Join(" | ", response.errors)}";
-            log?.LogError(msg + Environment.NewLine);
+            log?.LogError("{msg}", msg + Environment.NewLine);
             return false;
         }
         catch (FlurlHttpException x)
         {
             var msg = $"COULD NOT CLEAR CF CACHE: {x.Message}";
-            log?.LogError(x, msg + Environment.NewLine);
+            log?.LogError(x, "{msg}", msg + Environment.NewLine);
             return false;
         }
     }

@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace MongoWebApiStarter;
 
-public static class Extensions
+internal static class Extensions
 {
     private static readonly TextInfo txt = new CultureInfo("en-US", false).TextInfo;
 

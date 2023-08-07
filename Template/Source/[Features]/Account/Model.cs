@@ -1,7 +1,10 @@
-﻿namespace Account;
+﻿using System.ComponentModel;
+
+namespace Account;
 
 public class Model
 {
+    [DefaultValue("email@domain.com")]
     public string EmailAddress { get; set; }
     public string Password { get; set; }
     public string Title { get; set; }
@@ -14,4 +17,3 @@ public class Model
     public string CountryCode { get; set; }
     public string Mobile { get; set; }
 }
-

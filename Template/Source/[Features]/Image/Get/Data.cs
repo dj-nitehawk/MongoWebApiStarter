@@ -1,6 +1,6 @@
 ﻿namespace Image.Get;
 
-public static class Data
+internal static class Data
 {
     public static Task DownloadAsync(string id, Stream destination)
     {

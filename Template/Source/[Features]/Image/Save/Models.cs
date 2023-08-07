@@ -1,6 +1,6 @@
 ﻿namespace Image.Save;
 
-public class Request
+internal sealed class Request
 {
     public string? ID { get; set; }
     public int Width { get; set; }
@@ -8,7 +8,7 @@ public class Request
     public IFormFile File { get; set; }
 }
 
-public class Validator : Validator<Request>
+internal sealed class Validator : Validator<Request>
 {
     public Validator()
     {

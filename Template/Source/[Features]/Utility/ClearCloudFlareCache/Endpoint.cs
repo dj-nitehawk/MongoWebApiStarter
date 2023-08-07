@@ -2,7 +2,7 @@
 
 namespace Utility.ClearCloudFlareCache;
 
-public class Endpoint : EndpointWithoutRequest
+internal sealed class Endpoint : EndpointWithoutRequest
 {
     public CloudFlareService CloudFlare { get; set; } = null!;
 

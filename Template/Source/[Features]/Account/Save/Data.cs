@@ -2,7 +2,7 @@
 
 namespace Account.Save;
 
-public static class Data
+internal static class Data
 {
     public static async Task CreateOrUpdateAsync(Dom.Account acc)
     {
@@ -28,7 +28,7 @@ public static class Data
                  .ExecuteAsync();
     }
 
-    public static Task<string> GetAccountIDAsync(string emailAddress)
+    public static Task<string?> GetAccountIDAsync(string emailAddress)
     {
         return DB.Find<Dom.Account, string>()
                  .Match(a => a.Email == emailAddress.LowerCase())

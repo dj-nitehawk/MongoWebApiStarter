@@ -3,7 +3,7 @@ using MongoWebApiStarter;
 
 namespace Migrations;
 
-public class _002_seed_notification_templates : IMigration
+internal sealed class _002_seed_notification_templates : IMigration
 {
     public Task UpgradeAsync()
     {
@@ -40,7 +40,7 @@ public class _002_seed_notification_templates : IMigration
             <p>Thank you for using MongoWebApiStarter!</p>
             <p>--The MongoWebApiStarter Team<br>
               <a href='https://MongoWebApiStarter.com' target='_blank'>https://MongoWebApiStarter.com</a></p>
-            <p style='margin:3px auto;font:10px arial,sans-serif;color:#999'>© 2020 Copyright </p>
+            <p style='margin:3px auto;font:10px arial,sans-serif;color:#999'>© 2023 Copyright </p>
           </td>
         </tr>
       </tbody>

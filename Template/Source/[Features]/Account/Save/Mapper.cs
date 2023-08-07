@@ -3,7 +3,7 @@ using MongoWebApiStarter;
 
 namespace Account.Save;
 
-public class Mapper : Mapper<Request, Response, Dom.Account>
+internal sealed class Mapper : Mapper<Request, Response, Dom.Account>
 {
     public override Dom.Account ToEntity(Request r) => new()
     {

@@ -1,10 +1,10 @@
 ﻿namespace Account.Get;
 
-public class Mapper : Mapper<Request, Response, Dom.Account>
+internal sealed class Mapper : Mapper<Request, Response, Dom.Account>
 {
     public override Response FromEntity(Dom.Account a) => new()
     {
-        AccountID = a.ID,
+        AccountID = a.ID!,
         City = a.Address.City,
         CountryCode = a.Address.CountryCode,
         EmailAddress = a.Email,

@@ -1,11 +1,9 @@
 ﻿using MongoWebApiStarter;
-using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
-using SixLabors.ImageSharp.Processing;
 
 namespace Image.Save;
 
-public class Endpoint : Endpoint<Request, object, Mapper>
+internal sealed class Endpoint : Endpoint<Request, object, Mapper>
 {
     public override void Configure()
     {

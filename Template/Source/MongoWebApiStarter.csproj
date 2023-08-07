@@ -2,28 +2,26 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <NoWarn>1701;1702;CA2016;RCS1090;CA2254</NoWarn>
+        <NoWarn>1701;1702;CA2016;RCS1090</NoWarn>
+        <UserSecretsId>6e565062-7807-4623-94d1-cea5292aef14</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.200.10" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-        <PackageReference Include="FastEndpoints" Version="5.7.0" />
-        <PackageReference Include="FastEndpoints.Security" Version="5.7.0" />
-        <PackageReference Include="FastEndpoints.Swagger" Version="5.7.0" />
+        <PackageReference Include="FastEndpoints" Version="5.15.0" />
+        <PackageReference Include="FastEndpoints.Security" Version="5.15.0" />
+        <PackageReference Include="FastEndpoints.Swagger" Version="5.15.0" />
         <PackageReference Include="Flurl" Version="3.0.7" />
         <PackageReference Include="Flurl.Http" Version="3.2.4" />
-        <PackageReference Include="MailKit" Version="3.5.0" />
         <PackageReference Include="MlkPwgen" Version="0.3.0" />
-        <PackageReference Include="NodaTime" Version="3.1.6" />
-        <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
+        <PackageReference Include="NodaTime" Version="3.1.9" />
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-        <PackageReference Include="MongoDB.Entities" Version="21.0.2" />
+        <PackageReference Include="MongoDB.Entities" Version="22.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -38,4 +36,8 @@
         <!--#endif -->
     </ItemGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>CS1591</NoWarn>
+    </PropertyGroup>
 </Project>
