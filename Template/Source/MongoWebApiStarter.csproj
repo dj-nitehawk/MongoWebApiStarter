@@ -5,12 +5,12 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <NoWarn>1701;1702;CA2016;RCS1090</NoWarn>
-        <UserSecretsId>6e565062-7807-4623-94d1-cea5292aef14</UserSecretsId>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>1701;1702;CA2016;CS1591;RCS1090</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.200.10" />
+        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.200.26" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="FastEndpoints" Version="5.15.0" />
         <PackageReference Include="FastEndpoints.Security" Version="5.15.0" />
@@ -21,11 +21,7 @@
         <PackageReference Include="NodaTime" Version="3.1.9" />
         <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-        <PackageReference Include="MongoDB.Entities" Version="22.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <InternalsVisibleTo Include="MongoWebApiStarter.Tests" />
+        <PackageReference Include="MongoDB.Entities" Version="22.1.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -36,8 +32,4 @@
         <!--#endif -->
     </ItemGroup>
 
-    <PropertyGroup>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <NoWarn>CS1591</NoWarn>
-    </PropertyGroup>
 </Project>

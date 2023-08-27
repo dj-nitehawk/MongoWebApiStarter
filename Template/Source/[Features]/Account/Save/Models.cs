@@ -39,7 +39,8 @@ internal sealed class Validator : Validator<Request>
         if (r.EmailAddress is null) return true;
 
         var idForEmail = await Data.GetAccountIDAsync(r.EmailAddress);
-        return idForEmail != r.AccountID;
+
+        return idForEmail is not null && idForEmail != r.AccountID;
     }
 }
 

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
 
-        <PackageVersion>7.9.0</PackageVersion>
+        <PackageVersion>7.10.0</PackageVersion>
 
         <PackageType>Template</PackageType>
         <PackageId>MongoWebApiStarter</PackageId>
@@ -32,12 +32,6 @@
         <None Remove="Template\.vs\**" />
         <None Remove="Template\Source\bin\**" />
         <None Remove="Template\Source\obj\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Template\Source\Entities\vs.editorconfig" />
-      <None Remove="Template\Source\[Features]\vs.editorconfig" />
-      <None Remove="Template\vs.editorconfig" />
     </ItemGroup>
 
     <ItemGroup>

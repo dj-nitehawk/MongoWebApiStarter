@@ -1,4 +1,2 @@
-- email sending with amazon ses client v2
-- implement email/sms sending as job queues
-- upgrade dependencies to latest
-- upgrade project to .net 7.0
+- switch testing framework to xUnit
+- upgrade dependencies

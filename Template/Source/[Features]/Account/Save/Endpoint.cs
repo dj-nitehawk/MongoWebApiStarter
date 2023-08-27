@@ -10,7 +10,7 @@ internal sealed class Endpoint : Endpoint<Request, Response, Mapper>
 
     public Endpoint(IWebHostEnvironment env)
     {
-        isTestEnv = env.ApplicationName == "testhost";
+        isTestEnv = env.EnvironmentName == "Testing";
     }
 
     public override void Configure()
