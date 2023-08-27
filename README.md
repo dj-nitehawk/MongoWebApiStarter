@@ -40,7 +40,7 @@ A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net
 - shared data access logic is located in the Logic.* namespace.
 
 #### Integration Tests
-- uses mstest framework
+- uses [xunit](https://xunit.net/)
 - uses [fluentassertions](https://fluentassertions.com/)
 
 #### Bonuses
