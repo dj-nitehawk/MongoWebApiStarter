@@ -1,2 +1,1 @@
-- switch testing framework to xUnit
-- upgrade dependencies
+- refactor integration tests to use test ordering

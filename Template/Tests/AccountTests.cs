@@ -3,39 +3,30 @@ using FluentAssertions;
 using MongoDB.Entities;
 using System.Net.Http.Headers;
 using Xunit;
+using Xunit.Priority;
 using Login = Account.Login;
 using Save = Account.Save;
 using Verify = Account.Verify;
 
 namespace Tests;
 
+[TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class AccountTests : TestBase
 {
     public AccountTests(AppFixture fixture) : base(fixture) { }
 
-    [Fact]
+    private static readonly string EmailAddress = $"{Guid.NewGuid()}@email.com";
+    private static string? UserID;
+    private static string? JwtToken;
+
+    [Fact, Priority(1)]
     public async Task Account_Creation()
     {
-        var email = $"{Guid.NewGuid()}@email.com";
-        var (rsp, res) = await CreateAccount(email);
-
-        rsp?.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        res?.EmailSent.Should().BeTrue();
-        res?.ID.Should().NotBeNullOrEmpty();
-
-        var acc = await DB.Find<Dom.Account>().OneAsync(res?.ID);
-
-        acc!.Email.Should().Be(email);
-        acc.IsEmailVerified.Should().BeFalse();
-    }
-
-    private Task<TestResult<Save.Response>> CreateAccount(string email)
-    {
-        return App.AccountClient.POSTAsync<Save.Endpoint, Save.Request, Save.Response>(new()
+        var (rsp, res) = await App.AccountClient.POSTAsync<Save.Endpoint, Save.Request, Save.Response>(new()
         {
             City = "City",
             CountryCode = "LKA",
-            EmailAddress = email,
+            EmailAddress = EmailAddress,
             FirstName = "Firstname",
             LastName = "Surname",
             Mobile = "0773469292",
@@ -45,92 +36,81 @@ public class AccountTests : TestBase
             Title = "Mr.",
             ZipCode = "10100",
         });
+
+        rsp!.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        res!.EmailSent.Should().BeTrue();
+        res.ID.Should().NotBeNullOrEmpty();
+
+        UserID = res.ID;
+
+        var acc = await DB.Find<Dom.Account>().OneAsync(UserID);
+
+        acc!.Email.Should().Be(EmailAddress);
+        acc.IsEmailVerified.Should().BeFalse();
     }
 
-    [Fact]
+    [Fact, Priority(2)]
     public async Task Account_Verification()
-    {
-        var email = $"{Guid.NewGuid()}@email.com";
-
-        var (_, res) = await CreateAccount(email);
-
-        var verified = await VerifyAccount(res!.ID);
-
-        verified.Should().Be(true);
-    }
-
-    private async Task<bool> VerifyAccount(string accountID)
     {
         var code = (await DB
             .Find<Dom.Account>()
-            .OneAsync(accountID))!
+            .OneAsync(UserID))!
             .EmailVerificationCode;
 
         await App.AccountClient.POSTAsync<Verify.Endpoint, Verify.Request>(new()
         {
-            ID = accountID,
+            ID = UserID!,
             Code = code
         });
 
-        return await DB
+        var verified = await DB
             .Find<Dom.Account, bool>()
-            .Match(a => a.ID == accountID)
+            .Match(a => a.ID == UserID)
             .Project(a => a.IsEmailVerified)
             .ExecuteSingleAsync();
+
+        verified.Should().Be(true);
     }
 
-    [Fact]
+    [Fact, Priority(3)]
     public async Task Account_Login()
     {
-        var email = $"{Guid.NewGuid()}@email.com";
-
-        var (_, res) = await CreateAccount(email);
-        await VerifyAccount(res!.ID);
-
-        var (acRsp, acRes) = await LoginToAccount(email);
-
-        var acc = await DB.Find<Dom.Account>().OneAsync(res.ID);
-
-        acRsp?.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        acRes?.FullName.Should().Be($"{acc.Title} {acc.FirstName} {acc.LastName}");
-    }
-
-    private Task<TestResult<Login.Response>> LoginToAccount(string email)
-    {
-        return App.AccountClient.POSTAsync<Login.Endpoint, Login.Request, Login.Response>(new()
+        var (rsp, res) = await App.AccountClient.POSTAsync<Login.Endpoint, Login.Request, Login.Response>(new()
         {
-            UserName = email,
+            UserName = EmailAddress,
             Password = "qqqqq123Q"
         });
+
+        var acc = await DB.Find<Dom.Account>().OneAsync(UserID);
+
+        rsp!.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        res!.FullName.Should().Be($"{acc!.Title} {acc.FirstName} {acc.LastName}");
+        res.PermissionSet.Should().HaveCount(7);
+        res.Token.Value.Should().NotBeNull();
+
+        JwtToken = res.Token.Value;
     }
 
-    [Fact]
+    [Fact, Priority(4)]
     public async Task Account_Retrieve()
     {
-        var email = $"{Guid.NewGuid()}@email.com";
+        App.AccountClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", JwtToken);
 
-        var (_, res) = await CreateAccount(email);
-        await VerifyAccount(res!.ID);
+        var (_, res) = await App.AccountClient.GETAsync<Account.Get.Endpoint, Account.Get.Response>();
 
-        var (_, acRes) = await LoginToAccount(email);
-
-        App.AccountClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", acRes!.Token.Value);
-
-        var (_, gRes) = await App.AccountClient.GETAsync<Account.Get.Endpoint, Account.Get.Response>();
-
-        var acc = await DB.Find<Dom.Account>().OneAsync(gRes!.AccountID);
+        var acc = await DB.Find<Dom.Account>().OneAsync(res!.AccountID);
 
         var match =
-            acc!.Email == gRes.EmailAddress &&
-            acc.Title == gRes.Title &&
-            acc.FirstName == gRes.FirstName &&
-            acc.LastName == gRes.LastName &&
-            acc.Address.Street == gRes.Street &&
-            acc.Address.City == gRes.City &&
-            acc.Address.State == gRes.State &&
-            acc.Address.ZipCode == gRes.ZipCode &&
-            acc.Address.CountryCode == gRes.CountryCode &&
-            acc.Mobile == gRes.Mobile;
+            acc!.Email == res.EmailAddress &&
+            acc.Title == res.Title &&
+            acc.FirstName == res.FirstName &&
+            acc.LastName == res.LastName &&
+            acc.Address.Street == res.Street &&
+            acc.Address.City == res.City &&
+            acc.Address.State == res.State &&
+            acc.Address.ZipCode == res.ZipCode &&
+            acc.Address.CountryCode == res.CountryCode &&
+            acc.Mobile == res.Mobile;
 
         match.Should().BeTrue();
     }
