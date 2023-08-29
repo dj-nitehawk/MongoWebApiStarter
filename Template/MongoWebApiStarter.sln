@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoWebApiStarter", "Source\MongoWebApiStarter.csproj", "{C0506BB2-B183-41A4-A2A9-F56619A5A1EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoWebApiStarter.Tests", "Tests\MongoWebApiStarter.Tests.csproj", "{0C674FD7-792A-40E1-A516-D596F2DE5BED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{0C674FD7-792A-40E1-A516-D596F2DE5BED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

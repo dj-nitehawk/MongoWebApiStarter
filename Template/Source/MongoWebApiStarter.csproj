@@ -10,26 +10,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.200.26" />
+        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.200.27" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="FastEndpoints" Version="5.15.0" />
         <PackageReference Include="FastEndpoints.Security" Version="5.15.0" />
         <PackageReference Include="FastEndpoints.Swagger" Version="5.15.0" />
         <PackageReference Include="Flurl" Version="3.0.7" />
         <PackageReference Include="Flurl.Http" Version="3.2.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
         <PackageReference Include="MlkPwgen" Version="0.3.0" />
+        <PackageReference Include="MongoDB.Entities" Version="22.1.0" />
         <PackageReference Include="NodaTime" Version="3.1.9" />
         <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-        <PackageReference Include="MongoDB.Entities" Version="22.1.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Update="Properties\launchSettings.json" CopyToOutputDirectory="Always" />
-        <!--#if (remove) -->
-        <None Include="..\..\changelog.md" Link="Content\ChangeLog" Pack="false"></None>
-        <None Include="..\..\MongoWebApiStarterTemplate.csproj" Link="Content\Version" Pack="false"></None>
-        <!--#endif -->
     </ItemGroup>
 
 </Project>

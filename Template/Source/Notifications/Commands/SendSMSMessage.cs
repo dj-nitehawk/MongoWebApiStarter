@@ -1,4 +1,4 @@
-﻿namespace MongoWebApiStarter;
+﻿namespace MongoWebApiStarter.Notifications;
 
 internal sealed class SendSMSMessage : ICommand
 {

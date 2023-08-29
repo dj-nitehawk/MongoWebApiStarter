@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MongoWebApiStarter;
+namespace MongoWebApiStarter.Notifications;
 
 public partial record Notification
 {

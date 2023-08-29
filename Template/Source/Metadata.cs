@@ -5,4 +5,4 @@ global using MongoDB.Entities;
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("MongoWebApiStarter.Tests")]
+[assembly: InternalsVisibleTo("Tests")]

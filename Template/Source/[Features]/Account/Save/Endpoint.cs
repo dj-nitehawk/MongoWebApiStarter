@@ -1,5 +1,6 @@
 ﻿using MlkPwgen;
 using MongoWebApiStarter;
+using MongoWebApiStarter.Notifications;
 
 namespace Account.Save;
 

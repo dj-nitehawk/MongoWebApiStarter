@@ -1,7 +1,7 @@
 ﻿using Amazon.SimpleEmailV2;
 using Microsoft.Extensions.Options;
 
-namespace MongoWebApiStarter;
+namespace MongoWebApiStarter.Notifications;
 
 internal sealed class SendEmailMessage : ICommand
 {

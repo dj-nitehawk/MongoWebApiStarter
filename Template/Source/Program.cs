@@ -5,6 +5,7 @@ using FastEndpoints.Swagger;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoWebApiStarter;
+using MongoWebApiStarter.Notifications;
 using MongoWebApiStarter.Services;
 
 var bld = WebApplication.CreateBuilder();

@@ -1,1 +1,1 @@
-- refactor integration tests to use test ordering
+- csproj and template setup cleanups

@@ -2,30 +2,13 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Ryan Gunner",
   "classifications": [ "Common", "Web", "Web API", "ASP.NET" ],
-  "name": "MongoDB Web Api Starter",
+  "name": "MongoDB Web Api Starter Template",
   "identity": "MongoWebApiStarter",
-  "groupIdentity": "MongoWebApiStarter",
   "shortName": "mongowebapi",
   "tags": {
     "language": "C#",
     "type": "project"
   },
   "sourceName": "MongoWebApiStarter",
-  "preferNameDirectory": true,
-  "sources": [
-    {
-      "rename": {
-        "vs.editorconfig": ".editorconfig"
-      },
-      "exclude": [
-        "**/.vs/**",
-        "**/dp_keys/**",
-        "**/.git/**",
-        "**/.template.config/**",
-        "**/[Bb]in/**",
-        "**/[Oo]bj/**",
-        "**/TestResults/**"
-      ]
-    }
-  ]
+  "preferNameDirectory": true
 }
