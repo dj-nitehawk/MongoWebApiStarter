@@ -10,7 +10,6 @@ using Verify = Account.Verify;
 
 namespace Tests;
 
-[TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public class AccountTests : TestBase
 {
     public AccountTests(AppFixture fixture) : base(fixture) { }

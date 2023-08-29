@@ -1,1 +1,2 @@
 - csproj and template setup cleanups
+- move test orderer attribute to base test class

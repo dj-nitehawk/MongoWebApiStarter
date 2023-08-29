@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
+using Xunit.Priority;
 
 namespace Tests;
 
+[TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
 public abstract class TestBase : IClassFixture<AppFixture>
 {
     protected AppFixture App { get; init; }
