@@ -1,2 +1,3 @@
-- csproj and template setup cleanups
-- move test orderer attribute to base test class
+- use `FastEndpoints.Testing` package for integration tests
+- refactor tests
+- upgrade dependencies

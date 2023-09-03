@@ -35,7 +35,7 @@ internal sealed class Endpoint : Endpoint<Request, Response>
         Response.Token.Value = JWTBearer.CreateToken(
             signingKey: Settings.Value.Auth.SigningKey,
             expireAt: expiryDate,
-            priviledges: u =>
+            privileges: u =>
             {
                 u.Permissions.AddRange(permissions.AllCodes());
                 u[Claim.AccountID] = acc.ID!;

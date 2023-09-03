@@ -5,23 +5,21 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>1701;1702;CA2016;CS1591;RCS1090</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.200.27" />
+        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.201.5" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-        <PackageReference Include="FastEndpoints" Version="5.15.0" />
-        <PackageReference Include="FastEndpoints.Security" Version="5.15.0" />
-        <PackageReference Include="FastEndpoints.Swagger" Version="5.15.0" />
+        <PackageReference Include="FastEndpoints" Version="5.17.0" />
+        <PackageReference Include="FastEndpoints.Security" Version="5.17.0" />
+        <PackageReference Include="FastEndpoints.Swagger" Version="5.17.0" />
         <PackageReference Include="Flurl" Version="3.0.7" />
         <PackageReference Include="Flurl.Http" Version="3.2.4" />
-        <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
         <PackageReference Include="MlkPwgen" Version="0.3.0" />
         <PackageReference Include="MongoDB.Entities" Version="22.1.0" />
         <PackageReference Include="NodaTime" Version="3.1.9" />
-        <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
     </ItemGroup>
 
 </Project>
