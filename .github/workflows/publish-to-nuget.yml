@@ -19,7 +19,7 @@ jobs:
       - name: Setup .Net SDK
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: 7.x
+          dotnet-version: 8.x
 
       - name: Run Tests
         run: dotnet test Template/Tests/Tests.csproj --configuration Release --verbosity minimal

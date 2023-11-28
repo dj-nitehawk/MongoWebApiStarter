@@ -1,3 +1,3 @@
-- use `FastEndpoints.Testing` package for integration tests
-- refactor tests
+- migrate project to .net 8
 - upgrade dependencies
+- misc. code refactors

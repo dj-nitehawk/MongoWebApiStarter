@@ -2,7 +2,7 @@
 
 namespace Account.Get;
 
-internal sealed class Endpoint : Endpoint<Request, Response, Mapper>
+sealed class Endpoint : Endpoint<Request, Response, Mapper>
 {
     public override void Configure()
     {

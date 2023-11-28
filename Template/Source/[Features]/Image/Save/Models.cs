@@ -1,6 +1,6 @@
 ﻿namespace Image.Save;
 
-internal sealed class Request
+sealed class Request
 {
     public string? ID { get; set; }
     public int Width { get; set; }
@@ -8,8 +8,14 @@ internal sealed class Request
     public IFormFile File { get; set; }
 }
 
-internal sealed class Validator : Validator<Request>
+sealed class Validator : Validator<Request>
 {
+    static readonly string[] _mimeTypeWhitelist =
+    {
+        "image/jpeg",
+        "image/png"
+    };
+
     public Validator()
     {
         RuleFor(x => x.Width)
@@ -28,12 +34,9 @@ internal sealed class Validator : Validator<Request>
             .Must(f => IsAllowedSize(f.Length)).WithMessage("File is too small!");
     }
 
-    private static bool IsAllowedType(string contentType) => new[]
-    {
-        "image/jpeg",
-        "image/png"
-    }.Contains(contentType.ToLower());
+    static bool IsAllowedType(string contentType)
+        => _mimeTypeWhitelist.Contains(contentType.ToLower());
 
-    private static bool IsAllowedSize(long fileLength) =>
-        fileLength is >= 100 and <= 10485760;
+    static bool IsAllowedSize(long fileLength)
+        => fileLength is >= 100 and <= 10485760;
 }

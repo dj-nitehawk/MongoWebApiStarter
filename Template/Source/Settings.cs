@@ -1,8 +1,6 @@
-﻿#pragma warning disable CS8618
+﻿namespace MongoWebApiStarter;
 
-namespace MongoWebApiStarter;
-
-internal sealed class Settings
+sealed class Settings
 {
     public string AppName { get; set; }
     public DatabaseSettings Database { get; set; }
@@ -61,11 +59,7 @@ internal sealed class Settings
         public string ZoneID { get; set; }
     }
 
-    public class SMSSettings
-    {
-    }
+    public class SMSSettings { }
 
-    public class PaymentGatewaySettings
-    {
-    }
+    public class PaymentGatewaySettings { }
 }

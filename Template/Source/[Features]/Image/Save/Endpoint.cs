@@ -3,7 +3,7 @@ using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace Image.Save;
 
-internal sealed class Endpoint : Endpoint<Request, object, Mapper>
+sealed class Endpoint : Endpoint<Request, object, Mapper>
 {
     public override void Configure()
     {
@@ -20,15 +20,16 @@ internal sealed class Endpoint : Endpoint<Request, object, Mapper>
 
         r.ID = null;
 
-        using var img = SixLabors.ImageSharp.Image.Load(r.File.OpenReadStream());
+        using var img = await SixLabors.ImageSharp.Image.LoadAsync(r.File.OpenReadStream(), ct);
         img.Mutate(
-            x => x.Resize(new ResizeOptions
-            {
-                Mode = ResizeMode.Crop,
-                Size = new Size { Width = r.Width, Height = r.Height }
-            }));
+            x => x.Resize(
+                new ResizeOptions
+                {
+                    Mode = ResizeMode.Crop,
+                    Size = new() { Width = r.Width, Height = r.Height }
+                }));
         using var memStream = new MemoryStream();
-        img.SaveAsJpeg(memStream, new JpegEncoder { Quality = 80 });
+        await img.SaveAsJpegAsync(memStream, new() { Quality = 80 }, ct);
 
         var newID = await Data.UploadAsync(Map.ToEntity(r), memStream);
 

@@ -4,16 +4,16 @@ using Microsoft.Extensions.Options;
 
 namespace MongoWebApiStarter.Services;
 
-internal sealed class CloudFlareService
+sealed class CloudFlareService
 {
-    private const string base_url = "https://api.cloudflare.com/client/v4";
-    private readonly Settings.CloudFlareSettings? settings;
-    private readonly ILogger? log;
+    const string BaseURL = "https://api.cloudflare.com/client/v4";
+    readonly Settings.CloudFlareSettings? _settings;
+    readonly ILogger? _log;
 
     public CloudFlareService(IOptions<Settings> appSettings, ILogger<CloudFlareService> logger)
     {
-        settings = appSettings.Value.CloudFlare;
-        log = logger;
+        _settings = appSettings.Value.CloudFlare;
+        _log = logger;
         FlurlHttp.Configure(x => x.Timeout = TimeSpan.FromSeconds(10));
     }
 
@@ -21,32 +21,36 @@ internal sealed class CloudFlareService
     {
         try
         {
-            var response = await base_url
-                .AppendPathSegment("zones")
-                .AppendPathSegment(settings?.ZoneID)
-                .AppendPathSegment("purge_cache")
-                .WithOAuthBearerToken(settings?.Token)
-                .PostJsonAsync(new { purge_everything = true })
-                .ReceiveJson<CfPurgeCacheResponse>();
+            var response = await BaseURL
+                                 .AppendPathSegment("zones")
+                                 .AppendPathSegment(_settings?.ZoneID)
+                                 .AppendPathSegment("purge_cache")
+                                 .WithOAuthBearerToken(_settings?.Token)
+                                 .PostJsonAsync(new { purge_everything = true })
+                                 .ReceiveJson<CfPurgeCacheResponse>();
 
-            if (response.success) return true;
+            if (response.Success)
+                return true;
 
-            var msg = $"COULD NOT CLEAR CF CACHE: {string.Join(" | ", response.errors)}";
-            log?.LogError("{msg}", msg + Environment.NewLine);
+            var msg = $"COULD NOT CLEAR CF CACHE: {string.Join(" | ", response.Errors)}";
+            _log?.LogError("{msg}", msg + Environment.NewLine);
+
             return false;
         }
         catch (FlurlHttpException x)
         {
             var msg = $"COULD NOT CLEAR CF CACHE: {x.Message}";
-            log?.LogError(x, "{msg}", msg + Environment.NewLine);
+            _log?.LogError(x, "{msg}", msg + Environment.NewLine);
+
             return false;
         }
     }
 
-    private class CfPurgeCacheResponse
+    // ReSharper disable once ClassNeverInstantiated.Local
+    class CfPurgeCacheResponse
     {
-        public bool success { get; set; }
-        public string[] errors { get; set; } = Array.Empty<string>();
-        public string[] messages { get; set; } = Array.Empty<string>();
+        public bool Success { get; set; }
+        public string[] Errors { get; } = Array.Empty<string>();
+        public string[] Messages { get; set; } = Array.Empty<string>();
     }
 }

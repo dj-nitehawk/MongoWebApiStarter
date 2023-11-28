@@ -1,6 +1,6 @@
 ﻿namespace Utility.ShowLog;
 
-internal sealed class Endpoint : EndpointWithoutRequest
+sealed class Endpoint : EndpointWithoutRequest
 {
     public override void Configure()
     {
@@ -8,21 +8,17 @@ internal sealed class Endpoint : EndpointWithoutRequest
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(CancellationToken ct)
+    public override Task HandleAsync(CancellationToken ct)
     {
-        if (File.Exists("output.log"))
-        {
-            var fileInfo = new FileInfo(Path.Combine(Env.ContentRootPath, "output.log"));
+        if (!File.Exists("output.log"))
+            return SendNotFoundAsync();
 
-            await SendStreamAsync(
-                stream: fileInfo.OpenRead(),
-                fileName: null,
-                fileLengthBytes: null,
-                contentType: "text/plain");
-        }
-        else
-        {
-            await SendNotFoundAsync();
-        }
+        var fileInfo = new FileInfo(Path.Combine(Env.ContentRootPath, "output.log"));
+
+        return SendStreamAsync(
+            stream: fileInfo.OpenRead(),
+            fileName: null,
+            fileLengthBytes: null,
+            contentType: "text/plain");
     }
 }

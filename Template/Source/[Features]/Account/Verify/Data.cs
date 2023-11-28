@@ -1,6 +1,6 @@
 ﻿namespace Account.Verify;
 
-internal static class Data
+static class Data
 {
     public static async Task<bool> ValidateEmailAsync(string accountID, string code)
     {
@@ -8,7 +8,8 @@ internal static class Data
                                 .Match(a => a.ID == accountID && a.EmailVerificationCode == code)
                                 .ExecuteAnyAsync();
 
-        if (!accExists) return false;
+        if (!accExists)
+            return false;
 
         await DB.Update<Dom.Account>()
                 .Match(a => a.ID == accountID)

@@ -6,51 +6,45 @@ namespace MongoWebApiStarter;
 /// <summary>
 /// Utility for converting local DateTime to UTC and vise versa
 /// </summary>
-internal static class Dates
+static class Dates
 {
-    public const string year_month_date = "yyyy-MM-dd";
-    public const string hour_minute = "HH:mm";
-    public const string default_timezone = "Asia/Colombo"; // all zones: https://nodatime.org/TimeZones
+    public const string YearMonthDate = "yyyy-MM-dd";
+    public const string HourMinute = "HH:mm";
+    public const string DefaultTimezone = "Asia/Colombo"; // all zones: https://nodatime.org/TimeZones
 
     /// <summary>
     /// Returns the local date segment "2020-12-31" from a UTC DateTime instance for a given time zone
     /// </summary>
-    /// <param name="UTCDateTime">The input UTC DateTime</param>
+    /// <param name="utcDateTime">The input UTC DateTime</param>
     /// <param name="timeZone">The time zone to convert the DateTime in to</param>
-    public static string ToDatePart(this DateTime UTCDateTime, string timeZone = default_timezone)
-    {
-        return UTCDateTime == default
-            ? throw new ArgumentException("Cannot convert default dates to local dates!")
-            : ToLocal(UTCDateTime, timeZone).ToString(year_month_date);
-    }
+    public static string ToDatePart(this DateTime utcDateTime, string timeZone = DefaultTimezone)
+        => utcDateTime == default
+               ? throw new ArgumentException("Cannot convert default dates to local dates!")
+               : ToLocal(utcDateTime, timeZone).ToString(YearMonthDate);
 
     /// <summary>
     /// Returns the local time segment "12:30 AM" from a UTC DateTime instance for a given time zone
     /// </summary>
-    /// <param name="UTCDateTime">The input UTC DateTime</param>
+    /// <param name="utcDateTime">The input UTC DateTime</param>
     /// <param name="timeZone">The time zone to convert the DateTime in to</param>
-    public static string ToTimePart(this DateTime UTCDateTime, string timeZone = default_timezone)
-    {
-        return UTCDateTime == default
-            ? throw new ArgumentException("Cannot convert default dates to local dates!")
-            : ToLocal(UTCDateTime, timeZone).ToString(hour_minute);
-    }
+    public static string ToTimePart(this DateTime utcDateTime, string timeZone = DefaultTimezone)
+        => utcDateTime == default
+               ? throw new ArgumentException("Cannot convert default dates to local dates!")
+               : ToLocal(utcDateTime, timeZone).ToString(HourMinute);
 
     /// <summary>
     /// Converts a UTC DateTime to the given local time zone
     /// </summary>
-    /// <param name="UTCDateTime">The input UTC DateTime</param>
+    /// <param name="utcDateTime">The input UTC DateTime</param>
     /// <param name="timeZone">The time zone to convert the DateTime in to</param>
-    public static DateTime ToLocal(this DateTime UTCDateTime, string timeZone = default_timezone)
-    {
-        return UTCDateTime == default
-            ? throw new ArgumentException("Cannot convert default dates to local dates!")
-            : UTCDateTime.Kind != DateTimeKind.Utc
-                ? throw new ArgumentException("The supplied date must be a UTC date/time!")
-                : Instant.FromDateTimeUtc(UTCDateTime)
-                         .InZone(DateTimeZoneProviders.Tzdb[timeZone])
-                         .ToDateTimeUnspecified();
-    }
+    public static DateTime ToLocal(this DateTime utcDateTime, string timeZone = DefaultTimezone)
+        => utcDateTime == default
+               ? throw new ArgumentException("Cannot convert default dates to local dates!")
+               : utcDateTime.Kind != DateTimeKind.Utc
+                   ? throw new ArgumentException("The supplied date must be a UTC date/time!")
+                   : Instant.FromDateTimeUtc(utcDateTime)
+                            .InZone(DateTimeZoneProviders.Tzdb[timeZone])
+                            .ToDateTimeUnspecified();
 
     /// <summary>
     /// Create a UTC DateTime from given date and time strings and the time zone
@@ -58,17 +52,17 @@ internal static class Dates
     /// <param name="date">Local date string "2020-12-31"</param>
     /// <param name="time">Local time string "12:12 AM"</param>
     /// <param name="timeZone">The time zone of the local date/time</param>
-    public static DateTime ToUTC(string date, string time = "00:00", string timeZone = default_timezone)
+    public static DateTime ToUtc(string date, string time = "00:00", string timeZone = DefaultTimezone)
     {
         var result = LocalDateTimePattern
-            .CreateWithInvariantCulture($"{year_month_date} {hour_minute}")
-            .Parse(date + " " + time);
+                     .CreateWithInvariantCulture($"{YearMonthDate} {HourMinute}")
+                     .Parse(date + " " + time);
 
         return !result.Success
-            ? throw new InvalidPatternException(result.Exception.Message)
-            : result.Value
-                    .InZoneStrictly(DateTimeZoneProviders.Tzdb[timeZone])
-                    .ToDateTimeUtc();
+                   ? throw new InvalidPatternException(result.Exception.Message)
+                   : result.Value
+                           .InZoneStrictly(DateTimeZoneProviders.Tzdb[timeZone])
+                           .ToDateTimeUtc();
     }
 
     /// <summary>
@@ -78,7 +72,7 @@ internal static class Dates
     public static DateTime FirstDayOfWeek(this DateTime dayInWeek)
     {
         const DayOfWeek firstDay = DayOfWeek.Sunday;
-        DateTime firstDayInWeek = dayInWeek.Date;
+        var firstDayInWeek = dayInWeek.Date;
         while (firstDayInWeek.DayOfWeek != firstDay)
             firstDayInWeek = firstDayInWeek.AddDays(-1);
 
@@ -93,8 +87,8 @@ internal static class Dates
     public static bool DateTimeFormatIsCorrect(string date, string time = "00:00")
     {
         var result = LocalDateTimePattern
-            .CreateWithInvariantCulture($"{year_month_date} {hour_minute}")
-            .Parse(date + " " + time);
+                     .CreateWithInvariantCulture($"{YearMonthDate} {HourMinute}")
+                     .Parse(date + " " + time);
 
         return result.Success;
     }

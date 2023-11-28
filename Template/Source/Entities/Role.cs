@@ -1,6 +1,6 @@
 ﻿namespace Dom;
 
-internal sealed class Role : Entity
+sealed class Role : Entity
 {
     public string Name { get; set; }
     public bool SystemRole { get; set; }

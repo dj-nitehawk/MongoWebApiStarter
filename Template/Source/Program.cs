@@ -23,7 +23,8 @@ bld.Services
    .AddResponseCaching()
    .AddFastEndpoints()
    .AddJobQueues<JobRecord, JobStorageProvider>()
-   .AddJWTBearerAuth(stn.Auth.SigningKey);
+   .AddJWTBearerAuth(stn.Auth.SigningKey)
+   .AddAuthorization();
 
 if (!bld.Environment.IsProduction())
 {

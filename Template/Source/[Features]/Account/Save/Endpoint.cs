@@ -4,15 +4,10 @@ using MongoWebApiStarter.Notifications;
 
 namespace Account.Save;
 
-internal sealed class Endpoint : Endpoint<Request, Response, Mapper>
+sealed class Endpoint(IWebHostEnvironment env) : Endpoint<Request, Response, Mapper>
 {
-    private bool needsEmailVerification;
-    private readonly bool isTestEnv;
-
-    public Endpoint(IWebHostEnvironment env)
-    {
-        isTestEnv = env.EnvironmentName == "Testing";
-    }
+    bool _needsEmailVerification;
+    readonly bool _isTestEnv = env.EnvironmentName == "Testing";
 
     public override void Configure()
     {
@@ -31,32 +26,32 @@ internal sealed class Endpoint : Endpoint<Request, Response, Mapper>
 
         await SendVerificationEmailAsync(acc);
 
-        Response.EmailSent = needsEmailVerification;
+        Response.EmailSent = _needsEmailVerification;
         Response.ID = acc.ID!;
     }
 
-    private async Task SendVerificationEmailAsync(Dom.Account a)
+    async Task SendVerificationEmailAsync(Dom.Account a)
     {
-        if (needsEmailVerification && !isTestEnv)
+        if (_needsEmailVerification && !_isTestEnv)
         {
             var code = PasswordGenerator.Generate(20);
             await Data.SetEmailValidationCodeAsync(code, a.ID!);
 
             await new Notification
-            {
-                Type = NotificationType.Account_Welcome,
-                ToEmail = a.Email,
-                ToName = $"{a.FirstName} {a.LastName}",
-                SendEmail = true,
-                ToMobile = a.Mobile,
-                SendSMS = a.Mobile.HasValue()
-            }
-            .Merge("{Salutation}", $"{a.FirstName}")
-            .Merge("{ValidationLink}", $"{BaseURL}#/account/{a.ID}-{code}/validate")
-            .AddToSendingQueueAsync();
+                  {
+                      Type = NotificationType.Account_Welcome,
+                      ToEmail = a.Email,
+                      ToName = $"{a.FirstName} {a.LastName}",
+                      SendEmail = true,
+                      ToMobile = a.Mobile,
+                      SendSMS = a.Mobile.HasValue()
+                  }
+                  .Merge("{Salutation}", $"{a.FirstName}")
+                  .Merge("{ValidationLink}", $"{BaseURL}#/account/{a.ID}-{code}/validate")
+                  .AddToSendingQueueAsync();
         }
     }
 
-    private async Task CheckIfEmailValidationIsNeededAsync(Request r)
-        => needsEmailVerification = r.AccountID.HasNoValue() || r.AccountID != await Data.GetAccountIDAsync(r.EmailAddress);
+    async Task CheckIfEmailValidationIsNeededAsync(Request r)
+        => _needsEmailVerification = r.AccountID.HasNoValue() || r.AccountID != await Data.GetAccountIDAsync(r.EmailAddress);
 }

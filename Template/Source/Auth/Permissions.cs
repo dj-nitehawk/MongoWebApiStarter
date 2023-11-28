@@ -1,9 +1,11 @@
-﻿namespace MongoWebApiStarter.Auth;
+﻿// ReSharper disable InconsistentNaming
+
+namespace MongoWebApiStarter.Auth;
 
 /// <summary>
 /// The allowed operations/permissions for the application
 /// </summary>
-internal sealed class Allow : Permissions
+sealed class Allow : Permissions
 {
     //NOTE: these permission names are sent to the UI with the login response in a field called PermissionSet[]. 
     //      if they change; UI code needs to change too.
@@ -19,6 +21,4 @@ internal sealed class Allow : Permissions
     public const string Employee_Read = "201";
     public const string Employee_Update = "202";
     public const string Employee_Delete = "203";
-
 }
-

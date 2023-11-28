@@ -2,22 +2,18 @@
 
 namespace Account.Save;
 
-internal static class Data
+static class Data
 {
     public static async Task CreateOrUpdateAsync(Dom.Account acc)
     {
-        using var TN = DB.Transaction();
+        using var tn = DB.Transaction();
 
         if (acc.ID.HasValue()) // existing account
-        {
-            await TN.SavePreservingAsync(acc);
-        }
+            await tn.SavePreservingAsync(acc);
         else // new account
-        {
-            await TN.SaveAsync(acc);
-        }
+            await tn.SaveAsync(acc);
 
-        await TN.CommitAsync();
+        await tn.CommitAsync();
     }
 
     public static Task SetEmailValidationCodeAsync(string code, string accoundID)

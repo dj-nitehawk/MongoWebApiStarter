@@ -1,6 +1,6 @@
 ﻿namespace Image.Get;
 
-internal sealed class Request
+sealed class Request
 {
     public string ID { get; set; }
 }

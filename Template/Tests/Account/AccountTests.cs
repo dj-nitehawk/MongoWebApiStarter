@@ -5,10 +5,8 @@ using Verify = Account.Verify;
 
 namespace Tests.Account;
 
-public class AccountTests : TestClass<Fixture>
+public class AccountTests(Fixture f, ITestOutputHelper o) : TestClass<Fixture>(f, o)
 {
-    public AccountTests(Fixture f, ITestOutputHelper o) : base(f, o) { }
-
     [Fact, Priority(1)]
     public async Task Account_Creation()
     {
@@ -33,22 +31,19 @@ public class AccountTests : TestClass<Fixture>
     {
         var accountID = Fixture.AccountID;
 
-        var code = (await DB
-            .Find<Dom.Account>()
-            .OneAsync(accountID))!
-            .EmailVerificationCode;
+        var code = (await DB.Find<Dom.Account>().OneAsync(accountID))!.EmailVerificationCode;
 
-        await Fixture.Client.POSTAsync<Verify.Endpoint, Verify.Request>(new()
-        {
-            ID = accountID!,
-            Code = code
-        });
+        await Fixture.Client.POSTAsync<Verify.Endpoint, Verify.Request>(
+            new()
+            {
+                ID = accountID!,
+                Code = code
+            });
 
-        var verified = await DB
-            .Find<Dom.Account, bool>()
-            .Match(a => a.ID == accountID)
-            .Project(a => a.IsEmailVerified)
-            .ExecuteSingleAsync();
+        var verified = await DB.Find<Dom.Account, bool>()
+                               .Match(a => a.ID == accountID)
+                               .Project(a => a.IsEmailVerified)
+                               .ExecuteSingleAsync();
 
         verified.Should().BeTrue();
     }
@@ -56,11 +51,12 @@ public class AccountTests : TestClass<Fixture>
     [Fact, Priority(3)]
     public async Task Account_Login()
     {
-        var (rsp, res) = await Fixture.Client.POSTAsync<Login.Endpoint, Login.Request, Login.Response>(new()
-        {
-            UserName = Fixture.SaveRequest.EmailAddress,
-            Password = Fixture.SaveRequest.Password
-        });
+        var (rsp, res) = await Fixture.Client.POSTAsync<Login.Endpoint, Login.Request, Login.Response>(
+                             new()
+                             {
+                                 UserName = Fixture.SaveRequest.EmailAddress,
+                                 Password = Fixture.SaveRequest.Password
+                             });
 
         var acc = await DB.Find<Dom.Account>().OneAsync(Fixture.AccountID);
 

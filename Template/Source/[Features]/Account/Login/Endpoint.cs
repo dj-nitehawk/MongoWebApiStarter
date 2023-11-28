@@ -4,7 +4,7 @@ using MongoWebApiStarter.Auth;
 
 namespace Account.Login;
 
-internal sealed class Endpoint : Endpoint<Request, Response>
+sealed class Endpoint : Endpoint<Request, Response>
 {
     public IOptions<Settings> Settings { get; set; } = null!;
 

@@ -2,11 +2,13 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
+// ReSharper disable InconsistentNaming
+
 namespace MongoWebApiStarter.Notifications;
 
 public partial record Notification
 {
-    private static readonly Dictionary<string, NotificationTemplate> _templates = new();
+    static readonly Dictionary<string, NotificationTemplate> _templates = new();
 
     public static async Task Initialize()
     {
@@ -21,31 +23,32 @@ public partial record Notification
     public bool SendSMS { get; init; }
     public string Type { get; init; } = null!;
 
-    private readonly HashSet<(string Name, string Value)> _mergeFields = new();
-    private readonly List<string> _missingTags = new();
+    readonly HashSet<(string Name, string Value)> _mergeFields = new();
+    readonly List<string> _missingTags = new();
 
     public Notification Merge(string fieldName, string fieldValue)
     {
         _mergeFields.Add((fieldName, fieldValue));
+
         return this;
     }
 
     public async Task AddToSendingQueueAsync()
     {
         if (ToName.HasNoValue() ||
-           (SendEmail && ToEmail.HasNoValue()) ||
-           (SendSMS && ToMobile.HasNoValue()) ||
+            (SendEmail && ToEmail.HasNoValue()) ||
+            (SendSMS && ToMobile.HasNoValue()) ||
             Type.HasNoValue())
-        {
-            throw new ArgumentNullException("Unable to send notification without all required parameters!");
-        }
+            throw new ArgumentNullException(null, "Unable to send notification without all required parameters!");
 
         _templates.TryGetValue(Type, out var template);
 
         if (template == null)
             throw new ApplicationException($"Unable to find a message template for [{Type}]");
 
-        string? emailBody = null, emailSubject = null, smsBody = null;
+        string? emailBody = null,
+                emailSubject = null,
+                smsBody = null;
 
         if (SendEmail)
         {
@@ -80,7 +83,7 @@ public partial record Notification
         }
     }
 
-    private string MergeFields(string input, string fieldName)
+    string MergeFields(string input, string fieldName)
     {
         if (input.HasNoValue())
             throw new ApplicationException($"The template [{Type}] has no {fieldName} value!");

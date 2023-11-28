@@ -2,13 +2,13 @@
 
 namespace Utility.ClearCloudFlareCache;
 
-internal sealed class Endpoint : EndpointWithoutRequest
+sealed class Endpoint : EndpointWithoutRequest
 {
     public CloudFlareService CloudFlare { get; set; } = null!;
 
     public override void Configure()
     {
-        Get("/purge-cf-cache");//todo: protect this route with nginx or disable in production
+        Get("/purge-cf-cache"); //todo: protect this route with nginx or disable in production
         AllowAnonymous();
     }
 

@@ -1,6 +1,6 @@
 ﻿namespace MongoWebApiStarter;
 
-internal static class Tasks
+static class Tasks
 {
     /// <summary>
     /// Executes multiple async methods (mostly in parallel) and returns a Task containing a tuple of results
@@ -12,6 +12,7 @@ internal static class Tasks
     public static async Task<(T1, T2)> Run<T1, T2>(Task<T1> first, Task<T2> second)
     {
         await Task.WhenAll(first, second);
+
         return (first.Result, second.Result);
     }
 
@@ -27,6 +28,7 @@ internal static class Tasks
     public static async Task<(T1, T2, T3)> Run<T1, T2, T3>(Task<T1> first, Task<T2> second, Task<T3> third)
     {
         await Task.WhenAll(first, second, third);
+
         return (first.Result, second.Result, third.Result);
     }
 
@@ -44,6 +46,7 @@ internal static class Tasks
     public static async Task<(T1, T2, T3, T4)> Run<T1, T2, T3, T4>(Task<T1> first, Task<T2> second, Task<T3> third, Task<T4> fourth)
     {
         await Task.WhenAll(first, second, third, fourth);
+
         return (first.Result, second.Result, third.Result, fourth.Result);
     }
 
@@ -63,6 +66,7 @@ internal static class Tasks
     public static async Task<(T1, T2, T3, T4, T5)> Run<T1, T2, T3, T4, T5>(Task<T1> first, Task<T2> second, Task<T3> third, Task<T4> fourth, Task<T5> fifth)
     {
         await Task.WhenAll(first, second, third, fourth, fifth);
+
         return (first.Result, second.Result, third.Result, fourth.Result, fifth.Result);
     }
 }

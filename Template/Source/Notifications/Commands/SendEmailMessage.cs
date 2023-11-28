@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 
 namespace MongoWebApiStarter.Notifications;
 
-internal sealed class SendEmailMessage : ICommand
+sealed class SendEmailMessage : ICommand
 {
     public string ToName { get; set; }
     public string ToEmail { get; set; }
@@ -11,34 +11,28 @@ internal sealed class SendEmailMessage : ICommand
     public string Body { get; set; }
 }
 
-internal sealed class SendEmailMessageHandler : ICommandHandler<SendEmailMessage>
+sealed class SendEmailMessageHandler(IAmazonSimpleEmailServiceV2 sesClient, IOptions<Settings> cfg)
+    : ICommandHandler<SendEmailMessage>
 {
-    private readonly AmazonSimpleEmailServiceV2Client _ses;
-    private readonly Settings.EmailSettings _cfg;
-
-    public SendEmailMessageHandler(AmazonSimpleEmailServiceV2Client sesClient, IOptions<Settings> cfg)
-    {
-        _ses = sesClient;
-        _cfg = cfg.Value.Email;
-    }
+    readonly Settings.EmailSettings _cfg = cfg.Value.Email;
 
     public Task ExecuteAsync(SendEmailMessage cmd, CancellationToken c)
-    {
-        return _ses.SendEmailAsync(new()
-        {
-            FromEmailAddress = $"{_cfg.FromName}<{_cfg.FromEmail}>",
-            Destination = new()
+        => sesClient.SendEmailAsync(
+            request: new()
             {
-                ToAddresses = new() { $"{cmd.ToName}<{cmd.ToEmail}>" }
-            },
-            Content = new()
-            {
-                Simple = new()
+                FromEmailAddress = $"{_cfg.FromName}<{_cfg.FromEmail}>",
+                Destination = new()
                 {
-                    Subject = new() { Data = cmd.Subject },
-                    Body = new() { Html = new() { Data = cmd.Body } }
+                    ToAddresses = new() { $"{cmd.ToName}<{cmd.ToEmail}>" }
+                },
+                Content = new()
+                {
+                    Simple = new()
+                    {
+                        Subject = new() { Data = cmd.Subject },
+                        Body = new() { Html = new() { Data = cmd.Body } }
+                    }
                 }
             },
-        }, c);
-    }
+            cancellationToken: c);
 }

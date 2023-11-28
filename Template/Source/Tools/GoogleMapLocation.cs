@@ -5,11 +5,11 @@ namespace MongoWebApiStarter;
 /// <summary>
 /// Utility for working Google map links and embed codes
 /// </summary>
-internal static class MapLocation
+static class MapLocation
 {
-    private static readonly Regex rxOne = new("@(.*),(.*),", RegexOptions.Compiled); //map link
-    private static readonly Regex rxTwo = new(@"(?:2d|3d)([-\d].*?)!", RegexOptions.Compiled); //extract lon+lat from embed code
-    private static readonly Regex rxThree = new(@"src=""(.+?)""", RegexOptions.Compiled); //extract url from embed code
+    static readonly Regex _rxOne = new("@(.*),(.*),", RegexOptions.Compiled);           //map link
+    static readonly Regex _rxTwo = new(@"(?:2d|3d)([-\d].*?)!", RegexOptions.Compiled); //extract lon+lat from embed code
+    static readonly Regex _rxThree = new(@"src=""(.+?)""", RegexOptions.Compiled);      //extract url from embed code
 
     /// <summary>
     /// Extracts lon+lat info from a google map link or embed code and returns a Coordinates2D object
@@ -17,27 +17,30 @@ internal static class MapLocation
     /// <param name="gMapLinkOrCode">Google map embed code or link</param>
     public static Coordinates2D Get2DCoordinates(string gMapLinkOrCode)
     {
-        double lon, lat;
+        double lon,
+               lat;
 
         if (gMapLinkOrCode.HasNoValue())
             throw new ArgumentException("Supplied gmap link or code is empty!");
 
-        var match = rxOne.Match(gMapLinkOrCode);
+        var match = _rxOne.Match(gMapLinkOrCode);
 
         if (match.Success)
         {
             lon = Convert.ToDouble(match.Groups[2].Value); //lon is the second group
             lat = Convert.ToDouble(match.Groups[1].Value);
-            return new Coordinates2D(lon, lat);
+
+            return new(lon, lat);
         }
 
-        var matches = rxTwo.Matches(gMapLinkOrCode);
+        var matches = _rxTwo.Matches(gMapLinkOrCode);
 
         if (matches.Count > 0)
         {
             lon = Convert.ToDouble(matches[0].Groups[1].Value); //lon is the first match group
             lat = Convert.ToDouble(matches[1].Groups[1].Value);
-            return new Coordinates2D(lon, lat);
+
+            return new(lon, lat);
         }
 
         throw new InvalidOperationException("Unable to extract 2d coordinates from the supplied gmap link or code!");
@@ -48,7 +51,7 @@ internal static class MapLocation
     /// </summary>
     /// <param name="gMapLinkOrCode">Google map embed code or link</param>
     public static bool IsValid(string gMapLinkOrCode)
-        => gMapLinkOrCode.HasNoValue() || Get2DCoordinates(gMapLinkOrCode) != null;
+        => gMapLinkOrCode.HasNoValue() || Get2DCoordinates(gMapLinkOrCode).Coordinates.Length == 2;
 
     /// <summary>
     /// Extracts the URL from Google Map Embed code
@@ -59,11 +62,11 @@ internal static class MapLocation
         if (gMapEmbedCode.HasNoValue())
             return gMapEmbedCode;
 
-        var match = rxThree.Match(gMapEmbedCode);
+        var match = _rxThree.Match(gMapEmbedCode);
 
         return match.Success
-                ? match.Groups[1].Value
-                : gMapEmbedCode;
+                   ? match.Groups[1].Value
+                   : gMapEmbedCode;
     }
 
     /// <summary>
@@ -71,7 +74,5 @@ internal static class MapLocation
     /// </summary>
     /// <param name="link">The URL to check</param>
     public static bool IsEmbedLink(string link)
-    {
-        return link.HasNoValue() || link.StartsWith("https://www.google.com/maps/embed");
-    }
+        => link.HasNoValue() || link.StartsWith("https://www.google.com/maps/embed");
 }

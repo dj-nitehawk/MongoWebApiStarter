@@ -2,10 +2,8 @@
 
 namespace Tests.Account;
 
-public class Fixture : TestFixture<Program>
+public class Fixture(IMessageSink s) : TestFixture<Program>(s)
 {
-    public Fixture(IMessageSink s) : base(s) { }
-
     internal Save.Request SaveRequest { get; private set; } = default!;
     public string AccountID { get; set; } = "";
     public string JwtToken { get; set; } = "";
@@ -13,6 +11,7 @@ public class Fixture : TestFixture<Program>
     protected override Task SetupAsync()
     {
         SaveRequest = Fake.SaveRequest();
+
         return Task.CompletedTask;
     }
 

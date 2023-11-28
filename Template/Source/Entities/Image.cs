@@ -1,6 +1,6 @@
 ﻿namespace Dom;
 
-internal sealed class Image : FileEntity, ICreatedOn
+sealed class Image : FileEntity, ICreatedOn
 {
     public int Width { get; set; }
     public int Height { get; set; }

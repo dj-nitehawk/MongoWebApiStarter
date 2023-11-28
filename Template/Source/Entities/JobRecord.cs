@@ -1,6 +1,6 @@
 ﻿namespace Dom;
 
-internal sealed class JobRecord : Entity, IJobStorageRecord
+sealed class JobRecord : Entity, IJobStorageRecord
 {
     public string QueueID { get; set; }
     public object Command { get; set; }

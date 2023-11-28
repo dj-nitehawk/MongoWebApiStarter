@@ -1,16 +1,21 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
+// ReSharper disable InconsistentNaming
+
 namespace Dom;
 
-internal sealed class NotificationTemplate : IEntity
+sealed class NotificationTemplate : IEntity
 {
-    [BsonId] public string? ID { get; set; } //set the template name as id
+    [BsonId]
+    public string ID { get; set; } //set the template name as id
+
     public string SMSBody { get; set; }
     public string EmailSubject { get; set; }
     public string EmailBody { get; set; }
 
-    public string GenerateNewID()
-    {
-        throw new NotImplementedException();
-    }
+    public object GenerateNewID()
+        => ID; //because we're setting the ID manually
+
+    public bool HasDefaultID()
+        => !string.IsNullOrEmpty(ID);
 }

@@ -1,6 +1,6 @@
 ﻿namespace Image.Get;
 
-internal sealed class Endpoint : Endpoint<Request>
+sealed class Endpoint : Endpoint<Request>
 {
     public override void Configure()
     {
