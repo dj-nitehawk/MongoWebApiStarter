@@ -1,4 +1,6 @@
-﻿namespace MongoWebApiStarter;
+﻿#pragma warning disable CS8618
+
+namespace MongoWebApiStarter;
 
 sealed class Settings
 {

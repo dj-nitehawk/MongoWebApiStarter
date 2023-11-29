@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.300.10" />
+        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.300.11" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="FastEndpoints" Version="5.20.0" />
         <PackageReference Include="FastEndpoints.Security" Version="5.20.0" />
@@ -17,7 +17,7 @@
         <PackageReference Include="Flurl" Version="3.0.7" />
         <PackageReference Include="Flurl.Http" Version="3.2.4" />
         <PackageReference Include="MlkPwgen" Version="0.3.0" />
-        <PackageReference Include="MongoDB.Entities" Version="22.1.0.5-beta" />
+        <PackageReference Include="MongoDB.Entities" Version="23.0.0" />
         <PackageReference Include="NodaTime" Version="3.1.9" />
         <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
     </ItemGroup>
