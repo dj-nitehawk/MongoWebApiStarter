@@ -13,7 +13,7 @@ public partial record Notification
     public static async Task Initialize()
     {
         foreach (var t in await DB.Find<NotificationTemplate>().Match(_ => true).ExecuteAsync())
-            _templates.Add(t.ID!, t);
+            _templates.Add(t.ID, t);
     }
 
     public string ToName { get; init; } = null!;

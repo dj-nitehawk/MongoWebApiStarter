@@ -29,16 +29,15 @@ sealed class Endpoint : Endpoint<Request, Response>
         var expiryDate = DateTime.UtcNow.AddDays(1);
         var permissions = new Allow();
 
-        Response.FullName = $"{acc!.Title} {acc.FirstName} {acc.LastName}";
+        Response.FullName = $"{acc.Title} {acc.FirstName} {acc.LastName}";
         Response.Token.Expiry = expiryDate.ToLocal().ToString("yyyy-MM-ddTHH:mm:ss");
         Response.PermissionSet = permissions.AllNames();
-        Response.Token.Value = JWTBearer.CreateToken(
-            signingKey: Settings.Value.Auth.SigningKey,
+        Response.Token.Value = JWTBearer.CreateToken(signingKey: Settings.Value.Auth.SigningKey,
             expireAt: expiryDate,
             privileges: u =>
             {
                 u.Permissions.AddRange(permissions.AllCodes());
-                u[Claim.AccountID] = acc.ID!;
+                u[Claim.AccountID] = acc.ID;
             });
     }
 }

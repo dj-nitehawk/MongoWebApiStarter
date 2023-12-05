@@ -1,3 +1,3 @@
-- migrate project to .net 8
+- add `xunit.runner.json` file
+- update `.editorconfig` file
 - upgrade dependencies
-- misc. code refactors

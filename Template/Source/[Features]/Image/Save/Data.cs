@@ -10,6 +10,6 @@ static class Data
         await image.SaveAsync();
         await image.Data.UploadWithTimeoutAsync(stream, 60, 128);
 
-        return image.ID!;
+        return image.ID;
     }
 }

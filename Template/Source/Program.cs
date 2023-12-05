@@ -16,8 +16,7 @@ bld.Services
    .Configure<Settings>(sec)
    .AddHostedService<FileCleanerService>()
    .AddSingleton<CloudFlareService>()
-   .AddSingleton(new AmazonSimpleEmailServiceV2Client(
-       awsAccessKeyId: stn.Email.ApiKey,
+   .AddSingleton(new AmazonSimpleEmailServiceV2Client(awsAccessKeyId: stn.Email.ApiKey,
        awsSecretAccessKey: stn.Email.ApiSecret,
        region: RegionEndpoint.USEast1))
    .AddResponseCaching()
@@ -47,15 +46,13 @@ app.UseJobQueues(o =>
 });
 
 if (!bld.Environment.IsProduction())
-{
     app.UseSwaggerGen();
-}
 
 app.Run();
 
 async Task InitDatabase()
 {
-    BsonSerializer.RegisterSerializer(new ObjectSerializer(type => ObjectSerializer.DefaultAllowedTypes(type) || type.Name!.EndsWith("Message")));
+    BsonSerializer.RegisterSerializer(new ObjectSerializer(type => ObjectSerializer.DefaultAllowedTypes(type) || type.Name.EndsWith("Message")));
     await DB.InitAsync(stn.Database.Name, stn.Database.Host);
     await DB.InitAsync(stn.JobDatabase.Name, stn.JobDatabase.Host);
     await DB.InitAsync(stn.FileBucket.Name, stn.FileBucket.Host);

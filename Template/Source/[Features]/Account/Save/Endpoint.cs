@@ -27,7 +27,7 @@ sealed class Endpoint(IWebHostEnvironment env) : Endpoint<Request, Response, Map
         await SendVerificationEmailAsync(acc);
 
         Response.EmailSent = _needsEmailVerification;
-        Response.ID = acc.ID!;
+        Response.ID = acc.ID;
     }
 
     async Task SendVerificationEmailAsync(Dom.Account a)
@@ -35,7 +35,7 @@ sealed class Endpoint(IWebHostEnvironment env) : Endpoint<Request, Response, Map
         if (_needsEmailVerification && !_isTestEnv)
         {
             var code = PasswordGenerator.Generate(20);
-            await Data.SetEmailValidationCodeAsync(code, a.ID!);
+            await Data.SetEmailValidationCodeAsync(code, a.ID);
 
             await new Notification
                   {

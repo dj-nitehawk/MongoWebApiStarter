@@ -14,8 +14,8 @@ public class AccountTests(Fixture f, ITestOutputHelper o) : TestClass<Fixture>(f
 
         var (rsp, res) = await Fixture.Client.POSTAsync<Save.Endpoint, Save.Request, Save.Response>(req);
 
-        rsp!.IsSuccessStatusCode.Should().BeTrue();
-        res!.EmailSent.Should().BeTrue();
+        rsp.IsSuccessStatusCode.Should().BeTrue();
+        res.EmailSent.Should().BeTrue();
         res.ID.Should().NotBeNullOrEmpty();
 
         Fixture.AccountID = res.ID;
@@ -33,12 +33,11 @@ public class AccountTests(Fixture f, ITestOutputHelper o) : TestClass<Fixture>(f
 
         var code = (await DB.Find<Dom.Account>().OneAsync(accountID))!.EmailVerificationCode;
 
-        await Fixture.Client.POSTAsync<Verify.Endpoint, Verify.Request>(
-            new()
-            {
-                ID = accountID!,
-                Code = code
-            });
+        await Fixture.Client.POSTAsync<Verify.Endpoint, Verify.Request>(new()
+        {
+            ID = accountID,
+            Code = code
+        });
 
         var verified = await DB.Find<Dom.Account, bool>()
                                .Match(a => a.ID == accountID)
@@ -51,17 +50,16 @@ public class AccountTests(Fixture f, ITestOutputHelper o) : TestClass<Fixture>(f
     [Fact, Priority(3)]
     public async Task Account_Login()
     {
-        var (rsp, res) = await Fixture.Client.POSTAsync<Login.Endpoint, Login.Request, Login.Response>(
-                             new()
-                             {
-                                 UserName = Fixture.SaveRequest.EmailAddress,
-                                 Password = Fixture.SaveRequest.Password
-                             });
+        var (rsp, res) = await Fixture.Client.POSTAsync<Login.Endpoint, Login.Request, Login.Response>(new()
+        {
+            UserName = Fixture.SaveRequest.EmailAddress,
+            Password = Fixture.SaveRequest.Password
+        });
 
         var acc = await DB.Find<Dom.Account>().OneAsync(Fixture.AccountID);
 
-        rsp!.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        res!.FullName.Should().Be($"{acc!.Title} {acc.FirstName} {acc.LastName}");
+        rsp.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        res.FullName.Should().Be($"{acc!.Title} {acc.FirstName} {acc.LastName}");
         res.PermissionSet.Should().HaveCount(7);
         res.Token.Value.Should().NotBeNull();
 
@@ -75,7 +73,7 @@ public class AccountTests(Fixture f, ITestOutputHelper o) : TestClass<Fixture>(f
 
         var (_, res) = await Fixture.Client.GETAsync<Get.Endpoint, Get.Response>();
 
-        var acc = await DB.Find<Dom.Account>().OneAsync(res!.AccountID);
+        var acc = await DB.Find<Dom.Account>().OneAsync(res.AccountID);
 
         var match =
             acc!.Email == res.EmailAddress &&
