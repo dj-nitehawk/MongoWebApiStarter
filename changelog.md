@@ -1,3 +1,2 @@
-- add `xunit.runner.json` file
 - update `.editorconfig` file
 - upgrade dependencies

@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.300.13"/>
+        <PackageReference Include="AWSSDK.SimpleEmailV2" Version="3.7.300.16" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3"/>
         <PackageReference Include="FastEndpoints" Version="5.20.1"/>
         <PackageReference Include="FastEndpoints.Security" Version="5.20.1"/>
