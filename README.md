@@ -1,3 +1,14 @@
+
+# // DEPRECATION NOTICE //
+This template will no longer be maintained in favor of the [FastEndpoints.TemplatePack](https://github.com/FastEndpoints/Template-Pack). In order to scaffold a [VSA based project](https://github.com/FastEndpoints/Template-Pack/tree/main/templates/integrated) with MongoDB, you can install the template pack and create a new project as shown below:
+
+```shell
+dotnet new install FastEndpoints.TemplatePack
+dotnet new feintproj -n MyAwesomeProject
+```
+
+---
+
 # MongoWebApiStarter
 A full-featured starter template for `dotnet new` to quickly scaffold an Asp.Net 8.0 Web-Api project using pure vertical slice architecture with MongoDB as the data store.
 
